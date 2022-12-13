@@ -12,5 +12,9 @@ readLine()은 입력을 모두 optional String형으로 처리하기 때문에 �
 또한 readLine()은 EOF 즉 엔터를 치면 끝인 문구이다.   
 정수를 찍기 위해서는 Int(input[0])   
 언래핑(!)하는 이유는 nil이 할당될수도 있기 때문.   
+readLine() -> Optional<String>   
+readLine()! -> String   
+Int(readLine()!) -> Optional<Int>   
+Int(readLine()!)! -> Int   
 
 ## BAEKJOON
