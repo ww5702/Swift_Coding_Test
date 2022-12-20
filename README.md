@@ -23,8 +23,48 @@ map
 클로저로 각 항목들을 반영한 결과물을 가진 새로운 배열을 반환한다.
 ```
 func map<U>(transform: (T) -> U) -> Array<U>
+// ex 1,2,3,4 배열을 2씩 곱해서 다시 배열로
+let multipliedArray = array.map( { (value: Int) -> Int in return value * 2 } )
+// 이 또한 추론으로 생략가능
+let multipliedArray = array.map { $0 * 2 }
 ```
-  
+Filter   
+클로저로 각 항목들을 비교하여 일치하는 결과물을 가진 새로운 배열을 반환한다.   
+```
+func filter(includeElement: (T) -> Bool) -> Array<T>
+// 홀수 값만 가지는 배열을 얻는 예제
+let oddArray = array.filter( { (value: Int) -> Bool in return (value % 2 == 0) } )
+// 추론 생략
+let oddArray = array.filter{ $0 % 2 == 0 }
+```   
+Reduce   
+배열의 각 항목들을 재귀적으로 클로저를 적용시켜 하나의 값을 만든다.   
+```
+func reduce<U>(initial: U, combine: (U, T) -> U) -> U
+// 배열의 각 항목들
+array.reduce(0, { (s1: Int, s2: Int) -> Int in
+    return s1 + s2
+})
+// 추론 생략
+array.reduce(0) { $0 + $1 }
+```
+   
 
-
-## BAEKJOON
+   
+즉 이 코드를   
+```
+let numberArray = [1,2,3,4,5,6,7,8,9,10]
+var sum = 0
+for number in numberArray {
+    sum += number
+}
+print(sum)
+// 55
+```
+이렇게 바꿀 수 있다.   
+```
+let numberArray = [1,2,3,4,5,6,7,8,9,10]
+let sum = numberArray.reduce(0) { $0 + $1 }
+print(sum)
+// 55
+```   
