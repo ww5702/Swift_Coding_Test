@@ -1,12 +1,12 @@
 # Coding_Test
 
-Foundation   
+## Foundation   
 원시 데이터 타입(String, Int, Double), 컬렉션 타입(Array, Dictionary, Set) 기본적인 기능을 관리.   
 데이터 타입, 날짜 및 시간 계산, 필터 및 정렬, 네트워킹 등의 기본 기능 제공.   
 iOS뿐만 아니라 macOS, watchOS, tvOS 등 모든 애플 SDK에서 사용된다.     
    
    
-readLine()   
+## readLine()   
 swift에서 입력을 받는 메서드이다.   
 readLine()은 입력을 모두 optional String형으로 처리하기 때문에 또 다른 처리가 필요하다.   
 또한 readLine()은 EOF 즉 엔터를 치면 끝인 문구이다.   
@@ -17,9 +17,9 @@ readLine()! -> String
 Int(readLine()!) -> Optional<Int>   
 Int(readLine()!)! -> Int   
    
-Map,Filter,Reduce   
+## Map,Filter,Reduce   
 Swift의 표준 배열 라이브러리에는 map, filter, reduce라는 세가지 기능을 제공한다.   
-map   
+### map   
 클로저로 각 항목들을 반영한 결과물을 가진 새로운 배열을 반환한다.
 ```
 func map<U>(transform: (T) -> U) -> Array<U>
@@ -28,7 +28,7 @@ let multipliedArray = array.map( { (value: Int) -> Int in return value * 2 } )
 // 이 또한 추론으로 생략가능
 let multipliedArray = array.map { $0 * 2 }
 ```
-Filter   
+### Filter   
 클로저로 각 항목들을 비교하여 일치하는 결과물을 가진 새로운 배열을 반환한다.   
 ```
 func filter(includeElement: (T) -> Bool) -> Array<T>
@@ -37,7 +37,7 @@ let oddArray = array.filter( { (value: Int) -> Bool in return (value % 2 == 0) }
 // 추론 생략
 let oddArray = array.filter{ $0 % 2 == 0 }
 ```   
-Reduce   
+### Reduce   
 배열의 각 항목들을 재귀적으로 클로저를 적용시켜 하나의 값을 만든다.   
 ```
 func reduce<U>(initial: U, combine: (U, T) -> U) -> U
