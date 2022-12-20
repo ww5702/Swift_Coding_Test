@@ -16,5 +16,9 @@ readLine() -> Optional<String>
 readLine()! -> String   
 Int(readLine()!) -> Optional<Int>   
 Int(readLine()!)! -> Int   
+   
+Map,Filter,Reduce   
+  
+
 
 ## BAEKJOON
