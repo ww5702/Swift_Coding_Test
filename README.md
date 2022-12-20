@@ -68,3 +68,8 @@ let sum = numberArray.reduce(0) { $0 + $1 }
 print(sum)
 // 55
 ```   
+
+## forEach
+해당하는 범위내에서 전체 수를 선회하면서 탐색하는것   
+순회 도중 break로 빠져나가야하는 상황이 있다면 적절하지 않다.   
+하지만 전체 숫자를 확인해봐야하는 문제는 forEach가 적절하다.   
