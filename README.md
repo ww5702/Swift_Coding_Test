@@ -76,3 +76,4 @@ print(sum)
 
 readLine()!.split(separator:" ").map{ Int(String($0.reversed()) ) ?? 0}   
 에서 ?? 0 쓰는 이유 ;;
+   
