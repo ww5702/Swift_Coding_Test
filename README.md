@@ -46,7 +46,7 @@ array.reduce(0, { (s1: Int, s2: Int) -> Int in
     return s1 + s2
 })
 // 추론 생략
-array.reduce(0) { $0 + $1 }
+array.reduce(0) { $0 + $1 }   
 ```
    
 
