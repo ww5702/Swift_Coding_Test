@@ -77,3 +77,16 @@ print(sum)
 readLine()!.split(separator:" ").map{ Int(String($0.reversed()) ) ?? 0}   
 에서 ?? 0 쓰는 이유 ;;
    
+## 튜플
+튜플은 지정된 데이터의 묶음 이라고 표현 할 수있다.   
+```
+var person : (String, Int, Double) = ("asdf", 100, 180.5)
+
+// 인덱스를 통해서 값을 빼 올 수 있다.
+print(person.0) // asdf
+print(person.1) // 100
+
+person.0 = "dd"
+print(person.0) // dd
+```
+
