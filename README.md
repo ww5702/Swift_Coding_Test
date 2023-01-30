@@ -89,4 +89,14 @@ print(person.1) // 100
 person.0 = "dd"
 print(person.0) // dd
 ```
+또한 별칭을 사용해 사용할 수 있다.
+```
+var person : (name : String, age : Int, height : Double) = ("asdf", 100, 180.5)
+print(person.name)   // asdf
+print(person.age)    // 100
+ 
+person.age = 99
+print(person.age)    // 99
+   
+```
 
