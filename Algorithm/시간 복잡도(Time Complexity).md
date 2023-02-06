@@ -30,7 +30,7 @@ O(1)은 일정한 복잡도라고 하며, 입력값이 증가하더라도 시간
 <img width="234" alt="스크린샷 2023-02-06 오후 4 01 56" src="https://user-images.githubusercontent.com/60501045/216904734-9efb3a4a-6262-4205-b956-bea94e451eff.png">   
    
 ```
-func O_1_algorithm(arr, input) {
+func O_1_algorithm(_ arr : [Int],_ input : Int) -> Int {
     return arr[input]
 }
 let arr = [1,2,3,4,5]
@@ -46,4 +46,31 @@ O(n)은 선형 복잡도 라고 부르며, 입력값이 증가함에 따라 시�
 예를 들어 입력값이 1일때 1초의 시간이 걸리고, 입력값을 100으로 증가시켰을때 100초가 걸리는 알고리즘이라면   
 O(n)의 시간복잡도를 가졌다는 것을 의미한다.   
    
+<img width="262" alt="스크린샷 2023-02-06 오후 4 10 35" src="https://user-images.githubusercontent.com/60501045/216906738-de98d19e-36d4-4a43-ae3c-2f1aa39623ad.png">   
    
+```
+import Foundation
+ 
+func O_n_algorithm(_ n : Int){
+    for i in 0..<n {
+        print(i)
+    }
+}
+func another_O_n_algorithm(_ n : Int){
+    for i in 0..<2*n {
+        print(i)
+    }
+}
+let n : Int = 100
+O_n_algorithm(n)
+another_O_n_algorithm(n)
+```
+O_n_algorithm 함수에서는 입력값이 1 증가할 때 마다 실행시간이 1초씩 증가한다   
+입력값이 증가함에 따라 같은 비율로 걸리는 시간이 증가하고 있기 때문이다.   
+   
+그렇다면 another_O_n_algorithm은 2초씩 증가하기 때문에 O(2n)인가 싶지만 그렇지 않다.   
+입력값이 커지면 커질수록 의미가 퇴색되기 때문에 같은 비율로 증가하고 있다면 5배 10배 증가하더라도 O(n)이다.   
+
+## O(log n)
+O(log n)은 로그 복잡도라고 부르며 빅-오 표기법중 O(1) 다음으로 빠른 시간 복잡도를 가진다.   
+
