@@ -73,4 +73,29 @@ O_n_algorithm 함수에서는 입력값이 1 증가할 때 마다 실행시간�
 
 ## O(log n)
 O(log n)은 로그 복잡도라고 부르며 빅-오 표기법중 O(1) 다음으로 빠른 시간 복잡도를 가진다.   
+Binary Search Tree(이진탐색트리)가 대표적인 예시이다.   
+   
+<img width="239" alt="스크린샷 2023-02-07 오후 4 17 54" src="https://user-images.githubusercontent.com/60501045/217174459-df3da30c-bbbe-4cef-86c5-49e1f2ad23cb.png">   
+   
+```
+import Foundation
+ 
+func O_logn_algorithm(_ arr : [Int], num : Int) -> Bool{
+    if arr.count == 1 {
+        return arr[0] == num ? true : false
+    }
+    let mid = arr.count / 2
+    if arr[mid] == num { return true }
+    let range = arr[mid] > num ? (0..<mid) : ((mid + 1)..<arr.count)
 
+    return O_logn_algorithm(Array(arr[range]), num: num)
+}
+let arr = [1,2,3,4,5,6,7,8,9,10]
+print(O_logn_algorithm(arr, num : 3))
+```
+
+1부터 100까지의 숫자중 원하는 값을 탐색할 때, 30을 골랐다면 50보다 큰지 작은지 조사한 후 작은값으로 다시 탐색을 한다.   
+매번 숫자를 제시할 때 마다 경우의 수가 절반으로 줄어들기 떄문에 최악의 경우에도 7번이면 원하는 숫자를 찾을 수 있다.   
+
+## O(n^2)
+O(n^2)는 
