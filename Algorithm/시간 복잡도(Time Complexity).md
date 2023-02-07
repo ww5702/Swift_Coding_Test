@@ -23,6 +23,9 @@ Big-θ(빅-세타) ⇒ 그 둘의 평균(위 둘의 평균)
 <img width="691" alt="스크린샷 2023-02-06 오후 4 00 02" src="https://user-images.githubusercontent.com/60501045/216904262-04140029-2453-4f66-aeba-8f8a1542ddf6.png">   
    
    
+<img width="589" alt="스크린샷 2023-02-07 오후 4 46 20" src="https://user-images.githubusercontent.com/60501045/217183124-c43e848b-7dca-4bdb-a94b-5a0f517da347.png">   
+   
+   
 ## O(1)
 O(1)은 일정한 복잡도라고 하며, 입력값이 증가하더라도 시간이 늘어나지않는 시간복잡도를 의미한다.   
 입력의 크기와 관계없이 즉시 출력값을 얻어낼 수 있다는 의미이다.   
