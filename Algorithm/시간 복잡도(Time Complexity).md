@@ -132,7 +132,17 @@ n이 커지면 커질수록 지수가 주는 영향력이 퇴색되니 때문이
 ## O(2^n) 
 O(2^n)는 기하급수적 복잡도라고 부르며 빅-오 표기법중 가장 느린 시간 복잡도를 가진다.   
 가장 대표적인 기하급수적 복잡도로 피보자치 수열을 뽑을 수 있다.   
-
+   
+<img width="253" alt="스크린샷 2023-02-07 오후 4 41 19" src="https://user-images.githubusercontent.com/60501045/217182132-2003bdeb-a2e5-46d2-ac78-0fac918486b7.png">   
+   
+   
 ```
-
+import Foundation
+ 
+func O_2n_algorithm(_ n : Int) -> Int{
+    if n == 1 { return 1}
+    return n + O_2n_algorithm(n-1)
+}
+print(O_2n_algorithm(5))
 ```
+종이를 42번 접으면 두께가 지구에서 달까지의 거리보다 커진다는 이야기를 증명하는 알고리즘이다.   
