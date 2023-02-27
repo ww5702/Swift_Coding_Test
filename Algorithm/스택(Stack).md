@@ -10,3 +10,7 @@
 1. count() - 스택에 포함된 요소의 수를 반환   
 2. isEmpty() - 스택에 포함된 요소가 있는경우(true)/ 없는경우(false)반환   
 3. isFull() - 스택에 포함될 요소의 수가 결정되어 있는 경우 꽉찼다면(true) / 그렇지 않다면(false)반환   
+
+
+## removeLast() vs popLast()
+두 메소드는 공통적으로 배열의 마지막 요소(Element)를 없애고 해당 값을 return 해준다.   
