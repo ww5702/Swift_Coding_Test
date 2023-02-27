@@ -14,3 +14,9 @@
 
 ## removeLast() vs popLast()
 두 메소드는 공통적으로 배열의 마지막 요소(Element)를 없애고 해당 값을 return 해준다.   
+   
+![image](https://user-images.githubusercontent.com/60501045/221518092-4f99ff6b-aa56-44b0-abc7-8056127672df.png)   
+   
+하지만 두 메소드의 차이점은 존재한다.   
+removeLast()는 값이 무조건 존재해야 하고,   
+popLast()는 값이 없으면 nil을 리턴한다는 점이다.   
