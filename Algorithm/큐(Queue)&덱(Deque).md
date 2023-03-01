@@ -52,7 +52,42 @@ struct Queue<T> {
     }
 }
 ```
-이런식으로 구현하고, 실제 사용은 다음과 같다.
+배열을 이용해 구현하였고 append()나 removeFirst()를 통해 구현할 수 있었다.   
+하지만 removeFirst를 이용하고 나면 앞으로 당기는 작업이 필요하기에 시간복잡도가 O(n)으로 높다.   
+따라서 개선하는 방안을 떠올렸다.   
+```
+struct Queue<T> {
+    private var queue: [T?] = []
+    private var front: Int = 0
+    
+    public var frontValue: Int {
+        return self.front
+    }
+    
+    public var count: Int {
+        return queue.count
+    }
+    
+    public var isEmpty: Bool {
+        return queue.isEmpty
+    }
+    
+    public mutating func enqueue(_ element: T) {
+        queue.append(element)
+    }
+    
+    public mutating func dequeue() -> T? {
+        guard front <= count, let element = queue[front] else { return nil }
+        queue[front] = nil
+        front += 1
+        return element
+    }
+}
+```
+전과 같지만 front를 추가하고 dequeue를 개선하였다.   
+removeFirst 대신 nil로 초기화하여 데이터를 삭제해도 공간은 남아있어 index만 증가하는 구조이다.   
+따라서 앞으로 당기는 작업이 필요없고 시간복잡도가 O(1)이 된다.   
+실행 방법은 다음과 같다.   
 ```
 var myQueue = Queue<Int>()
 myQueue.enqueue(10)
