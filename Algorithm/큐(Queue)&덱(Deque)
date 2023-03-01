@@ -1,0 +1,31 @@
+스위프트에는 Queue나 Deque를 따로 라이브러리로 지원하지 않는다.   
+따라서 배열로 직접 구현을 해야한다.   
+
+# 큐(Queue)
+```
+struct Queue<T> {
+    private var queue: [T] = []
+    
+    public var count: Int {
+        return queue.count
+    }
+    
+    public var isEmpty: Bool {
+        return queue.isEmpty
+    }
+    
+    public mutating func enqueue(_ element: T) {
+        queue.append(element)
+    }
+    
+    public mutating func dequeue() -> T? {
+        return isEmpty ? nil : queue.removeFirst()
+    }
+}
+```
+이런식으로 구현하고, 실제 사용은 다음과 같다.
+```
+var myQueue = Queue<Int>()
+myQueue.enqueue(10)
+myQueue.dequeue()
+```
