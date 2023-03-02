@@ -99,3 +99,37 @@ myQueue.dequeue()
 영어로 Double - ended queue로 쉽게 말해 양방향으로 삽입과 삭제가 가능한 큐이다.   
 큐는 일반적으로 한 방향으로 삽입하고 다른 방향으로 삭제가 진행되지만,   
 덱은 양방향으로 가능하다는 뜻이다.   
+   
+<img width="635" alt="스크린샷 2023-03-02 오후 3 14 10" src="https://user-images.githubusercontent.com/60501045/222346142-b961b94d-329d-47a6-82d2-34166ee113b2.png">   
+   
+```
+class Queue<T> {
+        var enQueue: [T]
+        var deQueue: [T] = []
+        
+        var count: Int {
+            return enQueue.count + deQueue.count
+        }
+        
+        var isEmpty: Bool {
+            return enQueue.isEmpty && deQueue.isEmpty
+        }
+        
+        init(_ queue: [T]) {
+            self.enQueue = queue
+        }
+        
+        func push(_ element: T) {
+            enQueue.append(element)
+        }
+        
+        func pop() -> T {
+            if deQueue.isEmpty {
+                deQueue = enQueue.reversed()
+                enQueue.removeAll()
+            }
+            return deQueue.popLast()!
+        }
+    }
+```
+위와 같이 enqueue와 dequeue를 구현하여 양쪽으로 삽입과 삭제가 가능하도록한다.   
