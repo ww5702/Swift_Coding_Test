@@ -13,19 +13,13 @@ func solution() {
     data.sort(by: >)
     let first = data[0]
     let second = data[1]
-    var sum = 0
-    while true {
-        for _ in 0..<k {
-            if m == 0 { break }
-            sum += first
-            m -= 1
-            if m == 0 { break }
-        }
-        sum += second
-        m -= 1
-        if m == 0 { break }
-    }
-    print(sum)
+    var count = m / (k+1) * k
+    var count2 = m - count
+    var result = 0
+    result += count * first
+    result += count2 * second
+    
+    print(result)
 }
 solution()
 
