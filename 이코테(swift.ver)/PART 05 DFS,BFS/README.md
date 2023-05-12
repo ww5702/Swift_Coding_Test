@@ -13,5 +13,72 @@ DFS와 BFS를 이해하려면 스택과 큐에 대한 이해가 전제되어야 
    
 ## 스택
 박스 쌓기에 비유할 수 있다.   
-선입선출(FILO)(First In Last Out)구조로 가장 위에 쌓여있는 데이터가 우선 삭제되어야한다.   
+선입출(FILO)(First In Last Out)구조로 가장 위에 쌓여있는 데이터가 우선 삭제되어야한다.   
+```
+import Foundation
+func solution() {
+    let n = Int(readLine()!)!
+    var stack: [Int] = []
+    for _ in 0..<n {
+        let input = readLine()!.split(separator:" ").map{String($0)}
+        switch input[0] {
+        case "push":
+            push(Int(input[1])!)
+            break
+        case "pop":
+            print(pop())
+            break
+        case "size":
+            print(size())
+            break
+        case "empty":
+            print(empty())
+            break
+        case "top":
+            print(top())
+            break
+        default:
+            break
+        }
+    }
 
+
+    func push(_ n : Int) {
+        stack.append(n)
+    }
+    func pop() -> Int {
+        if let pop = stack.popLast() {
+            return pop
+        } else {
+            return -1
+        }
+    }
+    func size() -> Int{
+        return stack.count
+    }
+    func empty() -> Int{
+        if stack.isEmpty == true {
+            return 1
+        } else {
+            return 0
+        }
+    }
+    func top() -> Int{
+        if let pop = stack.last {
+            return pop
+        } else {
+            return -1
+        }
+    }
+}
+solution()
+```
+위의 코드는 stack 구조를 함수화하여 만들어놓은 것이다.   
+push, pop, size, empty, top기능을 사용할 수 있도록 하였다.   
+   
+## 큐
+큐는 대기줄에 비유할 수 있다.   
+선입선출(FIFO)(First In First Out) 구조로 먼저 줄은 선 사람이 먼저 나갈 수 있는 구조라고 볼 수 있다.   
+   
+⭐️ 물론 swift에는 파이썬과 같이 별도의 라이브러리가 없어 큐 또한 실제로 기능하는 함수를 따로 제작해줘야하는 불편함이 있다😂   
+   
