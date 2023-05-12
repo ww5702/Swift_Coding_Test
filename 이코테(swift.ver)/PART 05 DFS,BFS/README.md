@@ -82,3 +82,66 @@ push, pop, size, empty, top기능을 사용할 수 있도록 하였다.
    
 ⭐️ 물론 swift에는 파이썬과 같이 별도의 라이브러리가 없어 큐 또한 실제로 기능하는 함수를 따로 제작해줘야하는 불편함이 있다😂   
    
+```
+struct Queue<T> {
+    private var queue: [T?] = []
+    private var front: Int = 0
+    
+    public var frontValue: Int {
+        return self.front
+    }
+    
+    public var count: Int {
+        return queue.count
+    }
+    
+    public var isEmpty: Bool {
+        return queue.isEmpty
+    }
+    
+    public mutating func enqueue(_ element: T) {
+        queue.append(element)
+    }
+    
+    public mutating func dequeue() -> T? {
+        guard front <= count, let element = queue[front] else { return nil }
+        queue[front] = nil
+        front += 1
+        return element
+    }
+}
+```
+enque()를 통해 input, dequeue()를 통ㅇ해 output이 가능하다.   
+   
+## 재귀함수
+DFS와 BFS를 이해하려면 재귀함수도 이해하고 있어야 한다.   
+재귀함수는 자기 자신을 다시 호출하는 함수를 의미한다.   
+팩토리얼과 같은 함수를 구현할때 자주 사용한다.   
+```
+import Foundation
+func solution() {
+    let input = Int(readLine()!)!
+
+    func factorial(_ n : Int) -> Int{
+        if n <= 1 {
+            return 1
+        } else {
+            return n * factorial(n-1)
+        }
+    }
+    
+    print(factorial(input))
+}
+solution()
+```
+물론 for문을 통해 반복문으로 문제를 해결할 수도 있다.   
+하지만 점화식을 그대로 소스코드를 옮겨놓는 방식이 훨씬 간결하다고 볼 수 있다.   
+해당 개념은 다이나믹 프로그래밍으로도 이어지기 때문에 중요하다.   
+   
+## 탐색 알고리즘 DFS/BFS
+DFS(Depth-First Search) 깊이 우선 탐색이라고도 부름, 그래프에서 깊은 부분을 우선적으로 탐색하는 알고리즘이다.   
+그래프에서 서로 연결되어 있지 않은 노드끼리는 무한의 비용이라고 작성한다.   
+DFS알고리즘은 특정한 경로를 탐색하다가 특정한 상황에서 최대한 깊숙이 들어가서 노드를 방문한 후, 다시 돌아가 다른 경로를 탐색하는 알고리즘이다.   
+1. 탐색 시작 노드를 스택에 삽입하고 방문처리를 한다.   
+2. 스택의 최상단 노드에 방문하지 않은 인접노드가 있으면 그 인접노드를 스택에 넣고 방문 처리를한다. 방문하지 않은 인접노드가 없으면 스택에서 최상단 노드를 꺼낸다.   
+3. 2번의 과정을 더이상 수행할 수 없을 때 까지 반복한다.   
