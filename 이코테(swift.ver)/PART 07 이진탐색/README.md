@@ -32,4 +32,42 @@ solution()
 탐색 범위를 절반으로 좁혀가며 데이터를 탐색하는 특징이 있다.   
 시작점, 끝점, 중간점 이 3개의 변수를 사용해 탐색한다.   
 0 2 4 6 8 10 12 13 16 18   
-위의 
+위의 이미 정렬되어 있는 리스트가 있을 때 4인 원소를 찾는 방법은 이렇다.   
+시작점은 0 끝점은 18 두 지점을 합친후 반으로 나눈것이 중간점이다.   
+중간점이 실수일때는 소수점 이하를 버린다.   
+시작점이 0, 끝점은 18, 중간점은 8이다.   
+중간점 8과 찾아야하는 값 4를 비교한다.   
+중간점이 더 크므로 중간점 이후의 값은 비교할 이유가 없다.   
+끝점을 18에서 중간점 8 바로 전인 6으로 옮긴다.
+위의 과정을 반복해 결과값을 찾아내는 구조이다.   
+전체 데이터의 개수는 10개이지만 총 3번의 탐색으로 원소를 찾을 수 있었다.   
+따라서 시간복잡도는 O(logN)이다.   
+절반씩 데이터가 줄어들도록 만든다는 점에서 앞서 다룬 퀵 정렬과 공통점이 있따.   
+   
+위 이진탐색 알고리즘을 구현하는 방법에는 2가지 방법이 있는데 하나는 재귀함수를 이용하는 것이고,   
+다른 하나는 반복문을 이용하는 방법이다.   
+먼저 재귀함수를 이용해 구현해보자.   
+```
+import Foundation
+func solution() {
+    let input = readLine()!.split(separator: " ").map{Int($0)!}
+    let (n,target) = (input[0],input[1])
+    let arr = Array(readLine()!.split(separator: " ").map{Int($0)!})
+    
+    func binary_sarch(_ arr: [Int], _ target: Int, _ start: Int, _ end: Int) -> Int?{
+        if start > end { return nil }
+        var mid: Int = (start + end) / 2
+        
+        if arr[mid] == target {
+            return mid
+        }else if arr[mid] > target {
+            return binary_sarch(arr, target, start, mid - 1)
+        } else {
+            return binary_sarch(arr, target, mid + 1, end)
+        }
+    }
+    let result = binary_sarch(arr, target, 0, n-1)
+    print(result!+1)
+}
+solution()
+```
