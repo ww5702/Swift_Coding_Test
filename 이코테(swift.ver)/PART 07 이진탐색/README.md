@@ -42,7 +42,7 @@ solution()
 위의 과정을 반복해 결과값을 찾아내는 구조이다.   
 전체 데이터의 개수는 10개이지만 총 3번의 탐색으로 원소를 찾을 수 있었다.   
 따라서 시간복잡도는 O(logN)이다.   
-절반씩 데이터가 줄어들도록 만든다는 점에서 앞서 다룬 퀵 정렬과 공통점이 있따.   
+절반씩 데이터가 줄어들도록 만든다는 점에서 앞서 다룬 퀵 정렬과 공통점이 있다.   
    
 위 이진탐색 알고리즘을 구현하는 방법에는 2가지 방법이 있는데 하나는 재귀함수를 이용하는 것이고,   
 다른 하나는 반복문을 이용하는 방법이다.   
@@ -67,7 +67,54 @@ func solution() {
         }
     }
     let result = binary_sarch(arr, target, 0, n-1)
-    print(result!+1)
+    if result == nil {
+        print("원소가 존재하지 않습니다.")
+    } else {
+        print(result!+1)
+    }
 }
 solution()
 ```
+   
+반복문으로 구현   
+```
+import Foundation
+func solution() {
+    let input = readLine()!.split(separator: " ").map{Int($0)!}
+    var (n,target) = (input[0],input[1])
+    let arr = Array(readLine()!.split(separator: " ").map{Int($0)!})
+    
+    func binary_sarch(_ arr: [Int], _ target: Int, _ start: Int, _ end: Int) -> Int?{
+        var end = end
+        var start = start
+        
+        while start <= end {
+            var mid: Int = (start + end) / 2
+            if arr[mid] == target {
+                return mid
+            } else if arr[mid] > target {
+                end = mid - 1
+            } else {
+                start = mid + 1
+            }
+        }
+        return nil
+    }
+    
+    let result = binary_sarch(arr, target, 0, n-1)
+    if result == nil {
+        print("원소가 존재하지 않습니다.")
+    } else {
+        print(result!+1)
+    }
+}
+solution()
+```
+이진 탐색알고리즘을 여러번 입력하여 자연스럽게 외워야 할 필요가 있다.   
+이진 탐색의 원리는 다른 알고리즘에서도 폭 넓게 적용되는 원리와 유사하기 떄문에 매우 중요하다.   
+높은 난이도의 다른 문제에서는 이진탐색 알고리즘에 다른 알고리즘을 함께 사용해 풀어야 하는 경우도 존재한다.   
+더불어 코딩테스트의 이진 탐색 문제는 탐색 범위가 큰 상황에서의 탐색을 가정하는 문제가 많다.   
+만약 탐색 범위가 2,000만을 넘어가면 이진탐색으로 접근할 필요가 있을 수 있다.   
+O(logN)의 속도를 내야 문제를 풀 수 있는 경우가 대다수 일것이기 때문이다.   
+   
+## 트리 
