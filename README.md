@@ -1,4 +1,6 @@
 # Coding_Test
+   
+전체 데이터 100만개 이하라면 완전 탐색을 사용하기 적절하다.   
 
 ## Foundation   
 원시 데이터 타입(String, Int, Double), 컬렉션 타입(Array, Dictionary, Set) 기본적인 기능을 관리.   
