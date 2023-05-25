@@ -80,3 +80,71 @@
 이제 알고리즘을 실제 구현해보자.   
 먼저 말했던 쉽게 구현하는 방법이다.   
 O(V^2)의 시간복잡도를 가지는데 여기서 V는 노드의 개수를 말한다.   
+```
+import Foundation
+func solution() {
+    let input = readLine()!.split(separator: " ").map{Int($0)!}
+    let (n,m) = (input[0],input[1])
+    let start = Int(readLine()!)!
+    let INF = 987654321
+    var graph = Array(repeating: [(Int,Int)](), count: n+1)
+    var distance = Array(repeating: INF, count: n+1)
+    var visited = Array(repeating: false, count: n+1)
+    for _ in 0..<m {
+        let input = readLine()!.split(separator: " ").map{Int($0)!}
+        let (a,b,c) = (input[0],input[1],input[2])
+        graph[a].append((b,c))
+    }
+    print(graph)
+    
+    // 현재 distance에서 방문했던 적이 없었으면서 최단 거리인 노드는?
+    func getSmallNode() -> Int {
+        var min = INF
+        var index = 0
+        for i in 1..<n+1 {
+            if distance[i] < min && !visited[i] {
+                min = distance[i]
+                index = i
+            }
+        }
+        return index
+    }
+    
+    func dijkstra(_ start: Int) {
+        distance[start] = 0
+        visited[start] = true
+        
+        for i in graph[start] {
+            distance[i.0] = i.1
+            // i가 1일때 2,3,4까지의 거리는 2,5,1로 입력한다는 뜻
+        }
+        print(distance)
+        // 시작 노드를 제외한 전체 노드에 대해 최단 거리 계산
+        for _ in 0..<n-1 {
+            let now = getSmallNode()
+            visited[now] = true
+            print("현재 서있는 노드 = \(now)")
+            for j in graph[now] {
+                // 현재 서있는 노드까지의 거리 + 해당 노드에서 갈수있는 노드까지의 거리의 합
+                // 그 거리의 합과 기존에 적혀있는 합과 비교했을때 더 작다면 더 빠르게 갈 수 있다는 뜻
+                let cost = distance[now] + j.1
+                if cost < distance[j.0] {
+                    distance[j.0] = cost
+                }
+            }
+        }
+    }
+    dijkstra(start)
+    for i in 1..<n+1 {
+        if i == INF {
+            print("INFINITY")
+        } else {
+            print(distance[i])
+        }
+    }
+}
+solution()
+
+```
+복잡해 보이지만 주석과 함께 살펴본다면 그리 어렵지 않다는 것을 알 수 있다.   
+앞서 
