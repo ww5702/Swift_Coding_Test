@@ -174,7 +174,7 @@ V는 노드이 개수이고 E는 간선의 개수를 의미한다.
 대부분의 프로그래밍 언어에서는 우선순위 큐 라이브러리를 지원하기 때문에 우선순위 큐를 구현할 필요는 없다.   
 (물론 안타깝게도 스택과 큐처럼 swift는 라이브러리가 지원되지 않으므로 직접 구현해야 한다ㅎㅎ)   
 ```
-struct MinHeal<T:Comparable> {
+struct MinHeap<T:Comparable> {
     var heap: [T] = []
     var isEmpty: Bool {
         return heap.count <= 1 ? true : false
@@ -263,6 +263,8 @@ struct MinHeal<T:Comparable> {
  }
 ```
 위와 같은 구조로 힙을 구현해 둘 수 있다.   
+하지만 .sorted(by: { Bool }) 와 같은 방식으로 좀더 쉽고 직관적으로 구현이 가능하다.   
+   
 최소 힙을 이용하면 가장 값이 작은 원소가 추출이 되며, 최대 힙을 이용하면 가장 값이 큰 원소가 추출이 된다.   
 다시 한번 위의 그래프를 우선순위 큐를 이용해 풀이해보자.   
    
