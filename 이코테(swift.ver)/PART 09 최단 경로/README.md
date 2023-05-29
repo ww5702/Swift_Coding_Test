@@ -171,97 +171,75 @@ V는 노드이 개수이고 E는 간선의 개수를 의미한다.
 힙 자료구조는 우선순위 큐를 구현하기 위하여 사용하는 자료구조 중 하나이다.   
 우선순위 큐는 '우선순위가 가장 높은 데이터를 가장 먼저 삭제한다는 점' 이 특징이다.   
 따라서 여러 물건 데이터를 자료구조에 넣었다가 가치가 높은 물건 데이터붵 꺼내서 확인해야 하는 경우 효과적이다.   
-대부분의 프로그래밍 언어에서는 우선순위 큐 라이브러리를 지원하기 때문에 우선순위 큐를 구현할 필요는 없다.   
-(물론 안타깝게도 스택과 큐처럼 swift는 라이브러리가 지원되지 않으므로 직접 구현해야 한다ㅎㅎ)   
-```
-struct MinHeap<T:Comparable> {
-    var heap: [T] = []
+대부struct PriorityQueue<T: Comparable> {
+    private var heap = [T]()
+    
     var isEmpty: Bool {
-        return heap.count <= 1 ? true : false
+        return heap.isEmpty
     }
-    init() {}
-    init(_ element: T) {
-        heap.append(element)    // 0번 index 채우기 용
-        heap.append(element)    // 실제 RootNode 채움
+    
+    var count: Int {
+        return heap.count
     }
-    mutating func insert(_ element: T) {
+    
+    mutating func enqueue(_ element: T) {
+        heap.append(element)
+        heapifyUp(heap.count - 1)
+    }
+    
+    mutating func dequeue() -> T? {
         if heap.isEmpty {
-            heap.append(element)
-            heap.append(element)
-            return
+            return nil
         }
         
-        func isMoveUp(_ insertIndex: Int) -> Bool {
-            if insertIndex <= 1 {   // RootNode 일때,
-                return false
-            }
-            let parentIndex = insertIndex / 2
-            return heap[insertIndex] < heap[parentIndex] ? true : false
-        }
-        var insertIndex = heap.count - 1
-        while isMoveUp(insertIndex) {
-            let parentIndex = insertIndex / 2
-            heap.swapAt(insertIndex, parentIndex)
-            insertIndex = parentIndex
+        heap.swapAt(0, heap.count - 1)
+        let element = heap.removeLast()
+        heapifyDown(0)
+        
+        return element
+    }
+    
+    private mutating func heapifyUp(_ index: Int) {
+        var childIndex = index
+        var parentIndex = (childIndex - 1) / 2
+        
+        while childIndex > 0 && heap[childIndex] < heap[parentIndex] {
+            heap.swapAt(childIndex, parentIndex)
+            childIndex = parentIndex
+            parentIndex = (childIndex - 1) / 2
         }
     }
     
-    enum moveDownStatus { case left, right, none }
-    
-    mutating func pop() -> T? {
-        if heap.count <= 1 { return nil }
-        let returnData = heap[1]
-        heap.swapAt(1, heap.count - 1)
-        heap.removeLast()
+    private mutating func heapifyDown(_ index: Int) {
+        let lastIndex = heap.count - 1
+        var parentIndex = index
         
-        func moveDown(_ poppedIndex: Int) -> moveDownStatus {
-            let leftChildIndex = poppedIndex * 2
-            let rightChildIndex = leftChildIndex + 1
-            // case1 모든(왼족) 자식 노드가 없는 경우(완전이진트리는 왼쪽부터 채워지므로)
-            if leftChildIndex >= heap.count {
-                return .none
-            }
-            // case2 왼쪽 자식 노드만 있는 경우
-            if rightChildIndex >= heap.count {
-                return heap[leftChildIndex] < heap[poppedIndex] ? .left:.none
-            }
-            
-            // case3. 왼쪽&오른쪽 자식 노드 모두 있는 경우
-            // case3-1. 자식들이 자신보다 모두 큰 경우(자신이 제일 작은 경우)
-            if (heap[leftChildIndex] > heap[poppedIndex]) && (heap[rightChildIndex] > heap[poppedIndex]) {
-                return .none
-            }
-            
-            // case3-2. 자식들이 자신보다 모두 작은 경우(왼쪽과 오른쪽 자식 중, 더 작은 자식을 선별)
-            if (heap[leftChildIndex] < heap[poppedIndex]) && (heap[rightChildIndex] < heap[poppedIndex]) {
-                return heap[leftChildIndex] < heap[rightChildIndex] ? .left : .right
-            }
-            
-            // case3-3. 왼쪽과 오른쪽 자식 중, 한 자식만 자신보다 작은 경우
-            if (heap[leftChildIndex] < heap[poppedIndex]) || (heap[rightChildIndex] < heap[poppedIndex]) {
-                return heap[leftChildIndex] < heap[rightChildIndex] ? .left : .right
-            }
-            
-            return .none
-        }
-        var poppedIndex = 1
         while true {
-            switch moveDown(poppedIndex) {
-            case .none:
-                return returnData
-            case .left:
-                let leftChildIndex = poppedIndex * 2
-                heap.swapAt(poppedIndex, leftChildIndex)
-                poppedIndex = leftChildIndex
-            case .right:
-                let rightChildIndex = (poppedIndex * 2) + 1
-                heap.swapAt(poppedIndex, rightChildIndex)
-                poppedIndex = rightChildIndex
+            let leftChildIndex = parentIndex * 2 + 1
+            let rightChildIndex = parentIndex * 2 + 2
+            var minIndex = parentIndex
+            
+            if leftChildIndex <= lastIndex && heap[leftChildIndex] < heap[minIndex] {
+                minIndex = leftChildIndex
             }
+            
+            if rightChildIndex <= lastIndex && heap[rightChildIndex] < heap[minIndex] {
+                minIndex = rightChildIndex
+            }
+            
+            if minIndex == parentIndex {
+                break
+            }
+            
+            heap.swapAt(parentIndex, minIndex)
+            parentIndex = minIndex
         }
     }
- }
+}
+
+var pq = PriorityQueue<Int>()
 ```
+   
 위와 같은 구조로 힙을 구현해 둘 수 있다.   
 하지만 .sorted(by: { Bool }) 와 같은 방식으로 좀더 쉽고 직관적으로 구현이 가능하다.   
    
@@ -380,3 +358,10 @@ solution()
 N의 범위가 100이하이므로 매우 한정적이다.   
 따라서 N^3일지라도 해결이 가능하다.   
 (1에서 K까지의 최소거리) + (K에서 X까지의 최소 거리)가 정답이다.   
+   
+## 전보
+N개의 도시가 있다. 각 도시는 보내고자 하는 메시지가 있는 경우 다른 도시로 전보를 보내서 다른 도시로 전송할 수 있다.   
+C라는 도시에서 위급상황이 생겨 최대한 많은 도시로 메시지를 보내고자 한다.   
+도시 C에서 보낸 메시지를 받게 되는 도시의 개수는 총 몇개이며 도시들이 메시지를 받는데 걸리는 시간은 얼마일까?   
+   
+n과 m의 범위가 충분히 크기에 다익스트라 알고리즘을 이용해 풀 수 있다.   
