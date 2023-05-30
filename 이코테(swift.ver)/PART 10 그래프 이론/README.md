@@ -34,3 +34,54 @@ A가 1이고 B가 3이라면 B가 A를 가리키도록 설정한다.
 노드 3의 노드를 찾기 위해서는 먼저 부모 노드인 2로 이동한 다음 노드 2의 부모를 또 확인해 최종적으로 1으로 접근해야 한다.   
 다시 말해 서로소 집합 알고리즘으로 루트 노드를 찾기 위해서는 재귀적으로 부모를 거슬러 올라간다는 뜻이다.   
 코드로 구현해보자.   
+```
+import Foundation
+
+func solution() {
+    func find_parent(_ parent: [Int], _ x: Int) -> Int{
+        if parent[x] != x {
+            return find_parent(parent, parent[x])
+        }
+        return x
+    }
+    func union_parent(_ a: Int, _ b: Int) {
+        let a = find_parent(parent, a)
+        let b = find_parent(parent, b)
+        if a < b {
+            parent[b] = a
+        } else {
+            parent[a] = b
+        }
+    }
+    
+    let ve = readLine()!.split(separator: " ").map{Int($0)!}
+    let (v,e) = (ve[0],ve[1])
+    var parent = Array(repeating: 0, count: v+1)
+    // 초기 자기자신은 i를 가르킨다
+    for i in 1..<parent.count {
+        parent[i] = i
+    }
+    //union 연산 수행
+    for _ in 0..<e {
+        let ab = readLine()!.split(separator: " ").map{Int($0)!}
+        let (a,b) = (ab[0],ab[1])
+        union_parent(a, b)
+    }
+    
+    print("각 원소가 속한 집합 : ",terminator: " ")
+    for i in 1..<v+1 {
+        print(find_parent(parent, i), terminator: " ")
+    }
+    print()
+    // 부모 테이블 출력
+    print("부모 테이블 : ",terminator: " ")
+    for i in 1..<v+1 {
+        print(parent[i],terminator: " ")
+    }
+    
+}
+solution()
+```
+위와 같이 쉽게 구현이 되지만 find함수가 비효율적으로 동작한다.   
+재귀적이기 때문에 운이 없다면 O(V)의 시간복잡도를 가지게 된다.   
+find함수를 경로 압축 기법을 사용하여 최적화 시킨다.   
