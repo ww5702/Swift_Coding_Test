@@ -180,3 +180,143 @@ A,B 2개의 도시를 선택했을 때, 도시 A에서 도시 B로 이동하는 
 ```
 이렇게 최소한의 비용으로 최소 신장 트리를 찾을 수 있다.   
 이제 위 문제를 코드로 바꿔보자.   
+```
+import Foundation
+
+func solution() {
+    func find_parent(_ parent: [Int], _ x: Int) -> Int{
+        // 루트 노드를 찾을때까지 재귀적으로 호출
+        if parent[x] != x {
+            return find_parent(parent, parent[x])
+        }
+        return x
+    }
+    
+    func union_parent(_ a: Int, _ b: Int) {
+        let a = find_parent(parent, a)
+        let b = find_parent(parent, b)
+        if a < b {
+            parent[b] = a
+        } else {
+            parent[a] = b
+        }
+    }
+    
+    let ve = readLine()!.split(separator: " ").map{Int($0)!}
+    let (v,e) = (ve[0],ve[1])
+    var parent = Array(repeating: 0, count: v+1)
+    var edges: [(Int,Int,Int)] = []
+    var result = 0
+    // 초기 자기자신은 i를 가르킨다
+    for i in 1..<parent.count {
+        parent[i] = i
+    }
+    for _ in 0..<e {
+        let abcost = readLine()!.split(separator: " ").map{Int($0)!}
+        let (a,b,cost) = (abcost[0],abcost[1],abcost[2])
+        edges.append((cost,a,b))
+    }
+    print(edges)
+    edges.sort(by: {$0.0 < $1.0})
+    print(edges)
+    for i in edges {
+        if find_parent(parent, i.1) != find_parent(parent, i.2) {
+            union_parent(i.1, i.2)
+            result += i.0
+        }
+    }
+    print(result)
+}
+solution()
+```
+sorting만 정상적으로 진행해준다면 구현은 쉽다.   
+   
+## 위상정렬
+위상정렬은 정렬 알고리즘의 일종이다.   
+순서가 정해져 있는 일련의 작업을 차례대로 수행해야 할 때 사용할 수 있는 알고리즘이다.   
+이론적으로 말하자면 방향 그래프의 모든 노드를 방향성에 거스르지 않도록 순서대로 나열하는것이다.   
+전형적인 예시로는 '선수과목을 고렿낳 학습 순서 설정'을 예로 들 수 있다.   
+위상 정렬 알고리즘을 살펴보기전에 먼저 진입차수를 알아야 한다.   
+진입 차수란 말 그대로 특정한 노드로 들어오는 간선의 개수를 의미한다.   
+1. 진입차수가 0인 노드를 큐에 넣는다.   
+2. 큐가 빌 때까지 다음의 과정을 반복한다.   
+- 큐에서 원소를 꺼내 해당 노드에서 출발하는 간선을 그래프에서 제거한다.   
+- 새롭게 진입차수가 0이 된 노드를 큐에 넣는다.   
+알고리즘에서 확인할 수 있듯이 큐가 빌 때까지 큐에서 원소를 계속 꺼내서 처리하는 과정을 반복한다.   
+이떄 모든 원소를 방문하기 전에 큐가 빈다면 사이클이 존재한다고 판단할 수 있다.   
+위를 소스코들 구현해보자.   
+```
+import Foundation
+struct Deque<T> {
+    private var elements = [T]()
+    
+    mutating func enqueue(_ element: T) {
+        elements.append(element)
+    }
+    
+    mutating func dequeue() -> T? {
+        if elements.isEmpty {
+            return nil
+        } else {
+            return elements.removeFirst()
+        }
+    }
+    
+    mutating func dequeueBack() -> T? {
+        if elements.isEmpty {
+            return nil
+        } else {
+            return elements.removeLast()
+        }
+    }
+    
+    mutating func isEmpty() -> Bool {
+        if elements.count <= 0 { return true }
+        else { return false }
+    }
+}
+func solution() {
+    let ve = readLine()!.split(separator: " ").map{Int($0)!}
+    let (v,e) = (ve[0],ve[1])
+    //진입차수
+    var indegree = Array(repeating: 0, count: v+1)
+    var graph = Array(repeating: [(Int)](), count: v+1)
+    for _ in 0..<e {
+        let ab = readLine()!.split(separator: " ").map{Int($0)!}
+        let (a,b) = (ab[0],ab[1])
+        graph[a].append(b)
+        indegree[b] += 1
+    }
+    print(graph)
+    func topology_sort() {
+        var result: [Int] = []
+        var q = Deque<Int>()
+        // 진입차수가 0이면 append
+        for i in 1..<v+1 {
+            if indegree[i] == 0 {
+                q.enqueue(i)
+            }
+        }
+        while !q.isEmpty() {
+            let now = q.dequeue()
+            result.append(now!)
+            
+            // 해당 원소와 연결된 노드들의 진입차수 1 빼주기
+            for i in graph[now!] {
+                indegree[i] -= 1
+                if indegree[i] == 0 { q.enqueue(i)}
+            }
+        }
+        
+        for i in result {
+            print(i, terminator: " ")
+        }
+    }
+    topology_sort()
+}
+solution()
+
+```
+위상 정렬의 시간 복잡도는 O(V+E)이다.   
+위상 정렬을 수행할 때는 차례대로 모든 노드를 확인하면서, 해당 노드에서 출발하는 간선을 차례대로 제거해야한다.   
+노드와 간선을 모두 확인하는 개념에서 O(V+E)의 시간이 소요되는 것이다.   
