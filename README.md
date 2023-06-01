@@ -6,7 +6,10 @@
 ```
 그래프 저장 [()()], [()()()], [()] 와 같은 형식   
 var graph = Array(repeating: [(Int,Int)](), count: n+1) 
+12345 를 [1,2,3,4,5]로 변형
+let n = Array(readLine()!).map{Int(String($0))!}
 ```
+
    
 ## Foundation   
 원시 데이터 타입(String, Int, Double), 컬렉션 타입(Array, Dictionary, Set) 기본적인 기능을 관리.   
