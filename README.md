@@ -9,6 +9,7 @@ var graph = Array(repeating: [(Int,Int)](), count: n+1)
 12345 를 [1,2,3,4,5]로 변형
 let n = Array(readLine()!).map{Int(String($0))!}
 ```
+구현 문제가 가장 빨리 풀 수 있으면서 풀이가 어렵게 구성될 수 있다.   
 
    
 ## Foundation   
