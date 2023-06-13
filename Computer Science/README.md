@@ -4,3 +4,4 @@
 [중앙처리장치(CPU)의 작동 원리](https://github.com/ww5702/Coding_Test/tree/main/Computer%20Science/CPU%EC%9D%98%20%EC%9E%91%EB%8F%99%20%EC%9B%90%EB%A6%AC)   
 [캐시 메모리](https://github.com/ww5702/Coding_Test/tree/main/Computer%20Science/%EC%BA%90%EC%8B%9C%20%EB%A9%94%EB%AA%A8%EB%A6%AC)   
 [고정 소수점 & 부동 소수점](https://github.com/ww5702/Coding_Test/tree/main/Computer%20Science/%EA%B3%A0%EC%A0%95%20%EC%86%8C%EC%88%98%EC%A0%90%20%26%20%EB%B6%80%EB%8F%99%20%EC%86%8C%EC%88%98%EC%A0%90)   
+[패리티 비트 & 해밍 코드](https://github.com/ww5702/Coding_Test/blob/main/Computer%20Science/%ED%8C%A8%EB%A6%AC%ED%8B%B0%20%EB%B9%84%ED%8A%B8%20&%20%ED%95%B4%EB%B0%8D%20%EC%BD%94%EB%93%9C/README.md)   
