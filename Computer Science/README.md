@@ -1,4 +1,7 @@
 # CS
+참고 사이트   
+[boostcourse](https://www.boostcourse.org/cs112/joinLectures/41307)   
+
 ## Computer Architecture
 [컴퓨터의 구성](https://github.com/ww5702/Coding_Test/tree/main/Computer%20Science/Computer%20Architecture/%EC%BB%B4%ED%93%A8%ED%84%B0%EC%9D%98%20%EA%B5%AC%EC%84%B1)   
 [중앙처리장치(CPU)의 작동 원리](https://github.com/ww5702/Coding_Test/tree/main/Computer%20Science/Computer%20Architecture/ARM%20%ED%94%84%EB%A1%9C%EC%84%B8%EC%84%9C)   
