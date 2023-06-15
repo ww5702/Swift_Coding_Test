@@ -8,8 +8,7 @@
 [ARM 프로세서](https://github.com/ww5702/Coding_Test/tree/main/Computer%20Science/Computer%20Architecture/ARM%20%ED%94%84%EB%A1%9C%EC%84%B8%EC%84%9C)   
    
    
-   
-   
+[2진법&10진법&16진법](https://github.com/ww5702/Coding_Test/tree/main/Computer%20Science/2%EC%A7%84%EB%B2%95&10%EC%A7%84%EB%B2%95&16%EC%A7%84%EB%B2%95)   
    
 
 
