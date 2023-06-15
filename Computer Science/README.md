@@ -16,5 +16,5 @@
    
 ## C
 [C 기초](https://github.com/ww5702/Coding_Test/tree/main/Computer%20Science/C/C%20%EA%B8%B0%EC%B4%88)   
-
+[자료형, 형식지정자, 연산자](https://github.com/ww5702/Coding_Test/tree/main/Computer%20Science/C/%EC%9E%90%EB%A3%8C%ED%98%95,%20%ED%98%95%EC%8B%9D%20%EC%A7%80%EC%A0%95%EC%9E%90,%20%EC%97%B0%EC%82%B0%EC%9E%90)   
 
