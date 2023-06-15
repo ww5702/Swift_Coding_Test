@@ -6,8 +6,16 @@
 ```
 그래프 저장 [()()], [()()()], [()] 와 같은 형식   
 var graph = Array(repeating: [(Int,Int)](), count: n+1) 
+
 12345 를 [1,2,3,4,5]로 변형
 let n = Array(readLine()!).map{Int(String($0))!}
+
+"X,3,2,3,X","X,2,2,2,X" 등과 같은 String계열 배열을
+하나씩 잘라 Character 계열로 배열을 다시 구축 
+let graph = maps.reduce(into: [[Character]]()) {result, map in
+                                                  result.append(Array(map))
+                                                  }
+                                                
 ```
 구현 문제가 가장 빨리 풀 수 있으면서 풀이가 어렵게 구성될 수 있다.   
 함수를 잘 이용해 필요한 요구기능들을 각각 구현   
