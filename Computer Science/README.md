@@ -14,5 +14,7 @@
 ***
 [2진법&10진법&16진법](https://github.com/ww5702/Coding_Test/tree/main/Computer%20Science/2%EC%A7%84%EB%B2%95&10%EC%A7%84%EB%B2%95&16%EC%A7%84%EB%B2%95)   
    
+## C
+[C 기초](https://github.com/ww5702/Coding_Test/tree/main/Computer%20Science/C/C%20%EA%B8%B0%EC%B4%88)   
 
 
