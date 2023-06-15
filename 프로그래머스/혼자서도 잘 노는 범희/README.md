@@ -26,3 +26,38 @@ func solution(_ cards:[Int]) -> Int {
     return result
 }
 ```
+변경 후 코드   
+```
+var list:[Int] = []
+    var cardList = cards
+    var startIndex:Int = 0
+    var sum:Int = 0
+    while true {
+        for i in 0...cards.count-1 {
+            if cardList[i] > 0 {
+                startIndex = i
+                break
+            }
+        }
+        var count:Int = 0
+        while true {
+            count += 1
+            var index = startIndex
+            startIndex = cardList[index]-1
+            cardList[index] = 0
+            if cardList[startIndex] == 0 {
+                break
+            }
+        }
+        sum += count
+        list.append(count)
+        if sum == cards.count {
+            if list.count < 2 {
+                return 0
+            } else {
+                list.sort(by: >)
+                return list[0] * list[1]
+            }
+        }
+    }
+```
