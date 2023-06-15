@@ -1,5 +1,5 @@
 # CS
-참고 사이트   
+참고 사이트📚   
 [boostcourse](https://www.boostcourse.org/cs112/joinLectures/41307)   
 
 ## Computer Architecture
