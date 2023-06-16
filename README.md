@@ -20,6 +20,11 @@ bool로 array선언
 var visited = Array(repeating:Array(repeating: Bool(), count: col), count: row)
 var visited = [[Bool]](repeating:[Bool](repeating:false, count: col), count: row)
 둘중 하나로 사용 가능
+
+2차원 배열 조건 넣어서 정렬
+array.sort(by: {$0[0], $0[1] < $1[0], $1[1]}) 
+[0]을 기준으로 오름차순, 2순위로 [1]을 기준으로 오름차순 
+
 ```
 구현 문제가 가장 빨리 풀 수 있으면서 풀이가 어렵게 구성될 수 있다.   
 함수를 잘 이용해 필요한 요구기능들을 각각 구현   
