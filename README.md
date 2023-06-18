@@ -22,7 +22,7 @@ var visited = [[Bool]](repeating:[Bool](repeating:false, count: col), count: row
 둘중 하나로 사용 가능
 
 2차원 배열 조건 넣어서 정렬
-array.sort(by: {$0[0], $0[1] < $1[0], $1[1]}) 
+aarray.sorted{($0[0], $0[1]) < ($1[0], $1[1])}
 [0]을 기준으로 오름차순, 2순위로 [1]을 기준으로 오름차순 
 
 ```
