@@ -11,12 +11,11 @@
 [ARM 프로세서](https://github.com/ww5702/Coding_Test/tree/main/Computer%20Science/Computer%20Architecture/ARM%20%ED%94%84%EB%A1%9C%EC%84%B8%EC%84%9C)   
 [정보의 표현](https://github.com/ww5702/Coding_Test/blob/main/Computer%20Science/Computer%20Architecture/%EC%A0%95%EB%B3%B4%EC%9D%98%20%ED%91%9C%ED%98%84(ASCII,%EC%9C%A0%EB%8B%88%EC%BD%94%EB%93%9C)/README.md)   
    
-***
-[2진법&10진법&16진법](https://github.com/ww5702/Coding_Test/tree/main/Computer%20Science/2%EC%A7%84%EB%B2%95&10%EC%A7%84%EB%B2%95&16%EC%A7%84%EB%B2%95)   
-   
 ## C
 [C 기초](https://github.com/ww5702/Coding_Test/tree/main/Computer%20Science/C/C%20%EA%B8%B0%EC%B4%88)   
 [자료형, 형식지정자, 연산자](https://github.com/ww5702/Coding_Test/tree/main/Computer%20Science/C/%EC%9E%90%EB%A3%8C%ED%98%95,%20%ED%98%95%EC%8B%9D%20%EC%A7%80%EC%A0%95%EC%9E%90,%20%EC%97%B0%EC%82%B0%EC%9E%90)   
 
 ## Data structure
 [Array](https://github.com/ww5702/Coding_Test/blob/main/Computer%20Science/Data%20Structure/Array/README.md)   
+***
+[2진법&10진법&16진법](https://github.com/ww5702/Coding_Test/tree/main/Computer%20Science/2%EC%A7%84%EB%B2%95&10%EC%A7%84%EB%B2%95&16%EC%A7%84%EB%B2%95)   
