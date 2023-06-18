@@ -22,7 +22,7 @@
 [버블 정렬 & 선택 정렬](https://github.com/ww5702/Coding_Test/tree/main/Computer%20Science/Algorithms/%EB%B2%84%EB%B8%94%20%EC%A0%95%EB%A0%AC%20%26%20%EC%84%A0%ED%83%9D%20%EC%A0%95%EB%A0%AC)   
 [병합 정렬](https://github.com/ww5702/Coding_Test/tree/main/Computer%20Science/Algorithms/%EB%B3%91%ED%95%A9%20%EC%A0%95%EB%A0%AC)   
 상한 : 이진 -> 선형 -> 선택 -> 버블   
-하한 : 선형 -> 이진 -> 선택 -> 버블   
+하한 : 선형 -> 이진 -> 버블 -> 선형   
    
    
    
