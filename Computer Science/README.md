@@ -26,7 +26,9 @@
    
 ## Network
 [TCP & UDP](https://github.com/ww5702/Coding_Test/tree/main/Computer%20Science/Network/TCP%20&%20UDP)   
-
+   
+## SQL
+[SQL 문법](https://github.com/ww5702/Coding_Test/blob/main/Computer%20Science/SQL/README.md)   
    
 ***
 [2진법&10진법&16진법](https://github.com/ww5702/Coding_Test/tree/main/Computer%20Science/2%EC%A7%84%EB%B2%95&10%EC%A7%84%EB%B2%95&16%EC%A7%84%EB%B2%95)   
