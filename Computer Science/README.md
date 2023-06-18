@@ -24,7 +24,9 @@
 상한 : 이진 -> 선형 -> 선택 -> 버블   
 하한 : 선형 -> 이진 -> 버블 -> 선형   
    
-   
+## Network
+[TCP & UDP](https://github.com/ww5702/Coding_Test/tree/main/Computer%20Science/Network/TCP%20&%20UDP)   
+
    
 ***
 [2진법&10진법&16진법](https://github.com/ww5702/Coding_Test/tree/main/Computer%20Science/2%EC%A7%84%EB%B2%95&10%EC%A7%84%EB%B2%95&16%EC%A7%84%EB%B2%95)   
