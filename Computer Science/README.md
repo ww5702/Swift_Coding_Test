@@ -16,6 +16,11 @@
 [자료형, 형식지정자, 연산자](https://github.com/ww5702/Coding_Test/tree/main/Computer%20Science/C/%EC%9E%90%EB%A3%8C%ED%98%95,%20%ED%98%95%EC%8B%9D%20%EC%A7%80%EC%A0%95%EC%9E%90,%20%EC%97%B0%EC%82%B0%EC%9E%90)   
 
 ## Data structure
-[Array](https://github.com/ww5702/Coding_Test/blob/main/Computer%20Science/Data%20Structure/Array/README.md)   
+[Array](https://github.com/ww5702/Coding_Test/blob/main/Computer%20Science/Data%20Structure/Array/README.md)    
+## Algorithms
+[검색 알고리즘(선형, 이진)](https://github.com/ww5702/Coding_Test/tree/main/Computer%20Science/Algorithms/%EA%B2%80%EC%83%89%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98)   
+   
+   
+   
 ***
 [2진법&10진법&16진법](https://github.com/ww5702/Coding_Test/tree/main/Computer%20Science/2%EC%A7%84%EB%B2%95&10%EC%A7%84%EB%B2%95&16%EC%A7%84%EB%B2%95)   
