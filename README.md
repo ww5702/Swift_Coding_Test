@@ -10,6 +10,10 @@ var graph = Array(repeating: [(Int,Int)](), count: n+1)
 12345 를 [1,2,3,4,5]로 변형
 let n = Array(readLine()!).map{Int(String($0))!}
 
+["ABC","ABC","ABC"] 를 2차원배열로 하나씩 넣기
+let x = Array(arr[0].map{String($0)})을
+newArr.append(x)의 형식으로 넣는다.
+
 "X,3,2,3,X","X,2,2,2,X" 등과 같은 String계열 배열을
 하나씩 잘라 Character 계열로 배열을 다시 구축 
 let graph = maps.reduce(into: [[Character]]()) {result, map in
@@ -24,6 +28,10 @@ var visited = [[Bool]](repeating:[Bool](repeating:false, count: col), count: row
 2차원 배열 조건 넣어서 정렬
 aarray.sorted{($0[0], $0[1]) < ($1[0], $1[1])}
 [0]을 기준으로 오름차순, 2순위로 [1]을 기준으로 오름차순 
+
+var dict = ["E": 1, "S" : 1, "W" : -1, "N" : -1]
+일때 dict[0]! = 1, dict[2]! = -1 이다.
+
 
 ```
 구현 문제가 가장 빨리 풀 수 있으면서 풀이가 어렵게 구성될 수 있다.   
