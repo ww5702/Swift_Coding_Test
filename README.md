@@ -32,6 +32,9 @@ aarray.sorted{($0[0], $0[1]) < ($1[0], $1[1])}
 var dict = ["E": 1, "S" : 1, "W" : -1, "N" : -1]
 일때 dict[0]! = 1, dict[2]! = -1 이다.
 
+두개의 배열을 합쳐 dictionary 초기화
+let score: [String: Int] = Dictionary(uniqueKeysWithValues: zip(name, yearning))
+
 
 ```
 구현 문제가 가장 빨리 풀 수 있으면서 풀이가 어렵게 구성될 수 있다.   
