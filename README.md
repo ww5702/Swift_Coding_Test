@@ -106,6 +106,7 @@ print(sum)
 
 readLine()!.split(separator:" ").map{ Int(String($0.reversed()) ) ?? 0}   
 에서 ?? 0 쓰는 이유 ;;
+   https://babbab2.tistory.com/20   
    
 ## 튜플
 튜플은 지정된 데이터의 묶음 이라고 표현 할 수있다.   
