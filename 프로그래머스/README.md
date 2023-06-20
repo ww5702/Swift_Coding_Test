@@ -11,28 +11,7 @@
 [과제 진행하기(미완)](https://github.com/ww5702/Coding_Test/tree/main/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4/Level%202/%EA%B3%BC%EC%A0%9C%20%EC%A7%84%ED%96%89%ED%95%98%EA%B8%B0)   
 [광물 캐기](https://github.com/ww5702/Coding_Test/tree/main/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4/Level%202/%EA%B4%91%EB%AC%BC%20%EC%BA%90%EA%B8%B0)   
    
-   
-   ```
-   import Foundation
 
-func solution(_ wallpaper:[String]) -> [Int] {
-    var (a,b,c,d) = (51,51,0,0)
-    for i in 0..<wallpaper.count {
-        for j in 0..<wallpaper[i].count {
-            if wallpaper[i][j] == "#" {
-                if i < a { a = i }
-                if j < b { b = j }
-                if i > c { c = i }
-                if j > d { d = j }
-            }
-        }
-    }
-    print(a,b,c,d)
-    return []
-}
-   ```
-   
-   
 ```
 import Foundation
 
