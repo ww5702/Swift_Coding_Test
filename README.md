@@ -35,6 +35,9 @@ var dict = ["E": 1, "S" : 1, "W" : -1, "N" : -1]
 두개의 배열을 합쳐 dictionary 초기화
 let score: [String: Int] = Dictionary(uniqueKeysWithValues: zip(name, yearning))
 
+["ABC","AAA"]를   
+Array(keymap[0].map{String($0)}) -> ["A","B","C"] 로 나누는 것
+let keymap = keymap.map{$0.map{String($0)}} -> ["A","B","C"],["A","A","A"] 나누고 배열로 다시 저장
 
 ```
 구현 문제가 가장 빨리 풀 수 있으면서 풀이가 어렵게 구성될 수 있다.   
