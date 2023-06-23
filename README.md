@@ -39,6 +39,12 @@ let score: [String: Int] = Dictionary(uniqueKeysWithValues: zip(name, yearning))
 Array(keymap[0].map{String($0)}) -> ["A","B","C"] 로 나누는 것
 let keymap = keymap.map{$0.map{String($0)}} -> ["A","B","C"],["A","A","A"] 나누고 배열로 다시 저장
 
+영단어 UnicodeScalar로
+var word = Int(UnicodeScalar(i)!.value)
+다시 영어로
+String(UnicodeScalar(word)!)
+
+
 ```
 구현 문제가 가장 빨리 풀 수 있으면서 풀이가 어렵게 구성될 수 있다.   
 함수를 잘 이용해 필요한 요구기능들을 각각 구현   
