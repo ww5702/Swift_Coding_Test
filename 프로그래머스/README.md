@@ -12,6 +12,7 @@
 [광물 캐기](https://github.com/ww5702/Coding_Test/tree/main/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4/Level%202/%EA%B4%91%EB%AC%BC%20%EC%BA%90%EA%B8%B0)   
 [리코쳇 로봇](https://github.com/ww5702/Coding_Test/tree/main/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4/Level%202/%EB%A6%AC%EC%BD%94%EC%B3%87%20%EB%A1%9C%EB%B4%87)   
 [당구 연습](https://github.com/ww5702/Coding_Test/tree/main/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4/Level%202/%EB%8B%B9%EA%B5%AC%20%EC%97%B0%EC%8A%B5)   
+[혼자서 하는 틱택토](https://github.com/ww5702/Coding_Test/blob/main/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4/Level%202/%ED%98%BC%EC%9E%90%EC%84%9C%20%ED%95%98%EB%8A%94%20%ED%8B%B1%ED%83%9D%ED%86%A0/README.md)   
 
 
    
