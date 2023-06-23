@@ -18,3 +18,23 @@ func solution(_ cards1:[String], _ cards2:[String], _ goal:[String]) -> String {
     return result
 }
 ```
+다른 풀이   
+
+```
+import Foundation
+
+func solution(_ cards1:[String], _ cards2:[String], _ goal:[String]) -> String {
+    var a = 0
+    var b = 0
+    var result = "Yes"
+    for str in goal {
+        if a < cards1.count && str == cards1[a] {
+            a += 1
+        } else if b < cards2.count && str == cards2[b] {
+            b += 1
+        } else { result = "No"
+               break }
+    }
+    return result
+}
+```   
