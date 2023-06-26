@@ -17,5 +17,5 @@
 [당구 연습](https://github.com/ww5702/Coding_Test/tree/main/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4/Level%202/%EB%8B%B9%EA%B5%AC%20%EC%97%B0%EC%8A%B5)   
 [혼자서 하는 틱택토](https://github.com/ww5702/Coding_Test/blob/main/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4/Level%202/%ED%98%BC%EC%9E%90%EC%84%9C%20%ED%95%98%EB%8A%94%20%ED%8B%B1%ED%83%9D%ED%86%A0/README.md)   
 [교점에 별 찍기(미완)](https://github.com/ww5702/Coding_Test/blob/main/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4/Level%202/%EA%B5%90%EC%A0%90%EC%97%90%20%EB%B3%84%20%EC%B0%8D%EA%B8%B0/README.md)   
-
+[호텔 대실](https://github.com/ww5702/Coding_Test/tree/main/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4/Level%202/%ED%98%B8%ED%85%94%20%EB%8C%80%EC%8B%A4)   
    
