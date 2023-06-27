@@ -49,3 +49,26 @@ func solution(_ numbers:[Int]) -> [Int] {
     return result
 }
 ```
+세번째 제출   
+스택을 이용해 만약 스택이 비어있지않고, 해당 숫자가 더 크다면 -1로 통일되어있는 배열을 바꿔준다.   
+```
+import Foundation
+
+func solution(_ numbers:[Int]) -> [Int] {
+    var result = [Int](repeating: -1, count: numbers.count)
+    var stack = [Int]()
+    
+    for i in 0..<numbers.count {
+        // 스택이 비어있지 않고, 스택의 마지막이 현재의 숫자보다 크다면
+        // result를 교체해주면서 return
+        while !stack.isEmpty && numbers[stack.last!] < numbers[i]{
+            result[stack.popLast()!] = numbers[i]
+            //print(result)
+        }
+        stack.append(i)
+        //print(stack)
+    }
+    return result
+}
+
+```
