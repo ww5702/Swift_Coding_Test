@@ -37,4 +37,35 @@ func solution(_ weights:[Int]) -> Int64 {
     //print(count)
     return Int64(count)
 }
+두번째 제출
+이중 반복문을 사용하더라도 한정된 양을 지정해 max 값이더라도 넘지 않도록 했다.
+만약 비율을 곱해줬을때 다른 비율을 곱한 상대값과 0으로 나눠진다면 +1
+```
+import Foundation
+
+func solution(_ weights:[Int]) -> Int64 {
+    var position: [(Int,Int)] = [(1, 1), (2, 3), (2, 4), (3, 2), (3, 4), (4, 2), (4, 3)]
+    var count = 0
+    var dict: [Int:Int] = [:]
+    for w in weights {
+        for p in position {
+            var n = w * p.0
+            // 비율 첫번째꺼 나누기 두번째꺼가 0이라면 해당값으로
+            // 다음 비율을 곱해서 0이 나오는 사람을 찾는다
+            guard n % p.1 == 0 else { continue }
+            n /= p.1
+            guard dict[n] != nil else { continue }
+            count += dict[n]!
+        }
+        // w일때 비율이 맞는 사람이 있을때마다 +1
+        if dict[w] == nil {
+            dict[w] = 1
+        } else {
+            dict[w]! += 1
+        }
+        //print(dict)
+    }
+    return Int64(count)
+}
+```
 ```
