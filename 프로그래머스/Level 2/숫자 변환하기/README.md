@@ -8,7 +8,12 @@ func solution(_ x:Int, _ y:Int, _ n:Int) -> Int {
     var (x,y,n) = (x,y,n)
     var result = 0
     while true {
-        if x + n == y {
+        if x >= y { 
+            result = -1
+            break
+        }
+        
+        if (x+n) <= y && (x+n) > (x*2) && (x+n) > (x*3) {
             x += n
             result += 1
         } else if (y/x)%3 == 0 {
@@ -22,10 +27,7 @@ func solution(_ x:Int, _ y:Int, _ n:Int) -> Int {
             result += 1
         }
         if x == y { break }
-        if x >= y { 
-            result = -1
-            break
-        }
+        
     }
     return result
 }
