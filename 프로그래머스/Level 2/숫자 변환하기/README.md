@@ -32,3 +32,37 @@ func solution(_ x:Int, _ y:Int, _ n:Int) -> Int {
     return result
 }
 ```
+두 번째 제출   
+set 함수를 이용해 count가 증가할때마다 만들수있는 모든 경우의 수를 저장한다.   
+저장해주고 n을 더하거나 2를 곱하거나 3을 곱하다가 y가 포함될때 return count   
+```
+import Foundation
+
+func solution(_ x:Int, _ y:Int, _ n:Int) -> Int {
+    var set: Set<Int> = [x]
+    var result: Int = 0
+    
+    while !set.isEmpty {
+        if set.contains(y) {
+            return result
+        }
+        var nextSet: Set<Int> = []
+        // set함수를 이용해 n번만에 갈 수 있는 모든 경우의 수를 저장한다.
+        for i in set {
+            if i + n <= y {
+                nextSet.insert(i+n)
+            } 
+            if i * 2 <= y {
+                nextSet.insert(i*2)
+            }
+            if i * 3 <= y {
+                nextSet.insert(i*3)
+            }
+        }
+        set = nextSet
+        print(set)
+        result += 1
+    }
+    return -1
+}
+```
