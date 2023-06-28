@@ -37,6 +37,8 @@ func solution(_ weights:[Int]) -> Int64 {
     //print(count)
     return Int64(count)
 }
+```
+
 두번째 제출
 이중 반복문을 사용하더라도 한정된 양을 지정해 max 값이더라도 넘지 않도록 했다.
 만약 비율을 곱해줬을때 다른 비율을 곱한 상대값과 0으로 나눠진다면 +1
