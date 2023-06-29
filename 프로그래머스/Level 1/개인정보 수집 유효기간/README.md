@@ -120,18 +120,23 @@ func solution(_ today:String, _ terms:[String], _ privacies:[String]) -> [Int] {
         mmonth += expire
         if mmonth > 12 {
             yyear += (mmonth/12)
-            mmonth %= 12
-            dday -= 1
+            mmonth -= (mmonth/12 * 12)
+            if mmonth == 0 {
+                yyear -= 1
+                mmonth = 12
+            }
+        }
+        if dday == 1 {
+            if mmonth == 1 {
+                yyear -= 1
+                mmonth = 12
+                dday = 28
+            } else if mmonth > 1 {
+                dday = 28
+                mmonth -= 1
+            }
         } else {
             dday -= 1
-        }
-        if dday == 0 {
-            dday = 28
-            mmonth -= 1
-            if mmonth == 0 {
-                mmonth = 12
-                yyear -= 1
-            }
         }
         
         //print(yyear, mmonth, dday)
