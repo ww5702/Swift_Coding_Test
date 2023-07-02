@@ -31,6 +31,7 @@ arr.sorted{ $0[0] == $1[0] ? $0[1] > $1[1] : $0[0] < $1[0]}
 
 var dict = ["E": 1, "S" : 1, "W" : -1, "N" : -1]
 일때 dict[0]! = 1, dict[2]! = -1 이다.
+var rePrivacies = [String:String]()
 
 두개의 배열을 합쳐 dictionary 초기화
 let score: [String: Int] = Dictionary(uniqueKeysWithValues: zip(name, yearning))
