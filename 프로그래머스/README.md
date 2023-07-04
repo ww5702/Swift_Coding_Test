@@ -6,7 +6,8 @@
 [카드 뭉치](https://github.com/ww5702/Coding_Test/blob/main/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4/Level%201/%EC%B9%B4%EB%93%9C%20%EB%AD%89%EC%B9%98/README.md)   
 [둘 만의 암호](https://github.com/ww5702/Coding_Test/blob/main/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4/Level%201/%EB%91%98%EB%A7%8C%EC%9D%98%20%EC%95%94%ED%98%B8/README.md)   
 [개인정보 수집 유효기간](https://github.com/ww5702/Coding_Test/tree/main/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4/Level%201/%EA%B0%9C%EC%9D%B8%EC%A0%95%EB%B3%B4%20%EC%88%98%EC%A7%91%20%EC%9C%A0%ED%9A%A8%EA%B8%B0%EA%B0%84)      
-[크기가 작은 부분 문자열](https://github.com/ww5702/Coding_Test/tree/main/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4/Level%201/%ED%81%AC%EA%B8%B0%EA%B0%80%20%EC%9E%91%EC%9D%80%20%EB%B6%80%EB%B6%84%EB%AC%B8%EC%9E%90%EC%97%B4)   
+크기가 작은 부분 문자열   
+가장 가까운 같은 글자   
 
 
 # [Level 2](https://github.com/ww5702/Coding_Test/tree/main/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4/Level%202)   
