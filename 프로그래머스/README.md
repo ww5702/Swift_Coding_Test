@@ -1,7 +1,7 @@
 # Level 1
-[달리기 경주](https://github.com/ww5702/Coding_Test/tree/main/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4/Level%201/%EB%8B%AC%EB%A6%AC%EA%B8%B0%20%EA%B2%BD%EC%A3%BC)   
-[추억 점수](https://github.com/ww5702/Coding_Test/tree/main/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4/Level%201/%EC%B6%94%EC%96%B5%20%EC%A0%90%EC%88%98)   
-[공원 산책](https://github.com/ww5702/Coding_Test/tree/main/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4/Level%201/%EA%B3%B5%EC%9B%90%20%EC%82%B0%EC%B1%85)   
+- 달리기 경주   
+- 추억 점수   
+- 공원 산책   
 [바탕화면 정리](https://github.com/ww5702/Coding_Test/tree/main/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4/Level%201/%EB%B0%94%ED%83%95%ED%99%94%EB%A9%B4%20%EC%A0%95%EB%A6%AC)   
 [카드 뭉치](https://github.com/ww5702/Coding_Test/blob/main/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4/Level%201/%EC%B9%B4%EB%93%9C%20%EB%AD%89%EC%B9%98/README.md)   
 [둘 만의 암호](https://github.com/ww5702/Coding_Test/blob/main/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4/Level%201/%EB%91%98%EB%A7%8C%EC%9D%98%20%EC%95%94%ED%98%B8/README.md)   
