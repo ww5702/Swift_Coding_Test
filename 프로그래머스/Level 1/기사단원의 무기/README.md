@@ -40,6 +40,7 @@ func check(_ n: Int) -> Int {
     return answer
 }
 ```
+두번째 제출   
 n이 1,2,3일때 단순하게 return만 해주어도 시간절약을 할 수 있었다.   
 ```
 import Foundation
