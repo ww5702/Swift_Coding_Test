@@ -62,3 +62,26 @@ func solution(_ arrayA:[Int], _ arrayB:[Int]) -> Int {
     return maxNum
 }
 ```
+어차피 최대공약수로 못나눈다면 그 약수들로도 못나눈다는 결론을 내릴 수 있다면 더 빠르게 풀 수 있다.   
+유클리드 호제법을 이용해 최대공약수를 구한다.   
+allSatisfy를 통해 두번째 조건식을 검토해준다.   
+```
+import Foundation
+func solution(_ arrayA:[Int], _ arrayB:[Int]) -> Int {
+    let gcdA = gcd(arrayA)
+    let gcdB = gcd(arrayB)
+    //print(gcdA, gcdB)
+    let answerA = arrayB.allSatisfy { gcdA != 1 && $0 % gcdA != 0 } ? gcdA : 0
+    let answerB = arrayA.allSatisfy { gcdB != 1 && $0 % gcdB != 0 } ? gcdB : 0
+    
+    return max(answerA, answerB)
+}
+func gcd(_ arr: [Int]) -> Int {
+    return arr.reduce(arr[0], { gcd($0, $1) })
+}
+
+func gcd(_ a: Int, _ b: Int) -> Int {
+    if b == 0 { return a }
+    return gcd(b, a % b)
+}
+```
