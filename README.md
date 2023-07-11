@@ -69,6 +69,14 @@ for i in stride(from: 0, through: 5, by: 1) {
 
 allSatisfy를 통해 배열을 전부 확인해볼수있다.
 let answerA = arrayB.allSatisfy { gcdA != 1 && $0 % gcdA != 0 } ? gcdA : 0
+
+~= 연산자
+if 0..<10 ~= n {
+  n *= 10
+}
+만약 n이 0~10 안에 들어갔다면 반복문 수행
+!을 통해 반대도 가능
+
 ```
 구현 문제가 가장 빨리 풀 수 있으면서 풀이가 어렵게 구성될 수 있다.   
 함수를 잘 이용해 필요한 요구기능들을 각각 구현   
