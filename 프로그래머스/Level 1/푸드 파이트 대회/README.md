@@ -23,3 +23,18 @@ func solution(_ food:[Int]) -> String {
     return str
 }
 ```
+두번째 제출   
+repeating count 문을 사용하면 위의 문제점이라 생각했던 점을 시간단축시킬 수 있었다.   
+```
+import Foundation
+
+func solution(_ food:[Int]) -> String {
+    var str = ""
+    for i in 1..<food.count {
+        str += String(repeating: String(i), count: food[i]/2)
+        //print(str)
+    }
+    //print(str)
+    return str + "0" + str.reversed()
+}
+```
