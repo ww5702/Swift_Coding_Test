@@ -31,3 +31,25 @@ func solution(_ babbling:[String]) -> Int {
     return result
 }
 ```
+다른 풀이를 보았지만   
+결국 풀이 방법은 똑같고, 코드를 좀더 깔끔히 정리하였다.   
+```
+import Foundation
+func counting(_ word: String) -> Bool {
+    let babbling = ["aya", "ye", "woo", "ma"]
+    var result = ""
+    var lastWord = ""
+    for i in word.map{String($0)} {
+        result += i
+        if babbling.contains(result) && result != lastWord {
+            lastWord = result
+            result = ""
+        }
+    }
+    return result.isEmpty
+}
+func solution(_ babbling:[String]) -> Int {
+    return babbling.map{counting($0)}.filter{$0}.count
+}
+
+```
