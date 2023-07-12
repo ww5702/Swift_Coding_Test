@@ -60,3 +60,30 @@ func solution(_ order:[Int]) -> Int {
         
         */
 ```
+위의 코드를 좀더 가독성좋게 바꾼 경우이다.   
+for문을 돌리면서 else if일때(현재 컨테이너 레일에서 예비 컨테이너 레일로 넘겨야할때)   
+를 짧게 2중반복문을 돌리면서 stack에 append해주었다.   
+```
+import Foundation
+
+func solution(_ order:[Int]) -> Int {
+    var spare: [Int] = []
+    var max: Int = 0
+    var count: Int = 0
+    for box in order {
+        if spare.last == box {
+            count += 1
+            let _ = spare.removeLast()
+        } else if max < box {
+            count += 1
+            for b in max+1..<box {
+                spare.append(b)
+            }
+            max = box
+        } else {
+            break
+        }
+    } 
+    return count
+}
+```
