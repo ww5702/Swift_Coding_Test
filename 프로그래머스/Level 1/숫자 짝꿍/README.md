@@ -41,3 +41,21 @@ func solution(_ X:String, _ Y:String) -> String {
     }
 }
 ```
+두 번째 제출   
+방식은 위와 같지만 매우 간단하게 코드를 줄일 수 있었고,   
+무엇보다 "0000" 와 같은 경우일때 첫 번째 제출의 0을 피해갈 수 있던 점이 문제였다.   
+```
+import Foundation
+
+func solution(_ X:String, _ Y:String) -> String {
+    var list: [String] = []
+    for i in 0..<10 {
+        let xCount = X.filter{ String($0) == String(i) }.count
+        let yCount = Y.filter{ String($0) == String(i) }.count
+        list += Array(repeating: String(i), count: min(xCount, yCount))
+    }
+    //print(list)
+    
+    return list.isEmpty ? "-1" : list.filter { $0 == "0" }.count == list.count ? "0" : list.sorted(by: >).joined()
+}
+```
