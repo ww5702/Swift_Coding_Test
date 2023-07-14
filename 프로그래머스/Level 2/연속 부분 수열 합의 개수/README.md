@@ -36,3 +36,25 @@ func solution(_ elements:[Int]) -> Int {
     return result.count
 }
 ```
+두번째 제출   
+같은 이론이지만 구현하는 방식이 다르다.   
+index가 0부터 시작해서 0, 0~1, 0~2, 0~3 처럼 더해준 값을 set배열에 넣어주고,   
+1부터 시작해서 1, 1~2, 1~3, 1~4 1~5, 1~5 + 0... 처럼 더해준 값을 set배열에 넣어준다.   
+```
+import Foundation
+
+func solution(_ elements:[Int]) -> Int {
+    var result = Set<Int>()
+    for i in 0..<elements.count {
+        var number = 0
+        for offset in 0..<elements.count {
+            let value = (i + offset) % elements.count
+            //print(value)
+            number += elements[value]
+            result.insert(number)
+        }
+        //print(result)
+    }
+    return result.count
+}
+```
