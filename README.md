@@ -14,6 +14,10 @@ let n = Array(readLine()!).map{Int(String($0))!}
 let x = Array(arr[0].map{String($0)})을
 newArr.append(x)의 형식으로 넣는다.
 
+readLine()!.split(separator:" ").map{ Int(String($0.reversed()) ) ?? 0}   
+에서 ?? 0 쓰는 이유   
+https://babbab2.tistory.com/20
+
 "X,3,2,3,X","X,2,2,2,X" 등과 같은 String계열 배열을
 하나씩 잘라 Character 계열로 배열을 다시 구축 
 let graph = maps.reduce(into: [[Character]]()) {result, map in
@@ -156,11 +160,7 @@ print(sum)
 ## forEach
 해당하는 범위내에서 전체 수를 선회하면서 탐색하는것   
 순회 도중 break로 빠져나가야하는 상황이 있다면 적절하지 않다.   
-하지만 전체 숫자를 확인해봐야하는 문제는 forEach가 적절하다.   
-
-readLine()!.split(separator:" ").map{ Int(String($0.reversed()) ) ?? 0}   
-에서 ?? 0 쓰는 이유 ;;
-   https://babbab2.tistory.com/20   
+하지만 전체 숫자를 확인해봐야하는 문제는 forEach가 적절하다.      
    
 ## 튜플
 튜플은 지정된 데이터의 묶음 이라고 표현 할 수있다.   
