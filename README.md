@@ -88,7 +88,11 @@ a.removeSubrange(1..<3)
 removeFirst는 그냥 사용하면 되지만 시간복잡도 O(N)
 var q1 = queue1[queue1.startIndex...]
 로 바꾼다면
-q1.popFirst() 사용 가능   
+q1.popFirst() 사용 가능
+
+guard let else return
+if let
+if let은 지역안에서밖에 활용을 못하는 단점이 있다.
 ```
 구현 문제가 가장 빨리 풀 수 있으면서 풀이가 어렵게 구성될 수 있다.   
 함수를 잘 이용해 필요한 요구기능들을 각각 구현   
