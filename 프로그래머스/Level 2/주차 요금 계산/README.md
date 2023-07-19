@@ -87,3 +87,44 @@ func solution(_ fees:[Int], _ records:[String]) -> [Int] {
     return result
 }
 ```
+두번째 제출   
+차량 번호가 작은 순으로 정렬을 해주는것 외에는 구현하여 풀이하는 방식은 비슷하다.   
+올림도 ceil함수를 사용하면 더 편리하다.   
+```
+
+import Foundation
+
+func solution(_ fees:[Int], _ records:[String]) -> [Int] {
+    var answer: [Int] = []
+    var limit = 23*60 + 59
+    var carInfo: [String:(time: Int, state: String)] = [:]
+    
+    records.forEach {
+        let recordArr = $0.components(separatedBy:" ")
+        var time = { () -> Int in
+                   var timeInfo = recordArr[0].components(separatedBy:":")
+                   var hour = Int(timeInfo[0])!
+                   var min = Int(timeInfo[1])!
+                   return hour * 60 + min
+                   }()
+        var carNumber = recordArr[1]
+        var carState = recordArr[2]
+        if carInfo[carNumber] == nil{ carInfo[carNumber] = (time: time, state: carState)}
+        else { carInfo[carNumber]! = (time: time-carInfo[carNumber]!.time, state: carState)}
+    }
+    var sortedCarInfo = carInfo.sorted{ $0.key < $1.key }
+    sortedCarInfo.forEach {
+        var car = $0
+        if car.value.state == "IN"{
+            car.value.time = limit - car.value.time
+        }
+        var parkingTime: Float = Float(car.value.time) - Float(fees[0])
+        if parkingTime <= 0 { answer.append(fees[1])}
+        else {
+            var moneyPerT: Int = Int(ceil(parkingTime/Float(fees[2])))
+            answer.append(fees[1]+moneyPerT * fees[3])
+        }
+    }
+    return answer
+}
+```
