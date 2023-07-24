@@ -1,6 +1,7 @@
 첫 제출   
 Set과 Dictionary 배열을 이용하여 중복을 제거해가며 풀이해갔다.   
 하지만 테스트케이스 3번과 11번이 시간초과가 발생   
+저 i_ban_person 즉, Dictionary안의 [String:[String]]을 이용해야할 것 같다.   
 ```
 import Foundation
 
