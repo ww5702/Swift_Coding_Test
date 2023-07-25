@@ -10,10 +10,6 @@ var graph = Array(repeating: [(Int,Int)](), count: n+1)
 12345 를 [1,2,3,4,5]로 변형
 let n = Array(readLine()!).map{Int(String($0))!}
 
-["ABC","ABC","ABC"] 를 2차원배열로 하나씩 넣기
-let x = Array(arr[0].map{String($0)})을
-newArr.append(x)의 형식으로 넣는다.
-
 readLine()!.split(separator:" ").map{ Int(String($0.reversed()) ) ?? 0}   
 에서 ?? 0 쓰는 이유   
 https://babbab2.tistory.com/20
@@ -29,16 +25,34 @@ var visited = Array(repeating:Array(repeating: Bool(), count: col), count: row)
 var visited = [[Bool]](repeating:[Bool](repeating:false, count: col), count: row)
 둘중 하나로 사용 가능
 
+<2차원 배열>
 2차원 배열 조건 넣어서 정렬
 arr.sorted{ $0[0] == $1[0] ? $0[1] > $1[1] : $0[0] < $1[0]}
 [0]을 기준으로 오름차순, 2순위로 [1]을 기준으로 오름차순 
 
+["ABC","ABC","ABC"] 를 2차원배열로 하나씩 넣기
+let x = Array(arr[0].map{String($0)})을
+newArr.append(x)의 형식으로 넣는다.
+
+<딕셔너리>
 var dict = ["E": 1, "S" : 1, "W" : -1, "N" : -1]
 일때 dict[0]! = 1, dict[2]! = -1 이다.
 var rePrivacies = [String:String]()
 
 두개의 배열을 합쳐 dictionary 초기화
 let score: [String: Int] = Dictionary(uniqueKeysWithValues: zip(name, yearning))
+
+
+딕셔너리 input
+var best: [Int:Int] = [:]
+    for i in 0..<enemy.count {
+        best[i] = enemy[i]
+    }
+
+<Set>
+이런 형식으로 배열의 중복을 제거해줄 수도 있다.   
+var report = Set<String>(report)
+
 
 ["ABC","AAA"]를   
 Array(keymap[0].map{String($0)}) -> ["A","B","C"] 로 나누는 것
@@ -53,11 +67,6 @@ string 특정 문자 제거하고 합쳐서 출력
 print(today.split(separator:".").joined())
 print(today.components(separatedBy:".").joined())
 
-딕셔너리 input
-var best: [Int:Int] = [:]
-    for i in 0..<enemy.count {
-        best[i] = enemy[i]
-    }
 
 if문 한줄에
 var msg = number >= 20 ? "higger" : "lesser"
