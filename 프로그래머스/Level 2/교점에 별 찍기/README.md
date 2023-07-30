@@ -60,4 +60,56 @@ func solution(_ line:[[Int]]) -> [String] {
     return result
 }
 ```
+오랜만에 다시 풀엇을때   
+결국 풀이 방식은 똑같았다.   
+구현을 어떤 방식으로 더 빠르게 해결 할 수 있는지가 관건   
+```
+import Foundation
+
+func solution(_ line:[[Int]]) -> [String] {
+    var xpoint: Double = 0
+    var ypoint: Double = 0
+    var (xMax,xMin,yMax,yMin) = (-100000,100000,-100000,100000)
+    var list: [[Int]] = []
+    func find_point(_ a: [Int], _ b: [Int]) {
+        let xWhat = a[0]*(-b[1]) - (b[0]*(-a[1]))
+        var numWhat = b[2]*(-a[1]) - (a[2]*(-b[1]))
+        if xWhat != 0 && numWhat != 0 { xpoint = Double(numWhat) / Double(xWhat) }
+        let yWhat = a[1]*(-b[0]) - (b[1]*(-a[0]))
+        numWhat = b[2]*(-a[0]) - (a[2]*(-b[0]))
+        if yWhat != 0 && numWhat != 0 { ypoint = Double(numWhat) / Double(yWhat)}
+    }
+    for i in 0..<line.count-1 {
+        for j in i+1..<line.count {
+            find_point(line[i], line[j])
+            if Double(Int(xpoint)) == xpoint && Double(Int(ypoint)) == ypoint {
+                list.append([Int(xpoint),Int(ypoint)])
+                xMax = xMax < Int(xpoint) ? Int(xpoint) : xMax
+                xMin = xMin < Int(xpoint) ? xMin : Int(xpoint)
+                yMax = yMax < Int(ypoint) ? Int(ypoint) : yMax
+                yMin = yMin < Int(ypoint) ? yMin : Int(ypoint)
+            }
+        }
+    }
+    list.sort(by: {
+        $0[1] == $1[1] ? $0[0] < $1[0] : $0[1] > $1[1]
+    })
+    print(list)
+    var cnt = 0
+    var strcnt = 0
+    var result: [String] = []
+    for y in yMax...yMin {
+        for x in xMin...xMax {
+            if list[cnt] == [x,y] {
+                result[strcnt].append("*")
+                cnt += 1
+            }else {
+                result[strcnt].append(".")
+            }
+            print(y,x)
+        }
+        strcnt += 1
+    }
+    return []
+}
 ```
