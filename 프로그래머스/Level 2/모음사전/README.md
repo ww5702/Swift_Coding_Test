@@ -24,3 +24,21 @@ func dfs(_ wordLetters: [String]) {
         }
     }
 ```
+두번째 풀이   
+같은 dfs이지만 전부 배열에 하나씩 저장해 startindex를 통해 Index의 값을 return해주는 풀이 방법이다.   
+```
+import Foundation
+func solution(_ word:String) -> Int {
+    let w = "AEIOU".map{String($0)}
+    var result = [String]()
+    func dfs(_ str: String) {
+        result.append(str)
+        if str.count == 5 {return}
+        for i in 0..<w.count {
+            dfs(str+w[i])
+        }
+    }
+    dfs("")
+    return result.firstIndex(of: word)!
+}
+```
