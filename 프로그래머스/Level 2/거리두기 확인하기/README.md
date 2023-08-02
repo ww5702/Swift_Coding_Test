@@ -53,7 +53,7 @@ func solution(_ places:[[String]]) -> [Int] {
                         }
                     } else if one[1] == two[1] {
                         // 열이 일치한다면
-                        if p[min(one[0], two[0]+1)][one[1]] == "O" {
+                        if p[min(one[0], two[0])+1][one[1]] == "O" {
                             isSafe = false
                             break
                         }
