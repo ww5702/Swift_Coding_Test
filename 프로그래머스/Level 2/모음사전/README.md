@@ -26,6 +26,8 @@ func dfs(_ wordLetters: [String]) {
 ```
 두번째 풀이   
 같은 dfs이지만 전부 배열에 하나씩 저장해 startindex를 통해 Index의 값을 return해주는 풀이 방법이다.   
+대충 보더라도 해당 풀이가 더 빠르게 문제를 해결할 수있다.   
+
 ```
 import Foundation
 func solution(_ word:String) -> Int {
