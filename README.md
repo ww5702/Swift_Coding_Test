@@ -19,6 +19,16 @@ https://babbab2.tistory.com/20
 let graph = maps.reduce(into: [[Character]]()) {result, map in
                                                   result.append(Array(map))
                                                   }
+
+확장으로 string을 map하여 사용하기
+extension String {
+    subscript(_ index: Int) -> Character {
+        self[self.index(self.startIndex, offsetBy: index)]
+    }
+}
+let str = "POOOP"
+str[0] // "P"
+위와 같이 나온다.
                                                
 bool로 array선언
 var visited = Array(repeating:Array(repeating: Bool(), count: col), count: row)
