@@ -68,3 +68,20 @@ func solution(_ s:String) -> Int {
     return Int(result)!
 }
 ```
+두번째 제출   
+위의 해결방법과 같은 기능을 하는 함수가 있다.   
+replacingOccurrences이다.   
+string안의 문자중 arr[i]와 같은 문자를 String(i)로 변형해주는 기능이다.   
+
+```
+import Foundation
+
+func solution(_ s:String) -> Int {
+    let arr = ["zero","one","two","three","four","five","six","seven","eight","nine"]
+    var str = s
+    for i in 0..<arr.count {
+        str = str.replacingOccurrences(of: arr[i], with: String(i))
+    }
+    return Int(str)!
+}
+```
