@@ -20,6 +20,7 @@ let graph = maps.reduce(into: [[Character]]()) {result, map in
                                                   result.append(Array(map))
                                                   }
 
+<String>
 확장으로 string을 map하여 사용하기
 extension String {
     subscript(_ index: Int) -> Character {
@@ -29,6 +30,10 @@ extension String {
 let str = "POOOP"
 str[0] // "P"
 위와 같이 나온다.
+
+string안의 단어중 arr[i]와 같다면 String(i)로 바꿔주기
+str = str.replacingOccurrences(of: arr[i], with: String(i))
+
                                                
 bool로 array선언
 var visited = Array(repeating:Array(repeating: Bool(), count: col), count: row)
