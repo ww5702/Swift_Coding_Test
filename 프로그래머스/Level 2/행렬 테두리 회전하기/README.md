@@ -48,7 +48,6 @@ func solution(_ rows:Int, _ columns:Int, _ queries:[[Int]]) -> [Int] {
         }
         arr[query[2]-1][query[1]] = temp3
 
-        // 밑으로
         result.append(min.min()!)
     }
     
