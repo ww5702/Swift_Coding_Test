@@ -34,6 +34,10 @@ str[0] // "P"
 string안의 단어중 arr[i]와 같다면 String(i)로 바꿔주기
 str = str.replacingOccurrences(of: arr[i], with: String(i))
 
+string 특정 문자 제거하고 합쳐서 출력
+print(today.split(separator:".").joined())
+print(today.components(separatedBy:".").joined())
+
                                                
 bool로 array선언
 var visited = Array(repeating:Array(repeating: Bool(), count: col), count: row)
@@ -77,10 +81,6 @@ let keymap = keymap.map{$0.map{String($0)}} -> ["A","B","C"],["A","A","A"] 나�
 var word = Int(UnicodeScalar(i)!.value)
 다시 영어로
 String(UnicodeScalar(word)!)
-
-string 특정 문자 제거하고 합쳐서 출력
-print(today.split(separator:".").joined())
-print(today.components(separatedBy:".").joined())
 
 
 if문 한줄에
