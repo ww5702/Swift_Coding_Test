@@ -25,7 +25,7 @@
 - 약수의 개수와 덧셈
 - 로또의 최고 순위와 최저 순위
 - 
-
+   
 
 # [Level 2](https://github.com/ww5702/Coding_Test/tree/main/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4/Level%202)   
 - 요격 시스템
