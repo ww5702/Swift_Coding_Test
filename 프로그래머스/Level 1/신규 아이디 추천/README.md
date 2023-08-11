@@ -1,4 +1,5 @@
-
+주어진 조건에 맞춰서 하나씩 조건문을 집어넣으면 되는 문제이다.   
+구현을 요구하는 문제   
 ```
 import Foundation
 func checkId(_ id: String) -> String{
@@ -19,19 +20,37 @@ func checkId(_ id: String) -> String{
         }
     }
     newId = word
-    //4단계
-    var a = Array(newId)
+    // 4단계
+    var a = newId.map{String($0)}
     if a[0] == "." {
-        var b = a[1..<a.count]
+        a.removeSubrange(0..<1)
     }
-    // if a[a.count-1] == "." {
-    //     b = b[0..<b.count-1]
-    // }
+    if a.last == "." {
+        a.removeSubrange(a.count-1...a.count-1)
+    }
+    //newId = a.joined()
+    // 5단계
+    if a.count == 0 {
+        a.append("a")
+    }
+    // 6단계
+    if a.count >= 16 {
+        a.removeSubrange(15...)
+    }
+    if a.last == "." {
+        // 16번째부터 삭제했을때 마지막 글자가 .이라면 다시 삭제
+        a.removeSubrange(a.count-1...a.count-1)
+    }
+    // 7단계
+    while a.count <= 2{
+        a.append(a.last!)
+    }
+    
+    newId = a.joined(separator:"")
     
     return newId
 }
 func solution(_ new_id:String) -> String {
-    print(checkId(new_id))
-    return ""
+    return checkId(new_id)
 }
 ```
