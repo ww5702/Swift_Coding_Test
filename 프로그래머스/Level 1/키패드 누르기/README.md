@@ -48,3 +48,44 @@ func solution(_ numbers:[Int], _ hand:String) -> String {
     return ""
 }
 ```
+다른 사람의 풀이또한 비슷했다.   
+```
+import Foundation
+
+func solution(_ numbers:[Int], _ hand:String) -> String {
+    // 0~9
+    let keypad = [[3,1],[0,0],[0,1],[0,2],[1,0],[1,1],[1,2],[2,0],[2,1],[2,2]]
+    var now = [[3,0],[3,1]]
+    let hand = hand == "left" ? 0 : 1
+    var result = ""
+    
+    for n in numbers {
+        // 1 4 7일때 왼손
+        if [1,4,7].contains(n) {
+            result.append("L")
+            now[0] = keypad[n]
+        } else if [3,6,9].contains(n) {
+        // 3 6 9일때 오른손
+            result.append("R")
+            now[1] = keypad[n]
+        } else {
+        // 2 5 8 0 일때
+            let left = abs(now[0][0]-keypad[n][0]) + abs(now[0][1]-keypad[n][1])
+            let right = abs(now[1][0]-keypad[n][0]) + abs(now[1][1]-keypad[n][1])
+            // 거리가 같다면
+            if left == right {
+                now[hand] = keypad[n]
+                result.append(hand == 0 ? "L" : "R")
+            } else if left < right {
+                result.append("L")
+                now[0] = keypad[n]
+            } else {
+                result.append("R")
+                now[1] = keypad[n]
+            }
+        }
+    }
+    //print(result)
+    return result
+}
+```
