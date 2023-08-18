@@ -38,13 +38,26 @@ extension String {
 let str = "POOOP"
 str[0] // "P"
 위와 같이 나온다.
-
+---
 string안의 단어중 arr[i]와 같다면 String(i)로 바꿔주기
 str = str.replacingOccurrences(of: arr[i], with: String(i))
-
+---
 string 특정 문자 제거하고 합쳐서 출력
 print(today.split(separator:".").joined())
 print(today.components(separatedBy:".").joined())
+---
+hello의
+string.startIndex는 0 / string.endIndex는 5이다.
+즉 endIndex는 길이 전체를 반환한다는 것을 알 수 있다.
+string[string.startIndex] = h
+string[string.endIndex] = error
+중간중간의 개별 index 접근하기 = offsetBy
+string[string.index(startIndex, offsetBy: 0)] = h
+string[string.index(startIndex, offsetBy: 4)] = o
+string[string.index(endIndex, offsetBy: -1)] = o
+index = str.index(startIndex, offSetBy: i, limitedBy: str.endIndex) ?? str.endIndex
+-> index는 str의 0번째 index에서 i만큼 떨어진 거리의 인덱스이다.
+하지만 반복문에 의해 i가 커지다 endIndex를 넘어서면 endIndex로 반환된다
 
                                                
 bool로 array선언
