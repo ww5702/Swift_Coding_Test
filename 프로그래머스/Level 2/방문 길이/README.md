@@ -9,26 +9,25 @@ import Foundation
 func solution(_ dirs:String) -> Int {
     // 현위치
     var position = [0,0]
+    var next = [0,0]
     var visited: Set<[Int]> = []
     
     for d in dirs {
-        var (dx, dy) = (0,0)
-        
         // 이동경로에 따른 좌표
+        // 이동한 위치의 next
         switch d {
-            case "U": 
-            (dx, dy) = (0, 1)
-            case "D": 
-            (dx, dy) = (0, -1)
-            case "L": 
-            (dx, dy) = (-1, 0)
-            case "R": 
-            (dx, dy) = (1, 0)
+            case "U":
+            next = [position[0], position[1]+1]
+            case "D":
+            next = [position[0], position[1]-1]
+            case "L":
+            next = [position[0]-1, position[1]]
+            case "R":
+            next = [position[0]+1, position[1]]
             default: 
             break
         }
-        // 이동한 위치의 next
-        let next = [position[0]+dx, position[1]+dy]
+        
         // 만약 이동했을때 좌표평면을 벗어났다면 continue
         if abs(next[0]) > 5 || abs(next[1]) > 5 { continue }
         
@@ -38,7 +37,6 @@ func solution(_ dirs:String) -> Int {
         if !visited.contains(position+next) && !visited.contains(next+position) {
             visited.insert(position+next)
         }
-        //print(visited)
         // 현 위치 변경
         position = next
     }
