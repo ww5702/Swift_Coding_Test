@@ -28,11 +28,8 @@ func solution(_ skill:String, _ skill_trees:[String]) -> Int {
             
             //print(subValue)
         }
-        if isPossible == true {
-            result += 1
-        } else {
-            isPossible = true
-        }
+        result += isPossible == true ? +1 : +0
+        isPossible = true
     }
     return result
 }
