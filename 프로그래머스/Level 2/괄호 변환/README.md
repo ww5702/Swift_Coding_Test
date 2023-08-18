@@ -34,6 +34,8 @@ func solution(_ p:String) -> String {
         u.removeLast()
         temp.append(u.map{String($0) == "(" ? ")" : "("}.joined())
         return temp
+        // return "(\(solution(v)))\(u.map{String($0) == "(" ? ")" : "("}.joined())"
     }
 }
 ```
+return을 한줄로 더 간결하게 표현또한 가능했다.   
