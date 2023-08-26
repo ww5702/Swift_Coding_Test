@@ -19,7 +19,7 @@ https://babbab2.tistory.com/20
 let graph = maps.reduce(into: [[Character]]()) {result, map in
                                                   result.append(Array(map))
                                                   }
-
+   
 flatMap은 중첩된 배열을 제거하고 평평한 배열을 return 해준다.
 let numbers = [[1], [2, 3], [4, 5, 6], [7, 8, 9, 10]]
 
