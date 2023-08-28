@@ -58,7 +58,11 @@ string[string.index(endIndex, offsetBy: -1)] = o
 index = str.index(startIndex, offSetBy: i, limitedBy: str.endIndex) ?? str.endIndex
 -> index는 str의 0번째 index에서 i만큼 떨어진 거리의 인덱스이다.
 하지만 반복문에 의해 i가 커지다 endIndex를 넘어서면 endIndex로 반환된다
-
+---
+let actions = ["Enter":"님이 들어왔습니다.", "Leave":"님이 나갔습니다."]
+위와 같이 몇개 없는 문구들은 따로 지정하여
+print(actions[0]) // 님이 들어왔습니다.
+와 같이 매크로로 사용해줄 수 있다.   
                                                
 bool로 array선언
 var visited = Array(repeating:Array(repeating: Bool(), count: col), count: row)
