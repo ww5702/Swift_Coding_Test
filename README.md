@@ -45,6 +45,9 @@ str = str.replacingOccurrences(of: arr[i], with: String(i))
 string 특정 문자 제거하고 합쳐서 출력
 print(today.split(separator:".").joined())
 print(today.components(separatedBy:".").joined())
+reduce를 사용해도 합쳐서 출력할 수 있다.
+str.reduce(""){$0+"\($1)"})
+str의 초기값은"", 각 원소들을 붙여서 string으로 반환  
 ---
 hello의
 string.startIndex는 0 / string.endIndex는 5이다.
