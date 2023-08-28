@@ -45,3 +45,26 @@ func solution(_ N:Int, _ stages:[Int]) -> [Int] {
     return result
 }
 ```
+다른 사람의 풀이중 tuple을 사용해 풀이한 해결도 찾을 수 있었다.   
+고차함수를 한번만 사용해 문제를 해결한 것을 확인 할 수 있었다.   
+하지만 이 또한 고차함수를 사용했기에 5번과 9번이 시간초과가 발생하므로 해당부분을 count를 사용해 풀이해준다면 해결될것이다.   
+```
+import Foundation
+
+func solution(_ N:Int, _ stages:[Int]) -> [Int] {
+    var fail = [(Int,Double)]()
+    var people = stages.count
+    
+    for i in 1...N {
+        let now = stages.filter{$0 == i}.count
+        people -= now
+        
+        let value = Double(now) / Double(people)
+        fail.append((i,value))
+    }
+    //print(fail)
+    fail = fail.sorted(by:{$0.1 > $1.1})
+    //print(fail)
+    return fail.map{$0.0}
+}
+```
