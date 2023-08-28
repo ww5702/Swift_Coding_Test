@@ -37,3 +37,28 @@ func solution(_ n:Int, _ lost:[Int], _ reserve:[Int]) -> Int {
     return n-lost.count
 }
 ```
+firstIndex를 사용하지 않고도 반복문을 0..<reserve.count를 사용한다면 i를 사용해 바로 삭제할 수 있다.   
+```
+import Foundation
+
+func solution(_ n:Int, _ lost:[Int], _ reserve:[Int]) -> Int {
+    // 여벌 체육복을 가져온 학생이 체육복을 도난당했을 경우
+    let losted = lost.filter{ !reserve.contains($0) }.sorted()
+    var reserved = reserve.filter{!lost.contains($0) }.sorted()
+    //print(losted, reserved)
+    var result = n - losted.count
+
+    for l in losted {
+        for r in 0..<reserved.count {
+            if l == reserved[r]-1 || l == reserved[r]+1 {
+                reserved.remove(at: r)
+                result += 1
+                
+                break
+            }
+        }
+    }
+    
+    return result
+}
+```
