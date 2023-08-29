@@ -35,3 +35,22 @@ func solution(_ brown:Int, _ yellow:Int) -> [Int] {
     }
 }
 ```
+약수로 계산하지않고 반복문 하나로 풀이도 가능하다 sum은 최대 2,005,000이어서   
+```
+import Foundation
+func solution(_ brown:Int, _ yellow:Int) -> [Int] {
+    let sum = brown + yellow
+    var (w,h) = (0,0)
+    for i in 1...sum {
+        if sum % i == 0 {
+            w = sum / i
+            h = i
+        }
+        
+        if (w-2) * (h-2) == yellow {
+            break
+        }
+    }
+    return [w,h]
+}
+```
