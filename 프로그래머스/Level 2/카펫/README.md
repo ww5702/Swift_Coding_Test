@@ -20,4 +20,18 @@ func solution(_ brown:Int, _ yellow:Int) -> [Int] {
     return [min+cnt, min]
 }
 ```
-따라서 약수를 찾는 방식으로 진행   
+제곱근 가까운 수를 합과 나누면 정답이 되지 않을까 판단하여 다시 풀이   
+하지만 시간초과는 일어나지않았지만 실패   
+
+```
+import Foundation
+func solution(_ brown:Int, _ yellow:Int) -> [Int] {
+    var sum = brown + yellow
+    var min = Int(sqrt(Double(sum)))
+    if Int(pow(Double(min), 2)) == sum {
+        return [min, min]
+    } else {
+        return [(sum/min), min]
+    }
+}
+```
