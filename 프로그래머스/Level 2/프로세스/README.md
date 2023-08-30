@@ -32,3 +32,33 @@ func solution(_ priorities:[Int], _ location:Int) -> Int {
     return result
 }
 ```
+removeFisrt()는 시간복잡도 O(n)의 복잡도를 가져 시간초과를 가져올 수 도있다.   
+따라서 index를 따로 설정해 오른칸으로 한칸씩 이동하며   
+우선순위값이 빠진다면 result += 1 우선순위값이 빠진게 아니라면 append를 해주며 오른쪽으로 이동한다.   
+removeFirst를 사용하지 않는것이다.   
+만약 max값이 아닌데 빠져야하다 location과 index가 같은 순간은 location값이 맨 뒤로 이동하게 되므로 count-1로 설정해준다.   
+
+```
+import Foundation
+
+func solution(_ priorities:[Int], _ location:Int) -> Int {
+    var p = priorities
+    var result = 0
+    var index = 0
+    var location = location
+    while p.count != 0 {
+        let max = p.max()!
+        if p[index] != max {
+            p.append(p[index])
+            p[index] = 0
+            if location == index { location = p.count - 1}
+        } else {
+            result += 1
+            p[index] = 0
+            if index == location { break }
+        }
+        index += 1
+    }
+    return result
+}
+```
