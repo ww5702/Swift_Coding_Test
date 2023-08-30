@@ -21,3 +21,27 @@ func solution(_ progresses:[Int], _ speeds:[Int]) -> [Int] {
 }
 ```
 하지만 해당 문제는 스택/큐 문제이므로 스택과 큐로 다시 풀이하였다.   
+풀이과정은 같다.   
+```
+import Foundation
+
+func solution(_ progresses:[Int], _ speeds:[Int]) -> [Int] {
+    var Q = [Int]()
+    var Ans = [Int]()
+    for idx in progresses.indices {
+        Q.append((100-progresses[idx]-1)/speeds[idx] + 1)
+    }
+    //print(Q)
+    while !Q.isEmpty {
+        let delay = Q.first!
+        var cnt = 0
+        while !Q.isEmpty && Q.first! <= delay {
+            cnt += 1
+            Q.removeFirst()
+        }
+        Ans.append(cnt)
+    }
+    //print(Ans)
+    return Ans
+}
+```
