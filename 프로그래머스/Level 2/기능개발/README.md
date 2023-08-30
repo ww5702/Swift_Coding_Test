@@ -20,3 +20,4 @@ func solution(_ progresses:[Int], _ speeds:[Int]) -> [Int] {
     return result
 }
 ```
+하지만 해당 문제는 스택/큐 문제이므로 스택과 큐로 다시 풀이하였다.   
