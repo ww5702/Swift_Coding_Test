@@ -96,6 +96,10 @@ var best: [Int:Int] = [:]
         best[i] = enemy[i]
     }
 
+딕셔너리 고차함수 적용
+var arr = comb.map{(val1: String, val2: Int) -> Int in return val2+1 }
+return arr.reduce(1){$0*$1}-1
+
 <Set>
 이런 형식으로 배열의 중복을 제거해줄 수도 있다.   
 var report = Set<String>(report)
