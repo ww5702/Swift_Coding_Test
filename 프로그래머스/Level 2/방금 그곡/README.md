@@ -103,3 +103,49 @@ func solution(_ m:String, _ musicinfos:[String]) -> String {
 }
 ```
 C# D#등 샵이 들어간 코드를 소문자 c d로 변형시켜서 풀이하였다.   
+
+```
+func solution(_ m:String, _ musicinfos:[String]) -> String {
+    var result: [(title: String, time: Int)] = []
+    let m = m.replacingOccurrences(of: "C#", with: "c")
+        .replacingOccurrences(of: "D#", with: "d")
+        .replacingOccurrences(of: "F#", with: "f")
+        .replacingOccurrences(of: "G#", with: "g")
+        .replacingOccurrences(of: "A#", with: "a")
+    
+    for infoString in musicinfos {
+        let music = infoString.components(separatedBy: ",")
+        let start = music[0]
+        let end = music[1]
+        let title = music[2]
+        let info = music[3].replacingOccurrences(of: "C#", with: "c")
+            .replacingOccurrences(of: "D#", with: "d")
+            .replacingOccurrences(of: "F#", with: "f")
+            .replacingOccurrences(of: "G#", with: "g")
+            .replacingOccurrences(of: "A#", with: "a")
+            .map{String($0)}
+        
+        // 시간 계산
+        let startTime = start.components(separatedBy: ":").map{Int($0)!}
+        let startHour = startTime[0]
+        let startMinute = startTime[1]
+        let endTime = end.components(separatedBy: ":").map{Int($0)!}
+        let endHour = endTime[0]
+        let endMinute = endTime[1]
+        let minute = (endHour - startHour) * 60 + endMinute - startMinute
+        
+        var fullInfo = ""
+        for i in 0..<minute {
+            let index = i % info.count
+            fullInfo += info[index]
+        }
+        
+        if fullInfo.contains(m) {
+            result.append((title, minute))
+        }
+    }
+
+    return result.max{$0.time < $1.time}?.title ?? "(None)"
+}
+```
+시간 계산적으로 틀린 테스트케이스를 고쳐주었다.   
