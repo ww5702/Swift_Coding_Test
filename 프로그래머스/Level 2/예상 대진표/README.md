@@ -20,21 +20,11 @@ func solution(_ n:Int, _ a:Int, _ b:Int) -> Int
     
     무조건 짝수가 올라갈수밖에 없도록 구현을 해도 풀이가 가능할것같다
     */
-    while true {
-        if a % 2 == 0 {
-            a /= 2
-        } else {
-            a = (a+1)/2
-        }
-        if b % 2 == 0 {
-            b /= 2
-        } else {
-            b = (b+1)/2
-        }
+    while a != b {
+        a = Int(ceil(Double(a)/2.0))
+        b = Int(ceil(Double(b)/2.0))
         answer += 1
-        if a == b { break }
     }
-    
     return answer
 }
 ```
