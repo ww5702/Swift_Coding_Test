@@ -48,10 +48,9 @@ func solution(_ n:Int) -> Int {
     var newarr = permutation(arr, 4)
     var result = 0
     for i in 0..<newarr.count {
-        print(newarr[i])
-        //print(newarr[i].firstIndex(of:newarr[i][0]))
+        //print(newarr[i])
+        var possible = true
         for j in 0..<newarr[i].count-1 {
-            var possible = true
             for k in j+1..<newarr[i].count {
                 let ax = newarr[i].firstIndex(of:newarr[i][j])!+1
                 let ay = newarr[i][j]
@@ -59,19 +58,22 @@ func solution(_ n:Int) -> Int {
                 let by = newarr[i][k]
                 
                 //print(ax, ay, bx, by)
-                // 같은 대각선에 있다는 것
+                //print(abs(ax-bx), abs(ay-by))
+                //같은 대각선에 있다는 것
                 if abs(ax - bx) == abs(ay - by) {
                     possible = false
-                    continue
+                    break
                 }
             }
-            print("통과",newarr[i])
-            if possible == true {
-                result += 1
-            }
+            
+            if possible == false { break }
+        }
+        if possible == true { 
+            //print("가능",newarr[i])
+            result += 1
         }
     }
-    print(result)
-    return 0
+    //print(result)
+    return result
 }
 ```
