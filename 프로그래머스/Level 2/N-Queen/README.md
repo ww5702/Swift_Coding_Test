@@ -77,3 +77,35 @@ func solution(_ n:Int) -> Int {
     return result
 }
 ```
+
+```
+import Foundation
+func solution(_ n:Int) -> Int {
+    var result = 0
+    func search(_ list: [Int]) {
+        if list.count == n {
+            result += 1
+            return
+        }
+        for i in 0..<n {
+            if list.count == 0 {
+                search(list+[i])
+            } else {
+                var isCan = true
+                for j in 0..<list.count {
+                    let dist = (list.count - j)
+                    if list[j] == i || list[j] + dist == i || list[j] - dist == i {
+                        isCan = false
+                        break
+                    }
+                }
+                if isCan {
+                    search(list+[i])
+                }
+            }
+        }
+    }
+    search([])
+    return result
+}
+```
