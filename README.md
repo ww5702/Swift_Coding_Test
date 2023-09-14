@@ -113,6 +113,8 @@ let keymap = keymap.map{$0.map{String($0)}} -> ["A","B","C"],["A","A","A"] 나�
 var word = Int(UnicodeScalar(i)!.value)
 다시 영어로
 String(UnicodeScalar(word)!)
+A = 65 a = 97
+Z = 90 z = 122
 
 
 if문 한줄에
