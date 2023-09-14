@@ -81,6 +81,10 @@ arr.sorted{ $0[0] == $1[0] ? $0[1] > $1[1] : $0[0] < $1[0]}
 let x = Array(arr[0].map{String($0)})을
 newArr.append(x)의 형식으로 넣는다.
 
+두 배열을 합쳐 각각의 index값을 더한뒤 출력
+return zip(arr1, arr2).map{zip($0,$1).map{$0+$1}}
+zip을 활용하여 두 배열의 값들을 map해준다.
+
 <딕셔너리>
 var dict = ["E": 1, "S" : 1, "W" : -1, "N" : -1]
 일때 dict[0]! = 1, dict[2]! = -1 이다.
