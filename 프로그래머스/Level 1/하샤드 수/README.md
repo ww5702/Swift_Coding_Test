@@ -10,3 +10,14 @@ func solution(_ x:Int) -> Bool {
     return x % sum == 0 ? true : false
 }
 ```
+더욱 줄일수도 있다.   
+```
+func solution(_ x:Int) -> Bool {
+    var sum = 0
+    for n in String(x) {
+        sum += Int(n)!
+    }
+    //print(sum)
+    return x % sum == 0
+
+```
