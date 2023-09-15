@@ -21,3 +21,10 @@ func solution(_ x:Int) -> Bool {
     return x % sum == 0
 
 ```
+한줄로도 줄일수있다.   
+x의 초기값 0부터 시작해서 전체를 합한 값을 나눈다   
+```
+func solution(_ x:Int) -> Bool {
+    return x % String(x).reduce(0, {$0+Int(String($1))!}) == 0
+}
+```
