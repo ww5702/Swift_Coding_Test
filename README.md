@@ -85,6 +85,10 @@ newArr.append(x)의 형식으로 넣는다.
 return zip(arr1, arr2).map{zip($0,$1).map{$0+$1}}
 zip을 활용하여 두 배열의 값들을 map해준다.
 
+allSatisfy를 통해 배열을 전부 확인해볼수있다.
+let answerA = arrayB.allSatisfy { gcdA != 1 && $0 % gcdA != 0 } ? gcdA : 0
+
+
 <딕셔너리>
 var dict = ["E": 1, "S" : 1, "W" : -1, "N" : -1]
 일때 dict[0]! = 1, dict[2]! = -1 이다.
@@ -133,8 +137,7 @@ for i in stride(from: 0, through: 5, by: 1) {
     print(i) // 0, 1, 2, 3, 4, 5
 }
 
-allSatisfy를 통해 배열을 전부 확인해볼수있다.
-let answerA = arrayB.allSatisfy { gcdA != 1 && $0 % gcdA != 0 } ? gcdA : 0
+
 
 ~= 연산자
 if 0..<10 ~= n {
