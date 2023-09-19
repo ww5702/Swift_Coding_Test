@@ -40,6 +40,7 @@ func solution(_ n:Int) -> [[Int]] {
     }
     // 위의 점화식을 함수로
     func move(_ n: Int, _ start: Int, _ end: Int) -> [[Int]]{
+        // 옮겨야할 원판이 1개일때 빠져나가는 조건을 넣어준다.
         if n == 1 { return [[start, end]] }
         
         var answer = [[Int]]()
