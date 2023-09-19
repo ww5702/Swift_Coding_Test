@@ -1,4 +1,6 @@
-정확성 테스트는 통과헀으나 효율성 테스트의 실패   
+배열을 하나는 오름차순으로 하나는 내림차순으로 정렬 후    
+index를 늘려가며 하나씩 곱해준 값을 더해준다.   
+
 ```
 import Foundation
 /*
@@ -19,3 +21,4 @@ func solution(_ A:[Int], _ B:[Int]) -> Int
     return ans
 }
 ```
+
