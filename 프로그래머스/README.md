@@ -48,6 +48,7 @@
 - 정수 내림차순으로 정렬하기(map, sort)
 - 자연수 뒤집어 배열로 만들기(map, insert at)
 - 자릿수 더하기(map, reduce(0,+)
+- 이상한 문자 만들기(uppercased,lowercased)
 - 
    
 
