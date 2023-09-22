@@ -46,6 +46,7 @@
 - 제일 작은 수 제거하기(배열index조회, removeat)
 - 정수 제곱근 형변환(sqrt)
 - 정수 내림차순으로 정렬하기(map, sort)
+- 자연수 뒤집어 배열로 만들기(map, insert at)
 - 
    
 
