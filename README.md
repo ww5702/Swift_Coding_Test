@@ -65,7 +65,11 @@ index = str.index(startIndex, offSetBy: i, limitedBy: str.endIndex) ?? str.endIn
 let actions = ["Enter":"님이 들어왔습니다.", "Leave":"님이 나갔습니다."]
 위와 같이 몇개 없는 문구들은 따로 지정하여
 print(actions[0]) // 님이 들어왔습니다.
-와 같이 매크로로 사용해줄 수 있다.   
+와 같이 매크로로 사용해줄 수 있다.
+----
+String(repeating:"가", count: 2)
+가가
+Array뿐만 아니라 앞에 String을 사용할 수 있다.
                                                
 bool로 array선언
 var visited = Array(repeating:Array(repeating: Bool(), count: col), count: row)
