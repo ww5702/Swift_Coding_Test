@@ -21,3 +21,23 @@ func solution(_ n:Int) -> Int {
     return result
 }
 ```
+16번 테스트케이스가 실패한 경우가 발생하였다.   
+다시 문제를 읽어보니 0이 포함되어있는 범위때문이었다.   
+```
+import Foundation
+func solution(_ n:Int) -> Int {
+    if n == 0 { return 0 }
+    let num = Int(sqrt(Double(n)))
+    var result = 0
+    for i in 1...num {
+        if n % i == 0 {
+            result += i
+            result += (n/i)
+        }
+    }
+    if num * num == n {
+        result -= num
+    }
+    return result
+}
+```
