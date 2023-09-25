@@ -49,6 +49,7 @@
 - 자연수 뒤집어 배열로 만들기(map, insert at)
 - 자릿수 더하기(map, reduce(0,+)
 - 이상한 문자 만들기(uppercased,lowercased)
+- 약수의 합(sqrt)
 - 
    
 
