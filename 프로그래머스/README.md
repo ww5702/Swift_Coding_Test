@@ -57,6 +57,7 @@
 - 서울에서 김서방 찾기(firstIndex(of: ))
 - 문자열 다루기 기본(Int(문자) = nil)   
 - 문자열 내림차순으로 배치하기(map, sort, joined()
+- 문자열 내 p와 y의 개수
 - 
 
 
