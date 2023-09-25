@@ -55,7 +55,11 @@
 - 수박수박수박수박수?(반복문)
 - 소수찾기(소수 구하기 ,sqrt)
 - 서울에서 김서방 찾기(firstIndex(of: ))
+- 문자열 다루기 기본(Int(문자) = nil)   
 - 
+
+
+
    
 
 # [Level 2](https://github.com/ww5702/Coding_Test/tree/main/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4/Level%202)   
