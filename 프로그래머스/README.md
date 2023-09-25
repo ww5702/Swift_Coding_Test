@@ -50,6 +50,7 @@
 - 자릿수 더하기(map, reduce(0,+)
 - 이상한 문자 만들기(uppercased,lowercased)
 - 약수의 합(sqrt)
+- 시저 암호(UnicodeScalar)
 - 
    
 
