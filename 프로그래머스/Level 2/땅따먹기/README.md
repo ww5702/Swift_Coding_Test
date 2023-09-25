@@ -19,3 +19,23 @@ func solution(_ land:[[Int]]) -> Int{
     return land[land.count-1].max()!
 }
 ```
+만약 행의 크기가 4가 아닌 더 크거나 정해져있지 않다면 반복문을 여러개 사용하여 풀이할 수 있다.   
+가변하는 dp를 복사하여 만들고, 같은 열이라면 continue, 다른 열이라면 현재 행열의 값 + 전 행열의 값을 넣어주면서   
+전 행열의 값이 바뀌고 max 함수를 통해 값이 더 커진다면 덮어 씌워주는 방식으로 진행한다.   
+```
+import Foundation
+
+func solution(_ land:[[Int]]) -> Int{
+    var dp = land
+    for i in 1..<land.count {
+        for j in 0..<land[0].count {
+            for k in 0..<land[0].count {
+                // 만약 같은 열의 숫자를 고르려고 한다면 continue
+                if j == k { continue }
+                dp[i][j] = max(dp[i][j], dp[i-1][k] + land[i][j])
+            }
+        }
+    }
+    return dp.last!.max()!
+}
+```
