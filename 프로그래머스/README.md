@@ -146,4 +146,5 @@
 - 최대값과 최소값(components(separatedBy:" "), 구현)
 - 멀리 뛰기 (dp)
 - 땅따먹기 (dp)
+- 다음 큰 숫자 (radix, filter)
 - 
