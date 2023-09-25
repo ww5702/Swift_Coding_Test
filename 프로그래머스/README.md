@@ -51,6 +51,7 @@
 - 이상한 문자 만들기(uppercased,lowercased)
 - 약수의 합(sqrt)
 - 시저 암호(UnicodeScalar)
+- 문자열을 정수로 바꾸기(subarr[1...], joined())
 - 
    
 
