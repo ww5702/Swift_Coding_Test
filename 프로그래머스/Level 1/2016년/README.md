@@ -13,3 +13,12 @@ func solution(_ a:Int, _ b:Int) -> String {
     return result[(date+b)%7]
 }
 ```
+reduce 고차함수를 나누서 더해줄수도있다.   
+```
+func solution(_ a:Int, _ b:Int) -> String {
+    var date = 0
+    var plus = [31,29,31,30,31,30,31,31,30,31,30]
+    var result = ["THU","FRI","SAT","SUN","MON","TUE","WED"]
+    return result[(plus[0..<a-1].reduce(0,+)+b)%7]
+}
+```
