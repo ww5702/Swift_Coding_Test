@@ -27,3 +27,27 @@ func solution(_ s:String) -> Bool
     return queue.isEmpty ? true : false
 }
 ```
+효율성 심사에서 시간초과가 발생한것같다.   
+어차피 괄호는 ) 나 ( 밖에 없으므로 스택을 만들지않고 +1 -1 하면서 0이 된다면 true를 반환하였다.   
+
+```
+import Foundation
+
+func solution(_ s:String) -> Bool
+{
+    var word = s.map{String($0)}
+    var stack = 0
+    for w in word {
+        if w == "(" {
+            stack += 1
+        } else if w == ")" {
+            if stack == 0 {
+                return false
+            } else {
+                stack -= 1
+            }
+        }
+    }
+    return stack == 0 ? true : false
+}
+```
