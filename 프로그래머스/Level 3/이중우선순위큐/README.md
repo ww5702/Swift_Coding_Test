@@ -1,5 +1,7 @@
 우선순위큐가 아닌 주어진 문법대로 풀이했다.   
 이렇게 풀더라도 정답처리가 되긴하였다.   
+사실 removeFirst만 피하면 풀 수있다고 적혀있었다.   
+removeFirst는 시간복잡도가 O(N)이고, removeLast는 시간복잡도가 O(1)이기 때문   
 
 ```
 import Foundation
