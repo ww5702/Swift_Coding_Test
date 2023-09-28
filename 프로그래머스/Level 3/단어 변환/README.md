@@ -94,3 +94,39 @@ func solution(_ begin:String, _ target:String, _ words:[String]) -> Int {
     return 0
 }
 ```
+다시 풀기   
+words.contains(target) 조건을 넣지 않아 계속 2번테스트케이스가 오류가 났었다.   
+```
+import Foundation
+func canChange(_ str1: String, _ str2: String) -> Bool {
+    let str1 = str1.map{String($0)}
+    let str2 = str2.map{String($0)}
+    var cnt = 0
+    for i in 0..<str1.count {
+        if str1[i] != str2[i] { cnt += 1 }
+    }
+    return cnt == 1 ? true : false
+}
+func solution(_ begin:String, _ target:String, _ words:[String]) -> Int {
+    if !words.contains(target) || begin == target { return 0 }
+    var arr: [(String, Int)] = []
+    var index = 0
+    arr.append((begin, index))
+    while !arr.isEmpty {
+        let word = arr[index].0
+        let count = arr[index].1
+        index += 1
+        
+        for w in words {
+            if canChange(word, w) {
+                if w == target { 
+                    return count + 1 
+                } else {
+                    arr.append((w, count + 1))
+                }
+            }
+        }
+    }
+    return 0
+}
+```
