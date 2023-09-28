@@ -29,3 +29,31 @@ func solution(_ n:Int, _ computers:[[Int]]) -> Int {
     return network
 }
 ```
+다시 풀어보기   
+```
+import Foundation
+
+func solution(_ n:Int, _ computers:[[Int]]) -> Int {
+    var result = 0
+    var visited = Array(repeating: false, count: computers.count)
+    
+    func dfs(_ computer: Int){
+        visited[computer] = true
+        
+        for i in 0..<n {
+            // 방문하지 않았으며, 이어져있다면 재귀
+            if visited[i] == false && computers[computer][i] == 1 {
+                dfs(i)
+            }
+        }
+    }
+    
+    for i in 0..<n {
+        if visited[i] == false {
+            result += 1
+            dfs(i)
+        }
+    }
+    return result
+}
+```
