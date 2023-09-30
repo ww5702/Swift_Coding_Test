@@ -41,6 +41,7 @@ func solution(_ n:Int, _ stations:[Int], _ w:Int) -> Int{
 구조는 위와 같으나 코드를 줄여 풀이하면 다음과 같다.   
 ```
 import Foundation
+import Foundation
 
 func solution(_ n:Int, _ stations:[Int], _ w:Int) -> Int{
     var answer = 0, start = 1
@@ -50,7 +51,7 @@ func solution(_ n:Int, _ stations:[Int], _ w:Int) -> Int{
     }
     // 아직 뒤가 남았다면
     if start <= n {
-        answer += Int(ceil(Double(n - w - start)/Double(2*w+1)))
+        answer += Int(ceil(Double(n - start + 1)/Double(2*w+1)))
     }
     return answer
 }
