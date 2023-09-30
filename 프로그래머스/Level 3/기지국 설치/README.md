@@ -43,7 +43,7 @@ func solution(_ n:Int, _ stations:[Int], _ w:Int) -> Int{
 import Foundation
 
 func solution(_ n:Int, _ stations:[Int], _ w:Int) -> Int{
-    var answer = 0, start = 0
+    var answer = 0, start = 1
     for s in stations {
         answer += Int(ceil(Double(s - w - start)/Double(2*w+1)))
         start = s + w + 1
