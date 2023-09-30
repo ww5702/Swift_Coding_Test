@@ -37,3 +37,27 @@ func solution(_ n:Int, _ stations:[Int], _ w:Int) -> Int{
     return answer
 }
 ```
+하지만 newstreet나 street나 필요없는 배열을 만들고 있었다.   
+구조는 위와 같으나 코드를 줄여 풀이하면 다음과 같다.   
+```
+import Foundation
+
+func solution(_ n:Int, _ stations:[Int], _ w:Int) -> Int{
+    var answer = 0, start = 0
+    for s in stations {
+        answer += Int(ceil(Double(s - w - start)/Double(2*w+1)))
+        start = s + w + 1
+    }
+    // 아직 뒤가 남았다면
+    if start <= n {
+        answer += Int(ceil(Double(n - w - start)/Double(2*w+1)))
+    }
+    return answer
+}
+```
+start부터 처음 기지국 사이의 거리를 구해 필용한 기지국의 개수를 구해준다.   
+ceil함수를 씀으로써 소수점이 있을경우 반올림하여 +1하여 값을 더해주고,   
+start를 에너지가 닿는 지점까지로 옮겨 다음 기지국까지의 거리를 다시 구한다.   
+마지막 기지국까지 더했음에도 마지막 아파트까지 닿지 않았다면   
+해당 아파트까지의 거리를 다시 앞선 방식과 똑같이 필요한 기지국을 구해 정답에 더해준다.   
+
