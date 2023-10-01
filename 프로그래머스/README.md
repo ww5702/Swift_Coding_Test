@@ -162,4 +162,5 @@
 - 단어 변환(bfs)
 - 숫자 게임(구현)
 - 기지국 설치(구현, ceil)
+- 베스트 앨범(dictionary[:], dictionary[String:[Int]], dictionary sort)
 - 
