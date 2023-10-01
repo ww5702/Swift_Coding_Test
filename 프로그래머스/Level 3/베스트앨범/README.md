@@ -73,3 +73,41 @@ func solution(_ genres:[String], _ plays:[Int]) -> [Int] {
     return result
 }
 ```
+두가지 딕셔너리를 사용하지않고 list를 이용해 풀이할 수도 있다.   
+list(장르, [index:재생횟수])로 초기화하여 사용하면 된다.   
+
+```
+import Foundation
+
+func solution(_ genres:[String], _ plays:[Int]) -> [Int] {
+    var playList = [String:(play: Int, music: [Int:Int])]()
+    var answer = [Int]()
+
+    for (index, value) in genres.enumerated() {
+        print("지금 장르는? ",index, value)
+        if let genre = playList[value]?.play {
+            print("이미 저장된 장르")
+            playList[value]?.play = genre + plays[index]
+            playList[value]?.music[index] = plays[index]
+            print(playList)
+        } else {
+            print("처음 저장된 장르")
+            playList[value] = (play: plays[index], music: [index:plays[index]])
+            print(playList)
+        }
+    }
+
+    let rank = playList.sorted(by: { $0.value.play > $1.value.play })
+    print("많이 들은 장르로 정렬",rank)
+    rank.forEach { song in
+        let songRank = song.value.music.sorted { $0.key < $1.key }.sorted{ $0.value > $1.value}
+        print("노래 재생 횟수로 정렬", songRank)
+        let max = songRank.count > 1 ? 2 : 1
+        for i in 0..<max {
+            answer.append(songRank[i].key)
+        }
+    }
+
+    return answer
+}
+```
