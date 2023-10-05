@@ -99,3 +99,49 @@ func solution(_ gems:[String]) -> [Int] {
     return [result[0]+1,result[1]+1]
 }
 ```
+효율성을 높이는 방법을 찾아보니 딕셔너리를 이용하는 방법이 있었다.   
+해당 종류가 들어오면 값을 +1헤주고, 해당 종류가 빠진다면 -1을 해준다.   
+단 -1을 해줄때 0이 된다면 해당 값을 아예 삭제해주고,   
+만약 .count를 했을때 type와 값이 같다면 전에 풀이했던 방식과 같이 값들을 구해주고 최소값을 구해준다.   
+```
+import Foundation
+
+func solution(_ gems:[String]) -> [Int] {
+    var type = Set(gems).count
+    var gemsDict: [String:Int] = [:]
+    var start = 0, end = gems.count, cnt = 0
+    var l = 0, r = -1
+    while l < gems.count && r < gems.count {
+        cnt = gemsDict.count
+        // 만약 종류가 다 들어가있다면
+        if cnt == type {
+            //print("종류 다 들어감",gemsDict)
+            // 만약 최소값이 갱신된다면
+            if r - l < end - start {
+                end = r
+                start = l
+            }
+            if let value = gemsDict[gems[l]] {
+                if value - 1 == 0 {
+                    gemsDict.removeValue(forKey: gems[l])
+                } else {
+                    gemsDict[gems[l]] = value - 1
+                }
+            }
+            l += 1
+        } else {
+            r += 1
+            if r < gems.count {
+                // 해당 보석의 종류가 몇개인지
+                if let value = gemsDict[gems[r]] {
+                    gemsDict[gems[r]] = value + 1
+                } else {
+                    gemsDict[gems[r]] = 1
+                }
+            }
+        }
+    }
+    //print(start, end)
+    return [start+1, end+1]
+}
+```
