@@ -64,3 +64,38 @@ func solution(_ gems:[String]) -> [Int] {
     return [result[0]+1,result[1]+1]
 }
 ```
+정확도는 다 맞췄으나 효율성이 실패하는 경우가 발생했기에   
+removeFirst()를 없애는 방식을 시도해보았다.   
+```
+import Foundation
+
+func solution(_ gems:[String]) -> [Int] {
+    var type = Set(gems).count
+    var temp: [String] = []
+    var start = 0, end = -1, cnt = 0
+    var result: [Int] = [start,gems.count-1]
+    for gem in 0..<gems.count {
+        // 없던 종류가 들어간다면 +1
+        if !temp.contains(gems[gem]) { cnt += 1 }
+        temp.append(gems[gem])
+        end += 1
+        //print("현재 temp",temp,start,end)
+        // 만약 종류가 다 들어가있다면 계속해서 반복
+        while cnt == type {
+            //print("종류 다 들어감",temp,start,end)
+            // 만약 더 짧은 구간으로 가능하다면
+            if end - start < result[1] - result[0] {
+               // print("최소값 갱신")
+                result[0] = start
+                result[1] = end
+            }
+            let remv = temp[start]
+            temp[start] = ""
+            if !temp.contains(remv) { cnt -= 1}
+            start += 1
+        }
+    }
+    //print("최종",result)
+    return [result[0]+1,result[1]+1]
+}
+```
