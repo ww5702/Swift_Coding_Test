@@ -166,4 +166,5 @@
 - 스티커 모으기(2)(dp, dp2개 사용)
 - 불량 사용자(dfs)
 - 보석 쇼핑(dict,hash)
+- 징검다리 건너기(이분탐색, i in 0..<stones.count >>>> stone in stones)
 - 
