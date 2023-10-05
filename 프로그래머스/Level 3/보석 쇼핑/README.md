@@ -31,3 +31,36 @@ func solution(_ gems:[String]) -> [Int] {
     return [result[0]+1,result[1]+1]
 }
 ```
+시간초과를 줄이기 위해 Set함수를 덜 쓰는 방향으로 풀이하였다.   
+```
+import Foundation
+
+func solution(_ gems:[String]) -> [Int] {
+    var type = Set(gems).count
+    var temp: [String] = []
+    var start = 0, end = -1, cnt = 0
+    var result: [Int] = [start,gems.count-1]
+    for gem in 0..<gems.count {
+        // 없던 종류가 들어간다면 +1
+        if !temp.contains(gems[gem]) { cnt += 1 }
+        temp.append(gems[gem])
+        end += 1
+        //print("현재 temp",temp,start,end)
+        // 만약 종류가 다 들어가있다면 계속해서 반복
+        while cnt == type {
+            //print("종류 다 들어감",temp,start,end)
+            // 만약 더 짧은 구간으로 가능하다면
+            if end - start < result[1] - result[0] {
+                print("최소값 갱신")
+                result[0] = start
+                result[1] = end
+            }
+            let remv = temp.removeFirst()
+            if !temp.contains(remv) { cnt -= 1}
+            start += 1
+        }
+    }
+    //print("최종",result)
+    return [result[0]+1,result[1]+1]
+}
+```
