@@ -145,3 +145,5 @@ func solution(_ n:Int, _ costs:[[Int]]) -> Int {
     return result
 }
 ```
+크루스칼 알고리즘을 이해하는데 참고한 블로그입니다.   
+https://gmlwjd9405.github.io/2018/08/29/algorithm-kruskal-mst.html   
