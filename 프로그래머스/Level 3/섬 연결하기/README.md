@@ -41,3 +41,44 @@ func solution(_ n:Int, _ costs:[[Int]]) -> Int {
     return dijikstra(graph)
 }
 ```
+따라서 각 노드별로 갈수있는 최단비용을 구해보았다.   
+```
+import Foundation
+// 비용을 거리로 바꾼다면 똑같이 다익스트라로 할수있을것같다.
+func solution(_ n:Int, _ costs:[[Int]]) -> Int {
+    var graph = Array(repeating: [Int](), count: n)
+    var costArr = Array(repeating: Array(repeating: 987654321, count: n), count: n)
+    for cost in costs {
+        graph[cost[0]].append(cost[1])
+        graph[cost[1]].append(cost[0])
+        costArr[cost[0]][cost[1]] = cost[2]
+        costArr[cost[1]][cost[0]] = cost[2]
+    }
+    print(graph)
+    print(costArr)
+    var result = Array(repeating: [Int](), count: n)
+    func dijikstra(_ node: Int, _ graph: [[Int]]){
+        var costCnt = Array(repeating: 987654321, count: n)
+        var q: [Int] = []
+        q.append(node)
+        costCnt[node] = 0
+        
+        while !q.isEmpty {
+            let now = q.removeFirst()
+            for i in graph[now] {
+                if costCnt[i] > costArr[now][i] + costCnt[now] {
+                    costCnt[i] = costArr[now][i] + costCnt[now]
+                    q.append(i)
+                }
+            }
+        }
+        print(costCnt)
+        result[node] = costCnt
+    }
+    for i in 0..<n {
+        dijikstra(i, graph)
+    }
+    print(result)
+    return 0
+}
+```
