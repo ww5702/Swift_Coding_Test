@@ -82,3 +82,66 @@ func solution(_ n:Int, _ costs:[[Int]]) -> Int {
     return 0
 }
 ```
+이렇게해서는 사이클이 형성되는지 알수없다.   
+풀이를 살펴보니 크루스칼 알고리즘을 이용해 최소비용신장트리를 구성할 수 있었다.   
+```
+import Foundation
+// 크루스칼 알고리즘
+func solution(_ n:Int, _ costs:[[Int]]) -> Int {
+    var parents: [Int] = (0...n-1).map{$0}
+    let costs = costs.sorted{$0[2] < $1[2]}
+    print(parents)
+    print(costs)
+    
+    // 최상위 부모 등록
+    func unionSet(_ start: Int, _ end: Int) {
+        //print("최상위 부모인지 확인 시작")
+        var start = start, end = end
+        
+        start = findSet(start)
+        end = findSet(end)
+        if start != end {
+            parents[end] = start
+            //print("최상위 부모 등록 ",parents)
+        }
+        
+    }
+    
+    // 최상위 부모 찾기
+    func findSet(_ start : Int) -> Int {
+        // 자기자신이 최상위 부모라면 return
+        if parents[start] == start {
+            //print("자기자신 최상위부모",start, parents)
+            return start
+        } else {
+            let parent = findSet(parents[start])
+            parents[start] = parent
+            
+            // 그전까지 자신을 부모로 생각하던 노드들 전부 바꿔주기
+            for i in 0..<parents.count {
+                if parents[i] == start {
+                    parents[i] = parent
+                }
+            }
+            //print("최상위부모 변경",start, parents)
+            return parent
+        }
+        
+    }
+    
+    var result = 0
+    for cost in costs {
+        let start = findSet(cost[0])
+        let end = findSet(cost[1])
+        //print(start,end)
+        let value = cost[2]
+        
+        if start != end {
+            result += value
+            unionSet(start, end)
+        }
+        //print(result)
+    }
+    return result
+}
+```
