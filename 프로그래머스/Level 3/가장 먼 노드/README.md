@@ -36,3 +36,42 @@ func solution(_ n:Int, _ edge:[[Int]]) -> Int {
     return dijikstra(graph)
 }
 ```
+bfs   
+
+```
+import Foundation
+// 최단거리 하면 bfs
+func solution(_ n:Int, _ edge:[[Int]]) -> Int {
+    var graph = Array(repeating: [Int](), count: n+1)
+    for value in edge {
+        graph[value[0]].append(value[1])
+        graph[value[1]].append(value[0])
+    }
+    var moveCnt = Array(repeating: 987654321, count: n+1)
+    var visited = Array(repeating: false, count: n+1)
+    var q: [(Int,Int)] = []
+    moveCnt[0] = 0
+    moveCnt[1] = 0
+    q.append((1,0))
+    
+    
+    func bfs() {
+        visited[1] = true
+        while !q.isEmpty {
+            let (node,index) = q.removeFirst()
+            for i in graph[node] {
+                if !visited[i] && moveCnt[i] > index + 1 {
+                    q.append((i,index+1))
+                    moveCnt[i] = index+1
+                    visited[i] = true
+                }
+                visited[i] = true
+            }
+        }
+    }
+    bfs()
+
+    let max = moveCnt.max()!
+    return moveCnt.filter{$0 == max}.count
+}
+```
