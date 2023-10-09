@@ -127,7 +127,7 @@ var word = Int(UnicodeScalar(i)!.value)
 String(UnicodeScalar(word)!)
 A = 65 a = 97
 Z = 90 z = 122
-
+   
 
 if문 한줄에
 var msg = number >= 20 ? "higger" : "lesser"
