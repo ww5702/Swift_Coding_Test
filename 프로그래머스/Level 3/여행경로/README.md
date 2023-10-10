@@ -41,3 +41,41 @@ func solution(_ tickets:[[String]]) -> [String] {
     return result
 }
 ```
+따라서 반복문을 다 돌려도 알맞은 공항을 찾지 못했다면 removeLast()를 해주는 코드를 추가해준다.   
+그리고 removeLast를 해주기 전에 크기가 같아져서 반복문을 빠져나가는 경우를 방지해주기 위해 +1을 해주어 방지한다.   
+
+```
+import Foundation
+
+func solution(_ tickets:[[String]]) -> [String] {
+    let tickets = tickets.sorted{$0[1] < $1[1]}
+    var visited = Array(repeating: false, count: tickets.count)
+    var result: [String] = []
+    func dfs(_ start: String) {
+        
+        // 현재 방문한 도시 수가 티켓수와 같다면 return
+        if result.count == tickets.count {
+            result.append(start)
+            return
+        }
+        for i in 0..<tickets.count {
+            if tickets[i][0] == start && !visited[i] {
+                visited[i] = true
+                //print(start,tickets[i][1])
+                result.append(start)
+                dfs(tickets[i][1])
+                if result.count == tickets.count + 1 {
+                    return
+                }
+                result.removeLast()
+                visited[i] = false
+            }
+        }
+        
+    }
+    // 시작지점은 ICN이라고 나와있다
+    dfs("ICN")
+    //print(result)
+    return result
+}
+```
