@@ -1,3 +1,49 @@
+최종   
+
+```
+import Foundation
+
+func solution(_ jobs:[[Int]]) -> Int {
+    /*
+    처음에는 가장 먼저 도착한 작업을 수행한다
+    이번 작업을 수행하는 동안 도착하는 작업들을 별도의 작업큐에 모은다
+    작업큐에 도착한 작업들 중 수행시간이 가장 짧은 작업을 꺼내 수행한다
+    모든 작업을 처리할때까지 2,3줄의 과정을 반복한다.
+    */
+    var sortedjob = jobs.sorted{$0[0] == $1[0] ? $0[1] > $1[1] : $0[0] > $1[0]}
+    /*
+    해당 정렬과는 반대로 정렬하는것이 맞으나 removeFirst의 시간복잡도보다
+    removeLast가 훨씬 빠르기에 반대로 정렬하여 사용하였다.
+    */
+    var jobQ: [[Int]] = [sortedjob.removeLast()]
+    var result = 0, time = jobQ.first![0]
+    //print(jobQ, time, result)
+    while !jobQ.isEmpty {
+        // 현재 작업할 작업, 총 시간 변경
+        let now = jobQ.removeLast()
+        //print("현재",now)
+        result += abs(time-now[0])+now[1]
+        time += now[1]
+        //print("작업 후 ",time, result)
+        while !sortedjob.isEmpty && sortedjob.last![0] <= time {
+            jobQ.append(sortedjob.removeLast())
+        }
+        jobQ.sort{$0[1] > $1[1]}
+        //print("대기 큐",jobQ)
+        /*
+        만약 중간에 작업이 중단되면서 한참 뒤에 시작이 가능한 작업이
+        남아있다면 강제로 다음 작업을 끌어와준다.
+        */
+        if !sortedjob.isEmpty && jobQ.isEmpty {
+            jobQ.append(sortedjob.removeLast())
+        }
+    }
+    return result/jobs.count
+}
+```
+
+그동안의 풀이과정   
+***
 작업을 수행하고 있지 않을때는 제일 먼저 들어온 순서로 진행한다고 적혀있다.   
 따라서 처음 반복문으로 0초에 시작이 가능한 작업들을 모두 append한다.   
 그 후 현재 시간 - 작업이 가능했던시간 = 대기시간   
@@ -81,6 +127,52 @@ func solution(_ jobs:[[Int]]) -> Int {
         }
         jobQ.sort{$0[1] > $1[1]}
         //print("대기 큐",jobQ)
+    }
+    return result/jobs.count
+}
+```
+하지만 19번 테스트케이스가 실패했다.  
+이유를 찾아보니   
+처음에 요청시간 기준으로 정렬하고 하나씩 불러올 때,   
+중간의 요청시간이 텅비는 구간이 생기면 다음 작업이 없으므로 프로그램은 종료하게 된다.   
+따라서 jobs배열에 아직 값이 있고, 작업큐가 비어있다면 시간을 늘려주고 다음 작업을 강제로 가져오는 방법을 추가해야했다.   
+```
+import Foundation
+
+func solution(_ jobs:[[Int]]) -> Int {
+    /*
+    처음에는 가장 먼저 도착한 작업을 수행한다
+    이번 작업을 수행하는 동안 도착하는 작업들을 별도의 작업큐에 모은다
+    작업큐에 도착한 작업들 중 수행시간이 가장 짧은 작업을 꺼내 수행한다
+    모든 작업을 처리할때까지 2,3줄의 과정을 반복한다.
+    */
+    var sortedjob = jobs.sorted{$0[0] == $1[0] ? $0[1] > $1[1] : $0[0] > $1[0]}
+    /*
+    해당 정렬과는 반대로 정렬하는것이 맞으나 removeFirst의 시간복잡도보다
+    removeLast가 훨씬 빠르기에 반대로 정렬하여 사용하였다.
+    */
+    var jobQ: [[Int]] = [sortedjob.removeLast()]
+    var result = 0, time = jobQ.first![0]
+    //print(jobQ, time, result)
+    while !jobQ.isEmpty {
+        // 현재 작업할 작업, 총 시간 변경
+        let now = jobQ.removeLast()
+        //print("현재",now)
+        result += abs(time-now[0])+now[1]
+        time += now[1]
+        //print("작업 후 ",time, result)
+        while !sortedjob.isEmpty && sortedjob.last![0] <= time {
+            jobQ.append(sortedjob.removeLast())
+        }
+        jobQ.sort{$0[1] > $1[1]}
+        //print("대기 큐",jobQ)
+        /*
+        만약 중간에 작업이 중단되면서 한참 뒤에 시작이 가능한 작업이
+        남아있다면 강제로 다음 작업을 끌어와준다.
+        */
+        if !sortedjob.isEmpty && jobQ.isEmpty {
+            jobQ.append(sortedjob.removeLast())
+        }
     }
     return result/jobs.count
 }
