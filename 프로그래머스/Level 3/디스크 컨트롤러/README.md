@@ -48,3 +48,40 @@ func solution(_ jobs:[[Int]]) -> Int {
     return result/jobs.count
 }
 ```
+풀이방법은 비슷하지만 좀더 문법적으로 깔끔하게 구현해보았다.   
+removeFirst가 아닌 removeLast가 당연히 시간복잡도적으로 효율적이다.   
+
+```
+import Foundation
+
+func solution(_ jobs:[[Int]]) -> Int {
+    /*
+    처음에는 가장 먼저 도착한 작업을 수행한다
+    이번 작업을 수행하는 동안 도착하는 작업들을 별도의 작업큐에 모은다
+    작업큐에 도착한 작업들 중 수행시간이 가장 짧은 작업을 꺼내 수행한다
+    모든 작업을 처리할때까지 2,3줄의 과정을 반복한다.
+    */
+    var sortedjob = jobs.sorted{$0[0] == $1[0] ? $0[1] > $1[1] : $0[0] > $1[0]}
+    /*
+    해당 정렬과는 반대로 정렬하는것이 맞으나 removeFirst의 시간복잡도보다
+    removeLast가 훨씬 빠르기에 반대로 정렬하여 사용하였다.
+    */
+    var jobQ: [[Int]] = [sortedjob.removeLast()]
+    var result = 0, time = jobQ.first![0]
+    //print(jobQ, time, result)
+    while !jobQ.isEmpty {
+        // 현재 작업할 작업, 총 시간 변경
+        let now = jobQ.removeLast()
+        //print("현재",now)
+        result += abs(time-now[0])+now[1]
+        time += now[1]
+        //print("작업 후 ",time, result)
+        while !sortedjob.isEmpty && sortedjob.last![0] <= time {
+            jobQ.append(sortedjob.removeLast())
+        }
+        jobQ.sort{$0[1] > $1[1]}
+        //print("대기 큐",jobQ)
+    }
+    return result/jobs.count
+}
+```
