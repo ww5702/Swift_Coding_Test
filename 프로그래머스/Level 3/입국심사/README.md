@@ -59,10 +59,12 @@ func solution(_ n:Int, _ times:[Int]) -> Int64 {
             // 시간이 더 필요함
             min = mid + 1
         } else {
+            // 만족하거나 같더라도 1을 줄여봄으로써 최소시간을 찾아본다.
+            // 27 28 29분 모두가 6명을 심사할수도 있기때문이다.
             max = mid - 1
             result = mid
         }
     }
-    return result
+    return Int64(result)
 }
 ```
