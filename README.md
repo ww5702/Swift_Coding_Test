@@ -70,6 +70,10 @@ print(actions[0]) // 님이 들어왔습니다.
 String(repeating:"가", count: 2)
 가가
 Array뿐만 아니라 앞에 String을 사용할 수 있다.
+--------
+두자리로 표현하기 (시간, 분 관련일때 사용하기 유리)
+String(foramt: %02d:, nuber)
+7 -> 07
                                                
 bool로 array선언
 var visited = Array(repeating:Array(repeating: Bool(), count: col), count: row)
