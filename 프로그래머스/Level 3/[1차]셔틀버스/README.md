@@ -1,3 +1,55 @@
+최종   
+풀이 방식은 다들 비슷했지만 결국 차이점은 줄을 서는 사람들을 기준으로 정할지   
+버스가 출발하는 시간으로 기준을 정할지의 차이점이 있었다.   
+또한 시간 관련문제는 그냥 시간 x 60을 하여서 분으로 진행하는게 더 편한것 같았다.   
+
+```
+// 09:00 을 540으로 바꿔주기
+func formateMinute(_ str: String) -> Int {
+    let arr = Array(str)
+    let hour = Int(String(arr[..<2]))!
+    let min = Int(String(arr[3...]))!
+    return hour*60 + min
+}
+func solution(_ n:Int, _ t:Int, _ m:Int, _ timetable:[String]) -> String {
+    var result = 0
+    // 버스 시간표
+    let busTime: [Int] = {
+        let start = 9*60
+        var arr = [Int]()
+        for num in 0..<n {
+            arr.append(start + num*t)
+        }
+        return arr
+    }()
+    //print(busTime)
+    
+    var index = 0
+    let times = timetable.map{formateMinute($0)}.sorted(by:<)
+    //print(times)
+    
+    for bt in busTime {
+        var count = 0
+        // 다음 버스가 떠나기 전까지 시간동안 사람이 줄을 서게 되는데
+        // m(최대 인원)이 찰때까지 count를 세면서
+        while index < times.count && count < m && times[index] <= bt {
+            index += 1
+            count += 1
+        }
+        // 인원이 아직 차지 않았다면 최대한 늦게,
+        // 가득찼다면 index-1 바로 전사람보다 1분 빠르게 줄서기
+        result = count < m ? bt : times[index-1]-1
+        if index > times.count { break }
+    }
+    let hour = String(format: "%02d", result/60)
+    let min = String(format: "%02d", result%60)
+    
+    return "\(hour):\(min)"
+}
+```
+풀이과정   
+
+   
 2번째 테스트케이스때문에 문제를 파악하는데 더 오래 걸린거같다.   
 09시10분에 타면 되는게 아닌가 싶지만   
 09시에 08시에 줄을 슨 크루 한명만 타게 되고   
