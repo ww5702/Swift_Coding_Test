@@ -38,3 +38,38 @@ func solution(_ sequence:[Int]) -> Int64 {
     return Int64(cache.max()!)
 }
 ```
+배열을 2개를 만들어 그전까지 연속된 값들 vs 현재값부터 다시 시작하더라도 이게 더 크다   
+이 점화식을 떠올릴 수 있다면 쉽게 풀 수 있다.   
+3번째 index까지 더한값이 -2 4번째 index값이 -1이라면 4번째 index부터 다시 저장하고   
+연속된 값들을 비교해주는 것이다.   
+```
+import Foundation
+
+func solution(_ sequence:[Int]) -> Int64 {
+    /*
+    -1, 1, -1, 1 을 반복해서 곱하거나
+    1, -1, 1, -1 을 반복해서 곱할 수 있다
+    */
+    var cache1: [Int] = Array(repeating: -987654321, count: sequence.count)
+    var cache2: [Int] = Array(repeating: -987654321, count: sequence.count)
+    var num1 = [-1]
+    var num2 = [1]
+    
+    var giho = 1
+    
+    for i in 1..<sequence.count {
+        num1.append(giho)
+        num2.append(-giho)
+        giho *= -1
+    }
+    
+    cache1[0] = num1[0] * sequence[0]
+    cache2[0] = num2[0] * sequence[0]
+    
+    for i in 1..<sequence.count {
+        cache1[i] = max(sequence[i]*num1[i], cache1[i-1]+(sequence[i]*num1[i]))
+        cache2[i] = max(sequence[i]*num2[i], cache2[i-1]+(sequence[i]*num2[i]))
+    }
+    return Int64(max(cache1.max()!, cache2.max()!))
+}
+```
