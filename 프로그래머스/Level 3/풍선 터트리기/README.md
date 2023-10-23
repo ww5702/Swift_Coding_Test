@@ -77,3 +77,44 @@ func solution(_ a:[Int]) -> Int {
     return result
 }
 ```
+min()! 과정에서 당연히 시간초과가 발생한다.   
+따라서 dp를 이용해 최솟값을 구하면 시간을 줄일 수 있다.   
+왼쪽 최솟값과 오른쪽 최솟값 두 dp를 구해서 비교하여 시간을 줄일 수 있었다.   
+
+```
+import Foundation
+func solution(_ a:[Int]) -> Int {
+    if a.count < 3 {
+        return a.count
+    }
+    
+    var result = 0
+    var minNum = Int.max
+    var leftMins: [Int] = []
+    var rightMins: [Int]
+    
+    for i in 0..<a.count {
+        if minNum > a[i] {
+            minNum = a[i]
+        }
+        leftMins.append(minNum)
+    }
+    
+    rightMins = [Int](repeating: 0, count: leftMins.count)
+    minNum = Int.max
+    for i in stride(from: a.count-1, through: 0, by: -1) {
+        if minNum > a[i] {
+            minNum = a[i]
+        }
+        rightMins[i] = minNum
+    }
+    
+    for i in 0..<a.count {
+        if leftMins[i] < a[i] && rightMins[i] < a[i] {
+            continue
+        }
+        result += 1
+    }
+    return result
+}
+```
