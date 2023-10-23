@@ -52,3 +52,28 @@ func solution(_ a:[Int]) -> Int {
     return 0
 }
 ```
+타겟 넘버인 27보다 작은 숫자를 터뜨릴 수 있는 기회는 한번뿐이다.
+즉 본인보다 큰 숫자를 터뜨리는 기회는 계속할 수 있으므로   
+왼쪽과 오른쪽에서 가장 작은 숫자를 남겨야한다는 것이다.   
+```
+func solution(_ a:[Int]) -> Int {
+    var result = 1
+    if a.count > 2 {
+        for i in 1..<a.count-1 {
+            var arr: [Int] = []
+            let num = a[i]
+            arr.append(num)
+            arr.append(a[0..<i].min()!)
+            arr.append(a[i+1..<a.count].min()!)
+            arr.sort(by:>)
+            if arr[0] != num {
+                result += 1
+            }  
+        }
+    }
+    if a.count >= 2 {
+        result += 1
+    }
+    return result
+}
+```
