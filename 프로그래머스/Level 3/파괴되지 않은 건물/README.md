@@ -41,8 +41,7 @@ func solution(_ board:[[Int]], _ skill:[[Int]]) -> Int {
 }
 ```
 누적합을 이용한 풀이
-```
-import Foundation
+```import Foundation
 
 func solution(_ board:[[Int]], _ skill:[[Int]]) -> Int {
     /*
@@ -67,20 +66,17 @@ func solution(_ board:[[Int]], _ skill:[[Int]]) -> Int {
      0 0 0 0 0
      0 0 0 0 0
      0 0 0 0 0
-     0 0 0 0 0
     이 된다.
     2번째 예시를 추가해준다면
     -4 0 0 0 0
      0 0 0 0 0
     -2 0 0 0 2
      2 0 0 0 -2
-     0 0 0 0 0
     3번째 예시를 추가해준다면
     -4 0 0  0  0
      2 0 -2 0  0
     -2 0 0  0  2
      2 0 0  0 -2
-    -2 0 2  0  0
     4번째 예시 추가
     -4 -1  0  0  1
      2  0 -2  0  0
@@ -108,6 +104,7 @@ func solution(_ board:[[Int]], _ skill:[[Int]]) -> Int {
     let m = board.count
     for s in skill {
         let type = s[0]
+        let damage = s[5]
         let (x1,y1) = (s[1],s[2])
         let (x2,y2) = (s[3],s[4])
         // 공격일때와 회복일때를 나눠주는 조건문
@@ -137,7 +134,7 @@ func solution(_ board:[[Int]], _ skill:[[Int]]) -> Int {
                 newboard[x2+1][y2+1] += damage
             }
         }
-        //print(newboard)
+        print(newboard)
     }
     
     // 누적합 왼->오
