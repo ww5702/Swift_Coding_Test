@@ -40,3 +40,19 @@ Node를 관리해주는 LinkedList에서 append와 remove를 구현해주면된�
 search를 할 경우 속도가 매우 느려진다는 단점을 알고있으니 양방향으로 처음부터 구현하는것이 맞다   
 
 ## (양)방향 연결리스트
+가장 첫 노드를 가르키는 head와 가장 마지막 노드를 가르키는 tail을 두고,   
+내 앞노드, 내 뒷노드를 모드 연결하여 양방향에서 탐색가능하게 하는 연결리스트이다.   
+따라서 prev, data, next의 모양을 가지고 있다.   
+```
+class Node<T> {
+    var prev: Node?
+    var data: T?
+    var next: Node?
+    
+    init(data: T?, prev: Node? = nil, next: Node? = nil) {
+        self.prev = prev
+        self.data = data
+        self.next = next
+    }
+}
+```
