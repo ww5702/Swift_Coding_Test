@@ -74,3 +74,111 @@ func solution(_ n:Int, _ build_frame:[[Int]]) -> [[Int]] {
     return result.sorted(by: {$0[0] == $1[0] ? $0[1] == $1[1] ? $0[2] < $1[2] : $0[1] < $1[1] : $0[0] < $1[0]})
 }
 ```
+구현하는 가닥은 비슷했다   
+다만 맵을 넘어가는 경우도 판단해줬어야 했다   
+```
+import Foundation
+
+func solution(_ n:Int, _ build_frame:[[Int]]) -> [[Int]] {
+    /*
+    기둥은 바닥 위에 있거나, 보의 한쪽 끝 부분 위에 있거나, 다른 기둥 위
+    보는 한쪽 끝 부분이 기둥 위에 있거나, 양쪽 끝 부분이 다른 보와 연결
+    기둥과 보를 삭제할수는 있지만 위의 규칙이 적용되어야 한다
+    build frame
+    [0][1]은 x y 좌표
+    [2]는 설치 또는 삭제할 구조물 / 0 = 기둥, 1 = 보
+    [3]은 설치할지 삭제할지 / 0 = 삭제, 1 = 설치
+    보는 오른쪽으로 기둥은 위쪽으로 설치
+    */
+    // 해당 위치에 기둥이나 보가 있는지 확인해주기 위한 3차원배열
+    var map: [[[Int]]] = Array(repeating: Array(repeating: Array(repeating: 0, count: 2), count: n+1), count: n+1)
+    
+    /*
+    기둥 검증
+    바닥인가 y == 0
+    기둥 위인가 map[y-1][x][0] == 1
+    보의 한쪽 끝위인가 (벽을 넘지 않으며) 
+    map[y][x][1] == 1 || (x-1 >= 0 && map[y][x-1][1] == 1)
+    */
+    func checkGidong(map: [[[Int]]], x: Int, y: Int) -> Bool {
+        if y == 0 || map[y-1][x][0] == 1 || map[y][x][1] == 1 || (x-1 >= 0 && map[y][x-1][1] == 1) {
+            return true
+        }
+    
+        return false
+    }
+    
+    
+    /*
+    보 검증
+    한쪽끝이 기둥위인가 (벽을 넘지 않고))
+    map[y-1][x][0] == 1 || (x+1 < map.count && map[y-1][x+1][0] == 1)
+    양쪽 끝이 다른 보와 연결되어있는가 (벽을 넘지 않고))
+    (x-1 >= 0 && x < map.count && map[y][x-1][1] == 1 && map[y][x+1][1] == 1
+    */
+    func checkBo(map: [[[Int]]], x: Int, y: Int) -> Bool {
+        if map[y-1][x][0] == 1 || (x+1 < map.count && map[y-1][x+1][0] == 1) || (x-1 >= 0 && x < map.count && map[y][x-1][1] == 1 && map[y][x+1][1] == 1) {
+        return true
+        }
+        return false
+    }
+    
+    /*
+    삭제 검증
+    
+    */
+    func checkDelete (n: Int, map: [[[Int]]]) -> Bool {
+        for y in 0...n {
+            for x in 0...n {
+                // 기둥일 때
+                if map[y][x][0] == 1 && !checkGidong(map: map, x: x, y: y) {
+                    return false
+                }
+            
+                // 보일 때
+                if map[y][x][1] == 1 && !checkBo(map: map, x: x, y: y) {
+                    return false
+                }
+            }
+        }
+        return true
+    }
+    
+    
+    for buildData in build_frame {
+        let x = buildData[0]
+        let y = buildData[1]
+        let type = buildData[2]
+        let isInstall = buildData[3] == 1
+        // 설치일때
+        if isInstall {
+            if type == 0 {
+                if checkGidong(map: map, x: x, y: y) {
+                    map[y][x][0] = 1
+                }
+            } else {
+                if checkBo(map: map, x: x, y: y) {
+                    map[y][x][1] = 1
+                }
+            }
+        } else {
+            // 일단 삭제, 삭제가 안되는것이면 다시 원상복구
+            map[y][x][type] = 0
+            if !checkDelete(n: n, map: map) {
+                map[y][x][type] = 1
+            }
+        }
+    }
+    var result : [[Int]] = [[Int]]()
+    for y in 0...n {
+        for x in 0...n {
+            for type in 0...1 {
+                if map[y][x][type] == 1 {
+                    result.append([x,y,type])
+                }
+            }
+        } 
+    }
+    return result.sorted(by: {$0[0] == $1[0] ? $0[1] == $1[1] ? $0[2] < $1[2] : $0[1] < $1[1] : $0[0] < $1[0]})
+}
+```
