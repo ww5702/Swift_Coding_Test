@@ -57,3 +57,33 @@ func solution(_ n:Int, _ weak:[Int], _ dist:[Int]) -> Int {
     return 0
 }
 ```
+풀이방식은 비슷하나 결국 filter문을 얼마나 깔끔하게 사용할수있는지 문제였다.   
+```
+import Foundation
+
+func solution(_ n:Int, _ weak:[Int], _ dist:[Int]) -> Int {
+    // Set로 된 취약점들이 담긴 weaks변수를 만들어준다
+    // 취약점들이 같은것들의 반복을 피하기 위함
+    var weaks: Set<[Int]> = [weak]
+    
+    // 이동할 수 있는 거리가 큰 친구부터 차례로 순회
+    // 최대한 적은 친구를 이용해야하므로 멀리 갈수있는 친구부터
+    for (friendCnt, d) in dist.reversed().enumerated() {
+        // 이미 점검한 취약점들을 필터링한 새로운 취약점들을 담아준다
+        // 필터링한 취약점이 하나도 남지 않았다면 모두 점검된것
+        // 아니라면 새로운 취약점들을 담아준다
+        var newWeaks: Set<[Int]> = []
+        for w in weaks {
+            for start in w {
+                let end = (n+(start-d))%n
+                let filterWeaks = start > end ? w.filter{$0<end || start+1...n ~= $0} : w.filter{start+1..<end ~= $0}
+                if filterWeaks.isEmpty { return friendCnt+1}
+                newWeaks.insert(filterWeaks)
+            }
+        }
+        weaks = newWeaks
+    }
+    return -1
+}
+
+```
