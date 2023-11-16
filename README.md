@@ -66,6 +66,7 @@ string[string.index(endIndex, offsetBy: -1)] = o
 index = str.index(startIndex, offSetBy: i, limitedBy: str.endIndex) ?? str.endIndex
 -> index는 str의 0번째 index에서 i만큼 떨어진 거리의 인덱스이다.
 하지만 반복문에 의해 i가 커지다 endIndex를 넘어서면 endIndex로 반환된다
+num.index(after: middleIndex) = middleIndex의 변수 +1을 지정
 ---
 let actions = ["Enter":"님이 들어왔습니다.", "Leave":"님이 나갔습니다."]
 위와 같이 몇개 없는 문구들은 따로 지정하여
