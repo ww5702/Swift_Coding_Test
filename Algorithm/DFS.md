@@ -59,3 +59,24 @@ Q - 1 8 9 2 7 6 3
 S - 4 5   
 3을 뽑고 방문한 사실이 없기에 3을 Q에 넣고 3의 자식노드인 4 5 를 stack에 넣는다.   
 최종 : Q - 1 8 9 2 7 6 3 5 4
+
+코드 구현   
+```
+func dfs(_ graph: [String:[String]], _ start: String) -> [String] {
+   var visited: [String] = []
+   var needVisited: [String] = [start]
+   // stack이 빌때까지
+   while !needVisited.isEmpty {
+      // 마지막 값을 제거하고, 방문한 노드가 아니라면 추가  
+      let node = needVisited.removeLast()
+      if visited.contains(node) { continue }
+   
+      visited.append(node)
+      needVisited += graph[node] ?? []
+      
+   }
+   return visited
+}
+```
+노드 수(V), 간선 수(E)    
+시간 복잡도는 O(V+E) 이다.   
