@@ -49,3 +49,5 @@ func BFS(graph: [String: [String]], start: String) -> [String] {
 }
 
 ```
+노드 수(V), 간선 수(E)    
+시간 복잡도는 O(V+E) 이다. 
