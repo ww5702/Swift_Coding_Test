@@ -75,3 +75,140 @@ func solution(_ n:Int, _ paths:[[Int]], _ gates:[Int], _ summits:[Int]) -> [Int]
     return []
 }
 ```
+다익스트라를 살짝 변형시켜서 풀이해야한다.   
+해당 문제는 최단경로를 구하는것이 아닌, 노드까지의 경로가 최저로 이동하여 산봉우리까지 가야하는 문제이다.   
+즉 경로는 조금 더 길어져도 최대한 한번에 덜 움직이는 경로를 찾아내야 한다.   
+따라서 똑같이 우선순위큐를 이용해 풀이하면서 다익스트라 알고리즘을 활용하긴한다.   
+
+```
+import Foundation
+
+struct PQ<T> {
+    var nodes = [T]()
+    var isEmpty: Bool {
+        nodes.isEmpty
+    }
+    var sort: (T, T) -> Bool
+    
+    mutating func insert(_ ele: T) {
+        nodes.append(ele)
+        
+        swapUp(nodes.count - 1)
+    }
+    
+    mutating private func swap(_ index1: Int, _ index2: Int) {
+        guard index1 < nodes.count, index2 < nodes.count else { return }
+        
+        let temp = nodes[index1]
+        nodes[index1] = nodes[index2]
+        nodes[index2] = temp
+    }
+    
+    mutating private func swapUp(_ index: Int) {
+        guard index < nodes.count else { return }
+        var index = index
+        
+        while index != 0 {
+            let parent = index / 2
+            
+            if sort(nodes[index], nodes[parent]) {
+                swap(parent, index)
+                index = parent
+            } else {
+                return
+            }
+        }
+    }
+    
+    mutating func pop() -> T? {
+        swap(0, nodes.count - 1)
+        
+        defer {
+            nodes.removeLast()
+            swapDown(0)
+        }
+        
+        return nodes.last
+    }
+    
+    mutating func swapDown(_ index: Int) {
+        var index = index
+        
+        while true {
+            let right = (index + 1) * 2
+            let left = right - 1
+            var target = index
+            if left < nodes.count && sort(nodes[left], nodes[target]) {
+                target = left
+            }
+            
+            if right < nodes.count && sort(nodes[right], nodes[target]) {
+                target = right
+            }
+            
+            if target == index {
+                return
+            } else {
+                swap(target, index)
+                index = target
+            }
+        }
+    }
+}
+func solution(_ n:Int, _ paths:[[Int]], _ gates:[Int], _ summits:[Int]) -> [Int] {
+    var nodes = Array(repeating: [(Int,Int)](), count: n+1)
+    let summitsSet = Set(summits)
+    // 길 저장
+    for path in paths {
+        let (node1,node2,cost) = (path[0],path[1],path[2])
+        nodes[node1].append((node2,cost))
+        nodes[node2].append((node1,cost))
+    }
+    func Dijkstra() -> [Int] {
+        var pq = PQ<(Int,Int)>(sort: {$0.0 < $1.0})
+        let INF = Int.max
+        var distance = Array(repeating: INF, count : n+1)
+        // 모든 출발지를 하나에 넣고 돌린다
+        for gate in gates {
+            pq.insert((0,gate))
+            distance[gate] = 0
+        }
+        while !pq.isEmpty {
+            // 현재 위치
+            guard let cur = pq.pop() else { break }
+            let nowCost = cur.0
+            let nowNode = cur.1
+            // cost가 많을때는 어차피 필요없다
+            if distance[nowNode] < nowCost { continue }
+            for nextData in nodes[nowNode] {
+                let nextNode = nextData.0
+                let nextCost = nextData.1
+                let totalCost = max(nowCost, nextCost)
+                // 만약 nextNode까지 가는 거리가 지금 가는 방향이
+                // 더 적은 시간으로 간다면 바꿔주기
+                if distance[nextNode] > totalCost {
+                    distance[nextNode] = totalCost
+                    if summitsSet.contains(nextNode) { continue }
+                    pq.insert((totalCost, nextNode))
+                }
+            }
+        }
+        return distance
+    }
+    let distance = Dijkstra()
+    var answer = [Int.max,Int.max]
+    // 목적지인 summit까지 간다
+    for summit in summits {
+        // summit까지 가는데 휴식없이 최저시간으로 가는 비용이 나온다.
+        let value = distance[summit]
+        // 만약 해당값이 더 적은값이라면 바꿔준다
+        if answer[1] > value {
+            answer = [summit,value]
+        } else if answer[1] == value {
+        // 만약 같은 적은값이라면 산봉우리의 번호가 작은걸 고른다
+            answer = [min(answer[0],summit), value]
+        }
+    }
+    return answer
+}
+```
