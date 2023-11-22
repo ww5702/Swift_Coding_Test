@@ -12,6 +12,10 @@ var graph = Array(repeating: [(Int,Int)](), count: n+1)
 그래프 [[],[],[],[]] 와 같이 배열 안에 배열을 저장
 var graph = [[Int]](repeating: [Int](), count: n + 1)
 
+그래프에 [Int,[[Int]]] = [:] 저장
+선언할때 append를 바로 하면 없는 값이라 저장이 안됨 따라서 default로 초기값 설정
+map[value[0],default:[]].append([value[1],value[2]])
+
 12345 를 [1,2,3,4,5]로 변형
 let n = Array(readLine()!).map{Int(String($0))!}
 
