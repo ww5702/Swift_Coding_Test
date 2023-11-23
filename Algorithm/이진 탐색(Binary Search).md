@@ -11,5 +11,29 @@
 가장 먼저 mid(20) 를 기준으로 반으로 나누는것이다.   
 그리고 20보다 35가 크니 오른쪽 데이터들을 탐색하는 것이다.   
 그리고 윗 작업을 찾을때까지 반복한다.   
-
    
+![image](https://github.com/ww5702/Swift_Coding_Test/assets/60501045/c2a2022c-7155-4740-bc28-e620ef731a5a)
+   
+20을 기준으로 오른쪽 데이터만 남겨뒀을때 23 29 35가 남는다.   
+해당 값들의 mid(29)를 기준으로 찾고자 하는 데이터가 더 크므로 오른쪽 데이터를 남겨   
+윗 작업을 다시 진행한다.   
+그리고 윗 작업을 진행하다가 찾고자 하는 데이터와 35가 같다면 true를 다르다면 false를 반환해준다.   
+   
+구현   
+```
+func binarySearch(_ array: [Int], _ num: Int) -> Bool {
+   var start = 0
+   var end = array.count-1
+   while start <= end {
+      let mid = (start+end)/2
+      if array[mid] == num { return true }
+      if array[mid] < num {
+         end = mid - 1
+      } else {
+         start = mid + 1
+      }
+   }
+   return false
+}
+```
+이진 탐색의 시간복잡도는 n개의 배열을 2로 나누어 배열의 개수가 1이 될때까지 반복하지 O(logN)이다.   
