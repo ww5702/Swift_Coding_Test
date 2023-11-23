@@ -52,7 +52,8 @@ func solution(_ info:[String], _ query:[String]) -> [Int] {
             var low = 0
             var high = scoreArr.count-1
             var mid = 0
-            
+
+            // 작거나 같을때까지 해야 올바른 값이 나온다.
             while low <= high {
                 mid = (low+high)/2
                 if scoreArr[mid] < score {
