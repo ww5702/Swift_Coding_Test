@@ -34,7 +34,8 @@ func solution(_ info:[String], _ query:[String]) -> [Int] {
             }
         }
     }
-    
+    // 위에서 value값들을 마구잡이로 집어넣었기에 150,50,200 처럼 들어가있다.
+    // 이진 탐색을 사용하기 위해 값들을 정렬
     for d in db {
         let sortArr = d.value.sorted()
         db[d.key] = sortArr
