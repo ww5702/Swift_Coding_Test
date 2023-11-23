@@ -181,6 +181,15 @@ if let은 지역안에서밖에 활용을 못하는 단점이 있다.
 result = String(value,radix: 2)
 value값을 raidx의 값 진법으로 바꿔줄 수 있다.
 
+
+튜플을 배열로
+var mergeCell: [[(Int,Int)]] = []
+추가
+mergeCell.append([(0,0)])
+mergeCell.append([(1,1)])
+mergeCell[0].append(contentsOf: [(2,2)])
+print(mergeCell) // [(0,0)],[(1,1)]
+print(mergeCell[0]) // [(0,0)]
 ```
 구현 문제가 가장 빨리 풀 수 있으면서 풀이가 어렵게 구성될 수 있다.   
 함수를 잘 이용해 필요한 요구기능들을 각각 구현   
