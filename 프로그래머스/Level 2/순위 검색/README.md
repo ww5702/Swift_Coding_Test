@@ -45,7 +45,9 @@ func solution(_ info:[String], _ query:[String]) -> [Int] {
         let arr = q.components(separatedBy:" ")
         let key = "\(arr[0])\(arr[2])\(arr[4])\(arr[6])"
         let score = Int(arr[7])!
-        
+
+        // query에서 요구한 문의조건을 만족하는 점수들을 scoreArr에 저장한다
+        // 문의조건을 만족하는 사람이 없다면 0을 추가
         if let scoreArr = db[key] {
             var low = 0
             var high = scoreArr.count-1
