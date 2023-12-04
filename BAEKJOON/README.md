@@ -19,3 +19,7 @@ var input = [Int](readLine()!.split(separator:" ").map{Int($0)!})
 10811 / 5597 / 3052 / 1546 / 895
 4344
 ```
+## [2차원 배열](https://github.com/ww5702/Swift_Coding_Test/tree/main/BAEKJOON/2%EC%B0%A8%EC%9B%90%20%EB%B0%B0%EC%97%B4)
+```
+2738 / 2566 / 10798 / 2563
+```
