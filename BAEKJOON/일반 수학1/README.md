@@ -27,3 +27,24 @@ func solution() {
 solution()
 
 ```
+## 2720 세탁소 사장 동혁
+/ 와 %를 적절히 사용해서 문제에서 원하는 값을 출력해준다.   
+```
+import Foundation
+func solution() {
+    var T = Int(readLine()!)!
+    for _ in 0..<T {
+        var C = Int(readLine()!)!
+        var dolor = C/100, cent = C%100
+        var quarter = dolor*4 + cent/25
+        cent %= 25
+        var dime = cent / 10
+        cent %= 10
+        var nickel = cent / 5
+        cent %= 5
+        print("\(quarter) \(dime) \(nickel) \(cent)")
+    }
+}
+solution()
+
+```
