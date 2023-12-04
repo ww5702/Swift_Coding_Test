@@ -68,3 +68,15 @@ for _ in 0..<3 {
 print("\(location.0) \(location.1)")
 ```
 비트연산자로도 풀이가 가능했다.   
+
+## 15894 수학은 체육과목 입니다.
+변이 아무리 커도 둘러쌓인 길이는 x 4 이다.   
+```
+import Foundation
+func solution() {
+    var n = Int(readLine()!)!
+    print(n*4)
+}
+solution()
+
+```
