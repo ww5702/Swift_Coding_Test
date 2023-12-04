@@ -80,3 +80,24 @@ func solution() {
 solution()
 
 ```
+## 9063 대지 
+입력받은 좌표들중 x,y좌표의 최대 최소값을 정한뒤 넓이를 구한다.   
+
+```
+import Foundation
+func solution() {
+    var N = Int(readLine()!)!
+    var point: [[Int]] = []
+    for _ in 0..<N {
+        let value = readLine()!.split(separator: " ").map{Int(String($0))!}
+        point.append([value[0],value[1]])
+    }
+    let maxX = point.map{$0[0]}.max()!
+    let minX = point.map{$0[0]}.min()!
+    let maxY = point.map{$0[1]}.max()!
+    let minY = point.map{$0[1]}.min()!
+    print((maxX-minX) * (maxY - minY))
+}
+solution()
+
+```
