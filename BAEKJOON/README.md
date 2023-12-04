@@ -5,6 +5,8 @@ let N = Int(readLine()!)!
 
 입력한 값을 띄어쓰기를 기준으로 나누어 Int배열로 저장
 var input = [Int](readLine()!.split(separator:" ").map{Int($0)!})
+String 배열
+var inupt = readLine()!.split(separator:" ").map{String($0)}
 ```
 
 # 풀이
