@@ -101,3 +101,74 @@ func solution() {
 solution()
 
 ```
+
+## 10101 삼각형 외우기
+조건에 따라 출력값을 변경해준다.   
+```
+import Foundation
+func solution() {
+    var A = Int(readLine()!)!
+    var B = Int(readLine()!)!
+    var C = Int(readLine()!)!
+    var sum = A+B+C
+    if (A == 60 && B == 60 && C == 60) {
+        print("Equilateral")
+    } else {
+        if sum == 180 {
+            if (A == B || B == C || C == A) {
+                print("Isosceles")
+            } else {
+                print("Scalene")
+            }
+        } else {
+            print("Error")
+        }
+    }
+    
+}
+solution()
+
+```
+## 삼각형과 세 변
+조건에 맞춰서 출력문을 
+```
+import Foundation
+func solution() {
+    while true {
+        var input = readLine()!.split(separator: " ").map{Int(String($0))!}
+        if input.reduce(0, +) == 0 {
+            break
+        }
+        input.sort(by:>)
+        if input[0] >= input[1]+input[2] {
+            print("Invalid")
+        } else {
+            if (input[0] == input[1]) && (input[1] == input[2]){
+                print("Equilateral")
+            } else {
+                if (input[0] == input[1]) || (input[1] == input[2]) || (input[2] == input[0]) {
+                    print("Isosceles")
+                } else {
+                    print("Scalene")
+                }
+            }
+        }
+        
+    }
+}
+solution()
+
+```
+## 14215 세 막대
+상황에 맞는 값을 출력해준다.   
+```
+import Foundation
+func solution() {
+    var input = readLine()!.split(separator: " ").map{Int(String($0))!}
+    input.sort()
+    print(input[0]+input[1]+min(input[2], input[0]+input[1]-1))
+}
+solution()
+
+
+```
