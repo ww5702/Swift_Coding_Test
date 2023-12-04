@@ -28,5 +28,6 @@ var inupt = readLine()!.split(separator:" ").map{String($0)}
 ```
 ## [기하: 직사각형과 삼각형](https://github.com/ww5702/Swift_Coding_Test/tree/main/BAEKJOON/%EA%B8%B0%ED%95%98:%20%EC%A7%81%EC%82%AC%EA%B0%81%ED%98%95%EA%B3%BC%20%EC%82%BC%EA%B0%81%ED%98%95)   
 ```
-27323 / 1085 / 3009 
+27323 / 1085 / 3009 / 15894 / 9063
+10101 / 5073 / 14215
 ```
