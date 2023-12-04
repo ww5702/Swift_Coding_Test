@@ -14,7 +14,7 @@ var inupt = readLine()!.split(separator:" ").map{String($0)}
 
 ## [일반 수학1](https://github.com/ww5702/Swift_Coding_Test/tree/main/BAEKJOON/%EC%9D%BC%EB%B0%98%20%EC%88%98%ED%95%991)   
 ```
-2745 / 
+2745 / 11005 / 2720 / 2903
 ```
 ## [1차원 배열](https://github.com/ww5702/Swift_Coding_Test/blob/main/BAEKJOON/1%EC%B0%A8%EC%9B%90%20%EB%B0%B0%EC%97%B4/README.md)   
 ```
