@@ -1,4 +1,15 @@
 # 간단한 도형으로 기하 문제풀이를 시작해 봅시다.	
+## 27323 직사각형 
+넓이를 구해준다.   
+```
+import Foundation
+func solution() {
+    var A = Int(readLine()!)!
+    var B = Int(readLine()!)!
+    print(A*B)
+}
+solution()
+```
 
 ## 1085 직사각형에서 탈출
 한수는 지금 (x, y)에 있다.   
