@@ -129,7 +129,7 @@ func solution() {
 solution()
 
 ```
-## 삼각형과 세 변
+## 5073 삼각형과 세 변
 조건에 맞춰서 출력문을 
 ```
 import Foundation
