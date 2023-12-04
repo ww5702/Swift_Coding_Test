@@ -48,3 +48,19 @@ func solution() {
 solution()
 
 ```
+## 2903 중앙 이동 알고리즘
+변이 2개 3개 5개 9개 등등   
+1 2 4 8 등비수열로 변화한다는 점을 파악하면 쉽다.   
+
+```
+import Foundation
+func solution() {
+    var N = Int(readLine()!)!
+    // 2 3 5 9
+    // 1 2 4 8 씩 증가
+    var value = (1+Int(pow(Double(2), Double(N))))
+    print(Int(pow(Double(value),2)))
+}
+solution()
+
+```
