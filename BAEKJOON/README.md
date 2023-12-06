@@ -11,8 +11,12 @@ var inupt = readLine()!.split(separator:" ").map{String($0)}
 ```
 
 # 풀이
-## [입출력과 사칙연산]()   
-
+## [입출력과 사칙연산](https://github.com/ww5702/Swift_Coding_Test/blob/main/BAEKJOON/%EC%9E%85%EC%B6%9C%EB%A0%A5%EA%B3%BC%20%EC%82%AC%EC%B9%99%EC%97%B0%EC%82%B0/README.md)   
+```
+2557 / 1000 / 1001 / 10998 / 1008
+10869 / 10926 / 18108 / 10430 / 2588
+11382 / 10171 / 10172
+```
 ## [조건문](https://github.com/ww5702/Swift_Coding_Test/blob/main/BAEKJOON/%EC%A1%B0%EA%B1%B4%EB%AC%B8/README.md)   
 ```
 1330 / 9498 / 2753 / 14681 / 2884
