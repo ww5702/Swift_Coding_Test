@@ -46,3 +46,8 @@ var inupt = readLine()!.split(separator:" ").map{String($0)}
 2798 / 2231 / 19532 / 1018 / 1436
 2839
 ```
+## [집합과 맵](https://github.com/ww5702/Swift_Coding_Test/tree/main/BAEKJOON/%EC%A7%91%ED%95%A9%EA%B3%BC%20%EB%A7%B5)
+```
+10815 / 14425 / 7785 / 1620 / 10816
+1764 / 1269 / 11478
+```
