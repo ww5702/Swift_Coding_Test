@@ -111,6 +111,31 @@ print(count)
 세번째 제출
 배열을 하나로 줄여 시간을 더욱 단축시킬 수 있었다.   
 
+## 7785 회사에 있는 사람   
+삭제 remove는 시간복잡도가 O(n)이다.   
+삭제 행동이 시간복잡도가 O(1)으로 사용가능한 배열은   
+dictionary, set이다.   
+```
+import Foundation
+func solution() {
+    var N = Int(readLine()!)!
+    var arr = Set<String>()
+    for _ in 1...N {
+        var str = readLine()!.split(separator: " ").map{String($0)}
+        if str[1] == "enter" {
+            arr.insert(str[0])
+        } else {
+            arr.remove(str[0])
+        }
+    }
+    for i in arr.sorted(by: >) {
+        print(i)
+    }
+}
+solution()
+
+```
+
 ## 1620
 그럼 다솜아 이제 진정한 포켓몬 마스터가 되기 위해 도감을 완성시키도록 하여라.   
 일단 네가 현재 가지고 있는 포켓몬 도감에서 포켓몬의 이름을 보면 포켓몬의 번호를 말하거나,   
