@@ -113,6 +113,27 @@ for i in rank {
 ```
 2차원 배열로 입력값들을 받고 랭킹을 입력할 1차원 배열을 초기화시킨 후   
 자기보다 키와 몸무게가 둘다 큰 경우가 나온다면 해당 1차원 배열에 +1을 시켜줬다.   
+## 19532 수학은 비대면강의입니다.
+arr의 범위는 -999 ~ 999이다.   
+완전탐색을 하더라도 시간초과가 발생하지 않으므로 이중반복문을 수행하여 값이 동일할때 반환해준다.   
+```
+import Foundation
+func solution() {
+    let arr = [Int](-999...999)
+    let input = readLine()!.split(separator: " ").map{Int(String($0))!}
+    let (a,b,c,d,e,f) = (input[0],input[1],input[2],input[3],input[4],input[5])
+    for x in arr {
+        for y in arr {
+            if (a*x)+(b*y) == c, (d*x)+(e*y) == f {
+                print("\(x) \(y)")
+                break
+            }
+        }
+    }
+}
+solution()
+
+```
 ## 1018
 지민이는 자신의 저택에서 MN개의 단위 정사각형으로 나누어져 있는 M×N 크기의 보드를 찾았다.   
 어떤 정사각형은 검은색으로 칠해져 있고, 나머지는 흰색으로 칠해져 있다.   
