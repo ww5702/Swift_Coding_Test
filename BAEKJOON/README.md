@@ -31,3 +31,8 @@ var inupt = readLine()!.split(separator:" ").map{String($0)}
 27323 / 1085 / 3009 / 15894 / 9063
 10101 / 5073 / 14215
 ```
+## [브루트 포스](https://github.com/ww5702/Swift_Coding_Test/blob/main/BAEKJOON/%EB%B8%8C%EB%A3%A8%ED%8A%B8%20%ED%8F%AC%EC%8A%A4/README.md)   
+```
+2798 / 2231 / 19532 / 1018 / 1436
+2839
+```
