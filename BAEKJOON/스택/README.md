@@ -258,6 +258,59 @@ func solution() {
 준비된 stack에 (와 [를 append해준다.   
 단 스택이 비어있는데 ]나 )를 append해주려 한다면 false를 리턴해주고,   
 ]나 )를 append해주려 할때 스택의 last가 ]나 )처럼 맞는 짝이 아니라면 또한 false를 리턴해준다.   
+## 12789 도키도키 간식드리미
+옆줄에 세우면서 만약 옆줄의 맨앞이나 원래줄 맨앞이 간식을 먹어야 할 순서가 맞다면   
+간식순서 +1, 옆줄이나 현재줄 빼기   
+그리고 순서가 아니라면 옆줄에 세우는데,   
+만약 옆줄에 세울때 옆줄에 자기보다 작은 숫자가 있다면 불가능한 순서   
+index가 N을 넘어갈때 즉 전체를 한바퀴 돌았을때   
+isOk가 true라면 -> 즉 옆줄은 오름차순으로 잘 세워져있을것이다   
+가능한 부분   
+```
+import Foundation
+
+func solution() {
+    let N = Int(readLine()!)!
+    var value = readLine()!.split(separator: " ").map{Int($0)!}
+    var line: [Int] = []
+    var now = 1, index = 0
+    var isOk = true
+    while true {
+        if index >= N { break }
+        let cur = value[index]
+        if cur == now {
+            now += 1
+            index += 1
+        } else {
+            if line.count == 0 {
+                line.append(value[index])
+                index += 1
+            } else {
+                if line.last! == now {
+                    line.popLast()
+                    now += 1
+                } else {
+                    if value[index] > line.last! {
+                        print("Sad")
+                        isOk = false
+                        break
+                    } else {
+                        line.append(value[index])
+                        index += 1
+                    }
+                }
+            }
+        }
+//        print("현재 옆 줄",line)
+//        print("현재 먹어야하는 사람",now, index)
+    }
+    if isOk { print("Nice") }
+}
+solution()
+
+
+```
+
 
 ## 1874 스택수열
 스택 (stack)은 기본적인 자료구조 중 하나로, 컴퓨터 프로그램을 작성할 때 자주 이용되는 개념이다.   
