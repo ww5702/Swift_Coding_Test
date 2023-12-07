@@ -63,5 +63,5 @@ var inupt = readLine()!.split(separator:" ").map{String($0)}
 ## [큐, 덱](https://github.com/ww5702/Swift_Coding_Test/blob/main/BAEKJOON/%ED%81%90,%20%EB%8D%B1/README.md)   
 ```
 18258 / 2164 / 11866 / 28279 / 2346
-24511 / 10866 / 1021 / 5430
+24511 / 1966 / 10866 / 1021 / 5430
 ```
