@@ -53,5 +53,5 @@ var inupt = readLine()!.split(separator:" ").map{String($0)}
 ```
 ## [약수, 배수와 소수2](https://github.com/ww5702/Swift_Coding_Test/tree/main/BAEKJOON/%EC%95%BD%EC%88%98%2C%20%EB%B0%B0%EC%88%98%EC%99%80%20%EC%86%8C%EC%88%982)
 ```
-4134
+4134 / 17103 / 13909
 ```
