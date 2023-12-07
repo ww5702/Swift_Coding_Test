@@ -39,7 +39,7 @@ var inupt = readLine()!.split(separator:" ").map{String($0)}
 ## [기하: 직사각형과 삼각형](https://github.com/ww5702/Swift_Coding_Test/tree/main/BAEKJOON/%EA%B8%B0%ED%95%98:%20%EC%A7%81%EC%82%AC%EA%B0%81%ED%98%95%EA%B3%BC%20%EC%82%BC%EA%B0%81%ED%98%95)   
 ```
 27323 / 1085 / 3009 / 15894 / 9063
-10101 / 5073 / 14215
+10101 / 5073 / 142152
 ```
 ## [브루트 포스](https://github.com/ww5702/Swift_Coding_Test/blob/main/BAEKJOON/%EB%B8%8C%EB%A3%A8%ED%8A%B8%20%ED%8F%AC%EC%8A%A4/README.md)   
 ```
@@ -59,4 +59,9 @@ var inupt = readLine()!.split(separator:" ").map{String($0)}
 ```
 10828 / 28728 / 10773 / 9012 / 4949
 12789 / 1874
+```
+## [큐, 덱](https://github.com/ww5702/Swift_Coding_Test/blob/main/BAEKJOON/%ED%81%90,%20%EB%8D%B1/README.md)   
+```
+18258 / 2164 / 11866 / 28279 / 2346
+24511 / 10866 / 1021 / 5430
 ```
