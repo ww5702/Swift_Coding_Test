@@ -62,3 +62,39 @@ solution()
 
 
 ```
+## 13909 창문 닫기 
+N까지의 배수를 구하면서 +1   
+그리고 최종 window값이 짝수라면 문이 닫혀있고 홀수라면 문이 열려있다.   
+
+```
+import Foundation
+func solution() {
+    var N = Int(readLine()!)!
+    var window = Array(repeating: 0, count: N+1)
+    for i in 1...N {
+        for j in stride(from: i, through: N, by: i) {
+            window[j] += 1
+        }
+        //print(window)
+    }
+    print(window.filter{$0 % 2 != 0}.count)
+}
+solution()
+```
+그리고 위의 코딩이 즉 제곱들을 찾아줘야 하는 코딩을 의미한다.   
+```
+import Foundation
+func solution() {
+    var N = Int(readLine()!)!
+    var answer = 0
+    var i = 1
+    while i*i <= N {
+        answer += 1
+        i += 1
+    }
+    print(answer)
+}
+solution()
+
+
+```
