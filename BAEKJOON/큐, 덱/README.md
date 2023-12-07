@@ -208,6 +208,95 @@ solution()
 ```
 위 문제와 마찬가지로 조건에 맞춰서 append와 remove를 수행해준다.   
 
+## 28279 덱2
+덱은 reverse를 통해 하나의 enqueue로 구성할 수 있다.   
+앞에서 넣을때는 reverse -> append -> reverse를 진행한다면 된다   
+하지만 시간초과가 발생한다면   
+enqueu, dequeue 함수를 두개 구성하여 풀이를 한다.   
+```
+import Foundation
+
+func solution() {
+    let N = Int(readLine()!)!
+    var enqueue: [Int] = []
+    var dequeue: [Int] = []
+    for _ in 0..<N {
+        let input = readLine()!.split(separator: " ").map{Int($0)!}
+        switch(input[0]) {
+        case 1:
+            dequeue.append(input[1])
+            break;
+        case 2:
+            enqueue.append(input[1])
+            break;
+        case 3:
+            if dequeue.isEmpty {
+                if enqueue.isEmpty {
+                    print(-1)
+                } else {
+                    dequeue = enqueue.reversed()
+                    enqueue.removeAll()
+                    print(dequeue.popLast()!)
+                }
+            } else {
+                print(dequeue.popLast()!)
+            }
+            
+            break;
+        case 4:
+            if enqueue.isEmpty {
+                if dequeue.isEmpty {
+                    print(-1)
+                } else {
+                    enqueue = dequeue.reversed()
+                    dequeue.removeAll()
+                    print(enqueue.popLast()!)
+                }
+            } else {
+                print(enqueue.popLast()!)
+            }
+            
+            break;
+        case 5:
+            print(dequeue.count+enqueue.count)
+            break;
+        case 6:
+            (dequeue.isEmpty&&enqueue.isEmpty) ? print(1) : print(0)
+            break;
+        case 7:
+            if dequeue.isEmpty && enqueue.isEmpty {
+                print(-1)
+            } else {
+                if dequeue.isEmpty {
+                    print(enqueue.first!)
+                } else {
+                    print(dequeue.last!)
+                }
+            }
+            break;
+        case 8:
+            if dequeue.isEmpty && enqueue.isEmpty {
+                print(-1)
+            } else {
+                if enqueue.isEmpty {
+                    print(dequeue.first!)
+                } else {
+                    print(enqueue.last!)
+                }
+            }
+            break;
+        default:
+            break;
+        }
+//        print(enqueue)
+//        print(dequeue)
+    }
+}
+solution()
+
+
+```
+
 ## 1966 프린터 큐
 여러분도 알다시피 여러분의 프린터 기기는 여러분이 인쇄하고자 하는 문서를 인쇄 명령을 받은 ‘순서대로’, 즉 먼저 요청된 것을 먼저 인쇄한다.   
 여러 개의 문서가 쌓인다면 Queue 자료구조에 쌓여서 FIFO - First In First Out - 에 따라 인쇄가 되게 된다.   
