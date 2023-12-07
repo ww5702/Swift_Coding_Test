@@ -72,6 +72,45 @@ solution()
 ```
 stack의 개념 유의하며 push, pop, size, empty, top의 기능을 하나하나 구현하면 된다.   
 
+## 28278 스택 2
+명령어에 맞게 해당 값들을 출력해준다.   
+```
+import Foundation
+
+func solution() {
+    var Q: [Int] = []
+    let N = Int(readLine()!)!
+    for _ in 0..<N {
+        var input = readLine()!.split(separator: " ").map{Int($0)!}
+        
+        switch(input[0]) {
+        case 1:
+            Q.append(input[1])
+            break
+        case 2:
+            if Q.isEmpty {
+                print(-1)
+            } else {
+                print(Q.popLast()!)
+            }
+            break
+        case 3:
+            print(Q.count)
+            break
+        case 4:
+            Q.isEmpty ? print(1) : print(0)
+            break
+        case 5:
+            Q.isEmpty ? print(-1) : print(Q.last!)
+        default:
+            break
+        }
+    }
+}
+solution()
+
+
+```
 ## 10773 제로
 나코더 기장 재민이는 동아리 회식을 준비하기 위해서 장부를 관리하는 중이다.   
 재현이는 재민이를 도와서 돈을 관리하는 중인데, 애석하게도 항상 정신없는 재현이는 돈을 실수로 잘못 부르는 사고를 치기 일쑤였다.   
