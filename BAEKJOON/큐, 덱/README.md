@@ -332,6 +332,37 @@ solution()
 
 ```
 
+## 24511 queuestack
+stack은 숫자를 밀어내주는 역할밖에 해주지않아 이중반복문을 사용해봤지만 시간초과   
+
+```
+import Foundation
+
+func solution() {
+    // 사실상 스택이면 하는일이 없다.
+    var N = Int(readLine()!)!
+    var A = readLine()!.split(separator: " ").map{Int($0)!}
+    var B = readLine()!.split(separator: " ").map{Int($0)!}
+    var M = Int(readLine()!)!
+    var C = readLine()!.split(separator: " ").map{Int($0)!}
+    var answer: [Int] = []
+    for i in 0..<M {
+        var cur = C[i]
+        for j in 0..<N {
+            if A[j] == 0 {
+                swap(&cur, &B[j])
+            }
+        }
+        answer.append(cur)
+        
+    }
+    print(answer.map{String($0)}.joined(separator: " "))
+}
+solution()
+
+
+```
+
 ## 1966 프린터 큐
 여러분도 알다시피 여러분의 프린터 기기는 여러분이 인쇄하고자 하는 문서를 인쇄 명령을 받은 ‘순서대로’, 즉 먼저 요청된 것을 먼저 인쇄한다.   
 여러 개의 문서가 쌓인다면 Queue 자료구조에 쌓여서 FIFO - First In First Out - 에 따라 인쇄가 되게 된다.   
