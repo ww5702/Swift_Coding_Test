@@ -359,8 +359,42 @@ func solution() {
     print(answer.map{String($0)}.joined(separator: " "))
 }
 solution()
+```
+제일 먼저 queue라서 밀려난 값들을 뒤에서부터 넣는다   
+만약 부족했다면 넣으려고 헀던 C의 값을 앞에서부터 넣는다.   
+```
+import Foundation
 
-
+func solution() {
+    // 사실상 스택이면 하는일이 없다.
+    var N = Int(readLine()!)!
+    var A = readLine()!.split(separator: " ").map{Int($0)!}
+    var B = readLine()!.split(separator: " ").map{Int($0)!}
+    var M = Int(readLine()!)!
+    var C = readLine()!.split(separator: " ").map{Int($0)!}
+    var qStack: [Int] = []
+    var answer: [Int] = []
+    for i in 0..<N {
+        if A[i] == 0 {
+            qStack.append(B[i])
+        }
+    }
+    
+    if M >= qStack.count {
+        for i in stride(from: qStack.count-1, through: 0, by: -1) {
+            answer.append(qStack[i])
+        }
+        for i in 0..<(M-answer.count) {
+            answer.append(C[i])
+        }
+    } else {
+        for i in stride(from: qStack.count-1, through: qStack.count-M, by: -1) {
+            answer.append(qStack[i])
+        }
+    }
+    print(answer.map{String($0)}.joined(separator: " "))
+}
+solution()
 ```
 
 ## 1966 프린터 큐
