@@ -297,6 +297,41 @@ solution()
 
 ```
 
+## 2346 풍선 터뜨리기
+enumerated를 통해 Index를 고정시켜준뒤   
+터뜨린 풍선의 값에 따라 0이하면 남은 풍선수만큼 +   
+남은 풍선수를 넘어간다면 %= balloon.count를 통해 값을 조정해준다.   
+
+```
+import Foundation
+
+func solution() {
+    let N = Int(readLine()!)!
+    var balloon = readLine()!.split(separator: " ").enumerated().map{($0,Int($1)!)}
+    var index = 0
+    var answer: [String] = []
+    while true {
+        var temp = balloon[index].1
+        answer.append("\(balloon[index].0+1)")
+        // 현재 풍선 터짐 0이 터졌다면 다음도 0이라 가만히있는다
+        if temp > 0 { temp -= 1 }
+        balloon.remove(at: index)
+        index += temp
+        if balloon.count == 0 { break }
+        if index < 0 {
+            index = balloon.count + index % balloon.count
+        }
+        index %= balloon.count
+//        print(balloon)
+//        print(answer)
+    }
+    print(answer.joined(separator:" "))
+}
+solution()
+
+
+```
+
 ## 1966 프린터 큐
 여러분도 알다시피 여러분의 프린터 기기는 여러분이 인쇄하고자 하는 문서를 인쇄 명령을 받은 ‘순서대로’, 즉 먼저 요청된 것을 먼저 인쇄한다.   
 여러 개의 문서가 쌓인다면 Queue 자료구조에 쌓여서 FIFO - First In First Out - 에 따라 인쇄가 되게 된다.   
