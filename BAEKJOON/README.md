@@ -65,3 +65,9 @@ var inupt = readLine()!.split(separator:" ").map{String($0)}
 18258 / 2164 / 11866 / 28279 / 2346
 24511 / 1966 / 10866 / 1021 / 5430
 ```
+## [정수론과 조합론](https://github.com/ww5702/Swift_Coding_Test/blob/main/BAEKJOON/%EC%A0%95%EC%88%98%EB%A1%A0%20%EB%B0%8F%20%EC%A1%B0%ED%95%A9%EB%A1%A0/README.md)   
+```
+10549 / 24723 / 5086 / 1037 / 2609
+1934 / 2981 / 3036 / 11050 / 11051
+9375 / 1676 / 2004
+```
