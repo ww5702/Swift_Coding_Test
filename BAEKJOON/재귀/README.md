@@ -1,4 +1,23 @@
 # 재귀함수를 다뤄 봅시다.
+## 27433 팩토리얼2   
+```
+import Foundation
+func solution() {
+    let N = Int(readLine()!)!
+    var sum = 1
+    if N == 0 { print(1) }
+    else {
+        for i in 1...N {
+            sum *= i
+        }
+        print(sum)
+    }
+    
+}
+
+solution()
+
+```
 ## 10872 팩토리얼
 0보다 크거나 같은 정수 N이 주어진다. 이때, N!을 출력하는 프로그램을 작성하시오.   
 ```
@@ -141,6 +160,27 @@ print(answer)
 ```
 재귀함수로 병합정렬을 만들고 count를 따로 선언하여 count값을 출력해준다.   
 
+## 4779 칸토어 집합
+재귀함수를 이용해 line + 띄어쓰기 + line만큼을 만든다.   
+3일때 9 line 9띄어쓰기 9 line이고   
+9line은   
+3line 3띄어쓰기 3line 이다.   
+```
+import Foundation
+func solution() {
+    func split(_ n: Double) -> String{
+        if n == 0 { return "-"}
+        let line = split(n-1)
+        return line + String(repeating: " ", count: Int(pow(3, n-1))) + line
+    }
+    while let input = readLine(), let n = Double(input) {
+        print(split(n))
+    }
+}
+
+solution()
+
+```
 ## 2447 별 찍기 - 10
 재귀적인 패턴으로 별을 찍어 보자. N이 3의 거듭제곱(3, 9, 27, ...)이라고 할 때, 크기 N의 패턴은 N×N 정사각형 모양이다.   
 크기 3의 패턴은 가운데에 공백이 있고, 가운데를 제외한 모든 칸에 별이 하나씩 있는 패턴이다.   
