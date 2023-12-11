@@ -1,4 +1,25 @@
 # 정수론과 조합론을 배워 봅시다.
+## 15439 베라의 패션
+```
+import Foundation
+func solution() {
+    let N = Int(readLine()!)!
+    print(N*(N-1))
+}
+solution()
+
+```
+## 24723 녹색 거탑
+```
+import Foundation
+func solution() {
+    let N = Int(readLine()!)!
+    print(pow(2.0, N))
+}
+solution()
+
+```
+
 ## 5086 / 배수와 약수
 4 × 3 = 12이다.   
 이 식을 통해 다음과 같은 사실을 알 수 있다.   
