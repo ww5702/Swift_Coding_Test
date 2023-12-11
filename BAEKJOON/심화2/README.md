@@ -22,3 +22,25 @@ func solution() {
 solution()
 
 ```
+## 26069 붙임성 좋은 총총이
+set 함수를 이용해 무지개춤을 추는 사람을 특정해준다.   
+
+```
+import Foundation
+func solution() {
+    let N = Int(readLine()!)!
+    var list = Set<String>()
+    list.insert("ChongChong")
+    for _ in 0..<N {
+        let value = readLine()!.split(separator: " ").map{String($0)}
+        if list.contains(value[0]) || list.contains(value[1]) {
+            list.insert(value[0])
+            list.insert(value[1])
+        }
+    }
+    print(list.count)
+}
+
+solution()
+
+```
