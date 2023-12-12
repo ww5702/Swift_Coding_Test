@@ -80,3 +80,48 @@ func solution() {
 solution()
 
 ```
+
+## 1992 쿼드트리
+2630 문제랑 거의 동일한 방식으로 풀 수 있다.   
+달라진점은 나눠질때마다 (를 출력해주고 나눠진 값이 닫혀질때마다 )를 출력해주는 점이 다르다.   
+따라서 divideBoard를 x,y,width 값을 조절해줄때마다 ( , ) 를 출력해준다.   
+
+```
+import Foundation
+func solution() {
+    let N = Int(readLine()!)!
+    var board: [[Character]] = []
+    for _ in 0..<N {
+        var value = Array(readLine()!)
+        board.append(value)
+    }
+    var result = ""
+    func isOk(_ y: Int, _ x: Int, _ width: Int) -> Bool {
+        for i in y..<y+width {
+            for j in x..<x+width {
+                if board[i][j] != board[y][x] { return false }
+            }
+        }
+        return true
+    }
+    
+    func divideBoard(_ y: Int, _ x: Int, _ width: Int) {
+        if isOk(y, x, width) {
+            result += String(board[y][x])
+        } else {
+            result += "("
+            divideBoard(y, x, width/2)
+            divideBoard(y, x+width/2, width/2)
+            divideBoard(y+width/2, x, width/2)
+            divideBoard(y+width/2, x+width/2, width/2)
+            result += ")"
+        }
+    }
+    
+    divideBoard(0, 0, N)
+    print(result)
+}
+
+solution()
+
+```
