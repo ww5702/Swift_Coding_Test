@@ -125,3 +125,59 @@ func solution() {
 solution()
 
 ```
+## 1780 종이의 개수
+윗 문제들과 다를게 없다.   
+다른것이 있다면 종이를 4등분이 아니라 9등분한다는점   
+따라서 9등분을 해주는 값들을 조정해주면 된다,   
+```
+import Foundation
+func solution() {
+    let N = Int(readLine()!)!
+    var board: [[Int]] = []
+    for _ in 0..<N {
+        var value = readLine()!.split(separator: " ").map{Int(String($0))!}
+        board.append(value)
+    }
+    var (minusOne, zero, one) = (0,0,0)
+    func isOk(_ y: Int, _ x: Int, _ width: Int) -> Bool {
+        for i in y..<y+width {
+            for j in x..<x+width {
+                if board[i][j] != board[y][x] { return false }
+            }
+        }
+        return true
+    }
+
+    func divideBoard(_ y: Int, _ x: Int, _ width: Int) {
+        if isOk(y, x, width) {
+            if board[y][x] == 0 {
+                zero += 1
+            } else if board[y][x] == 1 {
+                one += 1
+            } else {
+                minusOne += 1
+            }
+        } else {
+            divideBoard(y, x, width/3)
+            divideBoard(y, x+width/3, width/3)
+            divideBoard(y, x+width/3*2, width/3)
+            
+            divideBoard(y+width/3, x, width/3)
+            divideBoard(y+width/3, x+width/3, width/3)
+            divideBoard(y+width/3, x+width/3*2, width/3)
+            
+            divideBoard(y+width/3*2, x, width/3)
+            divideBoard(y+width/3*2, x+width/3, width/3)
+            divideBoard(y+width/3*2, x+width/3*2, width/3)
+        }
+    }
+    
+    divideBoard(0, 0, N)
+    print(minusOne)
+    print(zero)
+    print(one)
+}
+
+solution()
+
+```
