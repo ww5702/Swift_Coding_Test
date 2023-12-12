@@ -251,3 +251,58 @@ for _ in 0..<m {
 ![image](https://user-images.githubusercontent.com/60501045/219357381-7c3ffd2c-e9e8-497c-bf8e-1a5657a7f70a.png)   
    
 별표 친 공백칸의 누적합을 구할 수 있다.   
+
+## 체스판 다시 칠하기2
+2차원배열 누적합을 사용하여 풀이한다.   
+(y,x)까지의 누적합은 (y-1)(x) + (y-1)(x) - (y)(x) + 현재 바둑판 색이다.   
+이렇게 처음(0,0)이 W(흰색)으로 칠해질때와, B(검정색)으로 칠해지는   
+두가지 경우의 수를 구해준다.   
+K에 따라 minCount를 구해줘야할 범위가 정해지는데   
+(0,0)부터 K가 3일때 (3,3)까지의 누적합은   
+(3,3) - (3,0) - (0,3) + (0,0) 이다.   
+(1,0)부터 (4,3)도   
+(4,3) - (1,3) - (4,0) + (1,0) 이다.   
+
+```
+import Foundation
+func solution() {
+    let input = readLine()!.split(separator: " ").map{Int($0)!}
+    let (N,M,K) = (input[0],input[1],input[2])
+    var chess: [[String]] = []
+    for _ in 0..<N {
+        chess.append(readLine()!.map{String($0)})
+    }
+    //print(chess)
+    func makeSum(_ color: String) -> [[Int]] {
+        var board: [[Int]] = Array(repeating:Array(repeating: 0, count: M+1),count:N+1)
+        var result = 0
+        // x,y좌표에 따라 해당 color와 같은지
+        for y in 0..<N {
+            for x in 0..<M {
+                if (y+x)%2 == 0 {
+                    result = chess[y][x] == color ? 0 : 1
+                } else {
+                    result = chess[y][x] != color ? 0 : 1
+                }
+                board[y+1][x+1] = board[y][x+1] + board[y+1][x] - board[y][x] + result
+            }
+        }
+        return board
+    }
+    // 최솟값 구하기
+    func minCount(_ board: [[Int]]) -> Int {
+        var minSum = Int.max
+        for y in 1...N-K+1 {
+            for x in 1...M-K+1 {
+                let value = board[y+K-1][x+K-1] - board[y-1][x+K-1] - board[y+K-1][x-1] + board[y-1][x-1]
+                minSum = min(minSum,value)
+            }
+        }
+        return minSum
+    }
+    print(min(minCount(makeSum("B")),minCount(makeSum("W"))))
+}
+
+solution()
+
+```
