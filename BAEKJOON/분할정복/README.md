@@ -211,3 +211,50 @@ func solution() {
 solution()
 
 ```
+## 11401 이항 계수 3
+(n    일때 n! / (n-k)! * k!   
+ k)   
+라고 정의할 수 있다.   
+그리고 주어진 값을 % 1000000007 해주는 문제이다.   
+결국 (n! / k!(n-k)!) % div 해주는데 ( div라고 1000000007를 칭한다)    
+20 미만의 N,K라면 문제가 없지만 문제는 주어지는 수가 너무 크다는 것이다.   
+따라서 모듈러의 연산 공식을 활용해야 하는데   
+모듈러 연산에서 나눗셈 연산은 없다는 점이 중요하다   
+(a/b)%m /= ((a % m) / (b % m)) % m   
+즉, 나눗셈의 수에 대한 모듈러 연산은 분배벅칙을 적용할 수 없다는 의미이다.   
+모듈러 연산은   
+(a x b) % p = ((a % p) x (b % p)) % p 로 적용할 수 있는데   
+분수꼴을 곱셈꼴로 바꾼뒤 위를 풀이하면 그만이다.   
+따라서 ((N! % div) * (K!(N-K)!)^-1 % div) % div 이다.   
+우리는 K!(N-K)!의 역원을 구하는게 관건으로 바뀐다   
+여기에 페르마의 소정리를 적용한다.   
+a는 정수, p는 소수이며 a와 p가 서로 나눠지지 않을때(배수가 아닐때)   
+a^p % p = a % p 이다.   
+
+```
+import Foundation
+func solution() {
+    let input = readLine()!.split(separator: " ").map{Int($0)!}
+    let (N,K) = (input[0],input[1])
+    let div = 1000000007
+    func factorial(_ n: Int) -> Int {
+        if n <= 1 { return 1}
+        return (n*factorial(n-1))%div
+    }
+    func mod_inverse(_ a: Int, _ p: Int) -> Int {
+        var base = a, expo = p
+        if expo == 1 { return base % div }
+        var temp = mod_inverse(base,expo/2)
+        if expo % 2 == 1 {
+            return (temp*temp%div) * base % div
+        }
+        return temp*temp%div
+    }
+    var num = factorial(N)
+    var num2 = factorial(K) * factorial(N-K) % div
+    print(num * mod_inverse(num2, div-2)%div)
+}
+
+solution()
+
+```
