@@ -87,5 +87,5 @@ var inupt = readLine()!.split(separator:" ").map{String($0)}
 ```
 ## [분할정복](https://github.com/ww5702/Swift_Coding_Test/tree/main/BAEKJOON/%EB%B6%84%ED%95%A0%EC%A0%95%EB%B3%B5)   
 ```
-2630 / 1992 / 1780
+2630 / 1992 / 1780 / 1629 / 
 ```
