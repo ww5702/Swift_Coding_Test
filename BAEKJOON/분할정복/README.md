@@ -258,3 +258,49 @@ func solution() {
 solution()
 
 ```
+## 2740 행결 곱셈
+입출력 후 행렬곱셈 법칙에 따라 곱해준다.   
+```
+import Foundation
+func solution() {
+    let input = readLine()!.split(separator: " ").map{Int($0)!}
+    let (N,M) = (input[0],input[1])
+    var arrA: [[Int]] = Array(repeating: Array(repeating: 0, count: M), count: N)
+    for i in 0..<N {
+        let value = readLine()!.split(separator: " ").map{Int($0)!}
+        for j in 0..<M {
+            arrA[i][j] = value[j]
+        }
+    }
+    //print(arrA)
+    let input2 = readLine()!.split(separator: " ").map{Int($0)!}
+    let (M2,K) = (input2[0],input2[1])
+    var arrB: [[Int]] = Array(repeating: Array(repeating: 0, count: K), count: M2)
+    for i in 0..<M2 {
+        let value = readLine()!.split(separator: " ").map{Int($0)!}
+        for j in 0..<K {
+            arrB[i][j] = value[j]
+        }
+    }
+    //print(arrB)
+    var result: [[String]] = []
+    var temp = 0
+    for i in 0..<N {
+        result.append([])
+        for j in 0..<K {
+            temp = 0
+            for k in 0..<M2 {
+                temp += arrA[i][k] * arrB[k][j]
+            }
+            result[i].append("\(temp)")
+        }
+    }
+    //print(result)
+    for i in 0..<result.count {
+        print(result[i].joined(separator: " "))
+    }
+}
+
+solution()
+
+```
