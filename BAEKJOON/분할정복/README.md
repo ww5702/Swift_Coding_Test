@@ -182,3 +182,32 @@ func solution() {
 solution()
 
 ```
+## 1629 곱셈
+A B C가 10 11 12일때   
+10^11 % 12는 결국 (10 % 12) * (10 % 12)를 11번 한것과 같다.   
+지수법칙을 이용해 지수가 홀수일떄는 (11 -> 5 * 5 * 1)이고   
+10이라면 5 * 5임을 이용한다.   
+```
+import Foundation
+func solution() {
+    let input = readLine()!.split(separator: " ").map{Int($0)!}
+    let (A,B,C) = (input[0],input[1],input[2])
+    
+    func dfs(_ n: Int) -> Int {
+        if n == 0 { return 1 }
+        if n % 2 == 0 {
+            let value = dfs(n/2)
+            return value%C * value%C
+        } else {
+            let value = dfs((n-1)/2)
+            return value%C * value%C * A%C
+        }
+    }
+    
+    print(dfs(B))
+    
+}
+
+solution()
+
+```
