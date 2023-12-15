@@ -355,7 +355,7 @@ func solution() {
 solution()
 
 ```
-피보나치 수 6
+## 11444 피보나치 수 6
 <img width="520" alt="스크린샷 2023-12-15 오후 2 21 45" src="https://github.com/ww5702/Swift_Coding_Test/assets/60501045/46ee216a-4574-4b31-bf54-cf5568499cac">   
 어지간한 피보나치 수는 동적계획법을 이용해 풀 수 있습니다.   
 하지만 1조가 넘는 수를 피보나치수를 구하려면 동적 계획법 또한 시간초과가 발생합니다.   
@@ -412,3 +412,87 @@ func solution() {
 solution()
 
 ```
+## 6549 히스토그램에서 가장 큰 직사각형
+초기값을 0,end (6)이라고 치고 시작한다.   
+해당값을 0,3 / 4,6 으로 나누고   
+0,1 2,3 4,5 5,6 으로 또 반을 나눈다   
+여기까지가 분할과정이다.   
+만약 0,0 1,1과 같이 start와 end가 같아진다면 가로가 1 높이가 arr[i]로   
+result를 지정해준다.   
+이제 예를들어 2,3이라고 가정하고 코드를 풀이해보겠다.   
+초기 height = min(arr[2],arr[3])이므로 4이다.   
+초기 넓이는 2칸 x height = 8이다   
+while문은 start : 2, end: 3이므로 작동하지 않는다.   
+
+다른 예로 start 0, end 6일때   
+mid 3 left = 3 right 4 가 되는 경우가 있다.   
+해당 경우의 최소높이는 1, 가로는 2 따라서 넓이는 2이다   
+하지만 result보다는 작으므로 변경은 되지않는다.   
+해당값의 left와 right가 start,end보다 좁으므로 한칸씩 바깥으로 밀어준다. left = 2, right = 4이더라도 넓이는 3x1 = 3이다 바뀌지않는다.   
+여전히 start,end보다는 좁으므로 또 밀어준다.   
+2,5가 되더라도 넓이는 4로 바뀌지않는다.   
+해당과정을 모두 반복해주게 된다면 최대 넓이는 8로 고정된다.   
+
+```
+import Foundation
+
+func solution() {
+    while true {
+        let input = readLine()!.split(separator: " ").map{Int($0)!}
+        if input[0] == 0 { break }
+        let n = input[0]
+        var arr: [Int] = Array(repeating: 0, count: n)
+        for i in 1...n {
+            arr[i-1] = input[i]
+        }
+        
+        print(checkRange(0, n-1))
+        
+        func checkRange(_ start: Int, _ end: Int) -> Int {
+            if start == end { return arr[start] }
+            let mid = (start+end)/2
+            //print(start,mid,end)
+            var result = max(checkRange(start, mid), checkRange(mid+1, end))
+            //print(result)
+            var left = mid
+            var right = mid+1
+            var height = min(arr[left],arr[right])
+            //print("left,right",left,right,height)
+            // 더 작은 높이로 현재는 2칸
+            result = max(result,height*2)
+            //print("초기 2칸으로 더 크게 되었는가",result)
+            // 모두가 가능한 높이로 최대한의 가로를 구한다.
+            while (start < left || right < end) {
+                // 둘다 아직 더 왼쪽이나 오른쪽으로 갈 수 있다면
+                if start < left && right < end {
+                    // 만약 왼쪽으로 한칸 가거나 오른쪽으로 한칸갈때 오른쪽의 높이가 더 크다면
+                    if arr[left-1] < arr[right+1] {
+                        right += 1
+                        height = min(height,arr[right])
+                    } else {
+                        left -= 1
+                        height = min(height, arr[left])
+                    }
+                } else if start < left {
+                // 왼쪽으로만 더 갈 수 있다면
+                    left -= 1
+                    height = min(height, arr[left])
+                } else if right < end {
+                // 오른쪽으로만 더 갈 수 있다면
+                    right += 1
+                    height = min(height, arr[right])
+                }
+                // 만약 진작에 했던 4X2 = 8이 1x6보다 크다면 바꿀필요 없다.
+                //print("넓이 변경",left,right,height)
+                result = max(result,height*(right-left+1))
+            }
+            return result
+        }
+    }
+    
+}
+
+solution()
+
+```
+
