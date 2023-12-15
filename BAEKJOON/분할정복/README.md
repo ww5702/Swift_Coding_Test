@@ -304,3 +304,54 @@ func solution() {
 solution()
 
 ```
+## 10830 행렬 제곱
+분할 정복 + 제곱의 성질을 이해하여 풀이해야한다.   
+```
+import Foundation
+func solution() {
+    let input = readLine()!.split(separator: " ").map{Int($0)!}
+    let (N,A) = (input[0],input[1])
+    var div = 1000
+    var matrix: [[Int]] = []
+    for _ in 0..<N {
+        matrix.append(readLine()!.split(separator: " ").map{Int($0)!})
+    }
+    for i in 0..<N {
+        for j in 0..<N {
+            matrix[i][j] %= 1000
+        }
+    }
+    
+    func powMatrix(_ board: [[Int]], _ b: Int) -> [[Int]] {
+        if b == 1 { return board }
+        var ret = powMatrix(board, b/2)
+        // 2^50이라면 2^25 2^25를 구한다
+        ret = multiple(ret, ret)
+        // 만약 51이라면 25,25를 한 값에 2를 한번 더 구해준다.
+        if b % 2 == 1 {
+            ret = multiple(ret, matrix)
+        }
+        return ret
+    }
+    
+    func multiple(_ board: [[Int]], _ board2: [[Int]]) -> [[Int]] {
+        var ret = Array(repeating: Array(repeating: 0, count: N), count : N)
+        for i in 0..<N {
+            for j in 0..<N {
+                for k in 0..<N {
+                    ret[i][j] += board[i][k] * board2[k][j]
+                    ret[i][j] %= div
+                }
+            }
+        }
+        return ret
+    }
+    let board = powMatrix(matrix, A)
+    for i in 0..<N {
+        print(board[i].map{String($0)}.joined(separator: " "))
+    }
+}
+
+solution()
+
+```
