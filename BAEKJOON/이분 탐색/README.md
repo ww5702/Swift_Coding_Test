@@ -33,3 +33,42 @@ func solution() {
 solution()
 
 ```
+## 1654 랜선자르기
+주어진 랜선의 크기중 start를 1로 하는것이 중요하다.   
+나머지는 평범한 이분정렬처럼 구해준다.   
+단, N과 같다고 바로 return해주는것이 아닌   
+최대 길이를 구하는것이기에 start를 계속해서 끌어올려준다.   
+
+```
+import Foundation
+
+func solution() {
+    let input = readLine()!.split(separator: " ").map{Int($0)!}
+    let(K,N) = (input[0],input[1])
+    var arr: [Int] = []
+    for _ in 0..<K {
+        arr.append(Int(readLine()!)!)
+    }
+    arr.sort()
+    var start = 1
+    var end = arr.last!
+    var result = 0
+    while start <= end {
+        let mid = (start+end)/2
+        var ret = 0
+        for i in arr {
+            ret += (i/mid)
+        }
+        if ret >= N {
+            result = max(result,mid)
+            start = mid+1
+        } else {
+            end = mid-1
+        }
+    }
+    print(result)
+}
+
+solution()
+
+```
