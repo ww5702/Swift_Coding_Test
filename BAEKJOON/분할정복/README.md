@@ -355,3 +355,52 @@ func solution() {
 solution()
 
 ```
+피보나치 수 6
+
+```
+import Foundation
+func solution() {
+    let n = Int(readLine()!)!
+    let div = 1000000007
+    let matrix = [[1,1],[1,0]]
+    
+    func powMatrix(_ board: [[Int]], _ n: Int) -> [[Int]] {
+        if n == 1 { return board }
+        var ret = powMatrix(board, n/2)
+        ret = multiple(ret, ret)
+        if n % 2 != 0 {
+            ret = multiple(ret, matrix)
+        }
+        return ret
+    }
+    
+    func multiple(_ board:[[Int]], _ board2:[[Int]]) -> [[Int]] {
+        var ret = Array(repeating: Array(repeating: 0, count: 2), count: 2)
+        for i in 0..<2 {
+            for j in 0..<2 {
+                for k in 0..<2 {
+                    ret[i][j] += (board[i][k] * board2[k][j])
+                    ret[i][j] %= div
+                }
+            }
+        }
+        return ret
+    }
+    
+    func fibonacci(_ n: Int) -> Int {
+        if n == 0 {
+            return 0
+        } else if n == 1 {
+            return 1
+        }
+        
+        let resultMatirx = powMatrix(matrix,n-1)
+        return resultMatirx[0][0]
+    }
+    
+    print(fibonacci(n))
+}
+
+solution()
+
+```
