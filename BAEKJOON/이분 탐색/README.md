@@ -231,4 +231,44 @@ func solution() {
 
 solution()
 
-``` 
+```
+## 12015 가장 긴 증가하는 부분 수열2
+등차수열도 등비수열도 아니기에 더 쉽게 풀이할 수 있다.   
+일단 배열의 last보다 크다면 넣고 continue   
+하지만 last보다 작더라도 result에 있는 현재 넣으려는 수보다 가장 가까운   
+큰 수와 현재 넣은 수를 교체해주는 방식으로 배열을 변화시킨다.   
+
+```
+import Foundation
+
+func solution() {
+    let a = Int(readLine()!)!
+    var arr = readLine()!.split(separator: " ").map{Int($0)!}
+    var result: [Int] = []
+    result.append(arr.first!)
+    for i in 1..<a{
+        //print(arr[i])
+        if result.last! < arr[i] {
+            result.append(arr[i])
+            continue
+        }
+        
+        var start = 0
+        var end = result.count
+        while start <= end {
+            let mid = (start+end)/2
+            if result[mid] < arr[i] {
+                start = mid + 1
+            } else {
+                end = mid - 1
+            }
+        }
+        result[start] = arr[i]
+    }
+    print(result.count)
+}
+
+solution()
+ 
+
+```
