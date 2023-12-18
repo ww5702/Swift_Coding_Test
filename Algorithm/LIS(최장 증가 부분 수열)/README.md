@@ -34,6 +34,28 @@ arr 4같은 경우에는 앞선 숫자들중 3(index = 1) , 2(index = 5), 3(inde
 해당 값들중 가장 max값을 넣어주면 되지만 3가지 경우 모두 answer가 1이므로 2를 넣어준다.   
 이렇게 해서 answer 배열을 완성했다.   
 해당 배열에서 가장 숫자가 큰 정답은 4이다.   
+```
+import Foundation
+
+func solution() {
+    let arr: [Int] = [3,5,7,9,1,4,8]
+    // LIS길이의 최솟값, 즉 자기 자신 1로 초기화
+    var dp: [Int] = Array(repeating: 1, count: arr.count)
+    for i in 0..<arr.count {
+        for j in 0..<i {
+            // 만약 해당 dp[i]값이 그 전의 길이들보다 크다면 해당 dp[j]뒤에 붙을 수 있다는 의미.
+            // 따라서 dp[j] + 1해준다.
+            // 하지만 위 동작은 dp[j]+1이 dp[i]보다 클 경우에만 동작
+            if arr[i] > arr[j] {
+                dp[i] = max(dp[i], dp[j]+1)
+            }
+        }
+    }
+    print(dp) // [1, 2, 3, 4, 1, 2, 4]
+}
+
+solution()
+```
 하지만 당연하게도 O(N^2)로 풀이가 가능한 알고리즘 문제는 거의 없다.   
    
    
@@ -75,4 +97,39 @@ result 1 4 7 8
 1 2 3 4 7 9
 1 2 3 4 5 9
 길이는 6이 된다.   
+```
+코드로 풀이한다면 이렇게 된다.   
+```
+import Foundation
+
+func solution() {
+    let arr: [Int] = [1, 5, 4, 2, 3, 8, 6, 7, 9, 3, 4, 5]
+    var result: [Int] = []
+    result.append(arr[0])
+    for i in 1..<arr.count {
+        // 만약 result의 last 즉 더 큰 값이라면 붙일 수 있다.
+        if arr[i] > result.last! {
+            result.append(arr[i])
+            continue
+        }
+        
+        var start = 0
+        var end = result.count
+        while start <= end {
+            let mid = (start+end)/2
+            if result[mid] < arr[i] {
+                start = mid + 1
+            } else {
+                end = mid - 1
+            }
+        }
+        
+        result[start] = arr[i]
+    }
+    
+    print(result) // [1, 2, 3, 4, 5, 9]
+}
+
+solution()
+
 ```
