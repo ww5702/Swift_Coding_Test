@@ -111,3 +111,54 @@ func solution() {
 solution()
 
 ```
+## 2110 공유기 설치 
+이분 탐색은 무엇을 기준으로 이분탐색할 것인가 설정하는 것이 중요하다.   
+여기서는 공유기 사이의 거리를 기준으로 이분탐색해본다.   
+최대 거리는 arr.last - arr.first 이다.   
+따라서 현 예제로는 9-1 = 8 이다.   
+이제 start = 1, end = 8일때 사이의 값을 mid로 지정하고   
+반복문을 돌면서 두 공유기 (prev,cur)의 사이가 mid를 넘는다면 count+1   
+반복문을 전부 끝냈을떄 count값이 C보다 많다면 거리를 더 넓혀도 된다고 판단   
+start = mid + 1, 만약 해당 거리로 공유기를 원하는 만큼 설치할수없다면   
+end = mid - 1를 해준다.   
+```
+import Foundation
+
+func solution() {
+    let input = readLine()!.split(separator: " ").map{Int($0)!}
+    let (N,C) = (input[0],input[1])
+    var arr: [Int] = []
+    for _ in 0..<N {
+        arr.append(Int(readLine()!)!)
+    }
+    arr.sort()
+    var start = 1, end = arr[N-1]-arr[0]
+    var result = 0
+    
+    while start <= end {
+        
+        var count = 1
+        let mid = (start+end)/2
+        //print(start,end,mid)
+        var prev = arr[0]
+        // mid 라는 사이거리를 만족시키면서 공유기를 세울 수 있는가
+        for i in 1..<N {
+            let cur = arr[i]
+            if cur-prev >= mid {
+                count += 1
+                prev = cur
+            }
+        }
+        if count < C {
+            end = mid - 1
+        } else {
+            result = max(result,mid)
+            start = mid + 1
+        }
+    }
+    print(result)
+}
+
+solution()
+
+```
