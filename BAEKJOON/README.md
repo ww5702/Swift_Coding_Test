@@ -92,5 +92,5 @@ var inupt = readLine()!.split(separator:" ").map{String($0)}
 ```
 ## [이분탐색](https://github.com/ww5702/Swift_Coding_Test/tree/main/BAEKJOON/%EC%9D%B4%EB%B6%84%20%ED%83%90%EC%83%89)
 ```
-1920 / 1654
+1920 / 1654 / 2805 / 
 ```
