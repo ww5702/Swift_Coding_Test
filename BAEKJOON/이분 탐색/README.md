@@ -72,3 +72,42 @@ func solution() {
 solution()
 
 ```
+## 2805 나무 자르기
+주어진 값들을 정렬 후 이분탐색에 쓰일 start, end값을 지정한다.   
+지정후 mid값을 기준으로 나무들을 잘랐을때 가져가는 나무인(temp)값이   
+원하는 M의 크기보다 클 경우 바로 return해주는것이 아닌   
+M을 가져갈 수 있는 최대의 나무 높이를 구하기 위해   
+start 값을 mid+1로 설정해준다.   
+당연히 M보다 적을 경우 자를 나무의 높이를 낮춰줘야하기에 end값을 조정해준다.   
+```
+import Foundation
+
+func solution() {
+    let input = readLine()!.split(separator: " ").map{Int($0)!}
+    let (N,M) = (input[0],input[1])
+    var arr = readLine()!.split(separator: " ").map{Int($0)!}
+    arr.sort()
+    var start = 1, end = arr.last!
+    var result = 0
+    while start <= end {
+        let mid = (start+end)/2
+        var temp = 0
+        for a in arr {
+            if a > mid {
+                temp += (a-mid)
+            }
+        }
+        if temp >= M {
+            result = max(result,mid)
+            start = mid + 1
+        } else {
+            end = mid - 1
+        }
+        
+    }
+    print(result)
+}
+
+solution()
+
+```
