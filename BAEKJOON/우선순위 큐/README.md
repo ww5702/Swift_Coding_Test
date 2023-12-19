@@ -124,3 +124,34 @@ func solution() {
 solution()
 
 ```
+하지만 크기가 적어서 그런지 밑과 같은 방식으로도 풀이가 가능했다.   
+
+```
+import Foundation
+func solution() {
+    let n = Int(readLine()!)!
+    var arr: [Int] = []
+    for _ in 0..<n {
+        let input = Int(readLine()!)!
+        if input == 0 {
+            if arr.count == 0 { print(0) }
+            else {
+                var max = 0, index = 0
+                for i in 0..<arr.count {
+                    if max < arr[i] {
+                        max = arr[i]
+                        index = i
+                    }
+                }
+                arr[index] = 0
+                print(max)
+            }
+        } else {
+            arr.append(input)
+        }
+    }
+}
+
+solution()
+
+```
