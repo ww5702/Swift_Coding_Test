@@ -156,6 +156,9 @@ solution()
 
 ```
 ## 1927 최소 힙
+최대 힙과 반대인 문제이다.   
+처음 heap을 불러올때 sort를 < 로 설정해주기만 하면 된다.   
+
 ```
 import Foundation
 public struct Heap<T> {
