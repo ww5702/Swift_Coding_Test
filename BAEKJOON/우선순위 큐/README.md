@@ -463,3 +463,110 @@ func solution() {
 solution()
 
 ```
+## 1520 내리막 길
+길찾기 문제라 bfs로 풀이해봤지만 시간초과   
+
+```
+import Foundation
+func solution() {
+    let input = readLine()!.split(separator: " ").map{Int($0)!}
+    let (m,n) = (input[0],input[1])
+    var board = [[Int]]()
+    for i in 0..<m {
+        board.append([])
+        board[i] = readLine()!.split(separator: " ").map{Int($0)!}
+    }
+    //print(board)
+    var result = 0
+    func bfs(_ x: Int, _ y: Int) {
+        //print(x,y)
+        if x == m-1 && y == n-1 {
+            result += 1
+            return
+        }
+        
+        //상
+        if x >= 1 {
+            if board[x-1][y] < board[x][y] {
+                bfs(x-1,y)
+            }
+        }
+        
+        //하
+        if x < m-1 {
+            if board[x+1][y] < board[x][y] {
+                bfs(x+1,y)
+            }
+        }
+        
+        //좌
+        if y >= 1 {
+            if board[x][y-1] < board[x][y] {
+                bfs(x,y-1)
+            }
+        }
+        
+        //우
+        if y < n-1 {
+            if board[x][y+1] < board[x][y] {
+                bfs(x,y+1)
+            }
+        }
+    }
+    
+    bfs(0,0)
+    print(result)
+}
+
+solution()
+```
+
+dfs에 dp를 더해서 풀이할 수 있다.   
+먼저 -1로 dp를 초기화하여 방문한 노드인지 아닌지 확인한다.   
+확인한 노드가 미방문한 노드라면 0으로 정정후 상하좌우로 이동가능하고,   
+이동할 수 있는 노드가 현재 노드보다 작다면 이동시킨다.   
+그리고 제일 밑부터 0으로 초기화된 노드가 dp[y][x]에 저장되면서   
+dp[0][0]으로 최종으로 저장된다.   
+
+```
+import Foundation
+func solution() {
+    let input = readLine()!.split(separator: " ").map{Int($0)!}
+    let (m,n) = (input[0],input[1])
+    var board = [[Int]]()
+    for i in 0..<m {
+        board.append([])
+        board[i] = readLine()!.split(separator: " ").map{Int($0)!}
+    }
+    //print(board)
+    
+    var dp: [[Int]] = Array(repeating: Array(repeating: -1, count: n), count: m)
+    
+    let dy = [0,1,0,-1]
+    let dx = [1,0,-1,0]
+    
+    func dfs(_ y: Int, _ x: Int) -> Int {
+        if y == (m-1) && x == (n-1) { return 1 }
+        
+        if dp[y][x] == -1 {
+            dp[y][x] = 0
+            for dir in 0..<4 {
+                let ny = y + dy[dir]
+                let nx = x + dx[dir]
+                //print(ny,nx)
+                if (0 <= ny && ny <= m-1 && 0 <= nx && nx <= n-1) 
+                    && board[y][x] > board[ny][nx] {
+                    dp[y][x] += dfs(ny,nx)
+                }
+            }
+        }
+        //print(dp)
+        return dp[y][x]
+    }
+    print(dfs(0,0))
+
+}
+
+solution()
+
+```
