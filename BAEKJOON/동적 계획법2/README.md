@@ -38,10 +38,6 @@ func solution() {
                     
                     //print(start,end,mid)
                     dp[start][end] = min(dp[start][end], dp[start][mid]+dp[mid+1][end]+sum[end]-sum[start-1])
-                    /*
-                     1 3 = 1 1 + 2 3 + 3 - 0
-                     0 + 22 + 25
-                     */
                 }
             }
         }
