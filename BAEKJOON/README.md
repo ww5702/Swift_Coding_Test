@@ -97,7 +97,7 @@ var inupt = readLine()!.split(separator:" ").map{String($0)}
 ```
 ## [우선순위 큐](https://github.com/ww5702/Swift_Coding_Test/tree/main/BAEKJOON/%EC%9A%B0%EC%84%A0%EC%88%9C%EC%9C%84%20%ED%81%90)   
 ```
-11279 / 1927 / 11286  . 
+11279 / 1927 / 11286  
 ```
 ## [동적 계획법2](https://github.com/ww5702/Swift_Coding_Test/blob/main/BAEKJOON/%EB%8F%99%EC%A0%81%20%EA%B3%84%ED%9A%8D%EB%B2%952/README.md)   
 ```
