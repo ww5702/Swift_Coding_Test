@@ -48,3 +48,43 @@ func solution() {
 solution()
 
 ```
+## 11049 행렬 곱셈 순서
+이 문제 또한 윗 문제처럼 mid값을 지정하여 풀이하는 방식으로 푼다.   
+어차피 곱셈의 순서는 2,3,4 는 가능하나 1,3이나 1,4로 바로 넘어갈 수 없다.   
+순서대로 곱셈이 가능하다는 행렬의 곱 법칙 때문이다.   
+따라서 start = 0, end = 1~n까지이고   
+start~end까지 mid를 움직여주면서 최소값을 구해준다.   
+dp[0][4] = min(dp[0][4], dp[0][1~3] + dp[1~3][4])인 셈이다.   
+여기서 중요한점은 해당값에서 행렬의 곱을 더해줘야하는데   
+N*M*K라고 문제에서 지정해져있다.   
+여기서 matrix[start][0] * matrix[start][1] * matrix[end][1]   
+로 하게 되면 틀리게 된다.   
+1~3, 4~5까지의 행렬을 곱하게 된다면   
+1의 start * 3의 end * 5의 end를 곱해줘야 두 행렬의 곰세의 횟수가 이어진다.   
+```
+import Foundation
+func solution() {
+    let n = Int(readLine()!)!
+    var matrix: [[Int]] = Array(repeating: Array(repeating: 0, count: 2), count: n)
+    var dp: [[Int]] = Array(repeating: Array(repeating: 0, count: n), count: n)
+    //print(matrix)
+    for i in 0..<n {
+        let value = readLine()!.split(separator: " ").map{Int($0)!}
+        matrix[i] = [value[0],value[1]]
+    }
+    for i in 1..<n {
+        for start in 0..<n-i {
+            let end = start+i
+            dp[start][end] = Int.max
+            for mid in start..<end {
+                //print(start,mid,end)
+                dp[start][end] = min(dp[start][end], dp[start][mid] + dp[mid+1][end] + (matrix[start][0] * matrix[mid][1] * matrix[end][1]))
+            }
+        }
+    }
+    print(dp[0][n-1])
+}
+
+solution()
+
+```
