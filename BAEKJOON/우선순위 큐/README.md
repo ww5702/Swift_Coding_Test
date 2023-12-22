@@ -570,3 +570,61 @@ func solution() {
 solution()
 
 ```
+## 2629 양팔저울
+dp로 풀이하는 방식은 맞지만   
+2차원 배열로 풀이한다.   
+500g의 추 30개가 행으로   
+추의 개수가 열로 들어간다.   
+즉, 1개의 추로 만들수있는 무게가 행렬1에 들어가고    
+2개의 추로 만들 수 있는 무게가 행렬2에 들어가고 이런 방식이다.   
+만들 수 있는 무게는 3가지 경우이다.   
+1. 추의 무게에 추가하기
+2. 구슬쪽에 무게 추가하기
+3. 어느곳도 추가하지 않기
+이 모든 공식으로 적용시키면 n개의 추를 다 썼을때 만들 수 있는 무게가 나온다.
+해당 값들을 출력해준다.
+   
+   
+로 풀이했으나 계속해서 실패가 출력된다.   
+이유가 모르겠어서 일단 코멘트 후 넘긴다.   
+```
+import Foundation
+func solution() {
+    let value = Int(readLine()!)!
+    let list: [Int] = readLine()!.split(separator: " ").map{Int($0)!}
+    let input = Int(readLine()!)!
+    let check: [Int] = readLine()!.split(separator: " ").map{Int($0)!}
+
+    // 추를 추가하지 않았을 경우
+    // 추를 구슬쪽에 추가
+    // 추를 무게쪽에 추가
+    var dp: [[Bool]] = Array(repeating: Array(repeating: false, count: 15001), count: list.count+1)
+    
+    func checkOk(_ idx: Int, _ weight: Int) {
+        guard !dp[idx][weight] else { return }
+        
+        dp[idx][weight] = true
+        
+        // 무게를 다 썼다.
+        guard idx < list.count else { return }
+        
+        
+        checkOk(idx+1, weight + list[idx])
+        checkOk(idx+1, weight)
+        checkOk(idx+1, abs(weight - list[idx]))
+    }
+    checkOk(0, 0)
+    var result: [String] = []
+    for i in 0..<input {
+        if dp[list.count-1][check[i]] {
+            result.append("Y")
+        } else {
+            result.append("N")
+        }
+    }
+    print(result.joined(separator: " "))
+}
+
+solution()
+
+```
