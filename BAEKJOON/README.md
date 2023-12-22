@@ -101,5 +101,6 @@ var inupt = readLine()!.split(separator:" ").map{String($0)}
 ```
 ## [동적 계획법2](https://github.com/ww5702/Swift_Coding_Test/blob/main/BAEKJOON/%EB%8F%99%EC%A0%81%20%EA%B3%84%ED%9A%8D%EB%B2%952/README.md)   
 ```
-11066 / 11049 / 1520 / ~~2629~~
+11066 / 11049 / 1520 / ~~2629~~ / 2293
+
 ```
