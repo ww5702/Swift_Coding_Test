@@ -628,3 +628,56 @@ func solution() {
 solution()
 
 ```
+## 2293 동전 1
+해당 알고리즘은 밑의 경우를 이해만 할 수 있다면 쉽게 풀이 할 수 있다.   
+  1  2  3  4  5     
+1 1  1  1  1  1   
+2 0  1  1  2  2   
+총 1  2  2  3  3   
+이렇게 경우의 수가 존재한다.   
+1로 1 2 3 4 5원을 만드는 경우는 한가지씩 있다.   
+2원으로 1은 만들 수 없고   
+2는 0에서 2원을 더한 1가지가 있다.   
+3은 1에서 2를 더해 1가지가 있고   
+4는 1을 2개인 경우와 2가 하나인 경우에서 2를 더해 만들 수 있다.   
+즉, 총 값인 dp[2]의 값을 그대로 dp[4]에 더한다는 의미이다.   
+
+stride를 쓴 이유는 5원의 값어치의 동전은 4원까지는 쓸모가 없는 동전이기때문이다.   
+stride안에 pow조건문을 사용하지 않으면 dp의 값이 2^31 값을 넘기는 경우가 있어   
+런타임 에러가 발생한다.   
+
+```
+import Foundation
+func solution() {
+    let input = readLine()!.split(separator: " ").map{Int($0)!}
+    let(n,k) = (input[0],input[1])
+    var coins: [Int] = []
+    for _ in 0..<n {
+        coins.append(Int(readLine()!)!)
+    }
+    var dp: [Int] = Array(repeating: 0, count: k+1)
+    dp[0] = 1
+    /*
+     동전을 만드는 경우
+     1 2 5원일때
+     6원 = 5원+1원, 4원+2원, 1원+5원
+     */
+    
+    for i in 0..<n {
+        for j in stride(from: coins[i], through: k, by: 1) {
+            // dp값이 2^31을 넘어가는 경우
+            if dp[j]+dp[j-coins[i]] >= Int(pow(2.0, 31.0)) {
+                dp[j] = 0
+            } else {
+                dp[j] += dp[j-coins[i]]
+            }
+            
+            //print(dp)
+        }
+    }
+    print(dp[k])
+}
+
+solution()
+
+```
