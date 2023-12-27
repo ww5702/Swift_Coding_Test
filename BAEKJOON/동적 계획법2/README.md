@@ -308,8 +308,7 @@ solution()
 ```
 ## 7579 앱
 처음 cost[i]에서 i+1부터 n까지 cost를 더했을때    
-m을 초과하지 않는 선에서 최저값을 갱신해주는 방법으로 처음 풀이해보았지만 실패하였다.   
-
+m을 초과하지 않는 선에서 최저값을 갱신해주는 방법으로 처음 풀이해보았지만 실패하였다.  
 ```
 import Foundation
 func solution() {
@@ -334,6 +333,52 @@ func solution() {
         //print(dp)
     }
     print(dp[m])
+}
+
+solution()
+
+```
+해당 문제는 필요한 데이터m으로 dp를 만들면 실패하게 된다.   
+cost를 dp로 만들어 풀이한다.   
+cost 1을 사용했을때 남겨놓을 수 있는 최대의 메모리를 구해놓는다고 생각하면 편하다.   
+그렇게 반복문을 진행한다면 dp를 반복문으로 순환하면서 m이상의 메모리를 만들어내는   
+최소 값을 반환한다.   
+예제를 예시로 들면   
+cost 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15     
+앱1   0 0 0 0 30 30 30 30 ...   
+앱2   10 10 10 40 40 40 ...   
+앱3   10 10 10 40 40 60 60 60 ...   
+가 된다.   
+앱3은 cost가 3, memory가 20이다.   
+cost[4]를 예로 들자   
+cost[4-3] 즉 cost[1]일때 해당 앱을 정리하면 cost[4]가 되면서   
+확보 메모리는 10+20 = 30이된다.   
+하지만 앱2를 정리했을때 cost[4]는 40이므로 해당값은 바뀔 수 없다.    
+```
+import Foundation
+func solution() {
+    let input = readLine()!.split(separator: " ").map{Int($0)!}
+    let (n,m) = (input[0],input[1])
+    var memory = readLine()!.split(separator: " ").map{Int($0)!}
+    var cost = readLine()!.split(separator: " ").map{Int($0)!}
+    var maxCost = cost.reduce(0, +)
+    
+    var dp: [Int] = Array(repeating: 0, count: maxCost+1)
+    
+    for i in 0..<n {
+        for c in (cost[i]...maxCost).reversed() {
+            // dp[c-cost[i]]는 아직 해당 앱을 제거하기 전의 비용으로 확보할 수 있는 최대 메모리이다.
+            // 여기서 현재 해당하는 memory[i]를 더해주면 현재 앱을 제거시켜 확보할 수 있는 메모리가 된다.
+            dp[c] = max(dp[c], dp[c-cost[i]] + memory[i])
+        }
+    }
+    
+    for i in 0...maxCost {
+        if dp[i] >= m {
+            print(i)
+            break
+        }
+    }
 }
 
 solution()
