@@ -153,3 +153,43 @@ solution()
 ```
 ## 1725 히스토그램
 전에 풀이했던 분할정복처럼 풀이할 경우 시간초과가 발생한다.   
+스택으로 풀이했어야 했기에 오큰수나 오동큰수처럼 index를 넣다가   
+높이보다 작은 순간이 나온다면 해당순간을 기준으로 넓이를 구해주는 방식으로   
+풀이를 진행해보았다.   
+```
+import Foundation
+
+func solution() {
+    let n = Int(readLine()!)!
+    var arr: [Int] = []
+    for _ in 0..<n {
+        arr.append(Int(readLine()!)!)
+    }
+    //print(arr)
+    var result = 0
+    var stack: [Int] = []
+    for i in 0..<n {
+        while !stack.isEmpty && arr[stack.last!] > arr[i] {
+            var height = arr[stack.popLast()!]
+            var width = stack.isEmpty ? i : i - stack.last! - 1
+            //print(height,width,result)
+            result = max(result, height*width)
+        }
+        
+        stack.append(i)
+        //print(stack)
+    }
+    print(stack)
+    
+    while !stack.isEmpty {
+        var height = arr[stack.popLast()!]
+        var width = stack.isEmpty ? n : n - stack.last! - 1
+        print(height,width,result)
+        result = max(result,height*width)
+    }
+    print(result)
+}
+
+solution()
+
+```
