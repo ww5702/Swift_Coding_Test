@@ -47,3 +47,29 @@ func solution() {
 solution()
 
 ```
+문제를 너무 어렵게 생각한것 같았다.   
+stack을 이용하여 popLast를 반복해준다.   
+```
+import Foundation
+func solution() {
+    var words = String(readLine()!)
+    let bomb = readLine()!
+    var stack: [Character] = []
+    
+    for word in words {
+        stack.append(word)
+        if bomb.last! == word {
+            let cnt = stack.count
+            if cnt >= bomb.count && String(stack[(cnt-bomb.count)...]) == bomb {
+                for _ in 0..<bomb.count {
+                    stack.popLast()
+                }
+            }
+        }
+    }
+    stack.count == 0 ? print("FRULA") : print(String(stack))
+}
+
+solution()
+
+```
