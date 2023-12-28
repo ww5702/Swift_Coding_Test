@@ -193,3 +193,54 @@ func solution() {
 solution()
 
 ```
+## 3015 오아이스 재결합
+줄서있는 사람보다 그 뒤에 올 사람이 더 크다면 while문을 실행하는데   
+큰 수일때 해당값과 같은 키거나 작은 크기의 사람이라면 해당 키의 사람수만큼 + 가능   
+그리고 남은 value의 값들을 +   
+인줄 알았지만 실패   
+```
+import Foundation
+
+func solution() {
+    let n = Int(readLine()!)!
+    var arr: [Int] = []
+    for _ in 0..<n {
+        arr.append(Int(readLine()!)!)
+    }
+    //print(arr)
+    /*
+     2 4 (1)
+     4 1 / 4 2 / 4 2 / 4 5 (1)
+     1 2 (2)
+     2 2 / 2 5 (1)
+     2 5 (1)
+     5 1
+     */
+    var cnt = 0
+    var stack: [Int] = []
+    var value: [Int:Int] = [:]
+    for i in 0..<n {
+        while !stack.isEmpty && stack.last! < arr[i] {
+            let index = stack.popLast()!
+            value[index]! -= 1
+            cnt += value[index]!
+            //print(stack, cnt)
+        }
+        
+        stack.append(arr[i])
+        let temp = value[arr[i]] ?? 0
+        value[arr[i]] = temp + 1
+        // 줄에 서자마자 바로 왼쪽에 있는 사람은 볼 수 있다.
+        //print(stack)
+        //print(value)
+        if !stack.isEmpty { cnt += 1 }
+    }
+    for i in value {
+        cnt += i.value
+    }
+    print(cnt)
+}
+
+solution()
+
+```
