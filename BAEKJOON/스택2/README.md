@@ -117,4 +117,37 @@ func solution() {
 
 solution()
 
-``
+```
+## 17299 오동큰수
+오큰수와 같은 방식으로 풀이하기만 하면 된다.   
+혹시 해당 숫자의 갯수를 카운팅하는 과정에서 시간초과가 발생하지 않으려나 걱정했지만   
+다행히 문제 없었다.   
+```
+import Foundation
+func solution() {
+    let n = Int(readLine()!)!
+    var num = readLine()!.split(separator: " ").map{Int($0)!}
+    var cnt = Array(repeating: 0, count: 5)
+    for n in num {
+        cnt[n] += 1
+    }
+    //print(cnt)
+    // 3 2 1 1
+    // -1 -1 1 2 2 1 -1
+    var stack: [Int] = []
+    for i in 0..<n {
+        while !stack.isEmpty && cnt[num[stack.last!]] < cnt[num[i]] {
+            num[stack.removeLast()] = num[i]
+        }
+        
+        stack.append(i)
+    }
+    for i in stack {
+        num[i] = -1
+    }
+    print(num.map{String($0)}.joined(separator: " "))
+}
+
+solution()
+
+```
