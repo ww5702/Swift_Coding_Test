@@ -73,3 +73,48 @@ func solution() {
 solution()
 
 ```
+## 17298 오큰수
+신박한 풀이방식이었다.   
+stack을 이용하여 풀이하는데 index값들을 이용해 풀이하는 것이다.   
+예를 들어 9 5 4 8이 있다.   
+만약 스택의 last! (9)가 5 4 8 보다 작은 순간이 있다면 해당 숫자가 오큰수이다.   
+하지만 없다면 일단 값을 스택에 넣는다.   
+말로 들으면 어려워보일 수 있으니 해당 코드의 동작순서를 보여주겠다.  
+```
+num    = 9 5 4 8
+result = 0
+num    = 9 5 4 8
+result = 0 1
+num    = 9 5 4 8
+result = 0 1 2
+num    = 9 5 8 8
+result = 0 1
+num    = 9 8 8 8 
+result = 0
+num    = 9 8 8 8
+result = 0 3
+```
+이제 남은 result(index배열)을 순회하면서 해당 값들은 오큰수가 없다는 의미로   
+값을 -1로 변환시켜준다.   
+```
+import Foundation
+func solution() {
+    let n = Int(readLine()!)!
+    var num = readLine()!.split(separator: " ").map{Int($0)!}
+    var result: [Int] = []
+    for i in 0..<n {
+        while !result.isEmpty && num[result.last!] < num[i] {
+            num[result.removeLast()] = num[i]
+        }
+        
+        result.append(i)
+    }
+    for i in result {
+        num[i] = -1
+    }
+    print(num.map{String($0)}.joined(separator: " "))
+}
+
+solution()
+
+``
