@@ -113,3 +113,51 @@ func solution() {
 solution()
 
 ```
+## 24444 알고리즘 수업 - 너비 우선 탐색1
+비슷하지만 bfs라는 함수가 반복해서 실행되지는 않는다.   
+graph[cur]에 들어간 모든 노드들을 방문하고 다음 index로 넘어간다.   
+
+```
+import Foundation
+func solution() {
+    let input = readLine()!.split(separator: " ").map{Int($0)!}
+    let (n,m,r) = (input[0],input[1],input[2])
+    var graph = [[Int]](repeating: [], count: n+1)
+    for _ in 0..<m {
+        let input = readLine()!.split(separator: " ").map{Int($0)!}
+        let (u,v) = (input[0],input[1])
+        graph[u].append(v)
+        graph[v].append(u)
+    }
+    //print(graph)
+    var visited = Array(repeating: 0, count: n+1)
+    var q: [Int] = []
+    var cnt = 0
+    var index = 1
+    func bfs(_ start: Int) {
+        q.append(start)
+        cnt += 1
+        visited[start] = cnt
+        
+        while q.count >= index {
+            let cur = q[index-1]
+            for node in graph[cur].sorted(by: <) {
+                if visited[node] == 0 {
+                    cnt += 1
+                    visited[node] = cnt
+                    q.append(node)
+                }
+            }
+            index += 1
+        }
+        
+    }
+    bfs(r)
+    for i in 1...n {
+        print(visited[i])
+    }
+}
+
+solution()
+
+```
