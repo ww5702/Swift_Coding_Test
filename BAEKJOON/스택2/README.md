@@ -244,3 +244,44 @@ func solution() {
 solution()
 
 ```
+구조체를 이용하여 변수를 정리하면   
+더 쉽게 풀이가 가능하다.   
+
+```
+import Foundation
+struct Pair {
+    let height: Int
+    var count: Int
+    
+    mutating func countUp(_ n: Int) {
+        self.count += n
+    }
+}
+func solution() {
+    var stack = [Pair]()
+    var result = 0
+    
+    let n = Int(readLine()!)!
+    for _ in 0..<n {
+        var pair = Pair(height: Int(readLine()!)!, count: 1)
+        
+        
+        while !stack.isEmpty && stack.last!.height <= pair.height {
+            // 나보다 작거나 같은 사람드로가 서로 볼 수 있다.
+            result += stack.last!.count
+            
+            if stack.last!.height == pair.height { pair.countUp(stack.last!.count) }
+            _ = stack.popLast()
+        }
+        
+        // 왼쪽에 처음 만나는 사람과는 서로 볼 수 있다.
+        if !stack.isEmpty { result += 1 }
+        
+        stack.append(pair)
+    }
+    print(result)
+}
+
+solution()
+
+```
