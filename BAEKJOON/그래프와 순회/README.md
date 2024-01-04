@@ -245,3 +245,43 @@ func solution() {
 solution()
 
 ```
+bfs로도 풀이가 가능하다.   
+
+```
+import Foundation
+func solution() {
+    let n = Int(readLine()!)!
+    let m = Int(readLine()!)!
+    var graph = [[Int]](repeating: [], count: n+1)
+    //print(graph)
+    
+    for _ in 0..<m {
+        let input = readLine()!.split(separator: " ").map{Int($0)!}
+        graph[input[0]].append(input[1])
+        graph[input[1]].append(input[0])
+    }
+    
+    var cnt = 0
+    var visited = Array(repeating:false,count: n+1)
+    var Q: [Int] = []
+
+    func bfs(_ start: Int) {
+        Q.append(start)
+        while !Q.isEmpty {
+            let cur = Q.removeFirst()
+            if visited[cur] { continue }
+            visited[cur] = true
+            cnt += 1
+            for node in graph[cur] {
+                Q.append(node)
+            }
+        }
+    }
+    
+    bfs(1)
+    print(cnt-1)
+}
+
+solution()
+
+```
