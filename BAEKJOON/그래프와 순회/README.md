@@ -338,3 +338,65 @@ func solution() {
 solution()
 
 ```
+## 2667 단지번호붙이기
+입력된 0,1의 지도에서 최대 25 x 25의 반복문을 실행한다.   
+만약 해당 좌표가 1이라면 dfs를 시작한다.   
+dfs를 시작하면 상하좌우의 좌표이동을 미리 준비한 뒤   
+해당 좌표를 이동하면서 지도를 넘어가지않고, 해당 좌표가 1이라면 즉 집이라면   
+해당 좌표로 dfs를 다시 실행한다.   
+이렇게 나온 result를 house 배열에 삽입하고   
+house의 count가 동이고, house배열을 내림차순으로 정렬하여 출력한다.   
+```
+import Foundation
+func solution(){
+    let n = Int(readLine()!)!
+    var board: [[Int]] = Array(repeating: Array(repeating: 0, count: n), count: n)
+    for i in 0..<n {
+        let value = Array(readLine()!).map{Int(String($0))!}
+        board[i] = value
+    }
+    
+//    for i in 0..<n {
+//        print(board[i])
+//    }
+//    print()
+    
+    var result = 0
+    var house: [Int] = []
+    
+    
+    // 상하좌우
+    let dy = [-1,1,0,0]
+    let dx = [0,0,-1,1]
+    
+    for i in 0..<n {
+        for j in 0..<n {
+            if board[i][j] == 1 {
+                result = 0
+                dfs(i,j)
+                house.append(result)
+            }
+        }
+    }
+            
+    func dfs(_ y: Int, _ x: Int) {
+        result += 1
+        board[y][x] = 0
+        for i in 0..<4 {
+            let curY = y + dy[i]
+            let curX = x + dx[i]
+            if curY >= 0 && curY < n && curX >= 0 && curX < n {
+                if board[curY][curX] == 1 { dfs(curY,curX) }
+            }
+        }
+    }
+    
+    print(house.count)
+    for h in house.sorted(by: <) {
+        print(h)
+    }
+}
+
+solution()
+
+```
