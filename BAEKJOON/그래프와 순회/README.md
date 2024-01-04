@@ -161,3 +161,50 @@ func solution() {
 solution()
 
 ```
+## 24445 알고리즘 수업 - 너비 우선 탐색2
+윗 문제의 내림차순으로 풀이하면 되는 문제이다.   
+sorted(by: >)로 변경해준다.   
+```
+import Foundation
+func solution() {
+    let input = readLine()!.split(separator: " ").map{Int($0)!}
+    let (n,m,r) = (input[0],input[1],input[2])
+    var graph = [[Int]](repeating: [], count: n+1)
+    for _ in 0..<m {
+        let input = readLine()!.split(separator: " ").map{Int($0)!}
+        let (u,v) = (input[0],input[1])
+        graph[u].append(v)
+        graph[v].append(u)
+    }
+    //print(graph)
+    var visited = Array(repeating: 0, count: n+1)
+    var q: [Int] = []
+    var cnt = 0
+    var index = 1
+    func bfs(_ start: Int) {
+        q.append(start)
+        cnt += 1
+        visited[start] = cnt
+        
+        while q.count >= index {
+            let cur = q[index-1]
+            for node in graph[cur].sorted(by: >) {
+                if visited[node] == 0 {
+                    cnt += 1
+                    visited[node] = cnt
+                    q.append(node)
+                }
+            }
+            index += 1
+        }
+        
+    }
+    bfs(r)
+    for i in 1...n {
+        print(visited[i])
+    }
+}
+
+solution()
+
+```
