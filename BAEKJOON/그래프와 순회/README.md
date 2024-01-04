@@ -285,3 +285,56 @@ func solution() {
 solution()
 
 ```
+## 1260 DFS와 BFS 
+dfs와 bfs를 둘다 만들어 비교해보는 문제이다.   
+```
+import Foundation
+func solution() {
+    let input = readLine()!.split(separator: " ").map{Int($0)!}
+    let (n,m,start) = (input[0],input[1],input[2])
+    var graph = [[Int]](repeating: [], count: n+1)
+    for _ in 0..<m {
+        let value = readLine()!.split(separator: " ").map{Int($0)!}
+        graph[value[0]].append(value[1])
+        graph[value[1]].append(value[0])
+    }
+    //print(graph)
+    
+    var dfsVisited = Array(repeating: false, count: n+1)
+    var bfsVisited = Array(repeating: false, count: n+1)
+    var Q: [Int] = []
+    
+    var dfsResult: [Int] = []
+    var bfsResult: [Int] = []
+    
+    func dfs(_ start: Int) {
+        dfsResult.append(start)
+        dfsVisited[start] = true
+        for node in graph[start].sorted(by: <) {
+            if !dfsVisited[node] {
+                dfs(node)
+            }
+        }
+    }
+    
+    func bfs(_ start: Int) {
+        Q.append(start)
+        while !Q.isEmpty {
+            let cur = Q.removeFirst()
+            if bfsVisited[cur] { continue }
+            bfsVisited[cur] = true
+            bfsResult.append(cur)
+            for node in graph[cur].sorted(by:<) {
+                Q.append(node)
+            }
+        }
+    }
+    dfs(start)
+    print(dfsResult.map{String($0)}.joined(separator: " "))
+    bfs(start)
+    print(bfsResult.map{String($0)}.joined(separator: " "))
+}
+
+solution()
+
+```
