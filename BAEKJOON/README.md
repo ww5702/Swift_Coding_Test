@@ -110,5 +110,6 @@ var inupt = readLine()!.split(separator:" ").map{String($0)}
 ```
 ## [그래프와 순회](https://github.com/ww5702/Swift_Coding_Test/tree/main/BAEKJOON/%EA%B7%B8%EB%9E%98%ED%94%84%EC%99%80%20%EC%88%9C%ED%9A%8C)   
 ```
-24479 / 24480 / 24444 
+24479 / 24480 / 24444 / 24445 / 2606
+
 ```
