@@ -451,3 +451,50 @@ func solution(){
 solution()
 
 ```
+## 2178 미로 탐색
+dfs로 풀이하면서 cnt가 더 작은 값으로 해당 좌표에 도달할 수 있다면   
+교체해주는 식으로 풀이하였다.   
+하지만 75%에서 시간초과가 발생   
+```
+import Foundation
+func solution(){
+    let input = readLine()!.split(separator: " ").map{Int($0)!}
+    let (n,m) = (input[0],input[1])
+    var board: [[Int]] = Array(repeating: Array(repeating: 0, count: m), count: n)
+    var result: [[Int]] = Array(repeating: Array(repeating: 100001, count: m), count: n)
+    for i in 0..<n {
+        let value = Array(readLine()!).map{Int(String($0))!}
+        board[i] = value
+        //print(board[i])
+    }
+    let dy = [1,-1,0,0]
+    let dx = [0,0,1,-1]
+    
+    func dfs(_ y: Int, _ x: Int, _ cnt: Int) {
+        var cnt = cnt
+        cnt += 1
+        result[y][x] = min(result[y][x], cnt)
+        
+        for i in 0..<4 {
+            let curY = y + dy[i]
+            let curX = x + dx[i]
+            
+            if curY >= 0 && curY <= n-1 && curX >= 0 && curX <= m-1 {
+                if board[curY][curX] == 1 && result[curY][curX] > result[y][x] + 1{
+                    dfs(curY, curX, cnt)
+                
+                }
+            }
+        }
+    }
+    
+    dfs(0,0,0)
+//    for i in 0..<n {
+//        print(result[i])
+//    }
+    print(result[n-1][m-1])
+}
+
+solution()
+
+```
