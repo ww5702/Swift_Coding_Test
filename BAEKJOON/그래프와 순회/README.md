@@ -400,3 +400,54 @@ func solution(){
 solution()
 
 ```
+## 1012 유기농 배추
+동서남북을 지정하여 해당 좌표가 1이라면 계속해서 dfs를 반복하여 필요한 배추지렁이의 마리를 구한다.   
+```
+import Foundation
+func solution(){
+    let t = Int(readLine()!)!
+    for _ in 0..<t {
+        let input = readLine()!.split(separator: " ").map{Int($0)!}
+        let (m,n,k) = (input[0],input[1],input[2])
+        var board: [[Int]] = Array(repeating: Array(repeating: 0, count: m), count: n)
+        var cnt = 0
+        for _ in 0..<k {
+            let value = readLine()!.split(separator: " ").map{Int($0)!}
+            board[value[1]][value[0]] = 1
+        }
+//        for i in 0..<n {
+//            print(board[i])
+//        }
+        let dx = [1,-1,0,0]
+        let dy = [0,0,1,-1]
+        
+        for i in 0..<n {
+            for j in 0..<m {
+                if board[i][j] == 1 {
+                    cnt += 1
+                    dfs(i,j)
+                }
+            }
+        }
+        
+        func dfs(_ y: Int, _ x: Int) {
+            board[y][x] = 0
+            for i in 0..<4 {
+                let curY = y + dy[i]
+                let curX = x + dx[i]
+                
+                if curY >= 0 && curY <= n-1 && curX >= 0 && curX <= m-1 {
+                    if board[curY][curX] == 1 { dfs(curY, curX) }
+                }
+            }
+        }
+        
+        print(cnt)
+        
+    }
+    
+}
+
+solution()
+
+```
