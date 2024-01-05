@@ -190,6 +190,11 @@ mergeCell.append([(1,1)])
 mergeCell[0].append(contentsOf: [(2,2)])
 print(mergeCell) // [(0,0)],[(1,1)]
 print(mergeCell[0]) // [(0,0)]
+
+
+dfs,bfs에서 board의 범위를 벗어났는지 확인하는 코드를
+curY >= 0 && curY <= n-1 && curX >= 0 && curX <= m-1 에서 
+(0..<n).contains(curY) && (0..<m).contains(curX) 로 바꿀 수 있다.   
 ```
 구현 문제가 가장 빨리 풀 수 있으면서 풀이가 어렵게 구성될 수 있다.   
 함수를 잘 이용해 필요한 요구기능들을 각각 구현   
