@@ -554,3 +554,10 @@ result[curY][curX] = result[node.0][node.1] + 1
 }   
 로 바꿔도 다름이 없었다.   
 어차피 순서대로 진행된다면 최저값으로 갱신되기 때문이다.   
+   
+    
+배운점이 있다면 
+curY >= 0 && curY <= n-1 && curX >= 0 && curX <= m-1 이 부분을   
+(0..<n).contains(curY) && (0..<m).contains(curX)   
+로 바꿀수 있었다.   
+단순한 문법인데 생각치 못헀다.   
