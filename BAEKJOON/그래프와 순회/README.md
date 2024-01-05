@@ -498,3 +498,59 @@ func solution(){
 solution()
 
 ```
+bfs로는 시간초과가 발생하지 않고 풀이가 가능했다.   
+```
+import Foundation
+func solution(){
+    let input = readLine()!.split(separator: " ").map{Int($0)!}
+    let (n,m) = (input[0],input[1])
+    var board: [[Int]] = Array(repeating: Array(repeating: 0, count: m), count: n)
+    var needToVisit = [(Int,Int)]()
+    var result = Array(repeating: Array(repeating: 0, count: m), count: n)
+    result[0][0] = 1
+    for i in 0..<n {
+        let value = Array(readLine()!).map{Int(String($0))!}
+        board[i] = value
+        //print(board[i])
+    }
+    let dy = [1,-1,0,0]
+    let dx = [0,0,1,-1]
+    
+    func bfs(_ y: Int, _ x: Int) {
+        needToVisit.append((y,x))
+        board[y][x] = 0
+        while !needToVisit.isEmpty {
+            let node = needToVisit.removeFirst()
+            
+            for i in 0..<4 {
+                let curY = node.0 + dy[i]
+                let curX = node.1 + dx[i]
+                
+                if curY >= 0 && curY <= n-1 && curX >= 0 && curX <= m-1 &&
+                    board[curY][curX] == 1 {
+                    
+                    board[curY][curX] = 0
+                    needToVisit.append((curY,curX))
+                    result[curY][curX] = result[node.0][node.1] + 1
+                }
+            }
+        }
+        
+    }
+    bfs(0,0)
+//    for i in 0..<n {
+//        print(result[i])
+//    }
+    print(result[n-1][m-1])
+}
+
+solution()
+
+```
+needToVist.append부분을 
+if result[curY][curX] > result[node.0][node.1]+1 {   
+needToVisit.append((curY,curX))   
+result[curY][curX] = result[node.0][node.1] + 1   
+}   
+로 바꿔도 다름이 없었다.   
+어차피 순서대로 진행된다면 최저값으로 갱신되기 때문이다.   
