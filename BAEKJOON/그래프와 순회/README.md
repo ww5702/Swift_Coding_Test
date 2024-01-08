@@ -719,3 +719,92 @@ func solution(){
 solution()
 
 ```
+## 7569 토마토
+위 문제의 3차원 문제이다.   
+따라서 입력받을 board와 걸리는 날짜를 계산할 result를 3차원으로 구성하고   
+움직일 좌표인 dx,dy에 이어 dz까지 만들어줘 총 6가지 방향으로 움직이도록 하기만 하면 된다.   
+
+```
+import Foundation
+func solution(){
+    let input = readLine()!.split(separator: " ").map{Int($0)!}
+    let (m,n,h) = (input[0],input[1],input[2])
+    var board: [[[Int]]] = Array(repeating: Array(repeating: Array(repeating: 0, count: m), count: n),count: h)
+    var Q = [(Int,Int,Int)]()
+    for i in 0..<h {
+        for j in 0..<n {
+            let value = readLine()!.split(separator: " ").map{Int($0)!}
+            board[i][j] = value
+            for k in 0..<m {
+                if board[i][j][k] == 1 { Q.append((i,j,k)) }
+            }
+        }
+    }
+    //print(board)
+    
+    let dz = [0,0,0,0,1,-1]
+    let dy = [1,-1,0,0,0,0]
+    let dx = [0,0,1,-1,0,0]
+    
+    var result = Array(repeating: Array(repeating: Array(repeating: 0, count: m), count: n),count: h)
+    var isPossible = true
+    var idx = 0
+    var lastIdx = (0,0,0)
+    func bfs(){
+        while idx < Q.count {
+            let cur = Q[idx]
+            idx += 1
+        
+            for i in 0..<6 {
+                let curZ = cur.0 + dz[i]
+                let curY = cur.1 + dy[i]
+                let curX = cur.2 + dx[i]
+                
+                if (0..<h).contains(curZ) && (0..<n).contains(curY) && (0..<m).contains(curX) &&
+                    board[curZ][curY][curX] == 0 {
+                    board[curZ][curY][curX] = 1
+                    result[curZ][curY][curX] = result[cur.0][cur.1][cur.2] + 1
+                    Q.append((curZ,curY,curX))
+                    lastIdx = (curZ,curY,curX)
+                }
+            }
+        }
+        
+        
+        for i in 0..<h {
+            for j in 0..<n {
+                for k in 0..<m {
+                    if board[i][j][k] == 0 {
+                        isPossible = false
+                    }
+                }
+            }
+        }
+        
+        
+//        for i in 0..<h {
+//            for j in 0..<n {
+//                print(board[i][j])
+//            }
+//        }
+//        print()
+//        
+//        for i in 0..<h {
+//            for j in 0..<n {
+//                print(result[i][j])
+//            }
+//            
+//        }
+        
+    }
+    bfs()
+    if !isPossible {
+        print(-1)
+    } else {
+        print(result[lastIdx.0][lastIdx.1][lastIdx.2])
+    }
+}
+
+solution()
+
+```
