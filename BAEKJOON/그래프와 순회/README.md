@@ -851,3 +851,122 @@ solution()
 
 ```
 하지만 bfs문제 이므로 bfs로도 풀이해보았다.   
+큐를 구현한다음 중복을 제거할 visited배열을 만든다.   
+현재 위치에서 -1, +1, *2가 가능하다면 해당 
+```
+import Foundation
+struct Queue {
+    var que: [Int] = []
+    mutating func push(_ x: Int) {
+        que.append(x)
+    }
+    
+    mutating func pop() -> Int {
+        que.reverse()
+        if let a = que.popLast() {
+            que.reverse()
+            return a
+        }
+        return 0
+    }
+    
+    func empty() -> Bool {
+        return que.isEmpty
+    }
+}
+func solution(){
+    let input = readLine()!.split(separator: " ").map{Int($0)!}
+    let (n,k) = (input[0],input[1])
+    var result: [Int] = Array(repeating: 0, count: 100001)
+    var visited = Array(repeating: false, count: 100001)
+    var q = Queue()
+    
+    func bfs(_ n: Int, _ k: Int) -> Int {
+        q.push(n)
+        
+        while !q.empty() {
+            let cur = q.pop()
+            if cur == k { break }
+            
+            if cur > 0 && !visited[cur-1] {
+                q.push(cur-1)
+                visited[cur-1] = true
+                result[cur-1] = result[cur] + 1
+            }
+            if cur < 100000 && !visited[cur+1] {
+                q.push(cur+1)
+                visited[cur+1] = true
+                result[cur+1] = result[cur] + 1
+            }
+            if cur * 2 < 100000 && !visited[cur*2] {
+                q.push(cur*2)
+                visited[cur*2] = true
+                result[cur*2] = result[cur] + 1
+            }
+            
+        }
+        return result[k]
+    }
+    
+    print(bfs(n,k))
+}
+solution()
+
+```
+허나 위와 같이 poplast로 풀이할 경우 통과는 가능하나   
+시간초과가 가끔 발생한다.   
+```
+import Foundation
+func solution(){
+    let input = readLine()!.split(separator: " ").map{Int($0)!}
+    let (n,k) = (input[0],input[1])
+    var result: [Int] = Array(repeating: 0, count: 100001)
+    var visited = Array(repeating: false, count: 100001)
+    var q: [(Int,Int)] = []
+    
+    func bfs(_ n: Int, _ k: Int) -> Int {
+        if n >= k {
+            return n-k
+        }
+        var idx = 0
+        q.append((n,0))
+        visited[n] = true
+        
+        while q.count >= idx {
+            let cur = q[idx]
+            let location = cur.0
+            let cnt = cur.1
+            
+            if location == k { break }
+            
+            if location > 0 && !visited[location-1] {
+                q.append((location-1,cnt+1))
+                visited[location-1] = true
+                result[location-1] = result[location] + 1
+            }
+            if location < 100000 && !visited[location+1] {
+                q.append((location+1,cnt+1))
+                visited[location+1] = true
+                result[location+1] = result[location] + 1
+            }
+            if location * 2 < 100001 && !visited[location*2] {
+                q.append((location*2,cnt+1))
+                visited[location*2] = true
+                result[location*2] = result[location] + 1
+            }
+            idx += 1
+        }
+        return result[k]
+    }
+    
+    print(bfs(n,k))
+}
+solution()
+
+```
+역시 bfs는 idx로 풀이하는것이 가장 빠른것 같다.   
+1. dp / 메모리(80296) / 시간 16ms
+2. bfs(popLast) / 메모리(70392) / 시간 1560ms
+3. bfs(idx) / 메모리(83572) / 시간 20ms
+
+   
