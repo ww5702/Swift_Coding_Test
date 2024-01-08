@@ -561,3 +561,89 @@ curY >= 0 && curY <= n-1 && curX >= 0 && curX <= m-1 이 부분을
 (0..<n).contains(curY) && (0..<m).contains(curX)   
 로 바꿀수 있었다.   
 단순한 문법인데 생각치 못헀다.   
+## 7576 토마토
+startPoint를 미리 설정 후 bfs로 풀이하였으나 시간초과 발생   
+
+```
+import Foundation
+func solution(){
+    let input = readLine()!.split(separator: " ").map{Int($0)!}
+    let (m,n) = (input[0],input[1])
+    var board: [[Int]] = Array(repeating: Array(repeating: 0, count: m), count: n)
+    var startPoint = [(Int,Int)]()
+    for i in 0..<n {
+        let value = readLine()!.split(separator: " ").map{Int($0)!}
+        board[i] = value
+        for j in 0..<m {
+            if board[i][j] == 1 { startPoint.append((i,j)) }
+        }
+    }
+    
+    let dy = [1,-1,0,0]
+    let dx = [0,0,1,-1]
+    
+    var needToVisit = [(Int,Int)]()
+    
+    var result = Array(repeating: Array(repeating: 1000001, count: m), count: n)
+    var isPossible = true
+    
+    func bfs(_ y: Int, _ x: Int) -> Int{
+        var tempBoard = board
+        var tempDay = 0
+        needToVisit.append((y,x))
+        result[y][x] = 0
+
+        while !needToVisit.isEmpty {
+            
+            let node = needToVisit.removeFirst()
+            for i in 0..<4 {
+                let curY = node.0 + dy[i]
+                let curX = node.1 + dx[i]
+                
+                if (0..<n).contains(curY) && (0..<m).contains(curX) &&
+                    tempBoard[curY][curX] == 0{
+                    //print(curY,curX)
+                    tempBoard[curY][curX ] = 1
+                    needToVisit.append((curY,curX))
+                    result[curY][curX] = min(result[curY][curX], result[node.0][node.1] + 1)
+                    tempDay = max(tempDay,result[curY][curX])
+                }
+            }
+        }
+        
+//        for i in 0..<n {
+//            print(result[i])
+//        }
+//        print()
+//        for i in 0..<n {
+//            print(tempBoard[i])
+//        }
+        for i in 0..<n {
+            let value = tempBoard[i]
+            if value.contains(0) {
+                isPossible = false
+                break
+            }
+        }
+        
+        return tempDay
+    }
+    var day = 100000001
+    for start in startPoint {
+        let value = bfs(start.0,start.1)
+        //print()
+        day = min(day,value)
+        if !isPossible { break }
+    }
+    
+    if !isPossible {
+        print(-1)
+    } else {
+        print(day)
+    }
+    
+}
+
+solution()
+
+```
