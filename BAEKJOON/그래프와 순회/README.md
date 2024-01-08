@@ -808,3 +808,46 @@ func solution(){
 solution()
 
 ```
+## 1697 숨박꼭질
+bfs문제이지만 제일 먼저 떠오른 풀이 방법은 dp였다.   
+최대 100000이어서 경우의 수만 구해준다면 풀이가 가능할것이라고 판단하였다.   
+
+```
+import Foundation
+func solution(){
+    let input = readLine()!.split(separator: " ").map{Int($0)!}
+    let (n,k) = (input[0],input[1])
+    var result: [Int] = Array(repeating: 100001, count: 100001)
+    
+    
+    func dp() -> Int {
+        // 만약 동생보다 앞에 있다면 뒤로 갈수밖에 없다.
+        if n >= k { return n-k }
+        
+        // 동생보다 뒤에 있다면 0부터 본인 위치까지는 +1씩 걸린다.
+        for i in 0..<n {
+            result[i] = n-i
+        }
+        
+        result[n] = 0
+        
+        for i in n+1...k {
+            // 짝수라면 /2의 위치에서 순간이동으로 오거나 / 한칸 전의 위치에서 올라오거나
+            if i % 2 == 0 {
+                result[i] = min(result[i/2]+1, result[i-1] + 1)
+            } else {
+            // 홀수라면 한칸 전의 위치에서 올라오거나
+            // 한칸 위의 칸의 /2 에서 순간이동으로 올라온위치 (7이라면 4의 *2에서 -1) 즉 2번 이동
+                result[i] = min(result[i-1]+1, result[(i+1)/2]+2)
+            }
+        }
+        
+        return result[k]
+    }
+    
+    print(dp())
+}
+solution()
+
+```
+하지만 bfs문제 이므로 bfs로도 풀이해보았다.   
