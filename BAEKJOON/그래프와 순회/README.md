@@ -969,4 +969,58 @@ solution()
 2. bfs(popLast) / 메모리(70392) / 시간 1560ms
 3. bfs(idx) / 메모리(83572) / 시간 20ms
 
-   
+## 7562 나이트의 이동   
+bfs를 이용한다.   
+나이트가 이동할 방법은 8가지이다.   
+해당 방법으로 이동했을때 맵을 넘어가지 않으며 이전에 이미 방문한적 없던 곳이라면   
+전 위치의 +1을 넣어준다.   
+```
+import Foundation
+func solution(){
+    let t = Int(readLine()!)!
+    for _ in 0..<t {
+        let l = Int(readLine()!)!
+        var visited = Array(repeating: Array(repeating: false, count: l), count: l)
+        var result = Array(repeating: Array(repeating: 0, count: l), count: l)
+        let input = readLine()!.split(separator: " ").map{Int($0)!}
+        let input2 = readLine()!.split(separator: " ").map{Int($0)!}
+        let (y,x) = (input[0],input[1])
+        let (goalY, goalX) = (input2[0], input2[1])
+        var q: [(Int,Int)] = []
+        
+        let dy = [-1,-2,-2,-1,1,2,2,1]
+        let dx = [-2,-1,1,2,2,1,-1,-2]
+        
+        func bfs(_ y: Int, _ x: Int) {
+            var idx = 0
+            q.append((y,x))
+            visited[y][x] = true
+            while q.count > idx {
+                let cur = q[idx]
+                idx += 1
+                for i in 0..<8 {
+                    let curY = cur.0 + dy[i]
+                    let curX = cur.1 + dx[i]
+                    if (0..<l).contains(curY) && (0..<l).contains(curX) && !visited[curY][curX]{
+                        //print(curY,curX)
+                        q.append((curY,curX))
+                        visited[curY][curX] = true
+                        result[curY][curX] = result[cur.0][cur.1] + 1
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        bfs(y,x)
+//        for i in 0..<l {
+//            print(result[i])
+//        }
+        print(result[goalY][goalX])
+    }
+}
+solution()
+
+```
