@@ -647,3 +647,75 @@ func solution(){
 solution()
 
 ```
+해당 풀이는 removeFirst()를 수행하게 됨으로 시간초과가 발생할 수 밖에 없다.   
+따라서 idx를 증가시켜주면서 코드를 확인하는 방법이 훨씬 효율이 좋다.   
+```
+import Foundation
+func solution(){
+    let input = readLine()!.split(separator: " ").map{Int($0)!}
+    let (m,n) = (input[0],input[1])
+    var board: [[Int]] = Array(repeating: Array(repeating: 0, count: m), count: n)
+    var Q = [(Int,Int)]()
+    for i in 0..<n {
+        let value = readLine()!.split(separator: " ").map{Int($0)!}
+        board[i] = value
+        for j in 0..<m {
+            if board[i][j] == 1 { Q.append((i,j)) }
+        }
+    }
+    
+    let dy = [1,-1,0,0]
+    let dx = [0,0,1,-1]
+    
+    var result = Array(repeating: Array(repeating: 0, count: m), count: n)
+    var isPossible = true
+    var idx = 0
+    var lastIdx = (0,0)
+    func bfs(){
+        while idx < Q.count {
+            let cur = Q[idx]
+            idx += 1
+        
+            for i in 0..<4 {
+                let curY = cur.0 + dy[i]
+                let curX = cur.1 + dx[i]
+                
+                if (0..<n).contains(curY) && (0..<m).contains(curX) &&
+                    board[curY][curX] == 0{
+                    board[curY][curX ] = 1
+                    result[curY][curX] = result[cur.0][cur.1] + 1
+                    Q.append((curY,curX))
+                    lastIdx = (curY,curX)
+                }
+            }
+        }
+        
+        for i in 0..<n {
+            for j in 0..<m {
+                if board[i][j] == 0 {
+                    isPossible = false
+                }
+            }
+        }
+//        
+//        for i in 0..<n {
+//            print(board[i])
+//        }
+//        print()
+//        
+//        for i in 0..<n {
+//            print(result[i])
+//        }
+        
+    }
+    bfs()
+    if !isPossible {
+        print(-1)
+    } else {
+        print(result[lastIdx.0][lastIdx.1])
+    }
+}
+
+solution()
+
+```
