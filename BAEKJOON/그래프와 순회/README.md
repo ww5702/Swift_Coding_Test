@@ -1024,3 +1024,67 @@ func solution(){
 solution()
 
 ```
+## 뱀과 사다리 게임
+
+```
+import Foundation
+func solution(){
+    let input = readLine()!.split(separator: " ").map{Int($0)!}
+    let (n,m) = (input[0],input[1])
+    var ladder: [Int:Int] = [:]
+    for _ in 0..<n {
+        let input = readLine()!.split(separator: " ").map{Int($0)!}
+        ladder[input[0]] = input[1]
+        
+    }
+    var snake: [Int:Int] = [:]
+    for _ in 0..<m {
+        let input = readLine()!.split(separator: " ").map{Int($0)!}
+        snake[input[0]] = input[1]
+    }
+    print(ladder,snake)
+    var result = Array(repeating: 0,count: 100)
+    var visited = Array(repeating: false, count: 100)
+    var q: [Int] = []
+    var idx = 0
+    
+//    print(ladder.contains{$0.key == 12})
+//    print(ladder[12])
+    
+    func bfs(_ start: Int) {
+        visited[start] = true
+        q.append(start)
+        
+        while idx <= q.count {
+            print(result)
+            let cur = q[idx]
+            idx += 1
+            
+            for i in 1...6 {
+                let curN = cur + i
+                if curN <= 100 && !visited[curN] {
+                    if ladder.contains(where: {$0.key == curN}) {
+                        q.append(ladder[curN]!)
+                        visited[ladder[curN]!] = true
+                        result[ladder[curN]!] = result[cur] + 1
+                    } else if snake.contains(where: {$0.key == curN}) {
+                        q.append(snake[curN]!)
+                        visited[snake[curN]!] = true
+                        result[snake[curN]!] = result[cur] + 1
+                    } else {
+                        q.append(curN)
+                        visited[curN] = true
+                        result[curN] = result[cur] + 1
+                    }
+                }
+            }
+        }
+        
+        
+    }
+    
+    bfs(1)
+}
+solution()
+
+```
