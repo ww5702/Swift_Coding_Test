@@ -1025,7 +1025,12 @@ solution()
 
 ```
 ## 뱀과 사다리 게임
-
+100크기의 게임판을 준비한다.   
+주사위는 1~6까지 굴릴 수 있고,   
+만약 아직 방문하지 않았으면서, 해당 위치의 발판이 보다 적은 주사위수로   
+방문할 수 있는 장소라면 스택에 넣어준다.   
+만약 밟은 발판이 사다리나 뱀으로 인해 내려가거나 올라가는 발판이라면   
+해당 경우 이동하게 되는 발판을 기준으로 result를 비교해준다.   
 ```
 import Foundation
 func solution(){
@@ -1042,9 +1047,9 @@ func solution(){
         let input = readLine()!.split(separator: " ").map{Int($0)!}
         snake[input[0]] = input[1]
     }
-    print(ladder,snake)
-    var result = Array(repeating: 0,count: 100)
-    var visited = Array(repeating: false, count: 100)
+    //print(ladder,snake)
+    var result = Array(repeating: 100,count: 101)
+    var visited = Array(repeating: false, count: 101)
     var q: [Int] = []
     var idx = 0
     
@@ -1054,9 +1059,10 @@ func solution(){
     func bfs(_ start: Int) {
         visited[start] = true
         q.append(start)
+        result[start] = 0
         
-        while idx <= q.count {
-            print(result)
+        while idx < q.count {
+            //print(result)
             let cur = q[idx]
             idx += 1
             
@@ -1064,17 +1070,26 @@ func solution(){
                 let curN = cur + i
                 if curN <= 100 && !visited[curN] {
                     if ladder.contains(where: {$0.key == curN}) {
-                        q.append(ladder[curN]!)
-                        visited[ladder[curN]!] = true
-                        result[ladder[curN]!] = result[cur] + 1
+                        if result[ladder[curN]!] > result[cur]+1 {
+                            q.append(ladder[curN]!)
+                            visited[ladder[curN]!] = true
+                            result[ladder[curN]!] = result[cur] + 1
+                        }
+                        
                     } else if snake.contains(where: {$0.key == curN}) {
-                        q.append(snake[curN]!)
-                        visited[snake[curN]!] = true
-                        result[snake[curN]!] = result[cur] + 1
+                        if result[snake[curN]!] > result[cur]+1 {
+                            q.append(snake[curN]!)
+                            visited[snake[curN]!] = true
+                            result[snake[curN]!] = result[cur] + 1
+                        }
+                        
                     } else {
-                        q.append(curN)
-                        visited[curN] = true
-                        result[curN] = result[cur] + 1
+                        if result[curN] > result[cur]+1 {
+                            q.append(curN)
+                            visited[curN] = true
+                            result[curN] = result[cur] + 1
+                        }
+                        
                     }
                 }
             }
@@ -1084,6 +1099,7 @@ func solution(){
     }
     
     bfs(1)
+    print(result[100])
 }
 solution()
 
