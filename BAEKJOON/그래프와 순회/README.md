@@ -1263,3 +1263,57 @@ solution()
  */
 
 ```
+이분 그래프란 본인을 제외한 연결된 노드들은 다른 색으로 칠해져있어야 하는 그래프이다.   
+예를 들어 1이 파란색이고 연결되어있는 노드가 2,3이라면 2,3은 빨간색으로 칠해져야한다.   
+다시 2,3이 연결된 다른 노드들은 파란색으로 칠해져 있어야 한다.   
+만약 연결되어있는 노드가 같은색이라면 이분그래프가 아니다.   
+따라서 방문한적있는 노드인 visited와 색을 칠하는 color 배열을 이용해   
+true, false로 색을 구분하여 칠한다.   
+만약 한번이라도 같은색이 있었다면 isOk를 true로 반환하고 return한다.   
+모든 그래프의 정점을 탐색했을떄 isOk이라면 NO를 출력한다.   
+```
+import Foundation
+func solution(){
+    let t = Int(readLine()!)!
+    
+    for _ in 0..<t {
+        let input = readLine()!.split(separator: " ").map{Int($0)!}
+        let (v,e) = (input[0],input[1])
+        var graph = [[Int]](repeating: [], count: v+1)
+        for _ in 0..<e {
+            let value = readLine()!.split(separator: " ").map{Int($0)!}
+            graph[value[0]].append(value[1])
+            graph[value[1]].append(value[0])
+        }
+        //print(graph)
+        var visited = Array(repeating: false, count: v+1)
+        var color = Array(repeating: false, count: v+1)
+        var isOk = false
+        
+        func dfs(_ start: Int){
+            
+            for node in graph[start] {
+                // 아직 방문하지 않음
+                if !visited[node] {
+                    visited[node] = true
+                    color[node] = !color[start]
+                    dfs(node)
+                } else {
+                    if color[start] == color[node] {
+                        isOk = true
+                        return
+                    }
+                }
+            }
+        }
+        
+        for i in 1..<v {
+            dfs(i)
+        }
+        
+        print(isOk ? "NO" : "YES")
+    }
+}
+solution()
+
+```
