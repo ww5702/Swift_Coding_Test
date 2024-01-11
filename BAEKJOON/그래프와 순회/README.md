@@ -1151,10 +1151,13 @@ func solution(){
                 
                 
                 if (0..<n).contains(curY) && (0..<m).contains(curX) {
+                    // 민약 아직 벽을 부순적이 없다면
                     if board[curY][curX] == 1 && cur.2 == 0 {
+                        // 앞으로 방문할 좌표는 벽을 이미 부쉈다는 의미로 [y][x][1]을 간다
                         visited[curY][curX][1] = visited[cur.0][cur.1][cur.2] + 1
                         q.append((curY,curX,1))
                     } else if board[curY][curX] == 0 && visited[curY][curX][cur.2] == 0 {
+                        // 벽을 마주하지 않았다면 방문하지만 않았으면 추가 가능
                         visited[curY][curX][cur.2] = visited[cur.0][cur.1][cur.2] + 1
                         q.append((curY,curX,cur.2))
                     }
@@ -1169,5 +1172,10 @@ func solution(){
     print(bfs())
 }
 solution()
+
+```
+## 1707 이분 그래프 
+
+```
 
 ```
