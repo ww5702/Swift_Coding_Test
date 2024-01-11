@@ -1175,7 +1175,91 @@ solution()
 
 ```
 ## 1707 이분 그래프 
-
+풀이는 맞는것 같으나 시간초과   
 ```
+import Foundation
+func solution(){
+    let t = Int(readLine()!)!
+    
+    for _ in 0..<t {
+        let input = readLine()!.split(separator: " ").map{Int($0)!}
+        let (v,e) = (input[0],input[1])
+        var graph = [[Int]](repeating: [], count: v+1)
+        for _ in 0..<e {
+            let value = readLine()!.split(separator: " ").map{Int($0)!}
+            graph[value[0]].append(value[1])
+            graph[value[1]].append(value[0])
+        }
+        //print(graph)
+        var isOk = true
+        
+        func bfs(_ start: Int) -> Bool {
+            var visited = Array(repeating: 0, count: v+1)
+            var q: [Int] = []
+            var idx = 0
+            q.append(start)
+            visited[start] = 1
+            
+            while idx < q.count {
+                //print(visited)
+                let cur = q[idx]
+                idx += 1
+                 
+                for node in graph[cur] {
+                    // 아직 방문하지 않음
+                    if visited[node] == 0 {
+                        if visited[cur] == 1 {
+                            visited[node] = -1
+                            q.append(node)
+                        } else {
+                            visited[node] = 1
+                            q.append(node)
+                        }
+                    } else if visited[node] == visited[cur] {
+                        return false
+                    }
+                }
+            }
+            return true
+        }
+        
+        for i in 1..<v {
+            if !bfs(i) {
+                isOk = false
+                break
+            }
+        }
+        
+        print(!isOk ? "NO" : "YES")
+    }
+}
+solution()
+
+/*
+ 
+ func bfs(_ start: Int){
+     q.append(start)
+     visited[start] = true
+     
+     while idx < q.count {
+         //print(visited)
+         let cur = q[idx]
+         idx += 1
+          
+         for node in graph[cur] {
+             // 아직 방문하지 않음
+             if !visited[node] {
+                 visited[node] = true
+                 color[node] = !color[cur]
+             } else {
+                 if color[cur] == color[node] {
+                     isOk = true
+                     return
+                 }
+             }
+         }
+     }
+ }
+ */
 
 ```
