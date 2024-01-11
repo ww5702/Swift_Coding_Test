@@ -1104,3 +1104,70 @@ func solution(){
 solution()
 
 ```
+## 2206 벽 부수고 이동하기
+풀이방식은 비슷하다.   
+벽을 아직 안부셨을때, 부셨을떄의 [0,0]으로 만들어 3차원배열로 만든다.   
+이동할 수 있는 경우의 수는 2가지이다.   
+1. 벽이 있다면 벽을 아직 뚫지 않았을때   
+board[curY][curX] == 1 && visited[cur.0][cur.1][cur.2] == 0   
+그렇다면 방문처리후 cur.2를 1로 바꾼후 큐에 넣는다.   
+2. 벽이 없고, 아직 방문한 적이 없다면   
+board[curY][curX] == 0 && visited[curY][curX][cur.2] == 0
+방문처리 후 큐에 그대로 넣는다.   
+```
+import Foundation
+func solution(){
+    let input = readLine()!.split(separator: " ").map{Int($0)!}
+    let (n,m) = (input[0],input[1])
+    var board = Array(repeating: Array(repeating: 0, count: m), count: n)
+    for i in 0..<n {
+        board[i] = Array(readLine()!.map{Int(String($0))!})
+    }
+    //print(board)
+    
+    var visited = Array(repeating: Array(repeating: [0,0], count: m), count: n)
+    var q = [(Int,Int,Int)]()
+    q.append((0,0,0))
+    visited[0][0][0] = 1
+    //print(visited)
+    
+    let dy = [1,-1,0,0]
+    let dx = [0,0,1,-1]
+    var idx = 0
+    
+    func bfs() -> Int{
+        
+        while idx < q.count {
+            let cur = q[idx]
+            idx += 1
+            
+            if cur.0 == n-1 && cur.1 == m-1 {
+                return visited[cur.0][cur.1][cur.2]
+            }
+            
+            for i in 0..<4 {
+                let curY = cur.0 + dy[i]
+                let curX = cur.1 + dx[i]
+                
+                
+                if (0..<n).contains(curY) && (0..<m).contains(curX) {
+                    if board[curY][curX] == 1 && cur.2 == 0 {
+                        visited[curY][curX][1] = visited[cur.0][cur.1][cur.2] + 1
+                        q.append((curY,curX,1))
+                    } else if board[curY][curX] == 0 && visited[curY][curX][cur.2] == 0 {
+                        visited[curY][curX][cur.2] = visited[cur.0][cur.1][cur.2] + 1
+                        q.append((curY,curX,cur.2))
+                    }
+                }
+            }
+        }
+        
+        
+        return -1
+    }
+    
+    print(bfs())
+}
+solution()
+
+```
