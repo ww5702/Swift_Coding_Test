@@ -488,3 +488,48 @@ solution()
 
 
 ```
+## 11657 타임머신
+음의 간선이 있기 때문에 벨만-포드 알고리즘을 이용하는 문제이다.   
+```
+import Foundation
+func solution(){
+    let INF = Int.max
+    let input = readLine()!.split(separator: " ").map{Int($0)!}
+    let (n,m) = (input[0],input[1])
+    var graph: [(Int,Int,Int)] = []
+    var distance = Array(repeating: INF, count: n+1)
+    for _ in 0..<m {
+        let input = readLine()!.split(separator: " ").map{Int($0)!}
+        graph.append((input[0],input[1],input[2]))
+    }
+    
+    
+    func BF(_ start: Int) -> Bool {
+        distance[start] = 0
+        for i in 1...n {
+            for j in 0..<m {
+                let cur = graph[j].0
+                let next = graph[j].1
+                let cost = graph[j].2
+                
+                if distance[cur] != INF && distance[next] > distance[cur] + cost {
+                    distance[next] = distance[cur] + cost
+                    
+                    if n == i { return true }
+                }
+            }
+        }
+        return false
+    }
+    
+    if BF(1) {
+        print(-1)
+    } else {
+        distance[2...].forEach{print($0 >= INF ? -1 : $0)}
+    }
+    
+}
+solution()
+
+
+```
