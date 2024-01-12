@@ -277,3 +277,62 @@ solution()
 
 
 ```
+## 13549 숨박꼭질
+dp로 풀이해보았기에 bfs로 풀이해보았다.   
+```
+import Foundation
+func solution(){
+    let input = readLine()!.split(separator: " ").map{Int($0)!}
+    let (n,k) = (input[0],input[1])
+    
+    var result: [Int] = Array(repeating: 100001, count: 100001)
+    var visited = Array(repeating: false, count: 100001)
+    
+    for i in 0..<n {
+        result[i] = n - i
+        visited[i] = true
+    }
+    
+    var idx = 0
+    
+    func bfs(_ start: Int) {
+        var q: [Int] = []
+        result[start] = 0
+        q.append(start)
+        visited[start] = true
+        
+        
+        while q.count > idx {
+            let cur = q[idx]
+            idx += 1
+            
+            // 2배 순간이동
+            if cur*2 < 100001 {
+                if result[cur*2] > result[cur] && !visited[cur*2]{
+                    visited[cur*2] = true
+                    result[cur*2] = result[cur]
+                    q.append(cur*2)
+                }
+            }
+            if cur+1 < 100001 {
+                if result[cur+1] > result[cur]+1 && !visited[cur+1] {
+                    visited[cur+1] = true
+                    result[cur+1] = result[cur]+1
+                    q.append(cur+1)
+                }
+                if result[cur-1] > result[cur]+1 && !visited[cur-1] {
+                    visited[cur-1] = true
+                    result[cur-1] = result[cur]+1
+                    q.append(cur-1)
+                }
+            }
+        }
+        print(result[k])
+    }
+    
+    bfs(n)
+}
+solution()
+
+
+```
