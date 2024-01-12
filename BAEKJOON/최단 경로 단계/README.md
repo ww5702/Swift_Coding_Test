@@ -328,6 +328,163 @@ func solution(){
     print(result[k])
 }
 solution()
+```
+## 9370 미확인 도착지
+문제를 이해하는데 더 오래 걸린 문제였다.   
+중간지인 g,h를 걸쳐서 도착예정지들을 방문하는데   
+start - 도착예정지와   
+start - g - h - 도착예정지 / start - h - g - 도착예정지가 같다면   
+최단거리로 도착예정지로 갔다는 의미이므로 추가해준다.   
+```
+import Foundation
+struct Heap <T: Comparable> {
+    var heap = [T]()
+    
+    private func getParent(_ index: Int) -> T {
+        heap[index / 2]
+    }
+    
+    private func getLeftChild(_ index: Int) -> T {
+        heap[index * 2]
+    }
+    
+    private func getRightChild(_ index: Int) -> T {
+        heap[index * 2 + 1]
+    }
+    
+    func isEmpty() -> Bool {
+        heap.count <= 1
+    }
+    
+    mutating func push(_ data: T) {
+        if isEmpty() { heap.append(data) }
+        var index = heap.count
+        heap.append(data)
+        
+        while index > 1 {
+            let parent = getParent(index)
+            guard parent > data else { break }
+            heap[index] = parent
+            index /= 2
+        }
+        heap[index] = data
+    }
+    mutating func pop() -> T? {
+        guard !isEmpty() else { return nil }
+        let item = heap[1]
+        let data = heap.removeLast()
+        let size = heap.count - 1
+        
+        guard !isEmpty() else { return item }
+        var (parent, child) = (1, 2)
+        while child <= size {
+            if child < size && getLeftChild(parent) > getRightChild(parent) {
+                child += 1
+            }
+            guard data > heap[child] else { break }
+            heap[parent] = heap[child]
+            parent = child
+            child *= 2
+        }
+        heap[parent] = data
+        return item
+    }
+}
+
+struct Node: Comparable {
+    static func < (lhs: Node, rhs: Node) -> Bool{
+        return lhs.cost < rhs.cost
+    }
+    
+    
+    init(node: Int, cost: Int) {
+        self.node = node
+        self.cost = cost
+    }
+    
+    let node: Int
+    let cost: Int
+}
+
+func solution(){
+    // 즉,
+    // start에서 출발하여 stop1, stop2를 걸쳐서 candidate까지 가는것이다.
+    // 만약 start에서 출발하여 candidate까지 가는것보다
+    // start - stop1 - stop2 - candidate가 더 최단거리라면
+    // 성립
+    
+    let T = Int(readLine()!)!
+    for _ in 0..<T {
+        let input = readLine()!.split(separator: " ").map{Int($0)!}
+        let (n,m,t) = (input[0],input[1],input[2])
+        let input2 = readLine()!.split(separator: " ").map{Int($0)!}
+        let (start,stop1,stop2) = (input2[0], input2[1], input2[2])
+        var graph = [Int: [Node]]()
+        for i in 1...n {
+            graph[i] = []
+        }
+        
+        for _ in 0..<m {
+            let input = readLine()!.split(separator: " ").map{Int($0)!}
+            graph[input[0]]!.append(Node(node: input[1], cost: input[2]))
+            graph[input[1]]!.append(Node(node: input[0], cost: input[2]))
+        }
+        //print(graph)
+        
+        var candidate: [Int] = []
+        for _ in 0..<t {
+            candidate.append(Int(readLine()!)!)
+        }
+        
+        
+        func dijkstra(_ start: Int) -> [Int] {
+            var q = Heap<Node>()
+            var distance = Array(repeating: Int.max, count: n+1)
+            distance[start] = 0
+            q.push(Node(node: start, cost: 0))
+            
+            while !q.isEmpty() {
+                let cur = q.pop()
+                let node = cur!.node
+                let cost = cur!.cost
+                let edge = graph[node]!
+                
+                for next in edge {
+                    if distance[next.node] > cost + next.cost {
+                        distance[next.node] = cost + next.cost
+                        q.push(Node(node: next.node, cost: distance[next.node]))
+                    }
+                }
+            }
+            return distance
+        }
+        
+        
+        let list1 = dijkstra(start)
+        let list2 = dijkstra(stop1)
+        let list3 = dijkstra(stop2)
+        
+        var result: [Int] = []
+        for c in candidate where list1[c] != Int.max {
+            var versusB = Int.max
+            if list1[stop1] != Int.max && list2[stop2] != Int.max && list3[c] != Int.max {
+                versusB = list1[stop1]+list2[stop2]+list3[c]
+            }
+            
+            var versusC = Int.max
+            if list1[stop2] != Int.max && list3[stop1] != Int.max && list2[c] != Int.max {
+                versusC = list1[stop2]+list3[stop1]+list2[c]
+            }
+            
+            if list1[c] == versusB || list1[c] == versusC {
+                result.append(c)
+            }
+        }
+        
+        print(result.sorted(by: <).map{String($0)}.joined(separator: " "))
+    }
+}
+solution()
 
 
 ```
