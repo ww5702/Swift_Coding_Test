@@ -32,7 +32,58 @@ dist[v] <= dist[cur] + w(current,v)이라는 것이다.
 0 4 8 5   
 ***
 3번 실행   
-1 2 3 4
+1 2 3 4   
 0 -2 8 5   
 ***
 가 된다.   
+   
+코드로 구현한다면 이와 같다.   
+```
+import Foundation
+func solution(){
+    let INF = Int.max
+    let vertexN = 4
+    
+    var graph = [Int: [(Int,Int)]]()
+    for _ in 0..<vertexN {
+        let input = readLine()!.split(separator: " ").map{Int($0)!}
+        graph.updateValue([(input[1],input[2])], forKey: input[0])
+        
+    }
+    print(graph)
+    
+    var edgeList = [(Int,Int,Int)]()
+    var dist = Array(repeating: INF, count: vertexN+1)
+    
+    for item in graph {
+        for value in item.value {
+            edgeList.append((item.key,value.0,value.1))
+        }
+    }
+    func bellmanFord(_ start: Int) -> Bool {
+        dist[start] = 0
+        
+        //n번 실시
+        for i in 0..<vertexN {
+            for j in 0..<edgeList.count {
+                let cur = edgeList[j].0
+                let next = edgeList[j].1
+                let weight = edgeList[j].2
+                if dist[cur] != INF && dist[next] > dist[cur]+weight {
+                    dist[next] = dist[cur]+weight
+                    if i == vertexN-1 {
+                        return true
+                    }
+                }
+            }
+        }
+        
+        return false
+    }
+    bellmanFord(1)
+    print(dist)
+}
+solution()
+
+
+```
