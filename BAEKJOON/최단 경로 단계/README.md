@@ -533,3 +533,44 @@ solution()
 
 
 ```
+## 11404 플로이드
+플로이드 워셜 알고리즘을 사용하여 풀이가 가능하다.   
+다 똑같았으나 마지막 출력하는 부분에서 만약 INF인 부분이 남아있다면 0으로 변환하여 출력하는 부분이 다르다.   
+```
+import Foundation
+func solution(){
+    let n = Int(readLine()!)!
+    let m = Int(readLine()!)!
+    var graph = [[Int]](repeating: [Int](repeating: Int.max, count: n+1), count: n+1)
+    for _ in 0..<m {
+        let input = readLine()!.split(separator: " ").map{Int($0)!}
+        graph[input[0]][input[1]] = min(graph[input[0]][input[1]], input[2])
+        
+    }
+    
+    
+    for node in 1...n {
+        graph[node][node] = 0
+    }
+    
+    for k in 1...n {
+        for i in 1...n {
+            for j in 1...n {
+                if graph[i][k] != Int.max && graph[k][j] != Int.max {
+                    graph[i][j] = min(graph[i][j], graph[i][k] + graph[k][j])
+                }
+            }
+        }
+    }
+    
+    for i in 1...n {
+        for j in 1...n {
+            print(graph[i][j] == Int.max ? 0 : graph[i][j], terminator: " ")
+        }
+        print()
+    }
+}
+solution()
+
+
+```
