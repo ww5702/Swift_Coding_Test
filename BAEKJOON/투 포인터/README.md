@@ -33,3 +33,38 @@ solution()
 
 
 ```
+## 2470 두 용액
+정렬된 수열의 두 수를 더했을때 0과 가까운 수를 고르는 문제이다.   
+0에 가까운 두 수를 골라야 하기에 절댓값을 이용하여 풀이를 진행한다.   
+만약 해당 두 수가 result보다 0에 가깝다면 해당 합으로 result를 대체해주고,   
+다시 두 수의 합이 0보다 작다면 start+=1,   
+합이 0보다 크다면 end -= 1 를 해준다.   
+```
+import Foundation
+func solution(){
+    let n = Int(readLine()!)!
+    var arr = readLine()!.split(separator: " ").map{Int($0)!}
+    arr.sort(by:<)
+    
+    var start = 0, end = n-1
+    var result = Int.max
+    var answer: [Int] = []
+    
+    while start < end {
+        
+        if result > abs(arr[end] + arr[start]){
+            result = abs(arr[end] + arr[start])
+            answer = [arr[start],arr[end]]
+        }
+        if arr[start] + arr[end] < 0 {
+            start += 1
+        } else {
+            end -= 1
+        }
+    }
+    print(answer.sorted(by:<).map{String($0)}.joined(separator: " "))
+}
+solution()
+
+
+```
