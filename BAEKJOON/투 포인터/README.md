@@ -68,3 +68,47 @@ solution()
 
 
 ```
+## 1806 부분합
+가장 짧은 s를 만드는 길이를 만드는 것이기에   
+주어진 수열은 정렬할 필요가 없다   
+0번부터 시작하여 s를 만들때까지 end를 늘려준다.   
+만약 s를 넘기다면 해당 인덱스들로 s이상을 만들수 있으므로    
+min(result)를 갱신할 수 있다면 갱신해준다.   
+그리고 첫번째 인덱스를 빼주고 cnt도 -1   
+다시 2번째 인덱스부터 s이상을 만들 수 있을떄까지 더해준다.   
+지문의 예시로는 더 더하지 않아도 s 이상을 만들 수 있어   
+while문은 동작하지 않는다.   
+위의 과정을 반복하여 정답을 구해낸다.   
+```
+import Foundation
+func solution(){
+    let input = readLine()!.split(separator: " ").map{Int($0)!}
+    let (n,s) = (input[0],input[1])
+    var arr = readLine()!.split(separator: " ").map{Int($0)!}
+    
+    var result = Int.max
+    var end = 0, sum = 0
+    var cnt = 0
+    
+    for start in 0..<n {
+        
+        while sum < s && end < n {
+            sum += arr[end]
+            end += 1
+            cnt += 1
+            //print(sum)
+        }
+        
+        if sum >= s {
+            result = min(result, cnt)
+            //print("ressult",sum,result)
+        }
+        sum -= arr[start]
+        cnt -= 1
+    }
+    print(result == Int.max ? 0 : result)
+}
+solution()
+
+
+```
