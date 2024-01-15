@@ -117,5 +117,5 @@ var inupt = readLine()!.split(separator:" ").map{String($0)}
 ## [최단 경로 단계](https://github.com/ww5702/Swift_Coding_Test/tree/main/BAEKJOON/%EC%B5%9C%EB%8B%A8%20%EA%B2%BD%EB%A1%9C%20%EB%8B%A8%EA%B3%84)   
 ```
 1753 / 1504 / 13549 / 9370 / 11657
-11404 / 
+11404 / 1956
 ```
