@@ -574,3 +574,48 @@ solution()
 
 
 ```
+
+## 1856 운동
+최단거리로 사이클을 구하는 문제이다.   
+한참을 생각하다가 힌트를 보고 깨달은거지만 노드가 3개가 있다고 해도 1 -> 2 -> 1 만 되더라도 사이클이 형성된다;;   
+마을은 최대 400개이므로 500개 이하의 간선이라면 플로이드 워셜 알고리즘으로 쉽게 풀이가 가능하다.   
+단, 전에 풀이하던 자기 자신으로 향하는 길을 0으로 설정해놓으면   
+사이클을 찾기 위한 1 에서 1까지의 거리라던지 2에서 2까지의 거리를 구할 수 없다.   
+따라서 Int.max로 초기화를 시키고 알고리즘을 돌린다.   
+```
+import Foundation
+func solution(){
+    let input = readLine()!.split(separator: " ").map{Int($0)!}
+    let (n,m) = (input[0],input[1])
+    var graph = [[Int]](repeating: [Int](repeating: Int.max, count: n+1), count: n+1)
+    for _ in 0..<m {
+        let input = readLine()!.split(separator: " ").map{Int($0)!}
+        graph[input[0]][input[1]] = min(graph[input[0]][input[1]], input[2])
+        
+    }
+    
+    //print(graph)
+    
+    for k in 1...n {
+        for i in 1...n {
+            for j in 1...n {
+                if graph[i][k] != Int.max && graph[k][j] != Int.max {
+                    graph[i][j] = min(graph[i][j] , graph[i][k] + graph[k][j])
+                }
+                
+            }
+        }
+    }
+    
+    var answer = Int.max
+    
+    for i in 1...n {
+        answer = min(answer, graph[i][i])
+    }
+    
+    print(answer == Int.max ? -1 : answer)
+}
+solution()
+
+
+```
