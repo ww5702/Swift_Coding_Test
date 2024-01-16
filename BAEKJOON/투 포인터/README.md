@@ -112,3 +112,61 @@ solution()
 
 
 ```
+
+## 
+에라토스테네스의 체를 이용해 소수들을 4000000까지 구해놓은다.   
+1부터 n까지 반복하면서   
+prime(i)가 0이 아니라면(소수라면) sum에 더해준다.   
+sum이 n보다 커지나 같아질때까지   
+그렇다면 연속된 수로 20보다 같거나 커지게 된다.   
+만약 해당 수가 n과 같다면 cnt += 1   
+같던 같지 않던 sum -= arr[start]를 해줌으로써   
+연속성을 계속해서 판단해준다.   
+```
+import Foundation
+func solution(){
+    let n = Int(readLine()!)!
+    
+    var arr = Array(repeating: 0, count: 4000001)
+    func isPrime(_ number: Int){
+        for i in 2...number{
+            arr[i] = i
+        }
+        for i in 2...number{
+            if arr[i] == 0{continue}
+            for j in stride(from: i+i, through: number, by: i){
+                arr[j] = 0
+            }
+        }
+    }
+
+    isPrime(4000000)
+    
+    //print(prime[0...100])
+    
+    var end = 0, sum = 0
+    var cnt = 0
+    for start in 1...n {
+        if arr[start] == 0 { continue }
+        
+        while sum < n && end <= n {
+            if arr[end] != 0 {
+                sum += arr[end]
+            }
+            end += 1
+            
+        }
+        
+        if sum == n {
+            cnt += 1
+        }
+        
+        sum -= arr[start]
+    }
+    
+    print(cnt)
+}
+solution()
+
+
+```
