@@ -121,5 +121,5 @@ var inupt = readLine()!.split(separator:" ").map{String($0)}
 ```
 ## [투 포인터](https://github.com/ww5702/Swift_Coding_Test/tree/main/BAEKJOON/%ED%88%AC%20%ED%8F%AC%EC%9D%B8%ED%84%B0)   
 ```
-3273 / 2470 / 1806
+3273 / 2470 / 1806 / 1644 / 
 ```
