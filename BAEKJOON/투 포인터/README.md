@@ -113,7 +113,8 @@ solution()
 
 ```
 
-## 
+## 1644 소수의 연속합 
+
 에라토스테네스의 체를 이용해 소수들을 4000000까지 구해놓은다.   
 1부터 n까지 반복하면서   
 prime(i)가 0이 아니라면(소수라면) sum에 더해준다.   
@@ -165,6 +166,88 @@ func solution(){
     }
     
     print(cnt)
+}
+solution()
+
+
+```
+## 1450 냅색문제
+dfs, 이분탐색으로 풀이하는 문제이다.   
+우선 n을 절반으로 나누어 해당 배열의 부분합을 구한다(participation)   
+그리고 1번 배열과 2번 배열을 가지고 이분탐색을 이용해 문제를 해결한다.   
+1번 배열은 정렬하여 기본값으로 가져오고,   
+2번 배열을 0번째 인덱스부터 끝까지 순환한다.   
+예를들어 두번째 그룹 부분합 배열의 첫번째 인덱스가 15라고 가정했을때   
+30 - 15와 sumArray1을 이분탐색을 돌린다.   
+n이 30일때 남은 무게는 15이다.   
+그 후 해당 정렬된 sumArray에서 15를 넘지 않는 부분합의 갯수를 구해준다.   
+여기서 meet to middle을 사용한다.   
+그리고 해당 갯수를 answer에 더해준다.   
+
+```
+import Foundation
+func solution(){
+    let input = readLine()!.split(separator: " ").map{Int($0)!}
+    let (n,c) = (input[0],input[1])
+    let cost = readLine()!.split(separator: " ").map{Int($0)!}
+    
+    var sumArray1: [Int] = []
+    var sumArray2: [Int] = []
+    var answer = 0
+    
+    // 부분합 구하기
+    /*
+     1씩 1~15개가 들어왔다고 가정하면
+     weight = 1, i = 1 , j = 15를 다시 재귀
+     weight = 0, i = 1, j = 15를 다시 재귀
+     
+     weight = 2, i = 2 , j = 15를 재귀
+     weight = 0, i = 2 , j = 15를 재귀
+     ...
+     weight = 15, i = 15, j = 15일때 append
+     weight = 0, i = 15, j = 15일때 append
+     
+     */
+    func participation(from i: Int, to j: Int, array: inout [Int], weight: Int) {
+        if weight > c { return }
+        
+        if i == j { 
+            array.append(weight)
+            return
+        }
+        
+        participation(from: i+1, to: j, array: &array, weight: weight + cost[i])
+        participation(from: i+1, to: j, array: &array, weight: weight)
+    }
+    
+    participation(from: 0, to: n/2, array: &sumArray1, weight: 0)
+    participation(from: n/2, to: n, array: &sumArray2, weight: 0)
+//    print(sumArray1)
+//    print(sumArray2)
+    
+    sumArray1.sort()
+    
+    // 부분합을 이용하여 경우의 수 구하기
+    func binarySearch(_ arr: [Int], _ target: Int) -> Int {
+        var start = 0, end = arr.count - 1
+        
+        while start <= end {
+            let mid = (start+end) / 2
+            if arr[mid] > target {
+                end = mid - 1
+            } else {
+                start = mid + 1
+            }
+        }
+        return start
+        
+    }
+    
+    for arr in sumArray2 {
+        answer += binarySearch(sumArray1, c - arr)
+    }
+    
+    print(answer)
 }
 solution()
 
