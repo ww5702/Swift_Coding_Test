@@ -56,6 +56,18 @@ func solution() {
 
 solution()
 ```
+그리고 해당 최장증가부분수열의 구성을 구하기 위해 다시 반복문을 역으로 순환시켜 구할 수 있다.   
+```
+var result = dp.max()!
+var list: [Int] = [] 
+for i in stride(from: n-1, through: 0, by: -1) {
+   if dp[i] == result {
+   list.append(arr[i])
+   result -= 1
+   }
+}
+print(list)
+```
 하지만 당연하게도 O(N^2)로 풀이가 가능한 알고리즘 문제는 거의 없다.   
    
    
