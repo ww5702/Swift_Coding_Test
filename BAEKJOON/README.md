@@ -125,5 +125,5 @@ var inupt = readLine()!.split(separator:" ").map{String($0)}
 ```
 ## [동적 계획법과 최단거리 역추적](https://github.com/ww5702/Swift_Coding_Test/tree/main/BAEKJOON/%EB%8F%99%EC%A0%81%20%EA%B3%84%ED%9A%8D%EB%B2%95%EA%B3%BC%20%EC%B5%9C%EB%8B%A8%EA%B1%B0%EB%A6%AC%20%EC%97%AD%EC%B6%94%EC%A0%81)
 ```
-12852 / 14002
+12852 / 14002 / 14003
 ```
