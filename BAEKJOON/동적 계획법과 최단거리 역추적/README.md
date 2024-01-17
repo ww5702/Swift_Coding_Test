@@ -58,3 +58,41 @@ solution()
 
 
 ```
+dp를 횟수를 나타내는 cnt와 그 전에 어디였는지인 before를 나눠 만들 수 있었다.   
+배열을 하나로 줄여 메모리 또한 줄일 수 있다.   
+
+```
+import Foundation
+func solution(){
+    var n = Int(readLine()!)!
+    var dp = Array(repeating: (cnt: Int.max, before: 0), count: n+1)
+    dp[0] = (0,0)
+    //print(dp)
+    for i in 1...n {
+        dp[i] = (dp[i-1].cnt + 1, i - 1)
+        
+        if i % 2 == 0 && i >= 2 {
+            if dp[i].cnt > dp[i/2].cnt + 1 {
+                dp[i] = (dp[i/2].cnt + 1, i / 2)
+            }
+        }
+        
+        if i % 3 == 0 && i >= 3 {
+            if dp[i].cnt > dp[i/3].cnt + 1 {
+                dp[i] = (dp[i/3].cnt + 1, i / 3)
+            }
+        }
+    }
+    //print(dp)
+    var answer = [Int]()
+    print(dp[n].cnt - 1)
+    while n >= 1 {
+        answer.append(n)
+        n = dp[n].before
+    }
+    print(answer.map{String($0)}.joined(separator: " "))
+}
+solution()
+
+
+```
