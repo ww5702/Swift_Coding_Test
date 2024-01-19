@@ -222,3 +222,63 @@ func solution(){
 }
 solution()
 ```
+## 9252 LCS 2
+최장 공통 부분 수열이다.   
+LIS와 비슷한 느낌으로 풀이할 수 있다.   
+index가 1000개 이하이므로 이중반복문으로 풀이할 수 있다.   
+해당글자까지 갔을때 만약 y,x값이 같다면 + 1,   
+다르다면 x-1, y-1중 더 큰 값을 계승한다.   
+```
+import Foundation
+func solution(){
+    var str1 = readLine()!.map{$0}
+    var str2 = readLine()!.map{$0}
+    //print(str1,str2)
+    var dp: [[Int]] = Array(repeating: Array(repeating: 0, count: str1.count+1), count: str2.count+1)
+    for i in 1...str2.count {
+        for j in 1...str1.count {
+            dp[i][j] = dp[i-1][j]
+            if str2[i-1] == str1[j-1] {
+                dp[i][j] = dp[i-1][j-1] + 1
+            } else {
+                if dp[i-1][j] > dp[i][j-1] {
+                    dp[i][j] = dp[i-1][j]
+                } else {
+                    dp[i][j] = dp[i][j-1]
+                }
+            }
+        }
+    }
+    var length = dp[str2.count].max()!
+    print(length)
+//    for i in 0...str1.count {
+//        print(dp[i])
+//    }
+    
+    var y = str2.count, x = str1.count
+    var answer: [Character] = []
+    
+
+    while length != 0 {
+        if dp[y-1][x] == dp[y][x] {
+            y -= 1
+            continue
+        }
+        if dp[y][x-1] == dp[y][x] {
+            x -= 1
+            continue
+        }
+        answer.append(str1[x-1])
+        y -= 1
+        x -= 1
+        length -= 1
+    }
+    if !answer.isEmpty {
+        print(String(answer.reversed()))
+    }
+    
+}
+solution()
+
+
+```
