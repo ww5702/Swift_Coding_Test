@@ -279,6 +279,87 @@ func solution(){
     
 }
 solution()
+```
+## 2618 경찰차
+bfs로 순간순간마다 거리의 차이를 계산하여서 짧은 차를 배정하였다.   
+하지만 시간초과가 발생하였다.   
+```
+import Foundation
+func solution(){
+    let n = Int(readLine()!)!
+    let w = Int(readLine()!)!
+    var accident: [(Int,Int)] = []
+    for _ in 0..<w {
+        let input = readLine()!.split(separator: " ").map{Int($0)!}
+        accident.append((input[0], input[1]))
+    }
+    //print(accident)
+    var first = (0,0)
+    var second = (n-1,n-1)
+    var cnt = 0
+    
+    func bfs(_ goalY: Int, _ goalX: Int, _ ny: Int, _ nx: Int) -> [Int] {
+        var board = Array(repeating: Array(repeating: 1000000, count: n), count: n)
+        var visited = Array(repeating: Array(repeating: false, count: n), count: n)
+        var result: [Int] = []
+        var idx = 0
+        var Q: [(Int,Int)] = []
+        Q.append((ny,nx))
+        visited[ny][nx] = true
+        board[ny][nx] = 0
+        
+        let dy = [1,-1,0,0]
+        let dx = [0,0,1,-1]
+        
+        while Q.count > idx{
+            let cur = Q[idx]
+            if cur.0 == goalY && cur.1 == goalX { break }
+            idx += 1
+            for i in 0..<4 {
+                let nowY = cur.0 + dy[i]
+                let nowX = cur.1 + dx[i]
+                
+                if (0..<n).contains(nowY) && (0..<n).contains(nowX) && !visited[nowY][nowX] {
+                    if board[nowY][nowX] > board[cur.0][cur.1] + 1 {
+                        visited[nowY][nowX] = true
+                        board[nowY][nowX] = board[cur.0][cur.1] + 1
+                        Q.append((nowY,nowX))
+                    }
+                }
+            }
+        }
+        result.append(board[goalY][goalX])
+        result.append(goalY)
+        result.append(goalX)
+        return result
+    }
+    
+    var value: [Int] = []
+    
+    for a in accident {
+        var goalY = a.0-1
+        var goalX = a.1-1
+        
+        var firstCar = bfs(goalY,goalX,first.0,first.1)
+        var secondCar = bfs(goalY,goalX,second.0,second.1)
+        //print(firstCar, secondCar)
+        
+        if firstCar[0] <= secondCar[0] {
+            cnt += firstCar[0]
+            first = (firstCar[1], firstCar[2])
+            value.append(1)
+        } else {
+            cnt += secondCar[0]
+            second = (secondCar[1], secondCar[2])
+            value.append(2)
+        }
+    }
+    print(cnt)
+    for v in value {
+        print(v)
+    }
+}
+solution()
 
 
 ```
