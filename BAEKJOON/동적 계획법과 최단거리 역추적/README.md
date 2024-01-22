@@ -360,6 +360,47 @@ func solution(){
     }
 }
 solution()
+```
+사실 장애물이 없어서 y,x - 사건장소 하면 해당장소까지의 거리가 나오니   
+해당 방식으로 계산을 해보았다.   
+당연히 틀렸다ㅋㅋ   
+```
+import Foundation
+func solution(){
+    let n = Int(readLine()!)!
+    let w = Int(readLine()!)!
+    var accident: [(Int,Int)] = []
+    for _ in 0..<w {
+        let input = readLine()!.split(separator: " ").map{Int($0)!}
+        accident.append((input[0], input[1]))
+    }
+    //print(accident)
+    var first = (0,0)
+    var second = (n-1,n-1)
+    var cnt = 0
+    var result: [Int] = []
+    
+    for a in accident {
+        let curY = a.0
+        let curX = a.1
+        
+        if (abs(first.0 - curY) + abs(first.1 - curX)) <= (abs(second.0 - curY) + abs(second.1 - curX)) {
+            cnt += (abs(first.0 - curY) + abs(first.1 - curX))
+            first = (curY,curX)
+            result.append(1)
+        } else {
+            cnt += (abs(second.0 - curY) + abs(second.1 - curX))
+            second = (curY,curX)
+            result.append(2)
+        }
+    }
+    print(cnt)
+    for r in result {
+        print(r)
+    }
+    
+}
+solution()
 
 
 ```
