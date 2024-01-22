@@ -401,6 +401,77 @@ func solution(){
     
 }
 solution()
-
+```
+문제에서 제시한 조건에 따라서   
+경찰차 A가 해결하려 움직이거나 / 경찰차 B가 해결하려 움직이거나 2가지 방법이 있다.   
+따라서 dp[][]를 dp[A가 움직인 경우][B가 움직인경우]로 분리하여 풀이해야한다.   
+경찰차 A,B의 현재 위치를 A,B, 다음 사건을 next라고 한다면   
+dp[A,B] = min(dp[next][B] + dist(A,X) , dp[A][next] + dist(B,X)) 이다.   
+예를들어 이동하려는 케이스가 3번 사건 (2,3)이다.   
+그렇다면 A에서 이동하는 경우, B에서 이동하는 경우가 있다.   
+그리고 A가 사건1,2번에 있거나 B가 사건1,2에 있거나의 경우가 있다.   
+dp[2][0] = min(dp[3][0] + dist(2,3,A경찰차) , dp[2][3] + dist(0,3,B경찰차)   
+dp[0][2] = min(dp[0][3] + dist(2,3,B경찰차) , dp[3][2] + dist(0,3,A경찰차)   
+로 나눌 수 있다.   
+그렇다면   
+dp[2][0] = min(0 + 5 , 0 + 3)   
+dp[0][2] = min(0 + 5 , 0 + 3)   
+과 같이 된다.   
 
 ```
+import Foundation
+func solution(){
+    let n = Int(readLine()!)!
+    let w = Int(readLine()!)!
+    var accident: [(Int,Int)] = []
+    for _ in 0..<w {
+        let input = readLine()!.split(separator: " ").map{Int($0)!}
+        accident.append((input[0], input[1]))
+    }
+    //print(accident)
+    var dp = Array(repeating: Array(repeating: 0, count: w+1), count: w+1)
+    for i in 1...w {
+        let next = w - i + 1
+        for j in 0..<w-i {
+            //print(w-i, j, next,j, w-i,next, w-i,next, j,next)
+            dp[w-i][j] = min(dp[next][j] + dist(w-i, next, false) , dp[w-i][next] + dist(j, next, true))
+            dp[j][w-i] = min(dp[j][next] + dist(w-i, next, true) , dp[next][w-i] + dist(j, next, false))
+        }
+    }
+//    for i in 0...w {
+//        print(dp[i])
+//    }
+    print(min(dp[0][1] + dist(0,1,true) , dp[1][0] + dist(0,1,false)))
+    trace(0, 0)
+    
+    
+    func dist(_ a: Int, _ b: Int, _ type: Bool) -> Int {
+        var A = (0,0)
+        if a == 0 {
+            if !type {
+                A = (1,1)
+            } else {
+                A = (n,n)
+            }
+        } else {
+            A = accident[a-1]
+        }
+        let B = accident[b-1]
+        return abs(A.0-B.0) + abs(A.1-B.1)
+    }
+    
+    func trace(_ a: Int, _ b: Int) {
+        let next = max(a,b) + 1
+        guard next <= w else { return }
+        if dp[a][next] + dist(b,next,true) > dp[next][b] + dist(a,next,false) {
+            print("1")
+            trace(next, b)
+        } else {
+            print("2")
+            trace(a, next)
+        }
+    }
+}
+solution()
+```
+솔직히 너무 복잡한 동적계획법이었다.   
