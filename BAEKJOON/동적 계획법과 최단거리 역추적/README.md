@@ -475,3 +475,56 @@ func solution(){
 solution()
 ```
 솔직히 너무 복잡한 동적계획법이었다.   
+
+## 13913 숨박꼭질 4
+-1로 초기화된 배열을 이동할때마다 해당 값으로 바꿔주고,   
+한 서클을 돌렸다면 cnt를 +1 해줌으로서 횟수를 셀 수 있다.   
+k를 방문한 순간 탈출하도록 코드를 짜서 횟수를 구하고,   
+result[k]를 역으로 찾으면서 -1이 될때까지 반복문을 실행하여 경로를 찾아낸다.   
+```
+import Foundation
+func solution(){
+    let input = readLine()!.split(separator: " ").map{Int($0)!}
+    var (n,k) = (input[0],input[1])
+    var result = Array(repeating: -1 , count: 100001)
+    var visited = Array(repeating: false, count: 100001)
+    var q: [Int] = []
+    var cnt = 0
+    
+    func bfs(_ start: Int) {
+        q.append(start)
+        visited[start] = true
+        
+        while !visited[k] {
+            cnt += 1
+            for _ in 0..<q.count {
+                let cur = q.removeFirst()
+                for i in [cur+1, cur-1, cur*2] {
+                    if 0...100000 ~= i && !visited[i]{
+                        q.append(i)
+                        result[i] = cur
+                        visited[i] = true
+                    }
+                }
+            }
+            
+        }
+    }
+    
+    bfs(n)
+    print(cnt)
+    var value = result[k]
+    var ans: [Int] = []
+    ans.append(k)
+    while value != -1 {
+        ans.append(value)
+        value = result[value]
+        
+    }
+    print(ans.reversed().map{String($0)}.joined(separator: " "))
+    
+}
+solution()
+
+
+```
