@@ -528,3 +528,99 @@ solution()
 
 
 ```
+## 9019 DSLR
+필요한 기능들을(DSLR)을 넣어 bfs로 풀이하였다.   
+
+```
+import Foundation
+func solution(){
+    let t = Int(readLine()!)!
+    for _ in 0..<t {
+        let input = readLine()!.split(separator: " ").map{Int($0)!}
+        var (num1,num2) = (input[0],input[1])
+//        var arr = String(input[0]).map{Int(String($0))!}
+//        var arr2 = String(input[1]).map{Int(String($0))!}
+        var result: [String] = Array(repeating: "", count: 10001)
+        var visited = Array(repeating: false, count: 10001)
+        var q: [Int] = []
+        var idx = 0
+        //print(arr1,arr2)
+        
+        func bfs(_ start: Int) {
+            visited[start] = true
+            q.append(start)
+            
+            while !visited[num2] {
+                let cur = q[idx]
+                idx += 1
+                
+                let D = (2*cur) % 10000
+                var S = cur-1
+                if S == 0 {
+                    S = 9999
+                }
+                var arr = String(cur).map{Int(String($0))!}
+                if arr.count <= 3 {
+                    for _ in 0..<4-arr.count {
+                        arr.append(0)
+                    }
+                    arr.reverse()
+                }
+                var Ltemp = arr[0]
+                for i in 0..<3 {
+                    arr[i] = arr[i+1]
+                }
+                arr[3] = Ltemp
+                var L = Int(arr.map{String($0)}.joined(separator: ""))!
+                
+                
+                arr = String(cur).map{Int(String($0))!}
+                if arr.count <= 3 {
+                    for _ in 0..<4-arr.count {
+                        arr.append(0)
+                    }
+                    arr.reverse()
+                }
+                var Rtemp = arr[3]
+                for i in stride(from: 3, through: 1, by: -1) {
+                    arr[i] = arr[i-1]
+                }
+                arr[0] = Rtemp
+                var R = Int(arr.map{String($0)}.joined(separator: ""))!
+                
+                // D
+                if !visited[D] {
+                    q.append(D)
+                    visited[D] = true
+                    result[D] = result[cur] + "D"
+                }
+                // S
+                if !visited[S] {
+                    q.append(S)
+                    visited[S] = true
+                    result[S] = result[cur] + "S"
+                }
+                // L
+                if !visited[L] {
+                    q.append(L)
+                    visited[L] = true
+                    result[L] = result[cur] + "L"
+                }
+                // R
+                if !visited[R] {
+                    q.append(R)
+                    visited[R] = true
+                    result[R] = result[cur] + "R"
+                }
+            }
+            
+        }
+        
+        bfs(num1)
+        print(result[num2])
+    }
+}
+solution()
+
+
+```
