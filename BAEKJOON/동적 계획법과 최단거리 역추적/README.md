@@ -624,3 +624,64 @@ solution()
 
 
 ```
+풀이방식은 똑같으나 저장을 숫자로 한 뒤 해당 숫자가 나왔을때   
+숫자를 cmd배열을 돌면서 해당 명령어들을 다시 출력해준다.    
+그리고 l과 r을 배열로 돌려 하는게 아닌 %1000 * 10 + num/1000과   
+%10 * 1000 + self/10 으로 수행 할 수 있다.   
+```
+import Foundation
+
+let cmd = ["","D","S","L","R"]
+extension Int {
+    var d: Int {
+        return self * 2 % 10000
+    }
+    var s: Int {
+        return self - 1 < 0 ? 9999 : self - 1
+    }
+    var l: Int {
+        return (self % 1000) * 10 + self / 1000
+    }
+    var r: Int {
+        return (self % 10) * 1000 + self / 10
+    }
+}
+
+func solution(){
+    let t = Int(readLine()!)!
+    for _ in 0..<t {
+        let input = readLine()!.split(separator: " ").map { Int($0)! }
+        let a = input[0], b = input[1]
+        var visited = [Bool](repeating: false, count: 10_001)
+        visited[a] = true
+        var q = [(a, 0)]
+        var idx = 0
+        
+        while q.count > idx {
+            let num = q[idx].0
+            let command = q[idx].1
+            visited[num] = true
+            
+            if num == b {
+                var answer = ""
+                for i in String(command) {
+                    answer += cmd[Int(String(i))!]
+                }
+                print(answer)
+                break
+            }
+            
+            for (idx, n) in [num.d,num.s,num.l,num.r].enumerated() {
+                if !visited[n] {
+                    visited[n] = true
+                    q.append((n,command * 10 + idx + 1))
+                }
+            }
+            idx += 1
+        }
+    }
+}
+solution()
+
+
+```
