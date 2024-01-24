@@ -687,7 +687,6 @@ solution()
 ```
 ## 11779 최소비용 구하기2
 다익스트라로 풀이하면서, 경로가 바뀔떄마다 경로또한 변경해주는 방식으로 풀이하였다.   
-하지만 실패하였다.   
 ```
 import Foundation
 struct Heap <T: Comparable> {
@@ -808,9 +807,52 @@ func solution(){
     }
     dijkstra(start)
     print(result[goal])
+    print(resultList[goal].count)
     print(resultList[goal].map{String($0)}.joined(separator: " "))
 }
 solution()
 
+```
+before의 개념으로 이동했다면 이동하기전 node를 기록해둔다.   
+그리고 역순으로 되돌아가다 보면 경로를 저장할 수 도 있다.   
+```
+func solution(){
+    var result: [Int] = Array(repeating: Int.max, count: n+1)
+    var resultList = [Int](repeating: -1, count: n+1)
+    
+    func dijkstra(_ start: Int) {
+        var q = Heap<Node>()
+        result[start] = 0
+        resultList[start] = 0
+        q.push(Node(node: start, cost: 0))
+        
+        while !q.isEmpty() {
+            let cur = q.pop()
+            let node = cur!.node
+            let cost = cur!.cost
+            if cost > result[node] { continue }
+            
+            let edge = graph[node]
+            for next in edge! {
+                if result[next.node] > next.cost + cost {
+                    result[next.node] = next.cost + cost
+                    resultList[next.node] = node
+                    q.push(Node(node: next.node, cost: result[next.node]))
+                    
+                }
+            }
+        }
+    }
 
+    dijkstra(start)
+    print(result[goal])
+    var route = goal
+    var ans: [Int] = []
+    while resultList[route] != -1 {
+        ans.append(route)
+        route = resultList[route]
+    }
+    print(ans.reversed().map{String($0)}.joined(separator: " "))
+}
+solution()
 ```
