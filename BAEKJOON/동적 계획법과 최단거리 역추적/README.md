@@ -685,3 +685,132 @@ solution()
 
 
 ```
+## 11779 최소비용 구하기2
+다익스트라로 풀이하면서, 경로가 바뀔떄마다 경로또한 변경해주는 방식으로 풀이하였다.   
+하지만 실패하였다.   
+```
+import Foundation
+struct Heap <T: Comparable> {
+    var heap = [T]()
+    
+    private func getParent(_ index: Int) -> T {
+        heap[index / 2]
+    }
+    
+    private func getLeftChild(_ index: Int) -> T {
+        heap[index * 2]
+    }
+    
+    private func getRightChild(_ index: Int) -> T {
+        heap[index * 2 + 1]
+    }
+    
+    func isEmpty() -> Bool {
+        heap.count <= 1
+    }
+    
+    func count() -> Int {
+        return heap.count
+    }
+    
+    mutating func push(_ data: T) {
+        if isEmpty() { heap.append(data) }
+        var index = heap.count
+        heap.append(data)
+        
+        while index > 1 {
+            let parent = getParent(index)
+            guard parent > data else { break }
+            heap[index] = parent
+            index /= 2
+        }
+        heap[index] = data
+    }
+    mutating func pop() -> T? {
+        guard !isEmpty() else { return nil }
+        let item = heap[1]
+        let data = heap.removeLast()
+        let size = heap.count - 1
+        
+        guard !isEmpty() else { return item }
+        var (parent, child) = (1, 2)
+        while child <= size {
+            if child < size && getLeftChild(parent) > getRightChild(parent) {
+                child += 1
+            }
+            guard data > heap[child] else { break }
+            heap[parent] = heap[child]
+            parent = child
+            child *= 2
+        }
+        heap[parent] = data
+        return item
+    }
+}
+
+struct Node: Comparable {
+    static func < (lhs: Node, rhs: Node) -> Bool {
+        lhs.cost < rhs.cost
+    }
+    
+    init(node: Int, cost: Int) {
+        self.node = node
+        self.cost = cost
+    }
+    
+    let node: Int
+    let cost: Int
+}
+
+func solution(){
+    let n = Int(readLine()!)!
+    let m = Int(readLine()!)!
+    var graph = [Int:[Node]]()
+    for i in 1...n {
+        graph[i] = []
+    }
+    for _ in 0..<m {
+        let input = readLine()!.split(separator: " ").map{Int($0)!}
+        graph[input[0]]!.append(Node(node: input[1], cost: input[2]))
+    }
+    //print(graph)
+    let input = readLine()!.split(separator: " ").map{Int($0)!}
+    let (start, goal) = (input[0],input[1])
+    var result: [Int] = Array(repeating: Int.max, count: n+1)
+    var resultList = Array(repeating: [Int](), count: n+1)
+    
+    func dijkstra(_ start: Int) {
+        var q = Heap<Node>()
+        var visited = Array(repeating: false, count: n+1)
+        result[start] = 0
+        resultList[start].append(start)
+        q.push(Node(node: start, cost: 0))
+        
+        while !q.isEmpty() {
+            let cur = q.pop()
+            let node = cur!.node
+            let cost = cur!.cost
+            if !visited[node] {
+                visited[node] = true
+                let edge = graph[node]
+                
+                for next in edge! {
+                    if result[next.node] > next.cost + cost {
+                        result[next.node] = next.cost + cost
+                        var value = resultList[node]
+                        value.append(next.node)
+                        q.push(Node(node: next.node, cost: result[next.node]))
+                        resultList[next.node] = value
+                    }
+                }
+            }
+        }
+    }
+    dijkstra(start)
+    print(result[goal])
+    print(resultList[goal].map{String($0)}.joined(separator: " "))
+}
+solution()
+
+
+```
