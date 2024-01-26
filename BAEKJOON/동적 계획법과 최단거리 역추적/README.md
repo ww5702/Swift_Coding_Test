@@ -856,3 +856,70 @@ func solution(){
 }
 solution()
 ```
+## 11780 플로이드 2
+도시의 크기가 100개 미만이므로 플로디으 워셜 알고리즘을 사용하기에 문제가 없다.   
+해당 알고리즘을 통해 도시로부터 도시까지의 최소 거리를 구해주고,   
+만약 k라는 경유지를 들려서 갈때 최단 거리가 갱신되어 들리게 된다면,   
+route[i][j]는 route[i][k]까지의 경로 + k + route[k][j]가 된다.   
+그리고 갈 수 없는 경로인 Int.max는 0으로 변환시키고,   
+조건에 맞춰서 출력해준다.   
+```
+import Foundation
+func solution(){
+    let n = Int(readLine()!)!
+    let m = Int(readLine()!)!
+    var graph = [[Int]](repeating: [Int](repeating: Int.max, count: n+1), count: n+1)
+    var routes = Array(repeating: Array(repeating: [Int](), count: n+1), count: n+1)
+    for _ in 0..<m {
+        let input = readLine()!.split(separator: " ").map{Int($0)!}
+        graph[input[0]][input[1]] = min(graph[input[0]][input[1]], input[2])
+    }
+    //print(graph)
+    for node in 1...n {
+        graph[node][node] = 0
+    }
+    for k in 1...n {
+        for i in 1...n {
+            for j in 1...n {
+                if graph[i][k] != Int.max && graph[k][j] != Int.max {
+                    if graph[i][j] > graph[i][k] + graph[k][j] {
+                        graph[i][j] = graph[i][k] + graph[k][j]
+                        var original = routes[i][j]
+                        var new = routes[i][k]
+                        new.append(k)
+                        routes[i][j] = new + routes[k][j]
+                        
+                    }
+                }
+            }
+        }
+    }
+    for i in 1...n {
+        for j in 1...n {
+            if graph[i][j] == Int.max {
+                graph[i][j] = 0
+            }
+        }
+    }
+    for i in 1...n {
+        print(graph[i][1...].map{String($0)}.joined(separator: " "))
+    }
+    for i in 1...n {
+        for j in 1...n {
+            if graph[i][j] == 0 { print(0) }
+            else {
+                let cnt = 2 + routes[i][j].count
+                let route = routes[i][j].map{String($0)}.joined(separator: " ")
+                if route.count != 0 {
+                    print(cnt, i, route, j)
+                } else {
+                    print(cnt, i, j)
+                }
+                
+            }
+        }
+    }
+}
+solution()
+
+```
