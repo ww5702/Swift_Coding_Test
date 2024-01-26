@@ -130,5 +130,5 @@ var inupt = readLine()!.split(separator:" ").map{String($0)}
 ```
 ## [트리](https://github.com/ww5702/Swift_Coding_Test/tree/main/BAEKJOON/%ED%8A%B8%EB%A6%AC)   
 ```
-11725 / 
+11725 / 1167 / 
 ```
