@@ -221,3 +221,50 @@ func solution(){
 solution()
 
 ```
+## 5639 이진 검색 트리
+해당 문제를 트리에 넣고 후위탐색을 할 경우 시간초과가 난다.   
+따라서 해당 전위탐색을 한 결과로 후위탐색을 실행할 줄 알아야 한다.   
+문제의 전위탐색 순서인   
+50 30 24 5 28 45 98 52 60에서   
+50이 루트노드   
+30부터 왼쪽   
+98부터 오른쪽을 담당하고 있다.   
+배열이 정렬되어 있지는 않지만 L < 루트 < R의 모습을 띄고 있는것을 알 수 있다.   
+이럴 경우 이분탐색을 통해 R을 찾을 수 있다.   
+오른쪽 노드를 찾은 뒤   
+후위 탐색인 왼쪽 -> 오른쪽 -> 루트 이 순서로 진행한다.   
+```
+import Foundation
+func solution(){
+    var pre: [Int] = []
+    while let input = readLine(), let n = Int(input) {
+        pre.append(n)
+    }
+    //print(pre)
+    func binarySearch(_ start: Int, _ end: Int, _ goal: Int) -> Int {
+        var start = start, end = end
+        
+        while start < end {
+            let mid = (start+end)/2
+            if goal < pre[mid] {
+                end = mid
+            } else {
+                start = mid + 1
+            }
+        }
+        return start
+    }
+    
+    func postOrder(_ start: Int, _ end: Int) {
+        if start >= end { return }
+        let index = binarySearch(start, end, pre[start])
+        postOrder(start+1, index)
+        postOrder(index, end)
+        print(pre[start])
+    }
+    postOrder(0, pre.count)
+}
+solution()
+
+```
+   
