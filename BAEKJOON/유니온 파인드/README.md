@@ -48,3 +48,54 @@ func solution(){
 solution()
 
 ```
+## 1976 여행가자
+갈수있는지 없는지 확인하는 문제이다.   
+물론 bfs,dfs가 효율도 좋고 빠르지만   
+유니온 파인드로도 풀수 있는지 없는지 확인해보라는 문제이다.   
+그리고 물론 도시가 200개 이하라서 가능했다.   
+
+```
+import Foundation
+func solution(){
+    
+    func find(_ x: Int) -> Int {
+        if parent[x] == x { return x }
+        else {
+            parent[x] = find(parent[x])
+            return parent[x]
+        }
+    }
+    func union(_ a: Int, _ b: Int) {
+        let a = find(a)
+        let b = find(b)
+        if (a != b) {
+            parent[b] = a
+        }
+    }
+    let n = Int(readLine()!)!
+    let m = Int(readLine()!)!
+    var parent = [Int](0...n)
+    for i in 0..<n {
+        let value = readLine()!.split(separator: " ").map{Int($0)!}
+        for j in 0..<n {
+            if value[j] == 0 { continue }
+            else {
+                union(i+1, j+1)
+            }
+        }
+    }
+    //print(parent)
+    let plan = readLine()!.split(separator: " ").map{Int($0)!}
+    var check = find(plan[0])
+    var isPossible = true
+    for i in 1..<plan.count {
+        if check != find(plan[i]) {
+            isPossible = false
+            break
+        }
+    }
+    print(isPossible ? "YES" : "NO")
+}
+solution()
+
+```
