@@ -136,3 +136,55 @@ func solution(){
 solution()
 
 ```
+## 1991 트리 순회
+주어진 트리에서 부모노드를 출력후 왼쪽 오른쪽을 방문할지   
+왼쪽 방문후 부모노드 출력 오른쪽노드 방문할지   
+왼쪽 오른쪽 방문 후 부모노드를 출력할지 정하면 된다.   
+```
+import Foundation
+struct Node {
+    let left: String
+    let right: String
+}
+func solution(){
+    let n = Int(readLine()!)!
+    var tree: [String:Node] = [:]
+    for _ in 0..<n {
+        let input = readLine()!.split(separator: " ").map{String($0)}
+//        print(input)
+        tree[input[0]] = Node(left: input[1], right:input[2])
+    }
+    //print(tree)
+    
+    func pre(_ node: String) {
+        if node == "." { return }
+        print(node, terminator: "")
+        pre(tree[node]!.left)
+        pre(tree[node]!.right)
+    }
+    
+    func inorder(_ node: String) {
+        if node == "." { return }
+        inorder(tree[node]!.left)
+        print(node, terminator: "")
+        inorder(tree[node]!.right)
+        
+    }
+    
+    func post(_ node: String) {
+        if node == "." { return }
+        post(tree[node]!.left)
+        post(tree[node]!.right)
+        print(node, terminator: "")
+    }
+    
+    pre("A")
+    print()
+    inorder("A")
+    print()
+    post("A")
+    
+}
+solution()
+
+```
