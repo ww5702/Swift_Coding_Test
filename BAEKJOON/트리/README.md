@@ -267,4 +267,70 @@ func solution(){
 solution()
 
 ```
-   
+## 4803 트리
+간선의 갯수가 어쩌고, 총 2개가 있고 자시고   
+사이클이 형성되는지 아닌지만 확인해주면 된다.   
+단 prev, cur을 준비하여 전에 왔던 곳인지 아닌지 확인하고   
+사이클이 형성되는 경우 false, 아니라면 true를 반환한다.   
+만약 true라면 트리가 하나 있는것이다.    
+```
+import Foundation
+func solution(){
+    var cnt = 0
+    while true {
+        let input = readLine()!.split(separator: " ").map{Int(String($0))!}
+        let (n,m) = (input[0],input[1])
+        if n == 0 && m == 0 { break }
+        cnt += 1
+        
+        var graph = [[Int]](repeating: [], count: n+1)
+        var visited = Array(repeating: false, count: n+1)
+        for _ in 0..<m {
+            let value = readLine()!.split(separator: " ").map{Int(String($0))!}
+            graph[value[0]].append(value[1])
+            graph[value[1]].append(value[0])
+        }
+        
+        func dfs(_ prev: Int, _ cur: Int) -> Bool {
+            visited[cur] = true
+            
+            for next in graph[cur] {
+                // 다음갈 노드가 이전과 같은경우 같은 경로로 오게되므로 무시
+                if next == prev { continue }
+                
+                // 이미 방문한 노드일 경우 사이클이 생기므로 false
+                if visited[next] { return false }
+                
+                // 사이클이 생길경우 false
+                if !dfs(cur, next) {
+                    return false
+                }
+                
+            }
+            
+            return true
+        }
+        
+        var tree = 0
+        for node in 1...n {
+            if !visited[node] {
+                if dfs(0,node) {
+                    tree += 1
+                }
+            }
+        }
+        if tree == 0 {
+            print("Case \(cnt): No trees.")
+        } else if tree == 1 {
+            print("Case \(cnt): There is one tree.")
+        } else {
+            print("Case \(cnt): A forest of \(tree) trees.")
+        }
+    }
+    
+    
+    
+}
+solution()
+
+```
