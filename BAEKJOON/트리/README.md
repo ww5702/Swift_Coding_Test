@@ -188,3 +188,36 @@ func solution(){
 solution()
 
 ```
+## 2263 
+후위 순회의 끝값은 항상 루트노드인 점을 이용하여 풀이하는 방식이다.   
+찾아낸 루트노드값을 출력해주고 left, right를 방문해준다.   
+하지만 이해가 완벽하게 되지는 않았다.   
+```
+import Foundation
+func solution(){
+    let n = Int(readLine()!)!
+    var inorder = readLine()!.split(separator: " ").map{Int(String($0))!}
+    inorder.insert(0, at: 0)
+    var postorder = readLine()!.split(separator: " ").map{Int(String($0))!}
+    postorder.insert(0, at: 0)
+    var index = Array(repeating: 0, count: n+1)
+    for i in 1...n {
+        index[inorder[i]] = i
+    }
+    func getPreOrder(_ instart: Int, _ inend: Int, _ poststart: Int, _ postend: Int) {
+        if instart > inend || poststart > postend { return }
+        
+        var rootIndex = index[postorder[postend]]
+        var left = rootIndex - instart
+        var right = inend - rootIndex
+        print(inorder[rootIndex], terminator: " ")
+        
+        getPreOrder(instart, rootIndex-1, poststart, poststart + left - 1)
+        getPreOrder(rootIndex + 1, inend, poststart + left, postend - 1)
+    }
+    
+    getPreOrder(1, n, 1, n)
+}
+solution()
+
+```
