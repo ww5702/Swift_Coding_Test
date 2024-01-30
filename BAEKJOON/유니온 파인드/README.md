@@ -149,3 +149,50 @@ func solution(){
 solution()
 
 ```
+## 20040 사이클 게임
+union을 진행하다가   
+만약 parent[a], parent[b]가 같은 순간이 있다면   
+해당 순간이 사이클이 형성되는 순간이다.   
+
+```
+import Foundation
+func solution(){
+    var isCycle = false
+    
+    func find(_ x: Int) -> Int {
+        if parent[x] == x { return x }
+        else {
+            parent[x] = find(parent[x])
+            return parent[x]
+        }
+    }
+    func union(_ a: Int, _ b: Int) {
+        let a = find(a)
+        let b = find(b)
+        if (a != b) {
+            parent[b] = a
+        } else {
+            isCycle = true
+        }
+    }
+    
+    let input = readLine()!.split(separator: " ").map{Int($0)!}
+    let (n,m) = (input[0],input[1])
+    var parent = [Int](0...n)
+    
+    for i in 0..<m {
+        let input = readLine()!.split(separator: " ").map{Int($0)!}
+        let left = input[0]
+        let right = input[1]
+        
+        union(left,right)
+        if isCycle {
+            print(i+1)
+            break
+        }
+    }
+    if !isCycle { print(0) }
+}
+solution()
+
+```
