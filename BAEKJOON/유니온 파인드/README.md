@@ -99,7 +99,7 @@ func solution(){
 solution()
 
 ```
-## 4195 
+## 4195 별자리 만들기
 기존의 parent를 string:string으로 바꿔준뒤   
 연결된 친구를 셀 cnt 또한 String:Int 로 만들어준다.   
 친구가 두명 나오는데 전부 왼쪽 친구를 기준으로 union시켜준다고 가정하고   
@@ -256,7 +256,7 @@ solution()
 ```
 ## 1774 우주신과의 교감
 이미 연결되어있는 간선이 존재한다는 것 빼고는 전부 같은 방식의 문제이다.   
-
+그리고 출력시 4.0을 4.00으로 해야한다는 점이 좀 다르다.   
 ```
 import Foundation
 func solution(){
