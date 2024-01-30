@@ -135,5 +135,5 @@ var inupt = readLine()!.split(separator:" ").map{String($0)}
 ```
 ## [유니온 파인드](https://github.com/ww5702/Swift_Coding_Test/tree/main/BAEKJOON/%EC%9C%A0%EB%8B%88%EC%98%A8%20%ED%8C%8C%EC%9D%B8%EB%93%9C)   
 ```
-1717 / 1976
+1717 / 1976 / 4195 / 20040
 ```
