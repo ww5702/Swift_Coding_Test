@@ -24,3 +24,51 @@ func solution(){
 solution()
 
 ```
+## 1197 최소 스패닝 트리
+최소 신장 트리의 기본을 묻는 문제이다.   
+
+```
+import Foundation
+func solution(){
+    let input = readLine()!.split(separator: " ").map{Int($0)!}
+    let (n,m) = (input[0],input[1])
+    
+    func find(_ x: Int) -> Int {
+        if parent[x] == x { return x }
+        else {
+            parent[x] = find(parent[x])
+            return parent[x]
+        }
+    }
+    func union(_ a: Int, _ b: Int) {
+        let a = find(a)
+        let b = find(b)
+        if (a != b) {
+            parent[b] = a
+        }
+    }
+    
+    var parent = [Int](0...n)
+    var graph: [(Int,Int,Int)] = []
+    for _ in 0..<m {
+        let input = readLine()!.split(separator: " ").map{Int($0)!}
+        graph.append((input[0],input[1],input[2]))
+    }
+    graph.sort(by: {$0.2 < $1.2})
+//    print(graph)
+    var line = 0
+    var result = 0
+    for i in 0..<m {
+        if line == n-1 { break }
+        let cur = graph[i]
+        if find(cur.0) != find(cur.1) {
+            union(cur.0, cur.1)
+            line += 1
+            result += cur.2
+        }
+    }
+    print(result)
+}
+solution()
+
+```
