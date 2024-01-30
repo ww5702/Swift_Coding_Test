@@ -196,3 +196,61 @@ func solution(){
 solution()
 
 ```
+## 4386 별자리 만들기
+좌표라고 어렵게 생각하지말고 3가지 좌표가 있다면 순서를 Int로 생각해   
+해당 별에서부터 나머지별까지의 값을 저장해준다고 생각하면 편하다.    
+그리고 해당 거리들중 가장 작은 거리들을 우선적으로 선택해 간선을 이어준다.   
+
+```
+import Foundation
+func solution(){
+    let n = Int(readLine()!)!
+    func find(_ x: Int) -> Int {
+        if parent[x] == x { return x }
+        else {
+            parent[x] = find(parent[x])
+            return parent[x]
+        }
+    }
+    func union(_ a: Int, _ b: Int) {
+        let a = find(a)
+        let b = find(b)
+        if (a != b) {
+            parent[b] = a
+        }
+    }
+    
+    var parent = [Int](0...n)
+    var stars: [(Double,Double)] = []
+    var distanceStar: [(Int,Int,Double)] = []
+    var result: Double = 0.0
+    
+    for _ in 0..<n {
+        let input = readLine()!.split(separator: " ").map{Double($0)!}
+        stars.append((input[0],input[1]))
+    }
+    for i in 0..<n {
+        for j in i+1..<n {
+            //print(stars[i],stars[j])
+            let x = pow((stars[i].0 - stars[j].0),2)
+            let y = pow((stars[i].1 - stars[j].1),2)
+            distanceStar.append((i,j,sqrt(x+y)))
+        }
+    }
+    //print(distanceStar)
+    distanceStar.sort{$0.2 < $1.2}
+    var line = 0
+    for i in 0..<distanceStar.count {
+        if line == n-1 { break }
+        if find(distanceStar[i].0) != find(distanceStar[i].1) {
+            result += distanceStar[i].2
+            line += 1
+            union(distanceStar[i].0, distanceStar[i].1)
+        }
+        
+    }
+    print(round(result*100)/100)
+}
+solution()
+
+```
