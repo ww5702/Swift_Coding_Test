@@ -99,3 +99,53 @@ func solution(){
 solution()
 
 ```
+## 4195 
+기존의 parent를 string:string으로 바꿔준뒤   
+연결된 친구를 셀 cnt 또한 String:Int 로 만들어준다.   
+친구가 두명 나오는데 전부 왼쪽 친구를 기준으로 union시켜준다고 가정하고   
+합쳐질때마다 왼쪽친구에게 + 오른쪽친구의 cnt 값을 더해준다.   
+
+```
+import Foundation
+func solution(){
+    let t = Int(readLine()!)!
+    for _ in 0..<t {
+        func find(_ x: String) -> String {
+            if parent[x] == x { return x }
+            else {
+                parent[x] = find(parent[x]!)
+                return parent[x]!
+            }
+        }
+        func union(_ a: String, _ b: String) {
+            let a = find(a)
+            let b = find(b)
+            if (a != b) {
+                parent[b] = a
+                cnt[a]! += cnt[b]!
+            }
+        }
+        let f = Int(readLine()!)!
+        var parent = [String:String]()
+        var cnt = [String:Int]()
+        for _ in 0..<f {
+            let input = readLine()!.split(separator: " ").map{String($0)}
+            if !parent.keys.contains(input[0]) {
+                parent[input[0]] = input[0]
+                cnt[input[0]] = 1
+            }
+            if !parent.keys.contains(input[1]) {
+                parent[input[1]] = input[1]
+                cnt[input[1]] = 1
+            }
+            union(input[0],input[1])
+            print(cnt[find(input[0])]!)
+        }
+    }
+    
+    
+    
+}
+solution()
+
+```
