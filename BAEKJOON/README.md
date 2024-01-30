@@ -137,3 +137,7 @@ var inupt = readLine()!.split(separator:" ").map{String($0)}
 ```
 1717 / 1976 / 4195 / 20040
 ```
+## [최소 신장 트리](https://github.com/ww5702/Swift_Coding_Test/tree/main/BAEKJOON/%EC%B5%9C%EC%86%8C%20%EC%8B%A0%EC%9E%A5%20%ED%8A%B8%EB%A6%AC)   
+```
+
+```
