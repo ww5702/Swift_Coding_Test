@@ -254,3 +254,69 @@ func solution(){
 solution()
 
 ```
+## 1774 
+이미 연결되어있는 간선이 존재한다는 것 빼고는 전부 같은 방식의 문제이다.   
+
+```
+import Foundation
+func solution(){
+    let input = readLine()!.split(separator: " ").map{Int($0)!}
+    let (n,m) = (input[0],input[1])
+    
+    func find(_ x: Int) -> Int {
+        if parent[x] == x { return x }
+        else {
+            parent[x] = find(parent[x])
+            return parent[x]
+        }
+    }
+    func union(_ a: Int, _ b: Int) {
+        let a = find(a)
+        let b = find(b)
+        if a < b {
+            parent[b] = a
+        } else {
+            parent[a] = b
+        }
+    }
+    
+    var parent = [Int](0...n)
+    var gods: [(Int,Int)] = []
+    var distanceGods: [(Int,Int,Double)] = []
+    var result: Double = 0.0
+    var line = 0
+    
+    for _ in 0..<n {
+        let input = readLine()!.split(separator: " ").map{Int($0)!}
+        gods.append((input[0],input[1]))
+    }
+    for _ in 0..<m {
+        let input = readLine()!.split(separator: " ").map{Int($0)!}
+        union(input[0], input[1])
+        line += 1
+    }
+    for i in 0..<gods.count-1 {
+        for j in i+1..<gods.count {
+            //print(stars[i],stars[j])
+            let x = pow((Double(gods[i].0) - Double(gods[j].0)),2)
+            let y = pow((Double(gods[i].1) - Double(gods[j].1)),2)
+            distanceGods.append((i,j,sqrt(x+y)))
+        }
+    }
+    //print(distanceGods)
+    distanceGods.sort{$0.2 < $1.2}
+
+    for i in 0..<distanceGods.count {
+        if line == n-1 { break }
+        if find(distanceGods[i].0) != find(distanceGods[i].1) {
+            result += distanceGods[i].2
+            line += 1
+            union(distanceGods[i].0, distanceGods[i].1)
+        }
+        
+    }
+    print(String(format: "%.2f", result))
+}
+solution()
+
+```
