@@ -196,3 +196,53 @@ func solution(){
 solution()
 
 ```
+## 6497 전력난
+크루스칼 알고리즘을 이용하면서 길이 이어지면 총 전력에서 - 해주면 된다.   
+```
+import Foundation
+func solution(){
+    let input = readLine()!.split(separator: " ").map{Int($0)!}
+    let (m,n) = (input[0],input[1])
+    
+    func find(_ x: Int) -> Int {
+        if parent[x] == x { return x }
+        else {
+            parent[x] = find(parent[x])
+            return parent[x]
+        }
+    }
+    func union(_ a: Int, _ b: Int) {
+        let a = find(a)
+        let b = find(b)
+        if a < b {
+            parent[b] = a
+        } else {
+            parent[a] = b
+        }
+    }
+    
+    var parent = [Int](0...m)
+    var graph: [(Int,Int,Int)] = []
+    var result = 0
+    for _ in 0..<n {
+        let input = readLine()!.split(separator: " ").map{Int($0)!}
+        graph.append((input[0],input[1],input[2]))
+        result += input[2]
+    }
+    graph.sort(by: {$0.2 < $1.2})
+    //print(graph)
+    var line = 0
+    for i in 0..<n {
+        if line == n-1 { break }
+        let cur = graph[i]
+        if find(cur.0) != find(cur.1) {
+            union(cur.0, cur.1)
+            line += 1
+            result -= cur.2
+        }
+    }
+    print(result)
+}
+solution()
+
+```
