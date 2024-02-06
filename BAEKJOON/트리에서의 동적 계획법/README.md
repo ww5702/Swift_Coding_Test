@@ -37,3 +37,71 @@ func solution(){
 solution()
 
 ```
+## 2213 트리의 독립집합
+그래프에서 정점의 부분 집합에 속한 모든 정점이 서로 연결되어있지 않으면   
+해당 부분 집합을 독립집합이라고 한다.   
+즉, 부모노드를 선택했다면 자식노드를 선택할 수 없고, 반대로 부모노드를 선택하지 않았다면, 자식노드를 선택 할 수 있다.   
+따라서 dp테이블을 2차원으로 만들고, 해당 노드를 선택한 경우 누적된 독립집합의 크기와 선택하지 않은 경우 모두를 저장한다.    
+1번 노드를 루트노드로 가정하고 1번노드를 선택한 경우와 안고른 경우로 나눠 최종적으로 비교해주면 된다.    
+next를 2번이라고 가정했을 때
+cache[2][0] = 2번 노드를 선택안했을 때 최대 값     
+cache[2][1] = 2번 노드를 선택했을 때 최대 값   
+이 된다.   
+
+```
+import Foundation
+func solution(){
+    let n = Int(readLine()!)!
+    var value = [0] + readLine()!.split(separator: " ").map{Int($0)!}
+    var graph = [[Int]](repeating: [], count: n+1)
+    for _ in 0..<n-1 {
+        let edge = readLine()!.split(separator: " ").map{Int($0)!}
+        graph[edge[0]].append(edge[1])
+        graph[edge[1]].append(edge[0])
+    }
+    var cache = [[Int]](repeating: [Int](repeating: 0, count: 2), count: n+1)
+    var route = [[[Int]]](repeating: [[Int]](repeating: [], count: 2), count: n+1)
+    var visited = [Bool](repeating: false, count: n+1)
+    
+//    print(cache)
+//    
+//    print(route)
+    
+    func dfs(_ node: Int) {
+        visited[node] = true
+        
+        cache[node][1] = value[node]
+        route[node][1].append(node)
+        
+        for next in graph[node] {
+            if !visited[next] {
+                dfs(next)
+                
+                if cache[next][0] > cache[next][1] {
+                    cache[node][0] += cache[next][0]
+                    route[node][0].append(contentsOf: route[next][0])
+                } else {
+                    cache[node][0] += cache[next][1]
+                    route[node][0].append(contentsOf: route[next][1])
+                }
+                
+                cache[node][1] += cache[next][0]
+                route[node][1].append(contentsOf: route[next][0])
+            }
+        }
+        
+    }
+    
+    dfs(1)
+//    print(cache)
+//    print(route)
+    if cache[1][0] > cache[1][1] {
+        print(cache[1][0])
+        print(route[1][0].sorted(by: <).map{String($0)}.joined(separator: " "))
+    } else {
+        print(cache[1][1])
+        print(route[1][1].sorted(by: <).map{String($0)}.joined(separator: " "))
+    }
+}
+solution()
+```
