@@ -152,5 +152,5 @@ var inupt = readLine()!.split(separator:" ").map{String($0)}
 ```
 ## [기하 2 단계](https://github.com/ww5702/Swift_Coding_Test/tree/main/BAEKJOON/%EA%B8%B0%ED%95%98%202%20%EB%8B%A8%EA%B3%84)   
 ```
-2166 / 
+2166 / 11758 
 ```
