@@ -105,3 +105,51 @@ func solution(){
 }
 solution()
 ```
+## 2533 사회망 서비스(SNS)
+해당 정점과 연결되어있는 위,아래 (부모,자식) 노드들은 연결된다는 논리로 접근한다.   
+2차원 배열로 만들어 해당 노드를 선택했을때, 안했을떄로 나누어 풀이한다.   
+단 dp값을 지정할때 주의할 점이 있다면   
+부모 노드가 얼리어답터였다고 자식노드가 아닌 경우로 계산할 경우   
+부모노드   
+A   
+a b c    
+와 같이 연결되어 있다고 할때   
+부모노드 + A 이렇게 두개만 얼리어답터인 경우가 부모노드 + a,b,c 인 경우보다 더 적기 때문에   
+점화식의 경우 min(cache[next][0], cache[next[1])로 계산해야 한다.   
+
+```
+import Foundation
+func solution(){
+    let n = Int(readLine()!)!
+    var graph = [[Int]](repeating: [], count: n+1)
+    for _ in 0..<n-1 {
+        let edge = readLine()!.split(separator: " ").map{Int($0)!}
+        graph[edge[0]].append(edge[1])
+        graph[edge[1]].append(edge[0])
+    }
+    //print(graph)
+    var cache = [[Int]](repeating: Array(repeating: 0, count: 2), count: n+1)
+    var visited = [Bool](repeating: false, count: n+1)
+    
+    func dfs(_ node: Int) {
+        visited[node] = true
+        cache[node][0] = 0
+        cache[node][1] = 1
+        
+        for next in graph[node] {
+            if !visited[next] {
+                dfs(next)
+                cache[node][0] += cache[next][1]
+                cache[node][1] += min(cache[next][0], cache[next][1])
+            }
+        }
+    }
+    
+    dfs(1)
+    //print(cache)
+    print(min(cache[1][0], cache[1][1]))
+    
+}
+solution()
+
+```
