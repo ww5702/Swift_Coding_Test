@@ -151,5 +151,51 @@ func solution(){
     
 }
 solution()
+```
+## 1949 우수 마을
+윗 문제들을 계속 풀다보면 같은 방식의 풀이 문제이다.    
+우수 마을을 선정하는 기준은 다음과 같다.   
+1. 해당 마을이 우수마을일때, 다음 마을은 우수마을이 될 수 없다.
+2. 해당 마을이 우수마을이 아닐때, 다음마을은 우수마을일수도 아닐수도 있다.
+위의 기준을 점화식에 적용시켜 문제를 풀이한다.   
+
+```
+import Foundation
+func solution(){
+    let n = Int(readLine()!)!
+    var value = [0] + readLine()!.split(separator: " ").map{Int($0)!}
+    var graph = [[Int]](repeating: [], count: n+1)
+    for _ in 0..<n-1 {
+        let edge = readLine()!.split(separator: " ").map{Int($0)!}
+        graph[edge[0]].append(edge[1])
+        graph[edge[1]].append(edge[0])
+    }
+    //print(graph)
+    
+    var cache = [[Int]](repeating: Array(repeating: 0, count: 2), count: n+1)
+    var visited = [Bool](repeating: false, count: n+1)
+    
+    func dfs(_ node: Int) {
+        visited[node] = true
+        cache[node][0] = 0
+        cache[node][1] = value[node]
+        
+        for next in graph[node] {
+            if !visited[next] {
+                dfs(next)
+                
+                cache[node][0] += max(cache[next][0], cache[next][1])
+                cache[node][1] += cache[next][0]
+                
+            }
+        }
+        
+    }
+    
+    dfs(1)
+    //print(cache)
+    print(max(cache[1][0], cache[1][1]))
+}
+solution()
 
 ```
