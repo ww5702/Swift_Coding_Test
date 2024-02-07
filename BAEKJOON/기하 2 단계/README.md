@@ -32,3 +32,27 @@ func solution(){
 solution()
 
 ```
+## 11758 CCW
+문제의 이름처럼 세 점을 이용해 방향성을 구하는 알고리즘인   
+CCW 알고리즘이 존재한다.   
+외적을 이용해 구할 수 있으며, 외적의 결과가 음수면 시계방향,   
+직선은 0,   
+반 시계의 방향일 경우 양수가 나온다.   
+x1*y2 + x2*y3 + x3*y1 - y1*x2 * y2*x3 + y3*x1   
+을 구하는 문제이다.   
+```
+import Foundation
+func solution(){
+    var board: [(Int,Int)] = []
+    for _ in 0..<3 {
+        let input = readLine()!.split(separator: " ").map{Int($0)!}
+        board.append((input[0],input[1]))
+    }
+    
+    let x = (board[0].0 * board[1].1 + board[1].0 * board[2].1 + board[2].0 * board[0].1)
+    let y = (board[0].1 * board[1].0 + board[1].1 * board[2].0 + board[2].1 * board[0].0)
+    print(x - y == 0 ? 0 : x-y > 0 ? 1 : -1)
+}
+solution()
+
+```
