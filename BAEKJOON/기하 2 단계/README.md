@@ -68,5 +68,58 @@ solution()
 해당 공식을 통과한다면 볼록임을 알 수 있다.   
 
 ```
+import Foundation
+func solution(){
+    var value = readLine()!.split(separator: " ").map{Double($0)!}
+    var arr: [[Double]] = []
+    var visited = [Bool](repeating: false, count: 8)
+    // 순서대로 돌아가면서 팔각형을 만들어준다.
+    // 총 40320가지
+    func dfs(_ n: Int, _ nums: [Double]) {
+        if n == 8 {
+            arr.append(nums)
+            //print(nums)
+            return
+        }
+        for i in 0..<8 {
+            if !visited[i] {
+                visited[i] = true
+                dfs(n+1, nums+[value[i]])
+                visited[i] = false
+            }
+        }
+    }
+    dfs(0,[])
+    //print(arr)
+    var result = 0
+    // 확인
+    for num in arr {
+        var possible = true
+        
+        for i in 0..<8 {
+            var num1 = 0.0
+            var num2 = 0.0
+            if i < 6 {
+                num1 = (num[i]*num[i+2]) * sqrt(2.0)
+                num2 = num[i+1] * (num[i] + num[i+2])
+            } else if i == 6{
+                num1 = (num[i]*num[i-6]) * sqrt(2.0)
+                num2 = num[i+1] * (num[i] + num[i-6])
+            } else {
+                num1 = (num[i]*num[i-6]) * sqrt(2.0)
+                num2 = num[0] * (num[i] + num[i-6])
+            }
+            
+            if num1 > num2 {
+                possible = false
+                break
+            }
+        }
+        //print(num,possible)
+        if possible { result += 1 }
+    }
+    print(result)
+}
+solution()
 
 ```
