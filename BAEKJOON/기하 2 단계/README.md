@@ -123,3 +123,46 @@ func solution(){
 solution()
 
 ```
+## 17386 선분 교차 1
+CCW를 이용하여 풀이하는 알고리즘이다.   
+점이 총 4개가 있다.   
+1,2,3,4로 쉽게 말해보자.   
+만약 CCW(1,2,3)과 CCW(1,2,4)가 1, -1로 서로 다른 방향이라면   
+해당 선분은 서로 교차가 된다.   
+하지만 이렇게만 비교할 경우 반례가 존재한다.   
+서로 교차되지않고, 떨어져있어도 방향이 서로 다르다면 해당 공식은 참으로 반환된다.   
+따라서 1,2,3 / 1,2,4 뿐만 아니라 3,4,1 / 3,4,2 까지 검사하여   
+해당 값들 모두 서로 다른방향이라면 해당 선분이 교차한다고 판단한다.   
+CCW(1,2,3) * CCW(1,2,4) <= 0 && CCW(3,4,1) * CCW(3,4,2) <= 0   
+
+
+```
+import Foundation
+func solution(){
+    let input = readLine()!.split(separator: " ").map{Int($0)!}
+    let (x1,y1,x2,y2) = (input[0],input[1],input[2],input[3])
+    let input2 = readLine()!.split(separator: " ").map{Int($0)!}
+    let (x3,y3,x4,y4) = (input2[0],input2[1],input2[2],input2[3])
+    
+    func CCW(_ x1: Int, _ y1: Int, _ x2: Int, _ y2: Int, _ x3: Int, _ y3: Int) -> Int {
+        let x = (x1 * y2 + x2 * y3 + x3 * y1)
+        let y = (y1 * x2 + y2 * x3 + y3 * x1)
+        
+        return x-y == 0 ? 0 : x-y > 0 ? 1 : -1
+    }
+    
+    let p1p2p3 = CCW(x1, y1, x2, y2, x3, y3)
+    let p1p2p4 = CCW(x1, y1, x2, y2, x4, y4)
+    let p3p4p1 = CCW(x3, y3, x4, y4, x1, y1)
+    let p3p4p2 = CCW(x3, y3, x4, y4, x2, y2)
+    //print(p1p2p3, p1p2p4, p3p4p1, p3p4p2)
+    
+    if p1p2p3 * p1p2p4 <= 0 && p3p4p1 * p3p4p2 <= 0 {
+        print(1)
+    } else {
+        print(0)
+    }
+        
+}
+solution()
+```
