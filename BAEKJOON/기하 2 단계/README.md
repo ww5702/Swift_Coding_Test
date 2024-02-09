@@ -123,7 +123,7 @@ func solution(){
 solution()
 
 ```
-## 17386 선분 교차 1
+## 17386 [선분 교차 1](https://www.acmicpc.net/problem/17386)    
 CCW를 이용하여 풀이하는 알고리즘이다.   
 점이 총 4개가 있다.   
 1,2,3,4로 쉽게 말해보자.   
