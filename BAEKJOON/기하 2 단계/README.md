@@ -164,3 +164,54 @@ func solution(){
 }
 solution()
 ```
+## 17387 선분 교차 2
+선분 교차 1에서 조금 바뀐 문제이다.   
+만약 두 선이 일직선으로 서로 겹쳐져있다면   
+CCW(1,2,3) * CCW(1,2,4) = 0   
+CCW(3,4,1) * CCW(3,4,2) = 0   
+이 된다.   
+따라서 x1,y1이 x4,y4보다 작고   
+x3,y3이 x2,y2보다 작다면 서로 겹쳐져있는 일직선 선분이기에 1을 출력해준다.   
+```
+import Foundation
+func solution(){
+    typealias Point = (x: Double, y: Double)
+    let input = readLine()!.split(separator: " ").map{Double($0)!}
+    var a = Point(x: input[0], y: input[1])
+    var b = Point(x: input[2], y: input[3])
+    let input2 = readLine()!.split(separator: " ").map{Double($0)!}
+    var c = Point(x: input2[0], y: input2[1])
+    var d = Point(x: input2[2], y: input2[3])
+    
+    func CCW(_ a: Point, _ b: Point, _ c: Point) -> Int {
+        let x = (a.x * b.y + b.x * c.y + c.x * a.y)
+        let y = (a.y * b.x + b.y * c.x + c.y * a.x)
+        
+        return x-y == 0 ? 0 : x-y > 0 ? 1 : -1
+    }
+    
+    let p1p2p3 = CCW(a,b,c)
+    let p1p2p4 = CCW(a,b,d)
+    let p3p4p1 = CCW(c,d,a)
+    let p3p4p2 = CCW(c,d,b)
+    //print(p1p2p3, p1p2p4, p3p4p1, p3p4p2)
+    
+    if p1p2p3 * p1p2p4 == 0 && p3p4p1 * p3p4p2 == 0 {
+        if a > b { swap(&a, &b) }
+        if c > d { swap(&c, &d) }
+        
+        if a <= d && b >= c {
+            print(1)
+        } else {
+            print(0)
+        }
+    } else if p1p2p3 * p1p2p4 <= 0 && p3p4p1 * p3p4p2 <= 0 {
+        print(1)
+    } else {
+        print(0)
+        
+    }
+}
+solution()
+
+```
