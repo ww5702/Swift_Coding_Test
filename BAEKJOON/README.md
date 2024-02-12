@@ -31,6 +31,10 @@ var inupt = readLine()!.split(separator:" ").map{String($0)}
 1712 / 2292 / 1193 / 2869 / 10250
 2775 / 2839 / 10757
 ```
+##[기본 수학2](https://github.com/ww5702/Swift_Coding_Test/blob/main/BAEKJOON/%EA%B8%B0%EB%B3%B8%20%EC%88%98%ED%95%992/README.md)
+```
+
+```
 ## [1차원 배열](https://github.com/ww5702/Swift_Coding_Test/blob/main/BAEKJOON/1%EC%B0%A8%EC%9B%90%20%EB%B0%B0%EC%97%B4/README.md)   
 ```
 10807 / 10871 / 10818 / 2562 / 10810
