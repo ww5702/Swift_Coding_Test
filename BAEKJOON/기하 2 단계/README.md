@@ -290,3 +290,84 @@ func solution(){
 solution()
 
 ```
+## 2162 [선분 그룹](https://www.acmicpc.net/problem/2162)
+선분 교차 2의 문제에서 해당 선분들이 연결되어있는지 그룹별로 확인하는 문제이다.   
+따라서 해당 선분들에 번호를 메기고 해당 선분들이 연결되어있는지 확인하기 위해    
+uion-find를 활용해준다.   
+처음 선분들을 따로 arr에 저장해주고,   
+2중반복문으로 해당 선분들을 서로 모두 검사해준다.   
+6%에서 실패 -> overlap부분을 하지 않아서 실패가 났다.   
+swap부분을 추가해주니 해결되었다.   
+16%부분의 오류 -> dictionary 부분에서 오류가 발생하였다.   
+해당 parent 배열을 정렬 후, 최대 값을 + 해주어 출력해주니 오류가 해결되었다.   
+
+```
+import Foundation
+func solution(){
+    func find(_ x: Int) -> Int {
+        if parent[x] == x { return x }
+        else {
+            parent[x] = find(parent[x])
+            return parent[x]
+        }
+    }
+    func union(_ a: Int, _ b: Int) {
+        let a = find(a)
+        let b = find(b)
+        if a < b {
+            parent[b] = a
+        } else {
+            parent[a] = b
+        }
+    }
+    
+    typealias Point = (x: Double, y: Double)
+    let n = Int(readLine()!)!
+    var arr: [(Point,Point)] = []
+    for _ in 0..<n {
+        let input = readLine()!.split(separator: " ").map{Double($0)!}
+        arr.append((Point(x: input[0], y: input[1]), Point(x: input[2], y: input[3])))
+    }
+    
+    func CCW(_ a: Point, _ b: Point, _ c: Point) -> Int {
+        let x = (a.x * b.y + b.x * c.y + c.x * a.y)
+        let y = (a.y * b.x + b.y * c.x + c.y * a.x)
+        
+        return x-y == 0 ? 0 : x-y > 0 ? 1 : -1
+    }
+    
+    var parent = [Int](0..<n)
+    
+    for i in 0..<n-1 {
+        for j in i+1..<n {
+            let value = [CCW(arr[i].0, arr[i].1, arr[j].0) * CCW(arr[i].0, arr[i].1, arr[j].1), CCW(arr[j].0, arr[j].1, arr[i].0) * CCW(arr[j].0, arr[j].1, arr[i].1)]
+            if value[0] == 0 && value[1] == 0 {
+                var a = arr[i].0, b = arr[i].1
+                var c = arr[j].0, d = arr[j].1
+                if a > b { swap(&a, &b)}
+                if c > d { swap(&c, &d)}
+                if a <= d && b >= c {
+                    if parent[i] != parent[j] {
+                        union(i, j)
+                    }
+                }
+            } else if value[0] <= 0 && value[1] <= 0 {
+                if parent[i] != parent[j] {
+                    union(i, j)
+                }
+            }
+        }
+    }
+    
+    
+    //print(parent)
+    (0..<n).forEach{find($0)}
+    print(Set(parent).count)
+    print(Dictionary(parent.map { ($0, 1) }, uniquingKeysWith: +).values.max()!)
+
+//    print(dict.count)
+//    print(dict.max(by: {$0.value < $1.value})!.value)
+}
+solution()
+
+```
