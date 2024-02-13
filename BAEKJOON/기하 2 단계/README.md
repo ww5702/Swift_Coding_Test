@@ -371,3 +371,37 @@ func solution(){
 solution()
 
 ```
+## 7869 
+넓이를 구하는 경우의 수는 3가지 이다.   
+1. 두 원이 만나지 않는 경우     
+2. 원안에 다른 원이 포함되는 경우   
+3. 두 원이 일부만 만나는 경우   
+따라서 해당 경우의 수를 구분해주고,
+3번의 경우 각 원에서 만들어진 부채꼴의 넓이에서 삼각혀으이 넓이를 뺀 넓이를 서로 더하면 된다.   
+   
+```
+import Foundation
+func solution(){
+    let input = readLine()!.split(separator: " ").map{Double($0)!}
+    let (x1,y1,r1) = (input[0],input[1],input[2])
+    let (x2,y2,r2) = (input[3],input[4],input[5])
+    
+    let d = sqrt(pow((x1-x2), 2) + pow(y1-y2, 2))
+    let PI = Double.pi
+    var result = 0.0
+    if r1+r2 <= d {
+        result = 0.0
+    } else if (fabs(r1-r2) >= d) {
+        result = PI * fmin(r1*r1, r2*r2)
+    } else {
+        var valueA = acos((d*d + r1*r1 - r2*r2) / (d*r1*2.0)) * 2.0
+        var valueB = acos((d*d + r2*r2 - r1*r1) / (d*r2*2.0)) * 2.0
+        
+        result = (valueA * r1 * r1 + valueB * r2 * r2 - r1*r1*sin(valueA) - r2*r2*sin(valueB)) * 0.5
+    }
+    print(String(format: "%.3f", result))
+    
+}
+solution()
+
+```
