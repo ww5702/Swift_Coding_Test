@@ -371,7 +371,7 @@ func solution(){
 solution()
 
 ```
-## 7869 
+## 7869 [두 원](https://www.acmicpc.net/problem/7869)
 넓이를 구하는 경우의 수는 3가지 이다.   
 1. 두 원이 만나지 않는 경우     
 2. 원안에 다른 원이 포함되는 경우   
