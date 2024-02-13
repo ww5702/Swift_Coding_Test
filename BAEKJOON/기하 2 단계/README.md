@@ -215,3 +215,78 @@ func solution(){
 solution()
 
 ```
+## 20149 선분 교차 3
+선분 교차 2에서 한 점에서 겹치게 된다면 해당 좌표를 반환시켜주는 문제이다.   
+해당 경우는 두 선분이 일직선이 아니면서 교차하는 경우,   
+두 선분중 하나는 일직선, 하나는 직선이 아닌 경우,   
+두 선분이 직선이지만, 한 점에서 겹치는 경우   
+이렇게 3가지 경우가 있다.   
+   
+<img width="861" alt="스크린샷 2024-02-13 오후 3 44 10" src="https://github.com/ww5702/Swift_Coding_Test/assets/60501045/74bc9777-3a61-4424-8905-65342ff1f0aa">   
+   
+두 선분의 교점은 해당 공식으로 찾아낸다.   
+```
+import Foundation
+func solution(){
+    typealias Point = (x: Double, y: Double)
+    let input = readLine()!.split(separator: " ").map{Double($0)!}
+    var a = Point(x: input[0], y: input[1])
+    var b = Point(x: input[2], y: input[3])
+    let input2 = readLine()!.split(separator: " ").map{Double($0)!}
+    var c = Point(x: input2[0], y: input2[1])
+    var d = Point(x: input2[2], y: input2[3])
+    
+    func CCW(_ a: Point, _ b: Point, _ c: Point) -> Int {
+        let x = (a.x * b.y + b.x * c.y + c.x * a.y)
+        let y = (a.y * b.x + b.y * c.x + c.y * a.x)
+        
+        return x-y == 0 ? 0 : x-y > 0 ? 1 : -1
+    }
+    
+    func findPoint(_ a: Point, _ b: Point, _ c: Point, _ d: Point) -> Point? {
+        let px = (a.x * b.y - a.y * b.x) * (c.x - d.x) - (a.x - b.x) * (c.x * d.y - c.y * d.x);
+        let py = (a.x * b.y - a.y * b.x) * (c.y - d.y) - (a.y - b.y) * (c.x * d.y - c.y * d.x);
+        let p = (a.x - b.x) * (c.y - d.y) - (a.y - b.y) * (c.x - d.x);
+        
+        if p == 0 {
+            if b == c && a <= c { return b }
+            else if a == d && c <= a { return a }
+            return nil
+        }
+        let x = px / p
+        let y = py / p
+        
+        return (x, y)
+    }
+    
+    let p1p2p3 = CCW(a,b,c)
+    let p1p2p4 = CCW(a,b,d)
+    let p3p4p1 = CCW(c,d,a)
+    let p3p4p2 = CCW(c,d,b)
+    //print(p1p2p3, p1p2p4, p3p4p1, p3p4p2)
+    
+    if p1p2p3 * p1p2p4 == 0 && p3p4p1 * p3p4p2 == 0 {
+        if a > b { swap(&a, &b) }
+        if c > d { swap(&c, &d) }
+        if a <= d && b >= c {
+            print(1)
+            if let point = findPoint(a, b, c, d) {
+                print(point.x, point.y)
+            }
+        } else {
+            print(0)
+        }
+    } else if p1p2p3 * p1p2p4 <= 0 && p3p4p1 * p3p4p2 <= 0 {
+        print(1)
+        if let point = findPoint(a, b, c, d) {
+            print(point.x, point.y)
+        }
+        
+    } else {
+        print(0)
+        
+    }
+}
+solution()
+
+```
