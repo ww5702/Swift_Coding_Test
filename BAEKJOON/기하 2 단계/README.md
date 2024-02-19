@@ -405,3 +405,58 @@ func solution(){
 solution()
 
 ```
+
+## 1069 [집으로](https://www.acmicpc.net/problem/1069)
+일단 sqrt(x^2 + y^2)로 일직선상의 거리를 구한다.   
+점프로 가는것보다 1초에 1씩 걸어가는 일직선상의 거리가 더 짧다면   
+일직선상의 거리 출력   
+하지만 아니라면, 2*d까지의 거리까지 일단 뛰어서 간다.   
+그 후, 남은 거리가 한번 뛰는것보다 많이 남았다면,   
+한번 뛰고 0,0까지 남은거리 걸어가기 vs 대각선으로 2번 뛰기를 비교해준다.   
+하지만 남은 거리가 한번 뛰는것보다 적게 남았다면,   
+한번 뛰고, 넘어간 거리만큼 걸어오기 vs 대각선으로 2번 뛰기를 비교해준다.   
+   
+<img width="112" alt="스크린샷 2024-02-19 오후 3 54 12" src="https://github.com/ww5702/Swift_Coding_Test/assets/60501045/dce8acde-3422-4f6b-b228-7e765b333221">
+   
+두번 뛴다는 의미는 남은 거리가 d*2보다 작다면 위의 그림처럼   
+점프 2번을 통해 목적지까지 갈 수 있다.   
+
+```
+import Foundation
+func solution(){
+    let input = readLine()!.split(separator: " ").map{Double($0)!}
+    let (x,y,d,t) = (input[0],input[1],input[2],input[3])
+    // 0,0까지 일직선상의 거리
+    let dist = sqrt(x*x + y*y)
+    // 만약 1초에 1씩 움직이지만 시간이 더 걸려서 점프한다면 그냥 거리 출력
+    if d <= t {
+        print(dist)
+    } else {
+        var result = 0.0
+        var length = dist
+        
+        // 걸어가는것보다는 점프가 더 빠르므로 먼저 점프
+        while length >= 2*d {
+            length -= d
+            result += t
+        }
+        
+        //print(length, result)
+        
+        // 남은 거리가 점프하는것보다 적다면
+        if length <= d {
+            // 두번 뛰는거 vs 한번 뛴다음 0,0까지 다시 돌아오기
+            result += min(2*t, length, d-length+t)
+        } else {
+            // 남은 거리가 점프하는것보다 크다면
+            // 두번 뛰는거 vs 한번 뛴거 + 0,0까지 남은거리 걸어오기
+            result += min(2*t, t+length-d)
+        }
+        
+        print(result)
+    }
+    
+}
+solution()
+
+```
