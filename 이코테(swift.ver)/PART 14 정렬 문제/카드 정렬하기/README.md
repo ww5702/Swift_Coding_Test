@@ -1,3 +1,6 @@
+매 순간 가장 작은 수를 두개 더해주면 된다.   
+즉 우선순위 큐가 필요하다.   
+물론 swift에는 우선순위큐에 사용되는 힙도 없고, pq도 없으므로 따로 구현해야 한다.   
 ```
 import Foundation
 struct Heap<T: Comparable> {
