@@ -1,6 +1,6 @@
 bfs와 구현을 이용한 풀이이다.   
 맞긴한데 뭔가 가독성이 떨어지는 느낌이다.   
-
+풀이 시간을 줄여보자   
 ```
 import Foundation
 func solution(){
