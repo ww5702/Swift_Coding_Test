@@ -7,12 +7,10 @@ func solution(){
     var arr = Array(repeating: true, count: end+1)
     arr[0] = false
     arr[1] = false
-    for i in 2...Int(sqrt(Double(end)))+1 {
+    for i in 2...Int(sqrt(Double(end))) {
         if arr[i] == true {
-            var j = 2
-            while i * j <= end {
+            for j in 2...end/i {
                 arr[i*j] = false
-                j += 1
             }
         }
     }
