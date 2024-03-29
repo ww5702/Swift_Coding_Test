@@ -2,6 +2,9 @@
 단계별 풀이에 없는 나머지 실버 문제입니다.   
    
    
+## [Level 2](https://github.com/ww5702/Swift_Coding_Test/tree/main/BAEKJOON/%F0%9F%93%93%EC%8B%A4%EB%B2%84/Level%202)   
+- 수열의 합
+- 
 ## [Level 3](https://github.com/ww5702/Swift_Coding_Test/tree/main/BAEKJOON/%EC%8B%A4%EB%B2%84/Level%203)      
 - 피보나치 함수
 - 
