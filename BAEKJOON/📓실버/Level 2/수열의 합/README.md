@@ -1,4 +1,3 @@
-```
 최소 l개부터 시작하여 middle을 구했을때 l...middle 부터 middle...l까지의 합이   
 n과 같으면 break   
 없다면 +1해주는 방식으로 풀이해보았다.   
@@ -73,7 +72,4 @@ func solution(){
     
 }
 solution()
-
-```
-
 ```
