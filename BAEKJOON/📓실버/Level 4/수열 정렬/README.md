@@ -12,17 +12,14 @@ func solution(){
     let n = Int(readLine()!)!
     let arr = readLine()!.split(separator: " ").map{Int($0)!}
     var result = Array(repeating: 0, count: n)
-    for i in 0..<arr.count {
-        result[arr[i]-1] = arr[i]
-    }
     var dictionary: [Int: [Int]] = [:]
-    for i in 0..<arr.count {
+    for i in 0..<n {
         let value = dictionary[arr[i]] ?? []
         dictionary[arr[i]] = value + [i]
     }
-    let list = dictionary.sorted(by: {$0.key < $1.key})
+    //print(dictionary)
     var idx = 0
-    for (_,value) in list {
+    for (_,value) in dictionary.sorted(by: {$0.key < $1.key}) {
         for v in value {
             result[v] = idx
             idx += 1
@@ -30,6 +27,36 @@ func solution(){
     }
     //print(result)
     print(result.map{String($0)}.joined(separator: " "))
+}
+solution()
+```
+밑과 같이 바로 정렬을 해줄수도 있다.   
+```
+import Foundation
+func solution(){
+    let n = Int(readLine()!)!
+    let arr = readLine()!.split{$0 == " "}.map{Int($0)!}
+    var k = [Int]()
+    var r = [Int]()
+    var s = ""
+        
+    for i in 0..<n {
+         k.append(i)
+         r.append(i)
+    }
+
+    k.sort{arr[$0] == arr[$1] ? $0 < $1 : arr[$0] < arr[$1]}
+    r.sort{k[$0] < k[$1]}
+        
+    //    print(k)
+    //    print(r)
+        
+        
+    for i in r {
+         s += "\(i) "
+     }
+     print(s)
+
 }
 solution()
 
