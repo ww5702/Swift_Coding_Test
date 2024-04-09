@@ -4,10 +4,14 @@
 ## [Level 1](https://github.com/ww5702/Swift_Coding_Test/tree/main/BAEKJOON/%F0%9F%93%93%EC%8B%A4%EB%B2%84/Level%201)    
 - Z
 - 행렬
+- 팥
+- 언더프라임
+- 접두사
 - 
 ## [Level 2](https://github.com/ww5702/Swift_Coding_Test/tree/main/BAEKJOON/%F0%9F%93%93%EC%8B%A4%EB%B2%84/Level%202)   
 - 수열의 합
 - 친구
+- 한 줄로 서기
 - 
 ## [Level 3](https://github.com/ww5702/Swift_Coding_Test/tree/main/BAEKJOON/%F0%9F%93%93%EC%8B%A4%EB%B2%84/Level%203)      
 - 피보나치 함수
@@ -22,6 +26,7 @@
 - 토너먼트
 - 좋은 구간
 - 평행사변형
+- 문자열
 - 
 ## [Level 5](https://github.com/ww5702/Swift_Coding_Test/tree/main/BAEKJOON/%F0%9F%93%93%EC%8B%A4%EB%B2%84/Level%205)   
 - 막대기
