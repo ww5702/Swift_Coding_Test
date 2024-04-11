@@ -33,7 +33,7 @@ func solution(){
         answer += 1
         y = y + dy[d]
         x = x + dx[d]
-        if !(0..<n).contains(y) || !(0..<n).contains(x) { break }
+        if !(0..<n).contains(y) || !(0..<n).contains(x) || board[y][x] == 1 { break }
         
         if board[y][x] == 0 {
             snake.append((y,x))
