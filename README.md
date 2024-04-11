@@ -6,6 +6,7 @@
 
 그래프에 가중치가 없다면 (1)이라면 -> bfs   
 가중치가 있다면 -> 다익스트라   
+[백준 나머지 문제풀기](https://www.acmicpc.net/problemset?sort=ranking_asc&page=1)   
 ```
 그래프 저장 [()()], [()()()], [()] 와 같은 형식   
 var graph = Array(repeating: [(Int,Int)](), count: n+1) 
