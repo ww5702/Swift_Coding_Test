@@ -1,3 +1,4 @@
+예제 7이 내 예상대로라면 1이 출력되야하는데 -1이 답이라 풀리지않았다.   
 ```
 import Foundation
 func solution(){
