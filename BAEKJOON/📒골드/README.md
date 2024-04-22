@@ -3,6 +3,10 @@
 ## [Level 1](https://github.com/ww5702/Swift_Coding_Test/tree/main/BAEKJOON/%F0%9F%93%92%EA%B3%A8%EB%93%9C/Level%201)   
 - 구슬 탈출 2
 - 
+
+## [Level 3](https://github.com/ww5702/Swift_Coding_Test/tree/main/BAEKJOON/%F0%9F%93%92%EA%B3%A8%EB%93%9C/Level%203)   
+- 가장 높은 탑 쌓기(dp)
+- 
 ## [Level 4](https://github.com/ww5702/Swift_Coding_Test/tree/main/BAEKJOON/%F0%9F%93%92%EA%B3%A8%EB%93%9C/Level%204)   
 - 뱀
 - 좋다
