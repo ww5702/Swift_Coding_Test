@@ -1,9 +1,15 @@
+브루트포스문제이다.   
+굉장이 어려운.   
+
 ```
 import Foundation
 func solution(){
     var n = Int(String(readLine()!))!
     let m = Int(String(readLine()!))!
-    var arr = readLine()!.split(separator: " ").map{Int($0)!}
+    var arr: [Int] = []
+    if m != 0 {
+        arr = readLine()!.split(separator: " ").map{Int(String($0))!}
+    }
     var minCnt = abs(n-100)
     for i in 0...1000000 {
         // 500,000까지지만 뒤에서 오는 경우도 있으므로 확인
