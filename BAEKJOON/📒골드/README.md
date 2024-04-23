@@ -12,6 +12,7 @@
 - 좋다
 - 알파벳
 - 테트로미노(dfs, 예외처리)   
+- 카드 정렬하기
 - 
 ## [Level 5](https://github.com/ww5702/Swift_Coding_Test/tree/main/BAEKJOON/%F0%9F%93%92%EA%B3%A8%EB%93%9C/Level%205)      
 - 로봇청소기
