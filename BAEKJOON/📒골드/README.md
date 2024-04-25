@@ -4,6 +4,9 @@
 - 구슬 탈출 2
 - 
 
+## [Level 2](https://github.com/ww5702/Swift_Coding_Test/tree/main/BAEKJOON/%F0%9F%93%92%EA%B3%A8%EB%93%9C/Level%202)
+- 통나무 옮기기(bfs, 10%에서 실패)
+- 
 ## [Level 3](https://github.com/ww5702/Swift_Coding_Test/tree/main/BAEKJOON/%F0%9F%93%92%EA%B3%A8%EB%93%9C/Level%203)   
 - 가장 높은 탑 쌓기(dp)
 - 
