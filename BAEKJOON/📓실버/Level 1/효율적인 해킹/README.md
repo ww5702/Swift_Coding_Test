@@ -123,3 +123,72 @@ func solution(){
 solution()
 
 ```
+idx를 늘리는것만으로는 UInt16을 써도 시간초과가 발생한다.   
+따라서 enqueue dequeue를 사용해야한다.   
+```
+import Foundation
+struct Queue<T> {
+    var pushStack = [T]()
+    var popStack = [T]()
+    var isEmpty: Bool {
+        return pushStack.isEmpty && popStack.isEmpty
+    }
+    var count: Int {
+        return pushStack.count + popStack.count
+    }
+
+    mutating func enqueue(_ element: T) {
+        pushStack.append(element)
+    }
+
+    mutating func dequeue() -> T? {
+        if popStack.isEmpty {
+            while let popped = pushStack.popLast() {
+                popStack.append(popped)
+            }
+        }
+        return popStack.popLast()
+    }
+}
+
+func solution(){
+    let input = readLine()!.split(separator: " ").map{Int($0)!}
+    let (n,m) = (input[0],input[1])
+    var graph: [[UInt16]] = Array(repeating: [], count: n+1)
+    //print(graph)
+    for _ in 0..<m {
+        let input = readLine()!.split(separator: " ").map{Int($0)!}
+        graph[input[1]].append(UInt16(input[0]))
+    }
+    //print(graph)
+    var result: [UInt16] = Array(repeating: 0, count: n+1)
+    var maxCnt = 0
+    
+    for i in 1...n {
+        var visited = Array(repeating: false, count: n+1)
+        
+        var q: [UInt16] = []
+        q.append(UInt16(i))
+        visited[i] = true
+        var idx = 0
+        while (q.count > idx) {
+            let now = q[idx]
+            idx += 1
+            for next in graph[Int(now)] {
+                q.append(next)
+                visited[Int(next)] = true
+            }
+        }
+        result[i] = UInt16(q.count)-1
+        maxCnt = max(maxCnt, Int(result[i]))
+    }
+    //print(result)
+    for i in 1...n {
+        if (result[i] == maxCnt) {
+            print(i, terminator: " ")
+        }
+    }
+}
+solution()
+
+```
