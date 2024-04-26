@@ -40,7 +40,7 @@ func solution(){
             
             for next in graph[now] {
                 q.append(next)
-                visited[node] = true
+                visited[next] = true
             }
         }
         return q
