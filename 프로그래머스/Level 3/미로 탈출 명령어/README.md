@@ -86,7 +86,7 @@ func solution(_ n:Int, _ m:Int, _ x:Int, _ y:Int, _ r:Int, _ c:Int, _ k:Int) -> 
 ```
 풀이는 같으나 이와 같이 애초에 순서를 d l r u 로 바꿔놓는것이 중요했다.   
 이동순서를 알파벳 순서로 바꾸어 계산 횟수를 줄여주는 것이다.   
-
+즉 제일 빠르게 올라가면서 만나면 바로 return인것이다.   
 ```
 import Foundation
 func solution(_ n:Int, _ m:Int, _ x:Int, _ y:Int, _ r:Int, _ c:Int, _ k:Int) -> String {
@@ -111,6 +111,47 @@ func solution(_ n:Int, _ m:Int, _ x:Int, _ y:Int, _ r:Int, _ c:Int, _ k:Int) -> 
     }
 
     go(x, y, "")
+    return result
+}
+```
+위 코드도 따라서 그대로 바꾸기만 하면 사용이 가능하다.   
+```
+import Foundation
+
+func solution(_ n:Int, _ m:Int, _ x:Int, _ y:Int, _ r:Int, _ c:Int, _ k:Int) -> String {
+    var result = "impossible"
+    let dy = [1,0,0,-1]
+    let dx = [0,-1,1,0]
+    
+    func dfs(_ y: Int, _ x: Int, _ path: String) {
+        if result != "impossible" { return }
+        
+        let canMove = k - path.count
+        let dis = abs((r-1)-y) + abs((c-1)-x) 
+        if canMove < dis || (canMove - dis) % 2 == 1 { return }
+        if canMove == 0 && dis == 0 {
+            result = path
+            return
+        }
+        
+        for i in 0..<4 {
+            let newY = y + dy[i]
+            let newX = x + dx[i]
+            if (0..<n).contains(newY) && (0..<m).contains(newX) {
+                if i == 0 {
+                    dfs(newY, newX, path+"d")
+                } else if i == 1 {
+                    dfs(newY, newX, path+"l")
+                } else if i == 2 {
+                    dfs(newY, newX, path+"r")
+                } else {
+                    dfs(newY, newX, path+"u")
+                }
+            }
+        }
+        
+    }
+    dfs(x-1, y-1, "")
     return result
 }
 ```
