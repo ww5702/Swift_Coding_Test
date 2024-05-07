@@ -39,12 +39,18 @@ func solution(_ n:Int, _ tops:[Int]) -> Int {
     let mod = 10007
     
     for i in 2..<n+1 {
-        // 전 상황이 윗삼각형이 있었나 없었나
+        // 윗삼각형이 있나 없나
         if tops[i-1] == 1 {
+            // 어차피 있던 없던 오른쪽 아래로 내릴것이기에 경우의수는 하나다
             downRight[i] = (downRight[i-1] + notDownRight[i-1]) % mod
+            // 전부 삼각형, 윗쪽 마름모, 밑쪽 마름모 3가지
+            // 나머지 전부 삼각형, 윗쪽 마름모 2가지
             notDownRight[i] = (downRight[i-1] * 2 + notDownRight[i-1] * 3) % mod
         } else {
+            // 어차피 경우의수는 하나다
             downRight[i] = (downRight[i-1] + notDownRight[i-1]) % mod
+            // 전부 삼각형, 왼쪽 마름모 2가지
+            // 가운데 삼각형 한가지
             notDownRight[i] = (downRight[i-1] + notDownRight[i-1] * 2) % mod
         }
     }
