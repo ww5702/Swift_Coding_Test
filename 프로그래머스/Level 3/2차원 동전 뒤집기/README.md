@@ -78,3 +78,74 @@ func solution(_ beginning:[[Int]], _ target:[[Int]]) -> Int {
     return result
 }
 ```
+
+```
+import Foundation
+
+func solution(_ beginning:[[Int]], _ target:[[Int]]) -> Int {
+    let n = beginning.count
+    let m = beginning[0].count
+    
+    let targetBool = target.map{$0.map{$0 == 1 ? true : false}}
+    print(targetBool)
+    
+    var beginCnt = 0
+    var reverseCnt = 0
+    var begin = beginning.map{ $0.map { $0 == 1 ? true : false } }
+    var reverse = beginning.map{ $0.map { $0 == 1 ? true : false } }
+    
+    // for i in 0..<n {
+    //     print(begin[i])
+    // }
+    // print()
+    // for i in 0..<n {
+    //     print(reverse[i])
+    // }
+    
+    func calculate(_ cnt: Int, _ now: [[Bool]]) -> Int {
+        var ans = 0
+        for i in 0..<n {
+            if targetBool[i] == now[i] { continue }
+            if now[i].map{$0 ? false : true} == targetBool[i] {
+                ans += 1
+                continue
+            }
+            return -1
+        }
+        return ans + cnt
+    }
+    
+    // 타겟과 다른 열을 beginCnt +1 그리고 다른열의 흰돌과 검은돌을 바꾸기
+    // 타겟과 같은 열을 reverseCnt +1 같은열의 흰돌과 검은돌 바꾸기
+    for j in 0..<m {
+        if targetBool[0][j] != begin[0][j] {
+            for i in 0..<m {
+                begin[i][j] = begin[i][j] ? false : true
+            }
+            beginCnt += 1
+        }
+
+        if targetBool[0][j] == reverse[0][j] {
+            for i in 0..<m {
+                reverse[i][j] = reverse[i][j] ? false : true
+            }
+            reverseCnt += 1
+        }
+    }
+    // print()
+    // for i in 0..<n {
+    //     print(begin[i])
+    // }
+    // print()
+    // for i in 0..<n {
+    //     print(reverse[i])
+    // }
+    
+    //print(beginCnt, reverseCnt)
+    let b = calculate(beginCnt, begin)
+    let r = calculate(reverseCnt, reverse)
+    
+    
+    return b == -1 || r == -1 ? b > r ? b : r : b < r ? b : r
+}
+```
