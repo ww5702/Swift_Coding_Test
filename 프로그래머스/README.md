@@ -200,4 +200,5 @@
 - 2차원 돈전 뒤집기(dfs, 비트연산, 구현, 미완)
 - 산 모양 타일링(dp 2개)
 - 매칭 점수(정규식, pattern, NSRegularExpression)
+- 공 이동 시뮬레이션(백트래킹, 구현, startX,startY,endX,endY)
 - 
