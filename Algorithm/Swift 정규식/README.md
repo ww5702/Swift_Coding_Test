@@ -3,14 +3,6 @@
 
 [참고한 사이트](https://borabong.tistory.com/32#google_vignette)   
 
-## 문자열 일부가 일치하는지 확인하는 법
-```
-// regex: 정규식 문자열
-string.range(of: regex, options: .regularExpression)
-regex = "[0-9]*" -> 0~9로 이루어져있는지
-
-```
-
 ## 정규식
 ```
 "^[A-Z]*$" // 대문자로만 구성
@@ -33,5 +25,49 @@ regex = "[0-9]*" -> 0~9로 이루어져있는지
 {5,10} = 5글자 이상 10글자 이하
 {5,} = 5글자 이상
 
- 
+?<> 으로 그룹으로 묶인 문자열에 이름을 붙여줄수 있다.
+
 ```
+
+## 문자열 일부가 일치하는지 확인하는 법
+```
+// regex: 정규식 문자열
+string.range(of: regex, options: .regularExpression)
+regex = "[0-9]*" -> 0~9로 이루어져있는지
+
+```
+
+## 문자열 일치하는 모든 범위를 알아야하는 경우
+```
+NSRegularExpression을 사용할때는 try? do try catch문을 사용해야 한다.
+
+do {
+ let regex = try NSRegularExpression(pattern: pattern, options: [])
+ let result = regex.matches(in: string, options: [], range: NSRange(location: 0, length: string.count))
+ let rexString = result.map{(element) -> String in
+   let range = Range(element.range, in: string)!
+        return String(string[range])
+    }
+    return rexStrings
+} catch let error {
+    print(error.localizedDescription)
+}
+```
+예를 들면 이와 같다.
+```
+let string: String = "기간은 2021.03.01 부터 2021.03.31까지 입니다."
+let datePattern: String = "(?<year>(19|20)[0-9]{2})\\.(?<month>(0[1-9]|1[0-2]))\\.(?<date>(0[1-9]|1[0-9]|2[0-9]|3[0-1]))"
+
+let regex = try? NSRegularExpression(pattern: datePattern, options: [])
+if let result = regex?.matches(in: string, options: [], range: NSRange(location: 0, length: string.count)) {
+    let rexStrings = result.map { (element) -> String in
+        let yearRange = Range(element.range(withName: "year"), in: string)!
+        let monthRange = Range(element.range(withName: "month"), in: string)!
+        let dateRange = Range(element.range(withName: "date"), in: string)!
+    
+        return "\(string[yearRange])년 \(string[monthRange])월 \(string[dateRange])일"
+    }
+    print(rexStrings)
+}
+```
+여기서 yyyy.mm.dd의 날짜 형식을 모두 찾아낼 수 있다.   
