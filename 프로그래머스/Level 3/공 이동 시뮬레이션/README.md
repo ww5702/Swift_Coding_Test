@@ -50,3 +50,15 @@ func solution(_ n:Int, _ m:Int, _ x:Int, _ y:Int, _ queries:[[Int]]) -> Int64 {
 }
 
 ```
+더하는 방식을 한번에 하더라도 다르게 하더라도 시간초과   
+
+```
+var newY = ny + (dy[move]*queries[i][1])
+var newX = nx + (dx[move]*queries[i][1])
+//print(newY, newX)
+    if newY < 0 { newY = 0 }
+    else if newY >= n { newY = n-1 }
+            
+    if newX < 0 { newX = 0 }
+    else if newX >= m { newX = m-1 }
+```
