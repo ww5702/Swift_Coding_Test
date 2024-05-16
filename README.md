@@ -309,5 +309,23 @@ print(person.age)    // 99
 
 ## union-find
 ```
+func union(_ a: Int, _ b: Int) {
+   let a = find(a)
+   let b = find(b)
+
+   if a < b {
+      parent[b] = a
+   } else {
+      parent[a] = b
+   }
+}
+
+func find(_ x: Int) -> Int {
+   if parent[x] == x {
+      return x
+   }
+   return find(parent[x])
+}
+
 
 ```
