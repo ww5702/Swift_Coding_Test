@@ -1,5 +1,5 @@
 bfs를 이용해 풀이해보았다.   
-2%에서 메모리 초과 발생   
+2%에서 시간초과 발생   
 
 ```
 import Foundation
@@ -7,6 +7,7 @@ func solution(){
     let input = readLine()!.split(separator: " ").map{Int($0)!}
     let (n,m) = (input[0],input[1])
     var board = Array(repeating: Array(repeating: "", count: n), count: m)
+    var visited = Array(repeating: Array(repeating: false, count: n), count: m)
     var start = (0,0)
     var fire = (0,0)
     for i in 0..<m {
@@ -54,6 +55,7 @@ func solution(){
         var fireQ: [(Int,Int)] = []
         q.append((start.0, start.1,0))
         fireQ.append((fire.0, fire.1))
+        visited[start.0][start.1] = true
         var before = 0
         var idx = 0
         
@@ -84,8 +86,9 @@ func solution(){
                 let newX = now.1 + dx[i]
                 
                 if (0..<m).contains(newY) && (0..<n).contains(newX) {
-                    if board[newY][newX] != "#" && board[newY][newX] != "F"{
+                    if board[newY][newX] != "#" && board[newY][newX] != "F" && !visited[newY][newX] {
                         q.append((newY,newX,now.2 + 1))
+                        visited[newY][newX] = true
                     }
                 }
             }
