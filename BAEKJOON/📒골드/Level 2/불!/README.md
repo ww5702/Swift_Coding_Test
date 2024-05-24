@@ -61,6 +61,7 @@ func solution(){
         
         while (q.count > idx) {
             let now = q[idx]
+            idx += 1
             //print(now)
             // 불 확산
             if now.2 != before {
@@ -72,23 +73,24 @@ func solution(){
                 before += 1
             }
             
-            if (now.0 == m-1 || now.1 == n-1) {
-                //print(q)
-                //print("벽 만남", now)
+            if (now.0 == m-1 || now.1 == n-1 || now.0 == 0 || now.1 == 0) {
+//                print(q)
+//                print("벽 만남", now)
                 result = now.2 + 1
                 break
             }
-            
-            idx += 1
             
             for i in 0..<4 {
                 let newY = now.0 + dy[i]
                 let newX = now.1 + dx[i]
                 
                 if (0..<m).contains(newY) && (0..<n).contains(newX) {
-                    if board[newY][newX] != "#" && board[newY][newX] != "F" && !visited[newY][newX] {
-                        q.append((newY,newX,now.2 + 1))
-                        visited[newY][newX] = true
+                    if board[newY][newX] != "#" && board[newY][newX] != "F" {
+                        if !visited[newY][newX] {
+                            q.append((newY,newX,now.2 + 1))
+                            visited[newY][newX] = true
+                        }
+                        
                     }
                 }
             }
