@@ -2,6 +2,7 @@
 단계별 풀이에 없는 나머지 실버 문제입니다.   
 ## [Level 1](https://github.com/ww5702/Swift_Coding_Test/tree/main/BAEKJOON/%F0%9F%93%92%EA%B3%A8%EB%93%9C/Level%201)   
 - 구슬 탈출 2
+- 구간 합 구하기(세그먼트 트리)
 - 
 
 ## [Level 2](https://github.com/ww5702/Swift_Coding_Test/tree/main/BAEKJOON/%F0%9F%93%92%EA%B3%A8%EB%93%9C/Level%202)
