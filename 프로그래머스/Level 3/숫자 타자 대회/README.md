@@ -238,3 +238,4 @@ func solution(_ numbers:String) -> Int {
 */
 
 ```
+dp로 풀이해야한다는 사실을 알게 되었다.   
