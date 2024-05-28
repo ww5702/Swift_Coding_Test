@@ -113,3 +113,11 @@ if left < right {
                 dfs(arr, leftHand, numPad[now], i+1, cost+right)
             }
 ```
+같은 번호판에 있다면 실패한다는 조건을 안넣었어서   
+넣은 다음 다시 실행   
+하지만 실패 45점   
+
+```
+// 같은 번호판에 있다면 불가능 
+if leftHand == rightHand { return }
+```
