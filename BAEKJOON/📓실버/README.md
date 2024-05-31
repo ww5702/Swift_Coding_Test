@@ -10,6 +10,7 @@
 - 컴백홈
 - 안전 영역
 - 쉬운 최단거리
+- 케빈 베이컨의 6단계 법칙
 - 
 ## [Level 2](https://github.com/ww5702/Swift_Coding_Test/tree/main/BAEKJOON/%F0%9F%93%93%EC%8B%A4%EB%B2%84/Level%202)   
 - 수열의 합
