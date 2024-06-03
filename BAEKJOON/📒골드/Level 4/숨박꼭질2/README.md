@@ -59,3 +59,48 @@ func solution(){
 solution()
 
 ```
+BFS로 n * 2, n + 1, n - 1 3가지 경우를 대입해가면서 풀이하면 쉽게 풀이가 가능했다.   
+3프로에서 계속 틀렸는데 범위 설정에서 100000을 포함안했더니 틀렸었다.   
+
+```
+import Foundation
+func solution(){
+    let input = readLine()!.split(separator: " ").map{Int($0)!}
+    let (n,k) = (input[0],input[1])
+    var q: [(Int,Int)] = []
+    var idx = 0
+    
+    var dis = Array(repeating: Int.max, count: 100001)
+    q.append((n,0))
+    dis[n] = 0
+    var cnt = 0
+    
+    while q.count > idx {
+        let now = q[idx]
+        //print(now)
+        idx += 1
+        
+        if now.1 > dis[k] { break }
+        
+        if now.0 == k {
+            dis[k] = now.1
+            cnt += 1
+        }
+        
+        let list = [now.0 * 2, now.0 - 1, now.0 + 1]
+        for i in 0..<3 {
+            if (0...100000).contains(list[i]) && dis[list[i]] >= now.1+1 {
+                dis[list[i]] = now.1+1
+                q.append((list[i], now.1+1))
+            }
+        }
+        
+        
+    }
+    print(dis[k])
+    print(cnt)
+    
+}
+solution()
+
+```
