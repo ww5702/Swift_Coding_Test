@@ -71,3 +71,20 @@ var sum = 0
     }
     print(sum-maxCnt)
 ```
+FileIO를 이용해 밑과 같이 입력받는다면 시간을 줄일 수는 있긴하다;   
+
+```
+let file = FileIO()
+
+
+let N = file.readInt()
+let M = file.readInt()
+
+var array = [[Int]]()
+for _ in 0..<M {
+    let x1 = file.readInt()
+    let x2 = file.readInt()
+    let cost = file.readInt()
+    array.append([x1,x2,cost])
+}
+```
