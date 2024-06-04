@@ -55,3 +55,19 @@ func solution(){
 solution()
 
 ```
+밑에 방식이 더 가독성이 있는 코드 같았다.   
+하지만 풀이 시간은 거의 비슷했다   
+
+```
+var sum = 0
+    var maxCnt = 0
+    for i in 0..<m {
+        let now = graph[i]
+        if find(now.0) != find(now.1) {
+            union(now.0, now.1)
+            sum += now.2
+            maxCnt = max(maxCnt, now.2)
+        }
+    }
+    print(sum-maxCnt)
+```
