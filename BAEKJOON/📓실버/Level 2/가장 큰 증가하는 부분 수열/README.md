@@ -50,8 +50,7 @@ func solution(){
     let n = Int(readLine()!)!
     var arr = readLine()!.split(separator: " ").map{Int(String($0))!}
     var dp = Array(repeating: -1, count: n+1)
-    dp[0] = arr[0]
-    for i in 1..<n {
+    for i in 1...n {
         dp[i] = arr[i-1]
         for j in 1...i {
             if arr[i-1] > arr[j-1] {
