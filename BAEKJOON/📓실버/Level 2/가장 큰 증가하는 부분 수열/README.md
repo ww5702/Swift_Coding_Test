@@ -42,3 +42,28 @@ solution()
  */
 
 ```
+dp로 진행   
+
+```
+import Foundation
+func solution(){
+    let n = Int(readLine()!)!
+    var arr = readLine()!.split(separator: " ").map{Int(String($0))!}
+    var dp = Array(repeating: -1, count: n+1)
+    dp[0] = arr[0]
+    for i in 1..<n {
+        dp[i] = arr[i-1]
+        for j in 1...i {
+            if arr[i-1] > arr[j-1] {
+                dp[i] = max(dp[j] + arr[i-1], dp[i])
+            }
+        }
+        //print(dp)
+    }
+    print(dp.max()!)
+}
+solution()
+/*
+ */
+
+```
