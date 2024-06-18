@@ -20,7 +20,6 @@ func solution(){
         let input = readLine()!.split(separator: " ").map{Int(String($0))!}
         arr.append(input)
     }
-    var isChange = false
     while true {
         var temp: [[Int]] = []
         //print("기본", arr)
