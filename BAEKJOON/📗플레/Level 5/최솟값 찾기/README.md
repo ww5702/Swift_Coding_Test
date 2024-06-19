@@ -34,3 +34,7 @@ solution()
  */
 
 ```
+맞춘방법을 보았으나   
+결국 입력을 fileIO로 받고,   
+[dequeu](https://github.com/ww5702/Swift_Coding_Test/blob/main/Algorithm/%ED%81%90(Queue)&%EB%8D%B1(Deque).md)를 따로 구현하여 풀이하였다.   
+즉 풀이방법은 맞았으나 swift에게는 가혹한 문제였다.   
