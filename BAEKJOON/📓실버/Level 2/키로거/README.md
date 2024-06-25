@@ -38,3 +38,44 @@ solution()
  */
 
 ```
+힙 처리 하는것처럼 풀이
+```
+import Foundation
+func solution(){
+    let n = Int(readLine()!)!
+    for _ in 0..<n {
+        var result: [String] = []
+        var backResult: [String] = []
+        var value = readLine()!.map{String($0)}
+        //print(value)
+        for i in 0..<value.count {
+            let now = value[i]
+            //print(now, cursor)
+            if now == "<" {
+                if !result.isEmpty {
+                    backResult.append(result.removeLast())
+                }
+            } else if now == ">" {
+                if !backResult.isEmpty {
+                    result.append(backResult.removeLast())
+                }
+            } else if now == "-" {
+                if !result.isEmpty {
+                    result.removeLast()
+                }
+            } else {
+                result.append(now)
+            }
+            
+            
+        }
+        print((result+(backResult.reversed())).joined(separator: ""))
+    }
+}
+
+solution()
+/*
+ AB>>C<D<<E<<<FGH>>->>-<<-
+ */
+
+```
