@@ -17,6 +17,9 @@
 그리고 다시 최대힙에서 가장 작은수 2 출력   
 위와 같은 형식으로 구현한다.   
 
+그리고 여전히 시간초과발생하여   
+FileIO로 입출력을 변형시켰다.   
+
 ```
 import Foundation
 final class FileIO {
