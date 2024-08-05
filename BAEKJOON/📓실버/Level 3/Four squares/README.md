@@ -2,6 +2,7 @@
 그리고 만약 구했던 값보다 큰 값이 반복된다면 빠져나온다   
 시간초과가 발생하여 FileIO로 입출력을 받았다   
 19프로에서 여전히 시간초과 발생   
+따라서 4보다 크다면 return 으로 변경하였더니 통과   
 
 ```
 import Foundation
@@ -68,6 +69,7 @@ func solution() {
     
     func dfs(_ n: Int, _ cnt: Int) {
         //print(n,cnt)
+        if (cnt >= 5) { return }
         
         if (n == 0) {
             result = cnt
