@@ -56,3 +56,64 @@ solution()
  */
 
 ```
+포인트는 한번 팀이 됬던 사람이 다른팀에 또 들어갈 수도 있다는거였다.   
+따라서 visited 방문배열이 두개가 필요하다.   
+
+```
+import Foundation
+func solution() {
+    let t = Int(readLine()!)!
+    var results = [Int]()
+    
+    for _ in 0..<t {
+        let r = Int(readLine()!)!
+        
+        let choice = [0] + readLine()!.split(separator: " ").map { Int($0)! }
+        
+        // 만약 전체가 같은팀일경우
+        if choice == Array(0...r) {
+            results.append(0)
+            continue
+        }
+        var visited = Array(repeating: false, count: r + 1)
+        var done = Array(repeating: false, count: r + 1)
+        var count = 0
+        
+        
+        func dfs(start: Int) {
+            visited[start] = true
+            var n = choice[start]
+            
+            if !visited[n] {
+                dfs(start: n)
+            } else if !done[n] {
+                while n != start {
+                    count += 1
+                    n = choice[n]
+                }
+                count += 1
+            }
+            done[start] = true
+        }
+        
+        
+        for i in 1...r {
+            if !visited[i] {
+                dfs(start: i)
+            }
+        }
+        
+        results.append(r - count)
+    }
+    
+    results.forEach {
+        print($0)
+    }
+}
+
+
+solution()
+/*
+ */
+
+```
