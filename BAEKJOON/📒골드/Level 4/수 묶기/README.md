@@ -88,3 +88,56 @@ solution()
  */
 
 ```
+너무 어렵게 생각했던거였다.   
+쉽게 생각해서 음수는 제일 작은 값들을 서로 곱해주고,   
+1은 그냥 더해주고   
+양수는 가장 큰값들끼리 서로 곱해주는게 가장 크다.   
+```
+import Foundation
+func solution() {
+    let n = Int(readLine()!)!
+    var arr:[Int] = []
+    var minusArr: [Int] = []
+    var plustArr: [Int] = []
+    
+    for _ in 0..<n {
+        let input = Int(readLine()!)!
+        if input <= 0 { minusArr.append(input) }
+        else if input == 1 { arr.append(input) }
+        else { plustArr.append(input) }
+    }
+    
+    var sum = 0
+    minusArr.sort(by: <)
+    plustArr.sort(by: >)
+    
+    var idx = 0
+    while idx < minusArr.count {
+        if idx+1 < minusArr.count {
+            sum += minusArr[idx] * minusArr[idx+1]
+        } else if idx+1 >= minusArr.count {
+            sum += minusArr[idx]
+        }
+        idx += 2
+    }
+    
+    idx = 0
+    while idx < plustArr.count {
+        if idx+1 < plustArr.count {
+            sum += plustArr[idx] * plustArr[idx+1]
+        } else if idx+1 >= plustArr.count {
+            sum += plustArr[idx]
+        }
+        idx += 2
+    }
+    
+    print(sum + arr.count)
+    
+}
+
+
+solution()
+/*
+ */
+
+```
