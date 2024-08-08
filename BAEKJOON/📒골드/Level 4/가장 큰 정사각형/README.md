@@ -54,3 +54,38 @@ solution()
  */
 
 ```
+그냥 조건 제외하고 0부터 시작하면서 더하면 그만이었다.   
+
+```
+import Foundation
+func solution() {
+    let nm = readLine()!.split(separator: " ").map{Int(String($0))!}
+    let (n,m) = (nm[0],nm[1])
+    var board = Array(repeating: Array(repeating: 0, count: m), count: n)
+    for i in 0..<n {
+        let input = Array(readLine()!).map{Int(String($0))!}
+        board[i] = input
+    }
+    
+    var dp = board
+    var maxValue = 0
+    
+    for i in 0..<n {
+        for j in 0..<m {
+            if i > 0 && j > 0 && board[i][j] == 1 {
+                board[i][j] += min(board[i][j-1], board[i-1][j], board[i-1][j-1])
+            }
+            maxValue = max(maxValue, board[i][j])
+        }
+    }
+    
+    print(maxValue * maxValue)
+    
+}
+
+
+solution()
+/*
+ */
+
+```
