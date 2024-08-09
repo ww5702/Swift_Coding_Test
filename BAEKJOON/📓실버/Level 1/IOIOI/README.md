@@ -30,3 +30,37 @@ solution()
  */
 
 ```
+비교를 더 쉽고 간편하게 계산식으로 구성하였더니 통과   
+
+```
+import Foundation
+func solution() {
+    let n = Int(readLine()!)!
+    let m = Int(readLine()!)!
+    var arr = readLine()!.map{$0}
+    var result = 0
+    var count = 0
+    var idx = 0
+    while idx < m-2 {
+        //print(value)
+        if String(arr[idx...idx+2]) == "IOI" {
+            count += 1
+            idx += 2
+            if count == n {
+                count -= 1
+                result += 1
+            }
+        } else {
+            idx += 1
+            count = 0
+        }
+    }
+    print(result)
+}
+
+
+solution()
+/*
+ */
+
+```
