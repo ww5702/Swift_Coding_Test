@@ -9,7 +9,7 @@ func solution() {
         if (num == n) {
             print(String(repeating: under, count: num)+"\"재귀함수가 뭔가요?\"")
             print(String(repeating: under, count: num)+"\"재귀함수는 자기 자신을 호출하는 함수라네\"")
-            print(String(repeating: under, count: num)+"라고 답변하셨지.")
+            print(String(repeating: under, count: num)+"라고 답변하였지.")
             return
         }
         
@@ -18,7 +18,7 @@ func solution() {
         print(String(repeating: under, count: num)+"마을 사람들은 모두 그 선인에게 수많은 질문을 했고, 모두 지혜롭게 대답해 주었지.")
         print(String(repeating: under, count: num)+"그의 답은 대부분 옳았다고 하네. 그런데 어느 날, 그 선인에게 한 선비가 찾아와서 물었어.\"")
         ans(num+1)
-        print(String(repeating: under, count: num)+"라고 답변하셨지.")
+        print(String(repeating: under, count: num)+"라고 답변하였지.")
     }
     
     ans(0)
@@ -28,6 +28,4 @@ func solution() {
 solution()
 /*
  */
-
-
 ```
