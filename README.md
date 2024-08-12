@@ -329,3 +329,11 @@ func find(_ x: Int) -> Int {
 
 
 ```
+
+## TIL   
+[고차함수에 따른 시간초과](https://github.com/ww5702/Swift_Coding_Test/blob/main/BAEKJOON/%F0%9F%93%93%EC%8B%A4%EB%B2%84/Level%203/N%EA%B3%BC%20M(7)/README.md)   
+
+```
+mapping으로 인해 시간이 더 걸릴때도 있다.
+고차함수를 빼더라도 재귀함수 자체에 추가해주는게 더 걸릴때도 있다
+```
