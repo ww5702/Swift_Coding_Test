@@ -6,7 +6,10 @@ func solution() {
     print("어느 한 컴퓨터공학과 학생이 유명한 교수님을 찾아가 물었다.")
     
     func ans(_ num: Int) {
-        if (num > n) {
+        if (num == n) {
+            print(String(repeating: under, count: num)+"\"재귀함수가 뭔가요?\"")
+            print(String(repeating: under, count: num)+"\"재귀함수는 자기 자신을 호출하는 함수라네\"")
+            print(String(repeating: under, count: num)+"라고 답변하셨지.")
             return
         }
         
@@ -25,5 +28,6 @@ func solution() {
 solution()
 /*
  */
+
 
 ```
