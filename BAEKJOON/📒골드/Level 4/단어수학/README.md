@@ -9,6 +9,9 @@ ACDEB
 A가 10000, C가 1010, G,F가 100 으로 순서대로 정렬하게된다.   
 그렇다면 A,C,G,F가 9,8,7,6이 된다면 자연스럽게 가장 큰 수가 된다.   
 
+dictionary를 순환하면서 9부터 차례대로 감소하면서 value값을 곱해줘 결괏값에 더한다.   
+
+
 ```
 import Foundation
 func solution() {
