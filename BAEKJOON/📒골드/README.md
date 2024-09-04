@@ -3,6 +3,7 @@
 ## [Level 1](https://github.com/ww5702/Swift_Coding_Test/tree/main/BAEKJOON/%F0%9F%93%92%EA%B3%A8%EB%93%9C/Level%201)   
 - 구슬 탈출 2
 - 구간 합 구하기(세그먼트 트리)
+- 외판원 순회(dp, 비트마스킹)
 - 
 
 ## [Level 2](https://github.com/ww5702/Swift_Coding_Test/tree/main/BAEKJOON/%F0%9F%93%92%EA%B3%A8%EB%93%9C/Level%202)
