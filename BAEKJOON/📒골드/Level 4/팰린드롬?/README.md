@@ -77,3 +77,41 @@ solution()
 
 
 ```
+가 아니라   
+FIO를 이용해 빠르게 입력받으면 해결되는 문제이다^^
+```
+let file = FileIO()
+    let N = file.readInt()
+    var arr: [Int] = [-1]
+    for _ in 0..<N {
+        arr.append(file.readInt())
+    }
+    let M = file.readInt()
+    var dp: [[Bool]] = Array(repeating: Array(repeating: false, count: N + 1), count: N + 1)
+    
+    for i in 1...N {
+        dp[i][i] = true // 1자리수는 무조건 팰린드롬.
+    }
+    
+    
+    for i in 1..<N {
+        if arr[i] == arr[i + 1] { // dp공식을 위해 미리 체크해놓음.
+            dp[i][i + 1] = true
+        }
+    }
+    
+    for i in stride(from: N-2, through: 1, by: -1) {
+        for j in i+2...N { // i와 i+1은 미리 세팅됨.
+            if (dp[i + 1][j - 1]) && (arr[i] == arr[j]) {
+                dp[i][j] = true
+            }
+        }
+    }
+    
+    var answer = ""
+    for _ in 0..<M {
+        let (S, E) = (file.readInt(), file.readInt())
+        answer += (dp[S][E] == true ? "1\n" : "0\n")
+    }
+    print(answer)
+```
