@@ -42,6 +42,7 @@
 - 수 묶기(구현)
 - 가장 큰 정사각형(dp)
 - 단어 수학(구현)
+- 팰린드롬?(dp)
 - 
 ## [Level 5](https://github.com/ww5702/Swift_Coding_Test/tree/main/BAEKJOON/%F0%9F%93%92%EA%B3%A8%EB%93%9C/Level%205)      
 - 로봇청소기
