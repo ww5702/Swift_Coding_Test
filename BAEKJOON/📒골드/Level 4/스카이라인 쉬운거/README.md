@@ -119,3 +119,48 @@ solution()
 
 
 ```
+하..   
+미사일 요격 시스템과 비슷하게 생각하면 됐었다.   
+예시를 예로 들었을 때   
+[1, 2, 1, 3, 1, 0, 2, 3, 2, 1, 0] 의 높이가 된다   
+그리고 y좌표가 낮아지는 지점에서 건물을 세는 것이 포인트이다.   
+y좌표가 낮아졌다면 어떤 건물이 끝났다는 의미이기 때문이다.   
+
+```
+import Foundation
+func solution() {
+    let n = Int(readLine()!)!
+    var result = 0
+    
+    var list: [Int] = []
+    for _ in 0..<n {
+        list.append(Int(readLine()!.split(separator: " ")[1])!)
+    }
+    list.append(0)
+    
+    var stack = [0]
+    
+    for l in list {
+        var height = l
+        // 스택의 마지막 요소가 현재 건물높이보다 큰 경우
+        while stack.last! > l {
+            
+            // 스택의 마지막 요소가 현재 건물의 높이와 다르다면
+            if stack.last != height {
+                result += 1
+                // 현재 높이를 높이로 지정
+                height = stack.last!
+            }
+            stack.removeLast()
+        }
+        stack.append(l)
+    }
+    print(result)
+}
+
+solution()
+/*
+ */
+
+
+```
