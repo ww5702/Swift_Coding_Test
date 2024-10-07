@@ -1,24 +1,25 @@
 ```
 import Foundation
 func solution(){
-    while let n = Int(readLine()!) {
+    while let n = readLine() {
         var cnt = 0
         var next = 1
         
         while true {
             cnt += 1
             //print(cnt, next)
-            if next % n == 0 {
+            if next % Int(n)! == 0 {
                 print("\(cnt)")
                 break
             } else {
                 next = ((next*10)+1)
-                next %= n
+                next %= Int(n)!
             }
         }
     }
 }
 
 solution()
+
 
 ```
