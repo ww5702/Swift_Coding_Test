@@ -1,5 +1,6 @@
 fileIO를 사용하지 않으면 풀 수 없는 문제이다.   
-
+문제는 다음과 같다.   
+1-2 / 2-3   
 ```
 import Foundation
 final class FileIO {
