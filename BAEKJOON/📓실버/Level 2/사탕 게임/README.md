@@ -90,3 +90,89 @@ solution()
 
 
 ```
+구현 방식이 틀렸던것이지 방식은 맞았다.   
+그리고 swapAt을 활용하면 좋았다.   
+
+```
+import Foundation
+func solution(){
+    let n = Int(readLine()!)!
+    var board = Array(repeating: Array(repeating: ".", count: n), count: n)
+    for i in 0..<n {
+        let input = readLine()!.map{String($0)}
+        for j in 0..<n {
+            board[i][j] = input[j]
+        }
+    }
+    
+    var result = -1
+    
+    func row_count() {
+        for i in 0..<n {
+            var count = 1
+            for j in 0..<n-1 {
+                if board[i][j] == board[i][j+1] {
+                    count += 1
+                } else {
+                    result = max(result, count)
+                    count = 1
+                }
+                result = max(result,count)
+            }
+        }
+    }
+
+    func col_count() {
+        for i in 0..<n {
+            var count = 1
+            for j in 0..<n-1 {
+                if board[j][i] == board[j+1][i] {
+                    count += 1
+                } else {
+                    result = max(result, count)
+                    count = 1
+                }
+                result = max(result, count)
+            }
+        }
+    }
+    
+    
+    
+    
+    for i in 0..<n {
+        for j in 0..<n-1 {
+        
+            // 자리 바꿔서 result 갱신해주고
+            board[i].swapAt(j,j+1)
+            row_count()
+            col_count()
+            //다시 자리 바꿔줌
+            board[i].swapAt(j,j+1)
+            
+            //열끼리 자리 바꿀건데, 값을 temp 에 저장해뒀다가 값을 줘야해.
+            var temp = board[j][i]
+            board[j][i] = board[j+1][i]
+            board[j+1][i] = temp
+            
+            row_count()
+            col_count()
+            
+            // 원래자리로 돌려
+            temp = board[j][i]
+            board[j][i] = board[j+1][i]
+            board[j+1][i] = temp
+         
+        }
+    }
+
+    print(result)
+    
+}
+
+solution()
+/*
+ */
+
+
+```
