@@ -259,3 +259,153 @@ var growthTree: [(Int,Int)] = []
 var minPQ = Heap<Int>{$0 < $1}
 var tree = Array(repeating: Array(repeating: minPQ, count: n), count: n)
 ```
+dictionary를 사용하면 시간초과가 해결이 되었다.   
+정렬보다 dictionary로 뽑아내는게 훨씬 빠르다는것을 다시 한번 깨달았다.   
+
+```
+import Foundation
+func solution(){
+    let nmk = readLine()!.split(separator: " ").map{Int(String($0))!}
+    let (n,m,k) = (nmk[0],nmk[1],nmk[2])
+    var yangboon: [[Int]] = []
+    for _ in 0..<n {
+        let input = readLine()!.split(separator: " ").map{Int(String($0))!}
+        yangboon.append(input)
+    }
+    var board = Array(repeating: Array(repeating: 5, count: n), count: n)
+    
+    var tree = Array(repeating: Array(repeating: [Int:Int](), count: n), count: n)
+    //var tree: [(Int,Int,Int)] = []
+    for _ in 0..<m {
+        let input = readLine()!.split(separator: " ").map{Int(String($0))!}
+        let y = input[0] - 1, x = input[1] - 1, age = input[2]
+        tree[y][x][age] = 1
+    }
+    
+//    for i in 0..<n {
+//        print(tree[i])
+//    }
+    //tree.sort(by: {$0.2 < $1.2})
+    //print(tree)
+    
+    let dy = [-1,-1,-1,0,0,1,1,1]
+    let dx = [-1,0,1,-1,1,-1,0,1]
+    
+    // k년 반복
+    for _ in 0..<k {
+        var deadTree: [(Int,Int,Int)] = []
+        var growthTree: [(Int,Int,Int)] = []
+        // 봄 (나이만큼 양분먹기)
+        
+        for i in 0..<n {
+            for j in 0..<n {
+                if !tree[i][j].isEmpty {
+                    var liveTree: [Int:Int] = [:]
+                    for age in tree[i][j].keys.sorted() {
+                        let count = tree[i][j][age]!
+                        if age * count <= board[i][j] {
+                            board[i][j] -= age*count
+                            liveTree[age+1] = count
+                            
+                            if (age+1) % 5 == 0 {
+                                growthTree.append((i,j,count))
+                            }
+                        } else if age <= board[i][j] {
+                            let eatCnt = board[i][j] / age
+                            
+                            board[i][j] -= age * eatCnt
+                            liveTree[age+1] = eatCnt
+                            
+                            if (age+1) % 5 == 0 {
+                                growthTree.append((i,j,eatCnt))
+                            }
+                            deadTree.append((i,j,(age/2)*(count-eatCnt)))
+                        } else {
+                            deadTree.append((i,j,(age/2)*count))
+                        }
+                    }
+                    tree[i][j] = liveTree
+                }
+                
+                
+            }
+        }
+        
+//        print("봄")
+//        for i in 0..<n {
+//            print(tree[i])
+//        }
+        
+        
+        // 여름 (양분 나눠주기)
+        for i in 0..<deadTree.count {
+            let t = deadTree[i]
+            let (ty,tx,year) = (t.0, t.1, t.2)
+            board[ty][tx] += year
+        }
+        
+//        print("여름")
+//        for i in 0..<n {
+//            print(board[i])
+//        }
+        
+        // 가을(번식)
+        for i in 0..<growthTree.count {
+            let t = growthTree[i]
+            let (ty,tx,count) = (t.0, t.1,t.2)
+            for i in 0..<8 {
+                let newY = ty+dy[i]
+                let newX = tx+dx[i]
+                if (0..<n).contains(newY) && (0..<n).contains(newX) {
+                    let value = tree[newY][newX][1] ?? 0
+                    tree[newY][newX][1] = value + count
+                }
+            }
+        }
+        
+//        print("가을")
+//        for i in 0..<n {
+//            print(tree[i])
+//        }
+        
+        // 겨울(양분 추가)
+        for i in 0..<n {
+            for j in 0..<n {
+                board[i][j] += yangboon[i][j]
+            }
+        }
+        
+//        print("겨울")
+//        for i in 0..<n {
+//            print(board[i])
+//        }
+        
+    }
+    
+    var result = 0
+    for i in 0..<n {
+        for j in 0..<n {
+            if !tree[i][j].isEmpty {
+                //print(tree[i][j])
+                result += tree[i][j].values.reduce(0, +)
+            }
+        }
+    }
+    print(result)
+}
+
+solution()
+/*
+ 5 2 10
+ 2 3 2 3 2
+ 2 3 2 3 2
+ 2 3 2 3 2
+ 2 3 2 3 2
+ 2 3 2 3 2
+ 2 1 3
+ 3 2 3
+ 
+ */
+
+
+```
