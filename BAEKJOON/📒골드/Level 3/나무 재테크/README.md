@@ -157,7 +157,7 @@ func solution(){
                         } else {
                             board[i][j] -= t
                             liveTree.append(t+1)
-                            if t+1 == 5 {
+                            if (t+1)%5 == 0 {
                                 growthTree.append((i,j))
                             }
                         }
@@ -233,4 +233,24 @@ solution()
  */
 
 
+```
+5배수인 나무만 따로 관리해도 시간초과   
+힙을 준비해야할것같다.   
+```
+var growthTree: [(Int,Int)] = []
+        // 봄 (나이만큼 양분먹기)
+        for i in 0..<tree.count {
+            let t = tree[i]
+            let (ty,tx,year) = (t.0, t.1, t.2)
+            if board[ty][tx] < year {
+                deadTree.append((ty,tx,year))
+            } else {
+                board[ty][tx] -= year
+                liveTree.append((ty,tx,year+1))
+                if (year+1) % 5 == 0 {
+                    growthTree.append((ty,tx))
+                }
+            }
+        }
+        tree = liveTree
 ```
