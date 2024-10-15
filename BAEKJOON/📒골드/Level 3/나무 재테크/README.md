@@ -254,3 +254,8 @@ var growthTree: [(Int,Int)] = []
         }
         tree = liveTree
 ```
+힙을 사용해도 시간초과   
+```
+var minPQ = Heap<Int>{$0 < $1}
+var tree = Array(repeating: Array(repeating: minPQ, count: n), count: n)
+```
