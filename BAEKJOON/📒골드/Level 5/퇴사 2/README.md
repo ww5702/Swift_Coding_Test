@@ -45,3 +45,37 @@ solution()
 
 
 ```
+dp가 더 쉽고 빠르다.   
+입력과 동시에 풀이를 진행하는데   
+현재 날짜까지의 최대 효율을 그대로 가져오고,   
+현재 날짜 + 상담에 걸리는시간이 아직 가능하다면   
+max값으로 dp를 바꿔준다.   
+
+```
+import Foundation
+func solution(){
+    let n = Int(readLine()!)!
+    var dp = Array(repeating: 0, count: n+1)
+    
+    for i in 0..<n {
+        let input = readLine()!.split(separator: " ").map{Int(String($0))!}
+        let t = input[0], p = input[1]
+        dp[i+1] = max(dp[i+1], dp[i])
+        
+        if i+t < n+1 {
+            dp[i+t] = max(dp[i+t], dp[i] + p)
+            
+        }
+    }
+    print(dp[n])
+    
+    
+}
+
+solution()
+/*
+ 
+ */
+
+
+```
