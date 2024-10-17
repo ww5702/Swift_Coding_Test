@@ -85,6 +85,7 @@ solution()
 ```
 내부 공기인지를 확인하기 위한 bfs를 추가구현했다   
 하지만 13프로에서 런타임에러 발생   
+
 ```
 import Foundation
 func solution(){
@@ -218,4 +219,14 @@ solution()
  */
 
 
+```
+(런타임에러는 입력값에서 틀렸을 가능성이 크다)   
+따라서 입력받는 부분을 자세히 보니 board[i][j] 의 범위가 전부 n으로 되어있었다^^   
+```
+for i in 0..<n {
+        let value = readLine()!.split(separator: " ").map{Int(String($0))!}
+        for j in 0..<m {
+            board[i][j] = value[j]
+        }
+    }
 ```
