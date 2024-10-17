@@ -1,0 +1,84 @@
+그냥 구현으로 풀이해봤는데 결과는 틀렸다.   
+
+```
+import Foundation
+func solution(){
+    let nm = readLine()!.split(separator: " ").map{Int(String($0))!}
+    let (n,m) = (nm[0], nm[1])
+    var board = Array(repeating: Array(repeating: 0, count: m), count: n)
+    for i in 0..<n {
+        let value = readLine()!.split(separator: " ").map{Int(String($0))!}
+        for j in 0..<n {
+            board[i][j] = value[j]
+        }
+    }
+    
+    func isEnd() -> Bool {
+        for i in 0..<n {
+            for j in 0..<m {
+                if board[i][j] == 1 { return false }
+            }
+        }
+        
+        return true
+    }
+    
+    var time = 0
+    let dy = [1,-1,0,0]
+    let dx = [0,0,1,-1]
+    while true {
+        if isEnd() { break }
+        time += 1
+        var q: [(Int,Int)] = []
+        for i in 0..<n {
+            for j in 0..<m {
+                
+                if board[i][j] == 1 {
+                    
+                    var cnt = 0
+                    for k in 0..<4 {
+                        let newY = i+dy[k]
+                        let newX = j+dx[k]
+                        if (0..<n).contains(newY) && (0..<m).contains(newX) {
+                            if board[newY][newX] == 0 {
+                                cnt += 1
+                            }
+                        }
+                    }
+                    
+                    if cnt >= 2 { q.append((i,j)) }
+                }
+            }
+        }
+        //print(q)
+        
+        for i in 0..<q.count {
+            let now = q[i]
+            board[now.0][now.1] = 0
+        }
+        
+        
+//        for i in 0..<n {
+//            print(board[i])
+//        }
+    }
+    print(time)
+    
+}
+
+solution()
+/*
+ 8 9
+ 0 0 0 0 0 0 0 0 0
+ 0 0 0 1 1 0 0 0 0
+ 0 0 0 1 1 0 1 1 0
+ 0 0 1 1 1 1 1 1 0
+ 0 0 1 1 1 1 1 0 0
+ 0 0 1 1 0 1 1 0 0
+ 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0
+ 
+ */
+
+
+```
