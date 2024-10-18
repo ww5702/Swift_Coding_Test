@@ -48,3 +48,41 @@ solution()
 
 
 ```
+hasPrefix가 있었다.   
+str[i+1].hasPrefix(str[i])는   
+정렬된값이니   
+91125426에서 911이라는 값이 앞에서부터 한번이라도 있는가?   
+를 물어보는것과 같다.   
+뒤에서부터 탐색은 hasSuffix이다.   
+
+```
+import Foundation
+func solution(){
+    let t = Int(readLine()!)!
+    for _ in 0..<t {
+        let n = Int(readLine()!)!
+        var str = [String]()
+        var isPossible = true
+        
+        for _ in 0..<n {
+            str.append(readLine()!)
+        }
+        str.sort(by:<)
+        for i in 0..<n-1 {
+            if str[i+1].hasPrefix(str[i]) {
+                isPossible = false
+                break
+            }
+        }
+        
+        print(isPossible ? "YES" : "NO")
+        
+    }
+}
+
+solution()
+/*
+ 
+ */
+
+```
