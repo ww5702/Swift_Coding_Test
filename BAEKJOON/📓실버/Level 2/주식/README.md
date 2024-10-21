@@ -43,3 +43,35 @@ solution()
  */
 
 ```
+실버 문제는 그냥 쉽게 생각하는게 답이다.   
+그냥 제일 비싼값으로 현재 주식을 판다고 생각하면 된다.   
+
+```
+import Foundation
+func solution(){
+    let t = Int(readLine()!)!
+    for _ in 0..<t {
+        let n = Int(readLine()!)!
+        var arr = readLine()!.split(separator: " ").map{Int(String($0))!}
+        
+        var result = 0
+        var maxValue = 0
+        
+        for i in (0..<n).reversed() {
+            if maxValue < arr[i] {
+                maxValue = arr[i]
+            } else {
+                result += maxValue-arr[i]
+            }
+        }
+        
+        print(result)
+    }
+}
+
+solution()
+/*
+ 
+ */
+
+```
