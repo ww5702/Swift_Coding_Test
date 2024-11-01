@@ -6,7 +6,10 @@ func solution(){
     var board = Array(repeating: [(Int,Int)](), count: d+1)
     for _ in 0..<n {
         let input = readLine()!.split(separator: " ").map{Int(String($0))!}
-        board[input[0]].append((input[1],input[2]))
+        if (0...d).contains(input[0]) && (0...d).contains(input[1]) {
+            board[input[0]].append((input[1],input[2]))
+        }
+        
     }
     var dp = Array(repeating: Int.max, count: d+1)
     dp[0] = 0
@@ -31,5 +34,6 @@ solution()
 /*
  
  */
+
 
 ```
