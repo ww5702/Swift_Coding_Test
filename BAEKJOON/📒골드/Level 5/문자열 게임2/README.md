@@ -48,3 +48,54 @@ solution()
  */
 
 ```
+더 쉽게 풀이한 방법이 있다.   
+a - 97을 하면 0이 된다.   
+따라서 0~25까지 알파벳들의 idx를 전부 저장해준다.   
+다음 k개수를 넘어가는 dictionary만 비교하면서   
+0부터 k-1개까지의 idx범위를 탐색하면서 범위의 크기를 비교해준다.   
+
+```
+import Foundation
+func solution(){
+    let t = Int(readLine()!)!
+    for _ in 0..<t {
+        let word = readLine()!
+        let k = Int(readLine()!)!
+        var dict = Array(repeating: [Int](), count: 26)
+        var i = 0
+        for w in word {
+            let num = Int(w.asciiValue!-97)
+            dict[num].append(i)
+            i += 1
+        }
+        
+        //print(dict)
+        var (minV,maxV) = (Int.max, Int.min)
+        
+        for i in 0..<dict.count {
+            let now = dict[i]
+            if now.count >= k {
+                var left = 0, right = k-1
+                var minTemp = now[right] - now[left] + 1
+                var maxTemp = now[right] - now[left] + 1
+                while right < now.count-1 {
+                    left += 1; right += 1
+                    minTemp = min(minTemp, now[right] - now[left] + 1)
+                    maxTemp = max(maxTemp, now[right] - now[left] + 1)
+                }
+                
+                minV = min(minTemp, minV)
+                maxV = max(maxTemp, maxV)
+                
+            }
+        }
+        
+        print(minV == Int.max || maxV == Int.min ? -1 : "\(minV) \(maxV)")
+    }
+}
+
+solution()
+/*
+ */
+
+```
