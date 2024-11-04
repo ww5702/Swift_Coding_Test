@@ -14,7 +14,7 @@ func solution(){
         if input[0] == 1 {
             board[input[1]] = input[2]
         } else {
-            print(board[input[1]...input[2]].reduce(1, *))
+            print(board[input[1]...input[2]].reduce(1, *) % 1_000_000_007)
         }
     }
 }
@@ -23,5 +23,6 @@ solution()
 /*
  1 2 6 4 2
  */
+
 
 ```
