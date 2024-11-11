@@ -5,6 +5,7 @@
 - 구간 합 구하기(세그먼트 트리)
 - 외판원 순회(dp, 비트마스킹)
 - 제곱 ㄴㄴ수(에라토스테네스의 채)
+- 벽 부수고 이동하기(bfs)
 - 
 
 ## [Level 2](https://github.com/ww5702/Swift_Coding_Test/tree/main/BAEKJOON/%F0%9F%93%92%EA%B3%A8%EB%93%9C/Level%202)
