@@ -127,6 +127,27 @@ solution()
  
  
  */
-  
 
+```
+1등 풀이는 다음과 같다.   
+결국 위 풀이가 다음과 같다;   
+
+```
+import Foundation
+func solution(){
+    let t = Int(readLine()!)!
+    var dp = Array(repeating: 0, count: 10001)
+    dp[0] = 1
+    for k in 1...3 {
+        for i in k...10000 {
+            dp[i] += dp[i-k]
+        }
+    }
+    
+    for _ in 0..<t {
+        let num = Int(readLine()!)!
+        print(dp[num])
+    }
+}
+solution()
 ```
