@@ -123,3 +123,17 @@ solution()
  */
 
 ```
+만약 첫 코드를 그대로 사용하고 싶다면   
+while q.count< n 해당 코드에    
+if idx == k { break } 만 넣어준다면 통과하게 되어있다.   
+```
+var idx = 0
+while q.count < n {
+    if !q.contains(arr[idx]) {
+        q.append(arr[idx])
+        //print(q,idx)
+    }
+    idx += 1
+    if idx == k { break }
+}
+```
