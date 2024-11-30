@@ -70,3 +70,54 @@ solution()
  */
 
 ```
+문제는 쉽게 찾을 수 있었다.   
+나는 1 1 1 2 3과 같이   
+만약에 처음부터 같은 전자기기가 여러개라면 패스해주는 알고리즘을 따로 짰는데   
+만약 idx가 끝없이 증가한다면 오류가 발생하는것 같았다.   
+
+```
+import Foundation
+func solution(){
+    let nk = readLine()!.split(separator: " ").map{Int(String($0))!}
+    let (n,k) = (nk[0],nk[1])
+    let arr = readLine()!.split(separator: " ").map{Int(String($0))!}
+    
+    var q: [Int] = []
+    var result = 0
+    
+    if n >= k {
+        print(result)
+    } else {
+        for i in 0..<k {
+            //print(arr[i])
+            if q.contains(arr[i]) {
+                continue
+            } else if q.count < n {
+                q.append(arr[i])
+            } else {
+                var temp = Set(q)
+                // 뒤에 현재 껴져있는 전자기기중 또 껴야할 전자기기가 있다면 패스
+                for j in i+1..<k {
+                    if temp.count == 1 { break }
+                    if temp.contains(arr[j]) {
+                        temp.remove(arr[j])
+                    }
+                }
+                q.remove(at: q.firstIndex(of: temp.first!)!)
+                q.append(arr[i])
+                result += 1
+                //print(q, result)
+                
+            }
+        }
+        
+        print(result)
+    }
+    
+    
+}
+solution()
+/*
+ */
+
+```
