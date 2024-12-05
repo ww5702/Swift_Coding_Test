@@ -22,6 +22,7 @@
 - 벽 부수고 이동하기(bfs, Set)   
 - 공항(union-find)
 - 저울(누적합)
+- 주사위 윷놀이(dfs)
 - 
 ## [Level 3](https://github.com/ww5702/Swift_Coding_Test/tree/main/BAEKJOON/%F0%9F%93%92%EA%B3%A8%EB%93%9C/Level%203)   
 - 가장 높은 탑 쌓기(dp)
