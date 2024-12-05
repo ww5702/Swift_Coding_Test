@@ -7,7 +7,7 @@
  1 1 1 1
  1 1 1 1
  0 2 2 0
- answer = 1
+ answer = 2
  
  5 2
  0 0 0 2 2
@@ -134,3 +134,87 @@ func solution(){
 }
 solution()
 ```
+따라서 바이러스가 퍼질때 활성화된 바이러스가 비활성화된 바이러스를 지나갈때 지나갈수는 있게하되    
+해당 지역을 나중에 시간초로 카운트할때는 세지 못하도록 변경하였다.   
+나머지 부분은 같고, bfs부분과 초반 활성화된 바이러스를 지정하는 부분만 변경하였다.   
+
+```
+func bfs(_ v: [(Int,Int)]) {
+        var q: [(Int,Int)] = v
+        for i in 0..<v.count {
+            dis[v[i].0][v[i].1] = 0
+        }
+        var idx = 0
+        
+        while q.count > idx {
+            let now = q[idx]
+            idx += 1
+            
+            for i in 0..<4 {
+                let newY = now.0 + dy[i]
+                let newX = now.1 + dx[i]
+                
+                if (0..<n).contains(newY) && (0..<n).contains(newX) {
+                    if board[newY][newX] == 0 && dis[newY][newX] > dis[now.0][now.1] + 1 {
+                        dis[newY][newX] = dis[now.0][now.1] + 1
+                        q.append((newY,newX))
+                    } else if board[newY][newX] == 2 && dis[newY][newX] > dis[now.0][now.1]+1 {
+                        dis[newY][newX] = dis[now.0][now.1] + 1
+                        q.append((newY,newX))
+                    }
+                }
+                
+            }
+            
+        }
+        
+    }
+    
+    var tempCnt = 0
+    var result = Int.max
+    
+    func isEnd(_ v: [(Int,Int)]) -> Bool {
+        for i in 0..<n {
+            for j in 0..<n {
+                // 어차피 더 작은값은 나오지 못하므로 탈출
+                if dis[i][j] != Int.max && dis[i][j] >= result { return false }
+                // 못간지역인데 빈방이면 실패
+                if dis[i][j] == Int.max && board[i][j] == 0 {
+                    return false
+                } else if dis[i][j] == Int.max && (board[i][j] == 2 || board[i][j] == 1) {
+                // 못간지역인데 바이러스가 있던곳이라거나 벽이라면 패스
+                    continue
+                }
+                
+                if board[i][j] == 1 { continue }
+                if board[i][j] == 2 && tempBoard[i][j] != -1 { continue }
+                tempCnt = max(tempCnt, dis[i][j])
+            }
+            
+        }
+        return true
+    }
+    
+    
+    for i in 0..<pickVirus.count {
+        let pick = pickVirus[i]
+        dis = tempDis
+        tempBoard = board
+        for p in pick {
+            tempBoard[p.0][p.1] = -1
+        }
+        
+        bfs(pick)
+        tempCnt = -1
+        let isPossible = isEnd(pick)
+        //print(isPossible, tempCnt)
+        if isPossible {
+            result = min(result, tempCnt)
+        }
+        
+    }
+    print(result == Int.max ? -1 : result)
+
+```
+하지만 92프로에서 실패   
+처음부터 채울필요가 없을때 0을 리턴하도록 해야했다.   
