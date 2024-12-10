@@ -72,6 +72,7 @@
 - 창고 다각형
 - 상자 넣기(LIS)
 - 결혼식
+- 랭킹전 대기열
 - 
 ## [Level 3](https://github.com/ww5702/Swift_Coding_Test/tree/main/BAEKJOON/%F0%9F%93%93%EC%8B%A4%EB%B2%84/Level%203)      
 - 피보나치 함수
