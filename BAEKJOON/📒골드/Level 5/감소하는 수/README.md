@@ -69,3 +69,62 @@ solution()
  */
 
 ```
+만들수있는 최대값은 9876543210이다.   
+따라서 아무리 자릿수가 커져도 1022개를 넘기지 못한다.   
+
+```
+import Foundation
+func solution(){
+    let n = Int(readLine()!)!
+    var arr: [[Int]] = [[0,1,2,3,4,5,6,7,8,9]]
+    var cnt = 0
+    var idx = 0
+    while cnt <= n {
+        var temp: [Int] = []
+        for i in arr[idx] {
+            let str = String(i)
+            let num = Int(String(str[str.startIndex]))!
+            
+            // 해당 숫자 앞에 해당숫자보다 큰 값을 다 넣어준다고 생각하면 편하다.
+            if num < 9 {
+                for j in num+1...9 {
+                    //print(String(j) + String(i))
+                    temp.append(Int(String(j)+String(i))!)
+                }
+            }
+        }
+        //print(temp)
+        if temp.count == 0 { break }
+        idx += 1
+        arr.append(temp.sorted(by: <))
+        cnt += temp.count
+    }
+    let newArr = arr.flatMap({$0}).sorted(by: <)
+    //print(newArr.count)
+    
+    if n > 1022 {
+        print(-1)
+    } else {
+        print(newArr[n])
+    }
+}
+solution()
+/*
+ 0~9
+ 10
+ 21 20
+ 32 31 30
+ 43 42 41 40
+ ...
+ 98 97 96 95 94 93 ... 90
+ 3자리수
+ 210
+ 321 320 310
+ 432 431 421 420 410
+ 543 542 541 540 532 531 530 521 520 510
+ 
+ 9876543210
+ 
+ */
+
+```
