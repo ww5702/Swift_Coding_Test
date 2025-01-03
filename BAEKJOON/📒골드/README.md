@@ -115,4 +115,5 @@
 - Fly me to the Alpha Centauri(구현, 등차수열)
 - 택배 배송(heap, 다익스트라)
 - 감소하는 수(q, 구현)
+- 0 만들기(dfs)
 - 
