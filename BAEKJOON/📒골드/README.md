@@ -76,7 +76,8 @@
 - 4연산(구현)   
 - 두 배열의 합(브루트포스)
 - Puyo Puyo(bfs, 배열 내리기)
-- 
+- 약수의 합(누적합, 구현)
+-  
 ## [Level 5](https://github.com/ww5702/Swift_Coding_Test/tree/main/BAEKJOON/%F0%9F%93%92%EA%B3%A8%EB%93%9C/Level%205)      
 - 로봇청소기
 - 적록색약
