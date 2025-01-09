@@ -102,6 +102,7 @@
 - 두 스택(나중에 다시)
 - 한국이 그리울 땐 서버에 접속하지
 - 꿀 아르바이트
+- 빈도 정렬
 - 
 ## [Level 4](https://github.com/ww5702/Swift_Coding_Test/tree/main/BAEKJOON/%F0%9F%93%93%EC%8B%A4%EB%B2%84/Level%204)   
 - 수열 정렬
